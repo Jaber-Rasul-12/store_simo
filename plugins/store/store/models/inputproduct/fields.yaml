@@ -1,0 +1,14 @@
+fields:
+    product:
+        label: 'store.store::lang.model.inputproduct.product'
+        span: auto
+        type: relation
+        placeholder: 'store.store::lang.plugin.select'
+    notes:
+        label: 'store.store::lang.model.inputproduct.notes'
+        span: auto
+        type: text
+    qty:
+        label: 'store.store::lang.model.inputproduct.qty'
+        span: auto
+        type: number

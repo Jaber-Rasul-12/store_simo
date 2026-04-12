@@ -1,0 +1,56 @@
+    <!-- Contact Start -->
+    <div class="container-fluid pt-5">
+        {# <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">{{ 'للاستفسارات، يرجى التواصل معنا.' |_ }}</span></h2>
+        </div> #}
+        <div class="row px-xl-5">
+            <div class="col-lg-7 mb-5">
+                <div class="contact-form">
+                    <div id="success"></div>
+                    <form  method="post" data-request="onSendMessage" data-request-flash class="custom-contact-form" data-request-success="$('#id_full_name, #id_email, #id_subject,  #id_message').val('');" data-aos="fade-left" data-aos-delay="200">
+                        <div class="control-group">
+                            <input type="text" class="form-control" name="full_name" id="id_full_name"  placeholder="{{ 'الاسم الثلاثي' |_ }}"
+                                required="required" data-validation-required-message="{{ 'رجاء ادخل اسمك' |_ }}" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="email" class="form-control" name="email" id="id_email" placeholder="{{ 'البريد الإلكتروني' |_ }}"
+                                required="required" data-validation-required-message="{{ 'رجاء ادخل البريد الإلكتروني' |_ }}" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control" name="subject" id="id_subject" placeholder="{{ 'الموضوع' |_ }}"
+                                required="required" data-validation-required-message="{{ 'رجاء ادخل الموضوع' |_ }}" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <textarea class="form-control" name="message" rows="6" id="id_message" placeholder="{{ 'الرسالة' |_ }}"
+                                required="required"
+                                data-validation-required-message="{{ 'رجاء ادخل الرسالة' |_ }}"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary py-2 px-4" type="submit" id="sendMessageButton">{{ 'إرسال الرسالة' |_ }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-5 mb-5 text-right">
+                <h5 class="font-weight-semi-bold mb-3">{{ 'تواصل معنا' |_ }}</h5>
+                <p>{{ 'للاستفسارات، يرجى التواصل معنا.' |_ }}</p>
+                <div class="d-flex flex-column mb-3">
+                    <h5 class="font-weight-semi-bold mb-3">{{ 'متجر 1' |_}}</h5>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>{{ 'القامشلي , الكورنيش , الشارع العريض' |_ }}</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@simo.shop</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+963934240928</p>
+                </div>
+                <div class="d-flex flex-column">
+                    <h5 class="font-weight-semi-bold mb-3">{{ 'متجر 2' |_}}</h5>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>{{ 'القامشلي , الكورنيش , الشارع العريض' |_}}</p>
+                    <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@simo.shop</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+963934240928</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contact End -->

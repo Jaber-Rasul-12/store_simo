@@ -1,0 +1,20 @@
+fields:
+    user:
+        label: 'wallet.wallet::lang.model.wallet.user'
+        span: auto
+        type: relation
+        nameFrom: name
+    current_balance:
+        label: 'wallet.wallet::lang.model.wallet.current_balance'
+        span: auto
+        type: number
+        readOnly: true
+    public_id:
+        label: 'wallet.wallet::lang.model.transaction.public_id'
+        span: auto
+        type: text
+        readOnly: true
+    status:
+        label: 'wallet.wallet::lang.model.wallet.status'
+        span: auto
+        type: switch

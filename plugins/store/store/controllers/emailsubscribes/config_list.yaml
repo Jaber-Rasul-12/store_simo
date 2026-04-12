@@ -1,0 +1,12 @@
+list: $/store/store/models/emailsubscribe/columns.yaml
+modelClass: Store\Store\Models\EmailSubscribe
+title: 'store.store::lang.controller.emailsubscribes.emailsubscribes'
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'store/store/emailsubscribes/update/:id'

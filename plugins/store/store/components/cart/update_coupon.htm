@@ -1,0 +1,33 @@
+<br>
+{% if old_total is not null %}
+    <div class="row align-items-center mb-4">
+        <div class="col-6">
+            <p class="h6 text-muted mb-0">السعر الأصلي:</p>
+        </div>
+        <div class="col-6">
+            <p class="h2 text-danger mb-0">
+                <del>${{ old_total }}</del>
+            </p>
+        </div>
+    </div>
+    
+    <div class="row align-items-center mb-4 bg-opacity-10 p-3 rounded">
+        <div class="col-6">
+            <p class="h6 text-dark mb-0">نسبة الخصم:</p>
+        </div>
+        <div class="col-6">
+            <div class="badge  bg-warning text-white p-3 fs-5">
+                {{ percentage }}% <i class="bi bi-arrow-down ms-1"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row align-items-center mb-4">
+        <div class="col-6">
+            <p class="h6 text-dark mb-0">السعر بعد الخصم:</p>
+        </div>
+        <div class="col-6">
+            <p class="h4 text-success fw-bold mb-0">${{ new_total }}</p>
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,17 @@
+title = "الدفع"
+url = "/checkout"
+layout = "default"
+[localePicker]
+[Cart]
+[Store]
+[session]
+security = "user"
+redirect = "home"
+==
+{% partial 'home/topbar' %}
+   {% partial 'navbar' home=false  shop=false cart=false checkout=true contact=false %}
+   {# {% partial 'page_header' title='الدفع' name_page='الدفع'  %}    #}
+   {% partial 'checkout/checkout' %}
+
+
+

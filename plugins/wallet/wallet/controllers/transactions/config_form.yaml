@@ -1,0 +1,10 @@
+name: 'wallet.wallet::lang.controller.transactions.transactions'
+form: $/wallet/wallet/models/transaction/fields.yaml
+modelClass: Wallet\Wallet\Models\Transaction
+defaultRedirect: wallet/wallet/transactions
+create:
+    redirect: 'wallet/wallet/transactions/update/:id'
+    redirectClose: wallet/wallet/transactions
+update:
+    redirect: wallet/wallet/transactions
+    redirectClose: wallet/wallet/transactions

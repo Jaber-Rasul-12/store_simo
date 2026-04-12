@@ -1,0 +1,281 @@
+    <!-- Shop Detail Start -->
+    <div class="container-fluid text-right">
+
+
+        <div class="suggestions-wrapper">
+        
+           {% if relateds is not empty %}
+            <div class="suggestions-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="fw-bold mb-0">
+                            <i class="bi bi-star-fill text-warning me-2"></i>
+                            {{ 'منتجات  قد تعجبك' |_ }}
+                        </h5>
+                        <p class="text-muted small mt-1 mb-0">{{ 'اكتشف المزيد من المنتجات المميزة' |_ }}</p>
+                    </div>
+                   
+                </div>
+            </div>
+            {% endif %}
+        
+            <div class="suggestions-scroll-container">
+                <div class="suggestions-suggestions">
+                    {% for related in relateds %}
+                        <div class="suggestions-card" onclick="location.href='/brand/{{ related.slug }}'">
+                            <div class="suggestions-image-wrapper">
+                                <div class="suggestions-image">
+                                    <img src="{% if related.image.path %}{{ related.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" 
+                                         alt="{{ related.name }}"
+                                         loading="lazy">
+                                    <div class="image-overlay">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="suggestions-info">
+                                <h6 class="related-name">{{ related.name }}</h6>
+                                <small class="product-count text-muted">
+                                    {% if related.products_count %}
+                                        {{ related.products_count }} {{ 'منتج' |_ }}
+                                    {% else %}
+                                        {{ 'متوفر الآن' |_ }}
+                                    {% endif %}
+                                </small>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="row px-xl-5">
+            
+            {% set product = Store.onGetProductWithSlug %}
+            <div class="col-lg-7 pb-5">
+                <div class="suggestions-image" style="display: inline-block">
+                            <img class="w-100 h-100" src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="لا يوجد صورة">
+                </div>
+                <h3 class="font-weight-semi-bold">{{ product.name }}</h3>
+                {# <div class="d-flex mb-3">
+                    <div class="text-primary mr-2">
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star-half-alt"></small>
+                        <small class="far fa-star"></small>
+                    </div>
+                    <small class="pt-1">(50 Reviews)</small>
+                </div> #}
+                {% set activePrice = null %}
+                            {% set previousPrice = null %}
+                            
+                            {% for price in product.prices %}
+                                {% if price.status == true %}
+                                    {% set activePrice = price %}
+                                    {% if loop.index0 > 0 %}
+                                        {% set previousPrice = product.prices[loop.index0 - 1] %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {% if activePrice %}
+                                <h3 class="font-weight-semi-bold mb-4">{{ activePrice.price }}$</h3>
+                                {% if previousPrice %}
+                                    <h6 class="text-muted ml-2" style="padding: 10px"><del>{{ previousPrice.price }}$</del></h6>
+                                {% endif %}
+                            {% endif %}
+
+                $ {{ product.prices.first.price }}</h3>
+                <p class="mb-4">{{ product.short_description  }}</p>
+                <div class="d-flex mb-3">
+                    <p class="text-dark font-weight-medium mb-0 mr-3">{{ 'القياسات المتوفرة' }} :</p>
+                    <form>
+                            {% for size in product.sizes %}
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" 
+                                       class="custom-control-input" 
+                                       id="size-{{ size.id }}" 
+                                       name="product-size" 
+                                       value="{{ size.id }}">
+                                <label class="custom-control-label" for="size-{{ size.id }}">{{ size.name }}</label>
+                            </div>
+                            {% endfor %}
+                     </form>
+                </div>
+                <div class="d-flex mb-4">
+                    <p class="text-dark font-weight-medium mb-0 mr-3">{{ 'اللون المتوفر' }} :</p>
+                    <form>
+                        {% for color in product.colors %}
+                        
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="color-{{ color.id }}" name="color" value="{{ color.id }}">
+                            <label class="custom-control-label" for="color-{{ color.id }}">{{ color.name }}</label>
+                        </div>
+                        {% endfor %}
+                    </form>
+                </div>
+                <div class="d-flex align-items-center mb-4 pt-2 text-right">
+                    {# <div class="input-group quantity mr-3" style="width: 130px;">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-minus" >
+                            <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="form-control bg-secondary text-center" value="1">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-plus">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div> #}
+                    <a class="btn btn-primary px-3 " {% if user %} data-request="onAddToCart" data-request-flash data-request-data="product_id: {{ product.id }}" {% else %} href="/login" {% endif %} style="margin-right: 10px;"><i class="fa fa-shopping-cart mr-1"></i> {{ 'أضف إلى السلة' }}</a>
+                    
+                </div>
+                <div class="d-flex pt-2">
+                    <p class="text-dark font-weight-medium mb-0 mr-2">{{ 'شارك على' }}:</p>
+                    <div class="d-inline-flex">
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-dark px-2" href="">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% if product.images is not empty %}
+            <div class="col-lg-5 pb-5">
+                <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner border">
+                        
+                        {% for image in product.images %}
+                        <div class="carousel-item {% if loop.first %} active {% endif %}">
+                            <img class="w-100 h-100" src="{% if image.path %}{{ image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="لا يوجد صورة">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
+                        <i class="fa fa-2x fa-angle-left text-dark"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#product-carousel" data-slide="next">
+                        <i class="fa fa-2x fa-angle-right text-dark"></i>
+                    </a>
+                </div>
+            </div>
+             {% else %}
+             <div class="col-lg-5 pb-5 d-flex align-items-center justify-content-center">
+             
+               <h1 class="text-center text-danger">لا يوجد صور للمنتج</h1>
+             </div>
+            {% endif %}
+        </div>
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="nav nav-tabs justify-content-center border-secondary mb-4">
+                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">{{ 'الوصف' }}</a>
+                    {% if user %}
+                    <a class="nav-item nav-link" id="count_comment" data-toggle="tab" href="#tab-pane-3">{{ 'التقييمات (' ~ product.comments.count() ~ ')' }}</a>
+                    {% else %}
+                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">{{ 'التقييمات' }}</a>
+                    {% endif %}
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tab-pane-1">
+                        <h4 class="mb-3">{{ 'وصف المنتج' }}</h4>
+                        <p>{{ product.long_description }}</p>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="tab-pane-3">
+                        <div class="row">
+                            <div class="col-md-6" id="comments-section">
+                                <h4 class="mb-4">{{ 'التقييمات' }}</h4>
+                                {% if product.comments %}
+                                {% for comment in product.comments %}
+                                <div class="media mb-4">
+                                    <img src="{% if comment.user.avatar %}{{ comment.user.avatar.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="لا يوجد صورة" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                    <div class="media-body">
+                                        <h6 class="mr-3">{{ comment.user.name }}<small> - <i>{{ comment.created_at|date('Y-m-d') }}</i></small></h6>
+                                        <div class="text-primary mb-2 mr-3">
+                                            {% set rating = comment.rating %}
+                                            
+                                            {# Show full stars #}
+                                            {% for i in 1..5 %}
+                                                {% if rating >= i %}
+                                                    <i class="fas fa-star"></i>
+                                                {% elseif rating >= (i - 0.5) %}
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                {% else %}
+                                                    <i class="far fa-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                            
+                                            {# Optional: Show rating number #}
+                                            <span class="ml-2 text-dark">{{ rating|number_format(1) }}/5</span>
+                                        </div>
+                                        <p>{{ comment.comment }}</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% else %}
+                                <p>{{ 'لا يوجد اي تعليق بعد' |_ }}</p>
+                                {% endif %}
+                                
+                            </div>
+                            {% if user %}
+                                <div class="col-md-6">
+                                    {# <h4 class="mb-4">{{ 'اترك تقييمك' |_ }}</h4> #}
+                                    <br>
+                                    <br>
+                                    <small>{{ 'البريد الإلكتروني لن يُنشر. الحقول المطلوبة مُشار إليها بـ *' |_ }}</small>
+                                    
+                                    
+                                    
+                                    <form data-request="onAddComment" data-request-success="$('#message').val('');" data-request-flash id="commentForm">
+                                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                                        <div class="d-flex my-3 align-items-center">
+                                            <p class="mb-0 mr-2">{{ 'تقييمك' |_ }} * :</p>
+                                            <div class="star-rating mr-2">
+                                                {% for i in 1..5 %}
+                                                    <i class="far fa-star" data-rating="{{ i }}"></i>
+                                                {% endfor %}
+                                            </div>
+                                            <input type="hidden" name="rating" id="rating" value="0" required>
+                                            <span class="rating-value text-muted">0/5</span>
+                                            <div class="invalid-feedback d-block" id="rating-error" style="display: none!important;">
+                                                {{ 'الرجاء اختيار تقييم' |_ }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="message">{{ 'تعليقك' |_ }} *</label>
+                                            <textarea id="message" name="comment" cols="30" rows="5" class="form-control" required></textarea>
+                                        </div>
+                                        
+                                        <div class="form-group mb-0">
+                                            <button type="submit" class="btn btn-primary px-3">{{ 'اضافة تقييم' |_ }}</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            {% else %}
+                                <div class="col-md-6">
+                                    <p style="color: black:!important;;">{{ 'يرجى تسجيل الدخول لترك تعليق.' |_ }} <a href="/login" class="btn border border-primary text-primary hover:bg-blue-50">
+                                    <i class="fas fa-sign-in-alt text-primary"></i>
+                                    <span class="badge"> {{ 'تسجيل دخول' |_ }} </span>
+                                    </a></p>
+                                </div>
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Shop Detail End -->
+

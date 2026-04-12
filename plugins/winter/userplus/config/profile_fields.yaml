@@ -1,0 +1,47 @@
+# ===================================
+#  Extended Profile Field Definitions
+# ===================================
+
+phone:
+    label: winter.userplus::lang.user.phone
+    tab: winter.userplus::lang.tab.profile
+    span: left
+
+mobile:
+    label: winter.userplus::lang.user.mobile
+    tab: winter.userplus::lang.tab.profile
+    span: right
+
+company:
+    label: winter.userplus::lang.user.company
+    tab: winter.userplus::lang.tab.profile
+    span: left
+
+street_addr:
+    label: winter.userplus::lang.user.street_addr
+    tab: winter.userplus::lang.tab.profile
+
+city:
+    label: winter.userplus::lang.user.city
+    tab: winter.userplus::lang.tab.profile
+    span: left
+
+zip:
+    label: winter.userplus::lang.user.zip
+    tab: winter.userplus::lang.tab.profile
+    span: right
+
+country:
+    label: winter.location::lang.country.label
+    placeholder: winter.location::lang.country.select
+    type: dropdown
+    tab: winter.userplus::lang.tab.profile
+    span: left
+
+state:
+    label: winter.location::lang.state.label
+    placeholder: winter.location::lang.state.select
+    type: dropdown
+    tab: winter.userplus::lang.tab.profile
+    span: right
+    dependsOn: country

@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.sizes.sizes'
+form: $/store/store/models/size/fields.yaml
+modelClass: Store\Store\Models\Size
+defaultRedirect: store/store/sizes
+create:
+    redirect: 'store/store/sizes/update/:id'
+    redirectClose: store/store/sizes
+update:
+    redirect: store/store/sizes
+    redirectClose: store/store/sizes

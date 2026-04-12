@@ -1,0 +1,52 @@
+columns:
+    id:
+        label: 'store.store::lang.model.brand.id'
+        type: number
+    name:
+        label: 'store.store::lang.model.brand.name'
+        type: text
+        searchable: true
+    slug:
+        label: 'store.store::lang.model.brand.slug'
+        type: text
+    related_brands:
+        label: 'store.store::lang.model.brand.related_brands'
+        relation: related_brands
+        select: name
+    status:
+        label: 'store.store::lang.model.brand.status'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20  
+    is_featured:
+        label: 'store.store::lang.model.brand.is_featured'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20  
+    is_top:
+        label: 'store.store::lang.model.brand.is_top'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20  
+    is_popular:
+        label: 'store.store::lang.model.brand.is_popular'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20  
+    is_trending:
+        label: 'store.store::lang.model.brand.is_trending'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20  
+    description:
+        label: 'store.store::lang.model.brand.description'
+        type: acornassociated-list-truncate
+        truncate: true
+        truncate_limit: 12
+        show_more: true 
+    created_at:
+        label: 'store.store::lang.model.brand.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.brand.updated_at'
+        type: datetime

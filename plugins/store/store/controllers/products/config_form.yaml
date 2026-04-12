@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.products.products'
+form: $/store/store/models/product/fields.yaml
+modelClass: Store\Store\Models\Product
+defaultRedirect: store/store/products
+create:
+    redirect: 'store/store/products/update/:id'
+    redirectClose: store/store/products
+update:
+    redirect: store/store/products
+    redirectClose: store/store/products

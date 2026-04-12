@@ -1,0 +1,12 @@
+list: $/store/store/models/merchant/columns.yaml
+modelClass: Store\Store\Models\Merchant
+title: 'store.store::lang.controller.merchants.merchants'
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'store/store/merchants/update/:id'

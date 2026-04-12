@@ -1,0 +1,110 @@
+columns:
+    id:
+        label: 'store.store::lang.model.product.id'
+        type: number
+    backend_user[full_name]:
+        label: 'store.store::lang.model.product.backend_user'
+    brand:
+        label: 'store.store::lang.model.product.brand'
+        relation: brand 
+        select: name
+    name:
+        label: 'store.store::lang.model.product.name'
+        type: text
+    short_name:
+        label: 'store.store::lang.model.product.short_name'
+        type: text
+    related_products:
+        label: 'store.store::lang.model.product.related_products'
+        relation: related_products
+        select: name
+    merchant:
+        label: 'store.store::lang.model.product.merchant'
+        relation: merchant
+        select: full_name
+    categories:
+        label: 'store.store::lang.model.product.categories'
+        relation: categories
+        select: name
+    taxes_products:
+        label: 'store.store::lang.model.product.taxes_products'
+        relation: taxes_products
+        select: title
+    return_policies:
+        label: 'store.store::lang.model.product.return_policies'
+        relation: return_policies
+        select: title
+    promotions:
+        label: 'store.store::lang.model.product.promotions'
+        relation: promotions
+        select: name
+    colors:
+        label: store.store::lang.model.product.colors
+        realtion: colors
+        select: name
+    sizes:
+        label: store.store::lang.model.product.sizes
+        relation: sizes
+        select: name
+    prices:
+        label: 'store.store::lang.model.product.prices'
+        relation: prices
+        select: price        
+    slug:
+        label: 'store.store::lang.model.product.slug'
+        type: text
+    short_description:
+        label: 'store.store::lang.model.product.short_description'
+        type: acornassociated-list-truncate
+        truncate: true
+        truncate_limit: 12
+        show_more: true 
+    long_description:
+        label: 'store.store::lang.model.product.long_description'
+        type: acornassociated-list-truncate
+        truncate: true
+        truncate_limit: 12
+        show_more: true 
+    video_link:
+        label: 'store.store::lang.model.product.video_link'
+        type: acornassociated-list-truncate
+        truncate: true
+        truncate_limit: 12
+        show_more: true 
+    price:
+        label: 'store.store::lang.model.product.price'
+        type: text
+    qty:
+        label: 'store.store::lang.model.product.qty'
+        type: text
+    is_featured:
+        label: 'store.store::lang.model.product.is_featured'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20
+    new_product:
+        label: 'store.store::lang.model.product.new_product'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20
+    is_top:
+        label: 'store.store::lang.model.product.is_top'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20
+    is_best:
+        label: 'store.store::lang.model.product.is_best'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20
+    status:
+        label: 'store.store::lang.model.product.status'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20
+    created_at:
+        label: 'store.store::lang.model.product.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.product.updated_at'
+        type: datetime

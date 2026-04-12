@@ -1,0 +1,13 @@
+fields:
+    full_name:
+        label: 'store.store::lang.model.merchant.full_name'
+        span: auto
+        type: text
+    address:
+        label: 'store.store::lang.model.merchant.address'
+        span: auto
+        type: text
+    phone:
+        label: 'store.store::lang.model.merchant.phone'
+        span: auto
+        type: text

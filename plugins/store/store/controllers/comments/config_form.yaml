@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.comments.comments'
+form: $/store/store/models/comment/fields.yaml
+modelClass: Store\Store\Models\Comment
+defaultRedirect: store/store/comments
+create:
+    redirect: 'store/store/comments/update/:id'
+    redirectClose: store/store/comments
+update:
+    redirect: store/store/comments
+    redirectClose: store/store/comments

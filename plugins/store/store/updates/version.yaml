@@ -1,0 +1,81 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table store_store_categories'
+    - builder_table_create_store_store_categories.php
+1.0.3:
+    - 'Created table store_store_brands'
+    - builder_table_create_store_store_brands.php
+1.0.4:
+    - 'Created table store_store_return_policies'
+    - builder_table_create_store_store_return_policies.php
+1.0.5:
+    - 'Created table store_store_product_taxes'
+    - builder_table_create_store_store_product_taxes.php
+1.0.6:
+    - 'Created table store_store_merchants'
+    - builder_table_create_store_store_merchants.php
+1.0.7:
+    - 'Created table store_store_products'
+    - builder_table_create_store_store_products.php
+1.0.8:
+    - 'Created table store_store_categories_products'
+    - builder_table_create_store_store_categories_products.php
+1.0.9:
+    - 'Created table store_store_products_return_policies'
+    - builder_table_create_store_store_products_return_policies.php
+1.0.10:
+    - 'Created table store_store_product_taxes_products'
+    - builder_table_create_store_store_product_taxes_products.php
+1.0.11:
+    - 'Created table store_store_input_products'
+    - builder_table_create_store_store_input_products.php
+1.0.12:
+    - 'Created table store_store_carts'
+    - builder_table_create_store_store_carts.php
+1.0.13:
+    - 'Created table store_store_promotions'
+    - builder_table_create_store_store_promotions.php
+1.0.14:
+    - 'Created table store_store_cart_items'
+    - builder_table_create_store_store_cart_items.php
+1.0.15:
+    - 'Created table store_store_prices'
+    - builder_table_create_store_store_prices.php
+1.0.16:
+    - 'Created table store_store_sizes'
+    - builder_table_create_store_store_sizes.php
+1.0.17:
+    - 'Created table store_store_colors'
+    - builder_table_create_store_store_colors.php
+1.0.18:
+    - 'Sedder Table'
+    - seeders_table.php
+1.0.19:
+    - 'Created table store_store_products_sizes'
+    - builder_table_create_store_store_products_sizes.php
+1.0.20:
+    - 'Created table store_store_products_colors'
+    - builder_table_create_store_store_products_colors.php
+1.0.21:
+    - 'Created table store_store_emailsubscribes'
+    - builder_table_create_store_store_emailsubscribes.php
+1.0.22:
+    - 'Created table store_store_contact_messages'
+    - builder_table_create_store_store_contact_messages.php
+1.0.23:
+    - 'Created table store_store_coupons'
+    - builder_table_create_store_store_coupons.php
+1.0.24:
+    - 'Created table store_store_comments'
+    - builder_table_create_store_store_comments.php
+1.0.25:
+    - 'Created table store_store_brand_related'
+    - builder_table_create_store_store_brand_related.php
+1.0.26:
+    - 'Created table store_store_category_related'
+    - builder_table_create_store_store_category_related.php
+1.0.27:
+    - 'Created table store_store_product_related'
+    - builder_table_create_store_store_product_related.php
+

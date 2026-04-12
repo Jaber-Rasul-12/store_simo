@@ -1,0 +1,33 @@
+columns:
+    id:
+        label: 'wallet.wallet::lang.model.transaction.id'
+        type: number
+    public_id:
+        label: 'wallet.wallet::lang.model.transaction.public_id'
+        type: text
+        searchable: true
+    wallet:
+        label: 'wallet.wallet::lang.model.transaction.wallet'
+        relation: wallet
+        select: public_id
+        searchable: true
+    amount:
+        label: 'wallet.wallet::lang.model.transaction.amount'
+        type: text
+    description:
+        label: 'wallet.wallet::lang.model.transaction.description'
+        type: acornassociated-list-truncate
+        truncate: true
+        truncate_limit: 12
+        show_more: true 
+    status:
+        label: 'wallet.wallet::lang.model.transaction.status'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20  
+    created_at:
+        label: 'wallet.wallet::lang.model.transaction.created_at'
+        type: datetime
+    updated_at:
+        label: 'wallet.wallet::lang.model.transaction.updated_at'
+        type: datetime

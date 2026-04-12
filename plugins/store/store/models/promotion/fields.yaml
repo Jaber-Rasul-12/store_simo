@@ -1,0 +1,29 @@
+fields:
+    name:
+        label: 'store.store::lang.model.promotion.name'
+        span: auto
+        type: text
+    code:
+        label: 'store.store::lang.model.promotion.code'
+        span: auto
+        type: text
+    discount_value:
+        label: 'store.store::lang.model.promotion.discount_value'
+        span: auto
+        type: number
+    description: 
+        label: 'store.store::lang.model.promotion.description'
+        span: auto
+        type: textarea
+    start_date:
+        label: 'store.store::lang.model.promotion.start_date'
+        span: auto
+        type: datepicker
+    end_date:
+        label: 'store.store::lang.model.promotion.end_date'
+        span: auto
+        type: datepicker
+    status:
+        label: 'store.store::lang.model.promotion.status'
+        span: auto
+        type: switch

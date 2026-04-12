@@ -1,0 +1,31 @@
+fields:
+    full_name:
+        label: 'store.store::lang.model.contactmessage.full_name'
+        span: auto
+        context: update
+        readOnly: true
+        type: text
+    email:
+        label: store.store::lang.model.contactmessage.email
+        span: auto
+        type: text
+        context: update
+        readOnly: true
+    subject:
+        label: store.store::lang.model.contactmessage.subject
+        span: auto
+        type: text
+        context: update
+        readOnly: true
+    message:
+        label: store.store::lang.model.contactmessage.message
+        span: auto
+        type: textarea
+        context: update
+        readOnly: true
+    is_read:
+        label: 'store.store::lang.model.contactmessage.is_read'
+        span: auto
+        type: switch
+        context: update
+

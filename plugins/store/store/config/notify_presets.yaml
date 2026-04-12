@@ -1,0 +1,7 @@
+store_size_events:
+    name: حفظ جميع أحداث المقاسات
+    event: Store\Store\NotifyRules\SizeEvent
+    enabled: true
+    items:
+        - action: Winter\Notify\NotifyRules\SaveDatabaseAction
+          table_definition: إشعارات المقاسات

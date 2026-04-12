@@ -1,0 +1,12 @@
+list: $/store/store/models/brand/columns.yaml
+modelClass: Store\Store\Models\Brand
+title: 'store.store::lang.controller.brands.brands'
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'store/store/brands/update/:id'

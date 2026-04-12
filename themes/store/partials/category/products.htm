@@ -1,0 +1,142 @@
+<!-- Products Start -->
+<div class="container-fluid ">
+  
+<div class="suggestions-wrapper">
+    {% if relateds is not empty %}
+    <div class="suggestions-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="fw-bold mb-0">
+                    <i class="bi bi-star-fill text-warning me-2"></i>
+                    {{ 'تصنيفات قد تعجبك' |_ }}
+                </h5>
+                <p class="text-muted small mt-1 mb-0">{{ 'اكتشف المزيد من الاصناف المميزة' |_ }}</p>
+            </div>
+           
+        </div>
+    </div>
+    {% endif %}
+    <div class="suggestions-scroll-container">
+        <div class="suggestions-suggestions">
+            {% for related in relateds %}
+                <div class="suggestions-card" onclick="location.href='/category/{{ related.slug }}'">
+                    <div class="suggestions-image-wrapper">
+                        <div class="suggestions-image">
+                            <img src="{% if related.image.path %}{{ related.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" 
+                                 alt="{{ related.name }}"
+                                 loading="lazy">
+                            <div class="image-overlay">
+                                <i class="bi bi-box-arrow-up-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="suggestions-info">
+                        <h6 class="related-name">{{ related.name }}</h6>
+                        <small class="product-count text-muted">
+                            {% if related.products_count %}
+                                {{ related.products_count }} {{ 'منتج' |_ }}
+                            {% else %}
+                                {{ 'متوفر الآن' |_ }}
+                            {% endif %}
+                        </small>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+   
+                  <br>
+<hr>
+<div class="d-flex justify-content-center align-items-center mb-4" style="width: 100%;">
+   
+
+     <div class="search-container">
+                <form class="search-form" method="post" role="form" data-request="onSearchProductsWithCategory">
+                  <div class="search-input-group">
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      id="searchInput"
+                      name="text"
+                      data-track-input
+                      placeholder="{{ 'ابحث عن منتج، اسم...' |_ }}" 
+                      autocomplete="off">
+                    <button type="submit" class="search-btn">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                
+
+                </form>
+            </div>
+    
+    </div>
+<hr>
+
+      <div class="row px-xl-5 pb-3 row-product"  style="justify-content: center;" id="products-list_container">
+
+        {% for product in name_component %}
+
+           
+
+            <div class="col-lg-2 col-md-6 col-sm-12 pb-1 animate-on-scroll">
+                <div class="card product-item border-0 mb-4">
+                    {% if product.HasPromotions == true  %}
+                    <div class="badge-sale">{{ product.promotionsActive.discount_value }} %</div>
+                    {% endif %}
+                    
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i> {{ product.averageRating | default(0) }}
+                    </div>
+                    
+                    <div class="card-header bg-transparent border p-0">
+                        <div class="image-container">
+                            <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}"
+                                 class="product-image">
+                        </div>
+                    </div>
+                    
+                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                        <h6 class="text-truncate mb-3">{{ product.name }}</h6>
+                        <div class="d-flex justify-content-center product-flex position-relative ">
+                          {% set activePrice = null %}
+                            {% set previousPrice = null %}
+                            
+                            {% for price in product.prices %}
+                                {% if price.status == true %}
+                                    {% set activePrice = price %}
+                                    {% if loop.index0 > 0 %}
+                                        {% set previousPrice = product.prices[loop.index0 - 1] %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if activePrice %}
+                            {# <div class="discount-badge">-30%</div> #}
+                            <h6 class=""  style="padding: 10px; color: green;">{{ activePrice.price }}$</h6>
+                            {% if previousPrice %}
+                            <h6 class="text-muted ml-2" style="padding: 10px"><del>{{ previousPrice.price }}$</del></h6>
+                            {% endif %}
+
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer d-flex justify-content-between bg-light border">
+                        <a href="/detail/{{ product.slug }}" class="btn btn-custom btn-sm text-dark p-0">
+                            <i class="fas fa-eye text-primary-product-custom mr-1"></i>{{ 'عرض التفاصيل' |_ }}
+                        </a>
+                        <a {% if user %} data-request="onAddToCart" data-request-flash data-request-data="product_id: {{ product.id }}" {% else %} href="/login" {% endif %} class="btn btn-custom btn-sm text-dark p-0">
+                            <i class="fas fa-shopping-cart   mr-1"></i>{{ 'أضف إلى السلة' |_ }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    <!-- Products End -->

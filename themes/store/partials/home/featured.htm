@@ -1,0 +1,60 @@
+
+    <!-- Featured Start -->
+    <div class="container-fluid pt-5">
+
+        <div class="text-center mb-4">
+            <h2 class="section-title px-5"><span class="px-2">{{ 'خدماتنا المميزة' |_ }}</span></h2>
+            <p>{{ 'نقدم لكم مجموعة من الخدمات المتميزة التي تضمن تجربة تسوق فريدة ومرضية' |_ }}</p>
+
+        </div>
+        
+        <div class="row" id="features-row">
+
+             {% for feature in Store.onReturnPolicies %}
+
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="{{ feature.icon }}"></i>
+                    </div>
+                    <h3 class="feature-title">{{ feature.title }}</h3>
+                    <p style="color: var(--gray); font-size: 0.95rem;">{{ feature.title }}</p>
+                    
+                    <div class="feature-details">
+                        {{ feature.details }}
+                    </div>
+                    
+                    <div class="feature-toggle" onclick="toggleDetails(this)">
+                        <i class="fas fa-chevron-down"></i>
+                        <span>{{ 'عرض التفاصيل' |_ }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-item">
+                <span class="stat-number">15,000+</span>
+                <span class="stat-label">{{ 'عميل راضٍ' |_ }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">99%</span>
+                <span class="stat-label">{{ 'تقييم إيجابي' |_ }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">24/7</span>
+                <span class="stat-label">{{ 'دعم فني' |_ }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">5,000+</span>
+                <span class="stat-label">{{ 'منتج متوفر' |_ }}</span>
+            </div>
+        </div>
+    </div>
+    <!-- Featured End -->
+    
+           
+        
+    

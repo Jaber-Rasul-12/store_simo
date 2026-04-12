@@ -1,0 +1,24 @@
+title = "تفاصيل المنتج"
+url = "/detail/:slug"
+layout = "default"
+slug = "{{ :slug }}"
+[localePicker]
+[Store]
+[session]
+[Cart]
+
+
+==
+
+    {% partial 'home/topbar' %}
+
+    {% partial 'navbar' home=false  shop=true contact=false %}
+   {# {% partial 'page_header' title='تصفح متجرنا' name_page='تفاصيل المنتج'  %} #}
+
+   {% partial 'detail/detail' relateds=Store.onGetRelatedProducts %}
+
+
+
+
+
+    

@@ -1,0 +1,18 @@
+columns:
+    id:
+        label: 'store.store::lang.model.price.id'
+        type: number
+    price:
+        label: 'store.store::lang.model.price.price'
+        type: text
+    status:
+        label: 'store.store::lang.model.price.status'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20
+    created_at:
+        label: 'store.store::lang.model.price.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.price.updated_at'
+        type: datetime

@@ -1,0 +1,19 @@
+fields:
+    user:
+        label: 'store.store::lang.model.comment.user'
+        span: auto
+        type: relation
+        select: name
+    product:
+        label: 'store.store::lang.model.comment.product'
+        span: auto
+        type: relation
+        select: name
+    comment:
+        label: 'store.store::lang.model.comment.comment'
+        span: auto
+        type: text
+    rating:
+        label: 'store.store::lang.model.comment.rating'
+        span: auto
+        type: number

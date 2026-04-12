@@ -1,0 +1,15 @@
+{% for brand in Brands %}
+
+                        <a href="brand/{{ brand.slug }}" class="nav-item nav-link d-flex align-items-center justify-content-between category-item py-3 px-4" 
+                           style="border-bottom: 1px solid #f0f0f0;">
+                            <div class="d-flex align-items-center">
+                                <div class="category-icon mr-3 d-flex align-items-center justify-content-center" 
+                                     style="width: 36px; height: 36px; background-color: none; border-radius: 6px;">
+                                    <img src=" {% if brand.image.path %}{{ brand.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="لا يوجد صورة" style="width: 100%; height: 100%; border-radius: 30%;"></i>
+                                </div>
+                                <span class="category-name font-weight-medium" style="font-size: 0.95rem; padding-right: 5px;">{{ brand.name }}</span>
+                            </div>
+                            <span class="category-count badge badge-pill" style="padding: 5px 10px;">{{ brand.products_count }}</span>
+                        </a>
+
+{% endfor %}

@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.returnpolicies.returnpolicies'
+form: $/store/store/models/returnpolicy/fields.yaml
+modelClass: Store\Store\Models\ReturnPolicy
+defaultRedirect: store/store/returnpolicies
+create:
+    redirect: 'store/store/returnpolicies/update/:id'
+    redirectClose: store/store/returnpolicies
+update:
+    redirect: store/store/returnpolicies
+    redirectClose: store/store/returnpolicies

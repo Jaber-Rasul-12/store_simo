@@ -1,0 +1,9 @@
+fields:
+    price:
+        label: 'store.store::lang.model.price.price'
+        span: auto
+        type: number
+    status:
+        label: 'store.store::lang.model.price.status'
+        span: auto
+        type: switch

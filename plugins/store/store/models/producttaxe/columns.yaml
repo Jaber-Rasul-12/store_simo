@@ -1,0 +1,22 @@
+columns:
+    id:
+        label: 'store.store::lang.model.producttaxe.id'
+        type: number
+    title:
+        label: 'store.store::lang.model.producttaxe.title'
+        type: text
+        searchable: true
+    price:
+        label: 'store.store::lang.model.producttaxe.price'
+        type: text
+    status:
+        label: 'store.store::lang.model.producttaxe.status'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20 
+    created_at:
+        label: 'store.store::lang.model.producttaxe.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.producttaxe.updated_at'
+        type: datetime

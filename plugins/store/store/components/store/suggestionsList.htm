@@ -1,0 +1,3 @@
+{% for suggestion in suggestions %}
+    <a href="/detail/{{ suggestion.slug }}" class="dropdown-item"><img src=" {% if suggestion.image.path %}{{ suggestion.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="لا يوجد صورة" style="width: 20px; height: 20px; border-radius: 50%;"></i>{{ suggestion.name }}</a>
+{% endfor %}

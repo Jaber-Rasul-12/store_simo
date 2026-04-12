@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.colors.colors'
+form: $/store/store/models/color/fields.yaml
+modelClass: Store\Store\Models\Color
+defaultRedirect: store/store/colors
+create:
+    redirect: 'store/store/colors/update/:id'
+    redirectClose: store/store/colors
+update:
+    redirect: store/store/colors
+    redirectClose: store/store/colors

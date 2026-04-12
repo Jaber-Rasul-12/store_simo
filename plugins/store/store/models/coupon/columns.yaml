@@ -1,0 +1,31 @@
+columns:
+    id:
+        label: 'store.store::lang.model.coupon.id'
+        type: number
+    status:
+        label: 'store.store::lang.model.coupon.status'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20 
+    full_name:
+        label: 'store.store::lang.model.coupon.full_name'
+        type: text
+        searchable: true
+    code:
+        label: 'store.store::lang.model.coupon.code'
+        type: text
+        searchable: true
+    information_key_value:
+        label: store.store::lang.model.coupon.information
+        type: text
+        searchable: false
+        sortable: false
+    percentage:
+        label: 'store.store::lang.model.coupon.percentage'
+        type: text
+    created_at:
+        label: 'store.store::lang.model.coupon.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.coupon.updated_at'
+        type: datetime

@@ -1,0 +1,13 @@
+fields:
+    title:
+        label: 'store.store::lang.model.producttaxe.title'
+        span: auto
+        type: text
+    price:
+        label: 'store.store::lang.model.producttaxe.price'
+        span: auto
+        type: number
+    status:
+        label: 'store.store::lang.model.producttaxe.status'
+        span: auto
+        type: switch

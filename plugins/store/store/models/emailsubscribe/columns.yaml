@@ -1,0 +1,14 @@
+columns:
+    id:
+        label: 'store.store::lang.model.emailsubscribe.id'
+        type: number
+    email:
+        label: 'store.store::lang.model.emailsubscribe.email'
+        type: text
+        searchable: true
+    created_at:
+        label: 'store.store::lang.model.emailsubscribe.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.emailsubscribe.updated_at'
+        type: datetime

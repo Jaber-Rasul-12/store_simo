@@ -1,0 +1,18 @@
+title = "العروض"
+url = "/promotions"
+layout = "default"
+slug = "{{ :slug }}"
+[localePicker]
+[Store]
+[session]
+[Cart]
+== 
+
+   {% partial 'home/topbar' %}
+
+   {% partial 'navbar' home=false  shop=false contact=false %}
+
+   {# {% partial 'page_header' title='تصفح متجرنا' name_page='قسم التصنيفات'  %} #}
+
+   {% if Store.onGetProductsWherePromotions is not empty %} {% partial 'promotion/products' title_product='قسم العروض' name_component=Store.onGetProductsWherePromotions %} {% endif %}
+

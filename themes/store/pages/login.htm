@@ -1,0 +1,169 @@
+title = "تسجيل الدخول"
+url = "/login"
+layout = "default"
+[localePicker]
+[Store]
+[account]
+[sociallogin]
+redirect = "home"
+==
+{% if user %}
+    <script>
+        window.location.href = "{{ 'home'|page }}";
+    </script>
+{% endif %}
+{% partial 'home/topbar' %}
+{% partial 'navbar' home=false shop=false contact=false %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header text-white text-center py-4">
+                    <h2 class="mb-0"><i class="fas fa-sign-in-alt me-2"></i> {{ 'تسجيل دخول' |_ }}</h2>
+                </div>
+                
+                <div class="card-body p-4 p-md-5">
+                    
+                    <form data-request="onSignin" data-request-redirect="home" data-request-flash>
+                        
+                        
+                        <div class="mb-4 text-right">
+                            <label for="userSigninLogin" class="form-label fw-bold">
+                                <i class="fas fa-user me-2 text-primary"></i>{{ loginAttributeLabel }}
+                            </label>
+                            <input
+                                name="login"
+                                type="text"
+                                class="form-control form-control-lg border-2"
+                                id="userSigninLogin"
+                                placeholder="Enter your {{ loginAttributeLabel|lower }}"
+                                autocomplete="username"
+                                required
+                            />
+                        </div>
+
+                        <div class="mb-4 text-right">
+                            <label for="userSigninPassword" class="form-label fw-bold">
+                                <i class="fas fa-lock me-2 text-primary"></i>{{ 'كلمة المرور' |_ }}
+                            </label>
+                            <div class="input-group">
+                                <input
+                                    name="password"
+                                    type="password"
+                                    class="form-control form-control-lg border-2"
+                                    id="userSigninPassword"
+                                    placeholder="Enter your password"
+                                    autocomplete="current-password"
+                                    required
+                                />
+                                <button class="btn btn-outline-secondary border-2" type="button" id="togglePassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <a href="/"></a>
+                            </div>
+                        </div>
+
+                        {% if rememberLoginMode == 'ask' %}
+                        <div class="mb-4 form-check text-right">
+                            <input name="remember" type="checkbox" class="form-check-input" id="rememberCheck" value="1">
+                            <label class="form-check-label me-2" for="rememberCheck">
+                                {{ 'البقاء مسجلاً' |_ }}
+                            </label>
+                        </div>
+                        {% endif %}
+
+                        <div class="d-grid mb-4 text-center">
+                            <button type="submit" class="btn btn-primary btn-lg fw-bold py-3">
+                                <i class="fas fa-sign-in-alt me-2"></i>{{ 'تسجيل الدخول' |_ }}
+                            </button>
+                        </div>
+                    </form>
+                    <div class="text-center mb-4">
+                        <div class="border-top pt-4">
+                            <p class="text-muted mb-2">{{ 'ليس لدي حساب؟' |_ }}</p>
+                            <a href="{{ '/register' }}" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-user-plus me-2"></i>{{ 'تسجيل في الموقع' |_ }}
+                            </a>
+                        </div>
+                    </div>
+                     <div class="text-center mb-4">
+                    <p align="center" style="font-size: 22px; padding: 10px;">
+                        {% for name, link in social_login_links %}
+                         <a href="{{ link }}">{{ name }}</a>
+                        {% endfor %}
+ 	                </p>
+
+                    </div>
+
+                
+
+                </div>
+                
+                <div class="card-footer bg-light text-center py-3">
+                    <small class="text-muted">
+                        <i class="fas fa-shield-alt me-1"></i>{{ 'بياناتك محمية وفق سياسة الخصوصية' |_ }}
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.form-control-lg {
+    border-radius: 10px;
+    border-color: #dee2e6;
+    transition: all 0.3s;
+}
+
+.form-control-lg:focus {
+    border-color: #946b6b;
+    box-shadow: 0 0 0 0.25rem #946b6b;
+    transform: translateY(-2px);
+    background: white!important;
+}
+
+.btn-lg {
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.btn-lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.input-group .btn {
+    border-radius: 0 10px 10px 0;
+    border-left: none;
+}
+
+.form-check {
+    direction: rtl;
+    text-align: right;
+}
+
+.form-check-input {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+.alert {
+    border-radius: 10px;
+    border: none;
+}
+
+.text-right {
+    text-align: right !important;
+}
+</style>

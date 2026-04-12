@@ -1,0 +1,26 @@
+columns:
+    id:
+        label: 'wallet.wallet::lang.model.wallet.id'
+        type: number
+    user:
+        label: 'wallet.wallet::lang.model.wallet.user'
+        relation: user
+        select: name
+    public_id:
+        label: 'wallet.wallet::lang.model.transaction.public_id'
+        type: text
+        searchable: true
+    current_balance:
+        label: 'wallet.wallet::lang.model.wallet.current_balance'
+        type: text
+    status:
+        label: 'wallet.wallet::lang.model.wallet.status'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20  
+    created_at:
+        label: 'wallet.wallet::lang.model.wallet.created_at'
+        type: datetime
+    updated_at:
+        label: 'wallet.wallet::lang.model.wallet.updated_at'
+        type: datetime

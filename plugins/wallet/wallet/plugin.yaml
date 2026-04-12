@@ -1,0 +1,36 @@
+plugin:
+    name: 'wallet.wallet::lang.plugin.name'
+    description: 'wallet.wallet::lang.plugin.description'
+    author: Wallet
+    icon: wn-icon-wallet
+    replaces: {  }
+permissions:
+    wallet:
+        tab: 'wallet.wallet::lang.plugin.wallet'
+        label: 'wallet.wallet::lang.plugin.wallet'
+    wallets:
+        tab: 'wallet.wallet::lang.plugin.wallet'
+        label: 'wallet.wallet::lang.plugin.wallets'
+    transactions:
+        tab: 'wallet.wallet::lang.plugin.wallet'
+        label: 'wallet.wallet::lang.plugin.transactions'
+navigation:
+    wallet:
+        label: 'wallet.wallet::lang.plugin.wallet'
+        url: wallet/wallet/wallets
+        icon: icon-wallet
+        permissions:
+            - wallet
+        sideMenu:
+            wallets:
+                label: 'wallet.wallet::lang.plugin.wallets'
+                url: wallet/wallet/wallets
+                icon: icon-credit-card
+                permissions:
+                    - wallets
+            transactions:
+                label: 'wallet.wallet::lang.plugin.transactions'
+                url: wallet/wallet/transactions
+                icon: icon-exchange
+                permissions:
+                    - transactions

@@ -1,0 +1,18 @@
+fields:
+    title:
+        label: 'store.store::lang.model.returnpolicy.title'
+        span: auto
+        type: text
+    details:
+        label: 'store.store::lang.model.returnpolicy.details'
+        span: auto
+        type: text
+    status:
+        label: 'store.store::lang.model.returnpolicy.status'
+        span: auto
+        type: switch
+    icon:
+        label: 'Icon'
+        type: 'iconpicker'
+        default: 'far icon-address-book'
+        libraries: ~/modules/backend/formwidgets/iconpicker/meta/libraries.yaml

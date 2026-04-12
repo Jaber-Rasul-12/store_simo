@@ -1,0 +1,68 @@
+fields:
+    user:
+        label: 'store.store::lang.model.cart.user'
+        span: auto
+        type: relation
+        select: name
+        placeholder: 'store.store::lang.plugin.select'
+    type:
+        label: 'store.store::lang.model.cart.type'
+        span: auto
+        type: dropdown
+        placeholder: 'store.store::lang.plugin.select'
+        options:
+            cashe: 'store.store::lang.model.cart.cashe'
+            wallet: 'store.store::lang.model.cart.wallet'
+    wallet_id:
+        label: 'store.store::lang.model.cart.wallet'
+        span: auto
+        type: dropdown
+        # hidden: true
+        dependsOn: 
+            - user
+            - type
+        placeholder: 'store.store::lang.plugin.select'
+    coupon:
+        label: 'store.store::lang.model.cart.coupon'
+        type: relation
+        span: auto
+        select: full_name
+    total_price:
+        label: 'store.store::lang.model.cart.total_price'
+        type: number
+        span: auto
+    total_promotions:
+        label: 'store.store::lang.model.cart.total_promotions'
+        type: number
+        span: auto
+    final_price:
+        label: 'store.store::lang.model.cart.final_price'
+        type: number
+        span: auto
+    notes:
+        label: 'store.store::lang.model.cart.notes'
+        span: auto
+        type: text
+    contacts:
+        label: 'store.store::lang.model.cart.contacts'
+        span: auto
+        type: text
+    location_lat:
+        label: 'store.store::lang.model.cart.location_lat'
+        span: auto
+        type: text
+    location_lng:
+        label: 'store.store::lang.model.cart.location_lng'
+        span: auto
+        type: text
+    address:
+        label: 'store.store::lang.model.cart.address'
+        span: auto
+        type: text
+    status:
+        label: 'store.store::lang.model.cart.status'
+        span: auto
+        type: switch
+    items:
+        label: store.store::lang.model.cart.cartitems
+        type: relationmanager

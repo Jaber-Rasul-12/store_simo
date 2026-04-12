@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.contactmessages.contactmessages'
+form: $/store/store/models/contactmessage/fields.yaml
+modelClass: Store\Store\Models\ContactMessage
+defaultRedirect: store/store/contactmessages
+create:
+    redirect: 'store/store/contactmessages/update/:id'
+    redirectClose: store/store/contactmessages
+update:
+    redirect: store/store/contactmessages
+    redirectClose: store/store/contactmessages

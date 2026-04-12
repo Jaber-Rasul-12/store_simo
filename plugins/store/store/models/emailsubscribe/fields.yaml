@@ -1,0 +1,5 @@
+fields:
+    email:
+        label: 'store.store::lang.model.emailsubscribe.email'
+        span: auto
+        type: textarea

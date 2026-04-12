@@ -1,0 +1,318 @@
+        :root {
+            --primary: #8b5e5ec9;
+            --primary-dark: #804747;
+            --secondary: #EDF1FF;
+            --accent: #f9dfdf;
+            --light: #718096;
+            --gray: #64748b;
+            --dark: #2d3748;
+        }
+        
+       
+ 
+        
+
+        
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+        
+        .col-lg-3 {
+            width: 25%;
+            padding: 15px;
+        }
+        
+        .col-md-6 {
+            width: 50%;
+        }
+        
+        .col-sm-12 {
+            width: 100%;
+        }
+        
+        @media (max-width: 992px) {
+            .col-lg-3 {
+                width: 50%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .col-lg-3, .col-md-6 {
+                width: 100%;
+            }
+            .section-title{
+                margin-bottom: 25px;
+            }
+            #features-row{
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+            }
+   
+            .feature-card {
+                padding: 10px!important;
+                text-align: right;
+            }
+            .feature-icon{
+                font-size: 15px!important;
+                width: 50px!important;
+                height: 50px!important;
+            }
+            .feature-title{
+                font-size: 10px!important;
+            }
+            .feature-card p{
+                font-size: 10px!important;
+            }
+            .feature-toggle{
+                font-size: 10px!important;  
+            }
+            .feature-details{
+                font-size: 8px!important;  
+            }
+            .stats-section {
+                padding: 10px;
+            }
+            .stat-item{
+                font-size: 10px!important;
+                padding-top: 10px!important;
+            }
+            .stat-number{
+                font-size: 15px!important;
+                padding-top: 10px;
+            }
+            .stat-label{
+                font-size: 10px!important;   
+            }
+        }
+        
+        /* Feature Card Design */
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 35px 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            transition: all 0.4s ease;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            color: white;
+            font-size: 28px;
+            transition: all 0.4s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-title {
+            color: var(--primary);
+        }
+        
+        .feature-details {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.8;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .feature-card.active .feature-details {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 15px;
+        }
+        
+        .feature-toggle {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-toggle:hover {
+            color: var(--primary-dark);
+        }
+        
+        .feature-toggle i {
+            margin-right: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card.active .feature-toggle i {
+            transform: rotate(180deg);
+        }
+        
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .feature-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        /* .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; } */
+         
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 60px;
+            color: white;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Simple Modal Alternative */
+        .details-modal {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .details-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            transform: translateY(30px);
+            transition: transform 0.3s ease;
+        }
+        
+        .details-modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin: 0;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            color: var(--primary);
+        }
+        
+        .modal-body {
+            color: var(--gray);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }

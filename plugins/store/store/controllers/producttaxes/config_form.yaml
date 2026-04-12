@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.producttaxes.producttaxes'
+form: $/store/store/models/producttaxe/fields.yaml
+modelClass: Store\Store\Models\ProductTaxe
+defaultRedirect: store/store/producttaxes
+create:
+    redirect: 'store/store/producttaxes/update/:id'
+    redirectClose: store/store/producttaxes
+update:
+    redirect: store/store/producttaxes
+    redirectClose: store/store/producttaxes

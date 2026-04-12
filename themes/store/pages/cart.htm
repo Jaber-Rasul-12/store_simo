@@ -1,0 +1,16 @@
+title = "سلة التسوق"
+url = "/cart"
+layout = "default"
+[localePicker]
+[Store]
+[Cart]
+[session]
+security = "user"
+redirect = "home"
+
+==
+
+   {% partial 'home/topbar' %}
+   {% partial 'navbar' home=false  shop=false cart=true checkout=false contact=false %}
+   {# {% partial 'page_header' title='سلة التسوق' name_page='سلة التسوق'  %}    #}
+   {% partial 'cart/cart' %}

@@ -1,0 +1,9 @@
+fields:
+    name:
+        label: 'store.store::lang.model.color.name'
+        span: auto
+        type: text
+    code:
+        label: 'store.store::lang.model.color.code'
+        span: auto
+        type: colorpicker

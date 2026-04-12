@@ -1,0 +1,288 @@
+
+    <!-- Navbar Start -->
+    <div class="container-fluid mb-5" id="navbar-home">
+        <div class="row border-top px-xl-5" id="navbar-row">
+            <div class="col-lg-4 col-sm-3 d-none d-lg-block" id="navbar-categories">
+                <a class="btn shadow-none d-flex align-items-center justify-content-between text-white w-100 category-toggle-btn pulse-effect" 
+                   data-toggle="collapse" href="#navbar-vertical-category" 
+                   style="height: 65px; margin-top: -1px; padding: 0 30px; border-radius: 8px 8px 0 0;">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-th-large ml-2"></i>
+                        <h6 class="m-0 font-weight-bold" style="color: white!important;">{{ 'التصنيفات' |_ }}</h6>
+                    </div>
+                    <i class="fa fa-angle-down transition-icon"></i>
+                </a>
+                
+                <nav class="collapse show navbar navbar-vertical navbar-light align-items-start justify-content-center p-0" id="navbar-vertical-category" 
+                     style="border: 1px solid #e1e5eb; padding: 0px!important; border-top: none; border-radius: 0 0 8px 8px;">
+                    <form method="post" style="padding: 15px; width: 100%; display: flex; justify-content: center;" data-request="onSearchCategories" role="form">
+                        <div style="position: relative;; width: 75% ;">
+                            <input type="text" 
+                                   name="text" 
+                                   data-track-input
+                                   class="form-control form-control-sm"
+                                   placeholder="بحث في التصنيفات..."
+                                   autocomplete="off">
+                            <div class="input-group-append" style="position: absolute; left: 3px; top: 50%; transform: translateY(-50%);">
+                                <button class="btn btn-sm" type="button" style="border-radius: 6px;">
+                                    <i class="fas fa-search text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="navbar-nav w-100 overflow-auto category-list" id="categories-items" style="height: 410px">
+
+                    {% for category in Store.getCateogries %}
+
+                       {% if category.products_count > 0  %}
+
+                        <a href="category/{{ category.slug }}" style="width: 98%;" class="nav-item nav-link d-flex align-items-center justify-content-between category-item py-3 px-4" 
+                           style="border-bottom: 1px solid #f0f0f0;">
+                            <div class="d-flex align-items-center">
+                                <div class="category-icon mr-3 d-flex align-items-center justify-content-center" 
+                                     style="width: 36px; height: 36px; background-color: none; border-radius: 6px;">
+                                    <img src=" {% if category.image.path %}{{ category.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="لا يوجد صورة" style="width: 100%; height: 100%; border-radius: 30%;"></i>
+                                </div>
+                                <span class="category-name font-weight-medium" style="font-size: 0.95rem; padding-right: 5px;">{{ category.name }}</span>
+                            </div>
+                            <span class="category-count badge badge-pill" style="padding: 5px 10px;">{{ category.products_count }}</span>
+                        </a>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    </div>
+                </nav>
+            </div>
+
+
+
+
+                   
+
+
+
+            <div class="col-lg-4 col-sm-9" id="navbar-products">
+                <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">S</span>Imo</h1>
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="/" class="nav-item nav-link active">
+                               <i class="fas fa-home"></i> {{ 'الصفحة الرئيسية' |_ }}
+                            </a>
+                            <a href="/shop" class="nav-item nav-link">
+                                <i class="fas fa-store"></i> {{ 'تصفح' |_ }}
+                            </a>
+                            {% if user %}
+                            <a href="/cart" class="nav-item nav-link {% if cart %}active{% endif %}">
+                                <i class="fas fa-shopping-cart"></i> {{ 'تصفح السلة' |_ }} <h1 class="badge badge-danger" id="cart-count">{{ Cart.getCountCarts }}</h1>
+                            </a>
+                            <a href="/checkout" class="nav-item nav-link {% if checkout %}active{% endif %}">
+                                <i class="fas fa-check-circle"></i> {{ 'التاكد من اتمام الطلبات' |_ }} <h1 class="badge badge-danger">{{ Cart.getCountCartsCheckout }}</h1>
+                            </a>
+                            {% endif %}
+                            <a href="/contact" class="nav-item nav-link">
+                                <i class="fas fa-envelope"></i> {{ 'تواصل' |_ }}
+                            </a>
+
+                        </div>
+                        <div class="navbar-nav ml-auto py-0">
+                        </div>
+                    </div>
+                </nav>
+                
+                <div id="header-carousel" class="carousel slide" data-ride="carousel">
+
+                    <div class="carousel-inner">
+
+
+                    {% for product in Store.getProductsShowHomePage %}
+
+                        <div class="carousel-item {% if loop.first %} active {% endif %}" style="height: 410px;">
+                            <img class="img-fluid" src=" {% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="لا يوجد صورة">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h4 class="text-success text-uppercase font-weight-medium mb-3">{{ product.promotions.first.description }}</h4>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">{{ product.promotions.first.name }}</h3>
+                                    <a href="detail/{{ product.slug }}" class="btn btn-outline-success py-2 px-3">قم بالشراء الان</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+ 
+                      
+                    </div>
+                    <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                        <div class="btn btn-dark" >
+                            <span class="carousel-control-prev-icon"></span>
+                        </div>
+                    </a>
+                    <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                        <div class="btn btn-dark" >
+                            <span class="carousel-control-next-icon"></span>
+                        </div>
+                    </a>
+
+                </div>
+                
+            </div>
+            <div class="col-lg-4 col-sm-3 d-none d-lg-block" id="navbar-categories">
+                <a class="btn shadow-none d-flex align-items-center justify-content-between text-white w-100 category-toggle-btn pulse-effect" 
+                   data-toggle="collapse" href="#navbar-vertical" 
+                   style="height: 65px; margin-top: -1px; padding: 0 30px; border-radius: 8px 8px 0 0;">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-th-large ml-2"></i>
+                        <h6 class="m-0 font-weight-bold" style="color: white!important;">{{ 'العلامات التجارية' |_ }}</h6>
+                    </div>
+                    <i class="fa fa-angle-down transition-icon"></i>
+                </a>
+                
+                <nav class="collapse show navbar navbar-vertical navbar-light align-items-center p-0" id="navbar-vertical" 
+                     style="border: 1px solid #e1e5eb; padding: 0px!important; border-top: none; border-radius: 0 0 8px 8px;">
+                    <form method="post" style="padding: 15px; width: 100%; display: flex; justify-content: center;" data-request="onSearchBrands" role="form">
+                        <div style="position: relative;; width: 75% ;">
+                            <input type="text" 
+                                   name="name_brands" 
+                                   data-track-input
+                                   class="form-control form-control-sm"
+                                   placeholder="العلامات التجارية..."
+                                   autocomplete="off">
+                            <div class="input-group-append" style="position: absolute; left: 3px; top: 50%; transform: translateY(-50%);">
+                                <button class="btn btn-sm" type="button" style="border-radius: 6px;">
+                                    <i class="fas fa-search text-white"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="navbar-nav w-100 overflow-auto category-list" id="brands-items" style="height: 410px">
+
+                    {% for brand in Store.Brands %}
+                        {% if brand.products_count > 0  %}
+                        <a href="brand/{{ brand.slug }}" style="width: 98%;" class="nav-item nav-link d-flex align-items-center justify-content-between category-item py-3 px-4" 
+                           style="border-bottom: 1px solid #f0f0f0;">
+                            <div class="d-flex align-items-center">
+                                <div class="category-icon mr-3 d-flex align-items-center justify-content-center" 
+                                     style="width: 36px; height: 36px; background-color: none; border-radius: 6px;">
+                                    <img src=" {% if brand.image.path %}{{ brand.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="لا يوجد صورة" style="width: 100%; height: 100%; border-radius: 30%;"></i>
+                                </div>
+                                <span class="category-name font-weight-medium" style="font-size: 0.95rem; padding-right: 5px;">{{ brand.name }}</span>
+                            </div>
+                            <span class="category-count badge badge-pill" style="padding: 5px 10px;">{{ brand.products_count }}</span>
+                        </a>
+                        {% endif %}
+                    {% endfor %}
+
+                    </div>
+                </nav>
+            </div>    
+
+
+
+<div class="container-fluid ">
+ <div class="suggestions-wrapper" id="suggestions-wrapper-category-mobile">
+        
+           {% if Store.Brands is not empty %}
+            <div class="suggestions-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="fw-bold mb-0">
+                            <i class="bi bi-star-fill text-warning me-2"></i>
+                            {{ 'علامات تجارية  قد تعجبك' |_ }}
+                        </h5>
+                        <p class="text-muted small mt-1 mb-0">{{ 'اكتشف المزيد من العلامات التجارية المميزة' |_ }}</p>
+                    </div>
+                   
+                </div>
+            </div>
+            {% endif %}
+        
+            <div class="suggestions-scroll-container">
+                <div class="suggestions-suggestions">
+                    {% for related in Store.Brands %}
+                        <div class="suggestions-card" onclick="location.href='/brand/{{ related.slug }}'">
+                            <div class="suggestions-image-wrapper">
+                                <div class="suggestions-image">
+                                    <img src="{% if related.image.path %}{{ related.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" 
+                                         alt="{{ related.name }}"
+                                         loading="lazy">
+                                    <div class="image-overlay">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="suggestions-info">
+                                <h6 class="related-name">{{ related.name }}</h6>
+                                <small class="product-count text-muted">
+                                    {% if related.products_count %}
+                                        {{ related.products_count }} {{ 'منتج' |_ }}
+                                    {% else %}
+                                        {{ 'متوفر الآن' |_ }}
+                                    {% endif %}
+                                </small>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+ </div>
+ <div class="container-fluid ">
+          <div class="suggestions-wrapper" id="suggestions-wrapper-category-mobile">
+        
+           {% if Store.getCateogries is not empty %}
+            <div class="suggestions-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="fw-bold mb-0">
+                            <i class="bi bi-star-fill text-warning me-2"></i>
+                            {{ 'تصنيفات  قد تعجبك' |_ }}
+                        </h5>
+                        <p class="text-muted small mt-1 mb-0">{{ 'اكتشف المزيد من الاصناف المميزة' |_ }}</p>
+                    </div>
+                   
+                </div>
+            </div>
+            {% endif %}
+        
+            <div class="suggestions-scroll-container">
+                <div class="suggestions-suggestions">
+                    {% for related in Store.getCateogries %}
+                        <div class="suggestions-card" onclick="location.href='/brand/{{ related.slug }}'">
+                            <div class="suggestions-image-wrapper">
+                                <div class="suggestions-image">
+                                    <img src="{% if related.image.path %}{{ related.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" 
+                                         alt="{{ related.name }}"
+                                         loading="lazy">
+                                    <div class="image-overlay">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="suggestions-info">
+                                <h6 class="related-name">{{ related.name }}</h6>
+                                <small class="product-count text-muted">
+                                    {% if related.products_count %}
+                                        {{ related.products_count }} {{ 'منتج' |_ }}
+                                    {% else %}
+                                        {{ 'متوفر الآن' |_ }}
+                                    {% endif %}
+                                </small>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+</div>
+
+
+        </div>
+    </div>
+  
+

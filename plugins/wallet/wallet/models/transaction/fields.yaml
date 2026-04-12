@@ -1,0 +1,23 @@
+fields:
+    public_id:
+        label: 'wallet.wallet::lang.model.transaction.public_id'
+        span: auto
+        type: text
+        readOnly: true
+    wallet:
+        label: 'wallet.wallet::lang.model.transaction.wallet'
+        span: auto
+        type: relation
+        nameFrom: public_id
+    amount:
+        label: 'wallet.wallet::lang.model.transaction.amount'
+        span: auto
+        type: number
+    description:
+        label: 'wallet.wallet::lang.model.transaction.description'
+        span: auto
+        type: text
+    status:
+        label: 'wallet.wallet::lang.model.transaction.status'
+        span: auto
+        type: switch

@@ -1,0 +1,60 @@
+columns:
+    id:
+        label: 'store.store::lang.model.category.id'
+        type: number
+    name:
+        label: 'store.store::lang.model.category.name'
+        type: text
+        searchable: true
+    slug:
+        label: 'store.store::lang.model.category.slug'
+        type: text
+    related_categories:
+        label: 'store.store::lang.model.category.related_categories'
+        relation: related_categories
+        select: name
+    status:
+        label: 'store.store::lang.model.category.status'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20  
+    is_featured:
+        label: 'store.store::lang.model.category.is_featured'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20 
+    is_top:
+        label: 'store.store::lang.model.category.is_top'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20 
+    is_popular:
+        label: 'store.store::lang.model.category.is_popular'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20 
+    is_trending:
+        label: 'store.store::lang.model.category.is_trending'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20 
+    show_homepage:
+        label: 'store.store::lang.model.category.show_homepage'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20 
+    description:
+        label: 'store.store::lang.model.category.description'
+        type: acornassociated-list-truncate
+        truncate: true
+        truncate_limit: 12
+        show_more: true  
+    color:
+        label: 'store.store::lang.model.category.color'
+        type: colorpicker
+    created_at:
+        label: 'store.store::lang.model.category.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.category.updated_at'
+        type: datetime

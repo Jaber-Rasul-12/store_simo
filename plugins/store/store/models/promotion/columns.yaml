@@ -1,0 +1,36 @@
+columns:
+    id:
+        label: 'store.store::lang.model.promotion.id'
+        type: number
+    name:
+        label: 'store.store::lang.model.promotion.name'
+        type: text
+    code:
+        label: 'store.store::lang.model.promotion.code'
+        type: text
+    discount_value:
+        label: 'store.store::lang.model.promotion.discount_value'
+        type: text
+    start_date:
+        label: 'store.store::lang.model.promotion.start_date'
+        type: text
+    end_date:
+        label: 'store.store::lang.model.promotion.end_date'
+        type: text
+    status:
+        label: 'store.store::lang.model.promotion.status'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20
+    description: 
+        label: 'store.store::lang.model.promotion.description'
+        type: acornassociated-list-truncate
+        truncate: true
+        truncate_limit: 12
+        show_more: true 
+    created_at:
+        label: 'store.store::lang.model.promotion.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.promotion.updated_at'
+        type: datetime

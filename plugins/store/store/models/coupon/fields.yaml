@@ -1,0 +1,33 @@
+fields:
+    full_name:
+        label: 'store.store::lang.model.coupon.full_name'
+        span: auto
+        type: text
+    code:
+        label: 'store.store::lang.model.coupon.code'
+        span: auto
+        type: text
+    percentage:
+        label: 'store.store::lang.model.coupon.percentage'
+        span: auto
+        type: number
+    status:
+        label: 'store.store::lang.model.coupon.status'
+        span: auto
+        type: switch
+    information:
+            label: store.store::lang.model.coupon.information
+            prompt: store.store::lang.model.coupon.add_new_item
+            style: default
+            span: auto
+            type: repeater
+            form:
+                fields:
+                    key:
+                        label: key
+                        span: auto
+                        type: text
+                    value:
+                        label: value
+                        span: auto
+                        type: text

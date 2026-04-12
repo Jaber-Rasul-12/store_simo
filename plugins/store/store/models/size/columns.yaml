@@ -1,0 +1,13 @@
+columns:
+    id:
+        label: 'store.store::lang.model.size.id'
+        type: number
+    name:
+        label: 'store.store::lang.model.size.name'
+        type: text
+    created_at:
+        label: 'store.store::lang.model.size.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.size.updated_at'
+        type: datetime

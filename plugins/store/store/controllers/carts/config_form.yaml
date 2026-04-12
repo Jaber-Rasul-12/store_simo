@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.carts.carts'
+form: $/store/store/models/cart/fields.yaml
+modelClass: Store\Store\Models\Cart
+defaultRedirect: store/store/carts
+create:
+    redirect: 'store/store/carts/update/:id'
+    redirectClose: store/store/carts
+update:
+    redirect: store/store/carts
+    redirectClose: store/store/carts

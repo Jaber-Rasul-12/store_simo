@@ -1,0 +1,1 @@
+<h2 class="<?php echo e($record->icon); ?> text-primary text-center m-0 mr-3"></h2>

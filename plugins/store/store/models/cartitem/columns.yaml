@@ -1,0 +1,29 @@
+columns:
+    id:
+        label: 'store.store::lang.model.cartitem.id'
+        type: number
+    product:
+        label: 'store.store::lang.model.cartitem.product'
+        relation: product
+        select: name
+    promotion:
+        label: 'store.store::lang.model.cartitem.promotion'
+        relation: promotion
+        select: name
+    user:
+        label: 'store.store::lang.model.cartitem.user'
+        relation: user
+        select: name
+    qty:
+        label: 'store.store::lang.model.cartitem.qty'
+        type: text
+    price:
+        label: 'store.store::lang.model.cartitem.price'
+        type: number
+
+    created_at:
+        label: 'store.store::lang.model.cartitem.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.cartitem.updated_at'
+        type: datetime

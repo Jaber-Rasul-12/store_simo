@@ -1,0 +1,20 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+prices:
+    label: store.store::lang.plugin.prices
+    view:
+        list: $/store/store/models/price/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/store/store/models/price/fields.yaml
+        recordsPerPage: 10
+promotions:
+    label: store.store::lang.plugin.promotions
+    view:
+        list: $/store/store/models/promotion/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/store/store/models/promotion/fields.yaml
+        recordsPerPage: 10

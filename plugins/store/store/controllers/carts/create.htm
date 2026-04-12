@@ -1,0 +1,71 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('store/store/carts') ?>"><?= e(trans('store.store::lang.controller.carts.carts')) ?></a></li>
+        <li><?= e($this->pageTitle) ?></li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout']) ?>
+
+        <div class="layout-row">
+            <?= $this->formRender() ?>
+        </div>
+
+        <div class="form-buttons">
+            <div class="loading-indicator-container">
+                <button
+                    type="submit"
+                    data-request="onSave"
+                    data-hotkey="ctrl+s, cmd+s"
+                    data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+                    class="btn btn-primary"
+                    data-stripe-load-indicator>
+                    <?= e(trans('backend::lang.form.create')) ?>
+                </button>
+                <button 
+                    type="button"
+                    data-request="onSave"
+                    data-request-data="close:1"
+                    data-hotkey="ctrl+enter, cmd+enter"
+                    data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
+                    class="btn btn-default"
+                    data-stripe-load-indicator>
+                    <?= e(trans('backend::lang.form.create_and_close')) ?>
+                </button>
+                <span class="btn-text">
+                    <?= e(trans('backend::lang.form.or')) ?> <a href="<?= Backend::url('store/store/carts') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
+                </span>
+            </div>
+        </div>
+
+    <?= Form::close() ?>
+
+<?php else: ?>
+    <p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
+    <p><a href="<?= Backend::url('store/store/carts') ?>" class="btn btn-default"><?= e(trans('backend::lang.form.return_to_list')) ?></a></p>
+<?php endif ?>
+
+<script>
+    $(document).ready(function() {
+        // Use more specific selectors for Winter CMS form fields
+        var $wallet = $('.form-group[data-field-name="wallet_id"]');
+        var $type = $('select[name="Cart[type]"]'); // Changed to select since it's a dropdown
+        
+        // Hide wallet field initially
+        $wallet.hide();
+        
+        // Handle type change
+        $type.on('change', function() {
+            if ($(this).val() == 'wallet') {
+                $wallet.slideDown(400);
+            } else {
+                $wallet.slideUp(400);
+            }
+        });
+        
+        // Trigger change on page load to set initial state
+        $type.trigger('change');
+    });
+</script>

@@ -1,0 +1,16 @@
+columns:
+    id:
+        label: 'store.store::lang.model.color.id'
+        type: number
+    name:
+        label: 'store.store::lang.model.color.name'
+        type: text
+    code:
+        label: 'store.store::lang.model.color.code'
+        type: colorpicker
+    created_at:
+        label: 'store.store::lang.model.color.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.color.updated_at'
+        type: datetime

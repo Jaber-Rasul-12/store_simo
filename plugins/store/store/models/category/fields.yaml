@@ -1,0 +1,68 @@
+fields:
+    name:
+        label: 'store.store::lang.model.category.name'
+        span: auto
+        type: text
+    slug:
+        label: 'store.store::lang.model.category.slug'
+        span: auto
+        readOnly: true
+        preset:
+            field: name
+            type: slug
+
+    status:
+        label: 'store.store::lang.model.category.status'
+        span: auto
+        type: switch
+    is_featured:
+        label: 'store.store::lang.model.category.is_featured'
+        span: auto
+        type: switch
+    is_top:
+        label: 'store.store::lang.model.category.is_top'
+        span: auto
+        type: switch
+    is_popular:
+        label: 'store.store::lang.model.category.is_popular'
+        span: auto
+        type: switch
+    is_trending:
+        label: 'store.store::lang.model.category.is_trending'
+        span: auto
+        type: switch
+    show_homepage:
+        label: 'store.store::lang.model.category.show_homepage'
+        span: auto
+        type: switch
+    description:
+        label: 'store.store::lang.model.category.description'
+        span: auto
+        type: textarea
+    color:
+        label: 'store.store::lang.model.category.color'
+        span: auto
+        type: colorpicker
+    image:
+            label: store.store::lang.model.product.general_image
+            type: fileupload
+            mode: image
+            span: auto
+            imageHeight: 260
+            imageWidth: 260
+            tab: 'store.store::lang.plugin.files'
+            thumbOptions:
+                mode: crop
+                offset:
+                    - 0
+                    - 0
+                quality: 90
+                sharpen: 0
+                interlace: false
+                extension: auto
+    related_categories:
+        label: 'store.store::lang.model.category.related_categories'
+        span: full
+        type: relation
+        nameFrom: name
+        context: 'update'

@@ -1,0 +1,51 @@
+columns:
+    id:
+        label: 'store.store::lang.model.cart.id'
+        type: number
+    user:
+        label: 'store.store::lang.model.cart.user'
+        relation: user
+        select: name
+    wallet:
+        label: 'store.store::lang.model.cart.wallet'
+        relation: wallet
+        select: public_id 
+    coupon:
+        label: 'store.store::lang.model.cart.coupon'
+        relation: coupon
+        select: code
+    total_price:
+        label: 'store.store::lang.model.cart.total_price'
+        type: number
+    total_promotions:
+        label: 'store.store::lang.model.cart.total_promotions'
+        type: number
+    final_price:
+        label: 'store.store::lang.model.cart.final_price'
+        type: number
+    notes:
+        label: 'store.store::lang.model.cart.notes'
+        type: text
+    contacts:
+        label: 'store.store::lang.model.cart.contacts'
+        type: text
+    location_lat:
+        label: 'store.store::lang.model.cart.location_lat'
+        type: text
+    location_lng:
+        label: 'store.store::lang.model.cart.location_lng'
+        type: text
+    address:
+        label: 'store.store::lang.model.cart.address'
+        type: text
+    status:
+        label: 'store.store::lang.model.cart.status'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20
+    created_at:
+        label: 'store.store::lang.model.cart.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.cart.updated_at'
+        type: datetime

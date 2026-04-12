@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.categories.categories'
+form: $/store/store/models/category/fields.yaml
+modelClass: Store\Store\Models\Category
+defaultRedirect: store/store/categories
+create:
+    redirect: 'store/store/categories/update/:id'
+    redirectClose: store/store/categories
+update:
+    redirect: store/store/categories
+    redirectClose: store/store/categories

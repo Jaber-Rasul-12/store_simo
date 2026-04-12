@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.emailsubscribes.emailsubscribes'
+form: $/store/store/models/emailsubscribe/fields.yaml
+modelClass: Store\Store\Models\EmailSubscribe
+defaultRedirect: store/store/emailsubscribes
+create:
+    redirect: 'store/store/emailsubscribes/update/:id'
+    redirectClose: store/store/emailsubscribes
+update:
+    redirect: store/store/emailsubscribes
+    redirectClose: store/store/emailsubscribes

@@ -1,0 +1,160 @@
+plugin:
+    name: 'store.store::lang.plugin.name'
+    description: 'store.store::lang.plugin.description'
+    author: Store
+    icon: wn-icon-adjust
+    replaces: {  }
+permissions:
+    setting_store:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.setting_store'
+    category:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.category'
+    brand:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.brand'
+    return_policy:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.return_policy'
+    product_taxe:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.product_taxe'
+    products:
+        tab: 'store.store::lang.plugin.store'
+        label: 'store.store::lang.plugin.products'
+    input_products:
+        tab: 'store.store::lang.plugin.store'
+        label: 'store.store::lang.plugin.input_products'
+    carts:
+        tab: 'store.store::lang.plugin.store'
+        label: 'store.store::lang.plugin.carts'
+    promotions:
+        tab: 'store.store::lang.plugin.store'
+        label: 'store.store::lang.plugin.promotions'
+    cart_items:
+        tab: 'store.store::lang.plugin.store'
+        label: 'store.store::lang.plugin.cart_items'
+    store:
+        tab: 'store.store::lang.plugin.store'
+        label: 'store.store::lang.plugin.store'
+    sizes:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.sizes'
+    colors:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.colors'
+    emailsubscribes:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.emailsubscribes'
+    contact_messages:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.contact_messages'
+    coupons:
+        tab: 'store.store::lang.plugin.store'
+        label: 'store.store::lang.plugin.coupons'
+    comments:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.comments'
+    merchants:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.merchants'
+navigation:
+    setting_store:
+        label: 'store.store::lang.plugin.setting store'
+        url: store/store/categories
+        icon: icon-store
+        permissions:
+            - setting_store
+        sideMenu:
+            category:
+                label: 'store.store::lang.plugin.category'
+                url: store/store/categories
+                icon: icon-folder
+                permissions:
+                    - category
+            brand:
+                label: 'store.store::lang.plugin.brand'
+                url: store/store/brands
+                icon: icon-tag
+                permissions:
+                    - brand
+            return_policy:
+                label: 'store.store::lang.plugin.return_policy'
+                url: store/store/returnpolicies
+                icon: icon-refresh
+                permissions:
+                    - return_policy
+            product_taxe:
+                label: 'store.store::lang.plugin.product_taxe'
+                url: store/store/producttaxes
+                icon: icon-percent
+                permissions:
+                    - product_taxe
+            colors:
+                label: 'store.store::lang.plugin.colors'
+                url: store/store/colors
+                icon: icon-paint-brush
+                permissions:
+                    - colors
+            sizes:
+                label: 'store.store::lang.plugin.sizes'
+                url: store/store/sizes
+                icon: icon-expand
+                permissions:
+                    - sizes
+            emailsubscribes:
+                label: 'store.store::lang.plugin.emailsubscribes'
+                url: store/store/emailsubscribes
+                icon: icon-sitemap
+                permissions:
+                    - emailsubscribes
+            contact_messages:
+                label: 'store.store::lang.plugin.contact_messages'
+                url: store/store/contactmessages
+                icon: icon-inbox
+                permissions:
+                    - contact_messages
+            coupons:
+                label: 'store.store::lang.plugin.coupons'
+                url: store/store/coupons
+                icon: icon-star-half
+                permissions:
+                    - coupons
+            comments:
+                label: 'store.store::lang.plugin.comments'
+                url: store/store/comments
+                icon: icon-comment
+                permissions:
+                    - comments
+            merchants:
+                label: 'store.store::lang.plugin.merchants'
+                url: store/store/merchants
+                icon: icon-user-md
+                permissions:
+                    - merchants
+    store:
+        label: 'store.store::lang.plugin.store'
+        url: store/store/products
+        icon: icon-shopping-cart
+        permissions:
+            - store
+        sideMenu:
+            products:
+                label: 'store.store::lang.plugin.products'
+                url: store/store/products
+                icon: icon-tags
+                permissions:
+                    - products
+            input_products:
+                label: 'store.store::lang.plugin.input_products'
+                url: store/store/inputproducts
+                icon: icon-arrow-circle-down
+                permissions:
+                    - input_products
+            carts:
+                label: 'store.store::lang.plugin.carts'
+                url: store/store/carts
+                icon: icon-shopping-cart
+                permissions:
+                    - carts

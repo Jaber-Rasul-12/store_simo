@@ -1,0 +1,22 @@
+columns:
+    id:
+        label: 'store.store::lang.model.inputproduct.id'
+        type: number
+    product:
+        label: 'store.store::lang.model.inputproduct.product'
+        relation: product
+        select: name
+    backend_user[full_name]:
+        label: 'store.store::lang.model.inputproduct.backend_user'
+    notes:
+        label: 'store.store::lang.model.inputproduct.notes'
+        type: text
+    qty:
+        label: 'store.store::lang.model.inputproduct.qty'
+        type: text
+    created_at:
+        label: 'store.store::lang.model.inputproduct.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.inputproduct.updated_at'
+        type: datetime

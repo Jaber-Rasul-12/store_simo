@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.merchants.merchants'
+form: $/store/store/models/merchant/fields.yaml
+modelClass: Store\Store\Models\Merchant
+defaultRedirect: store/store/merchants
+create:
+    redirect: 'store/store/merchants/update/:id'
+    redirectClose: store/store/merchants
+update:
+    redirect: store/store/merchants
+    redirectClose: store/store/merchants

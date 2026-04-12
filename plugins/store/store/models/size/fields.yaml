@@ -1,0 +1,5 @@
+fields:
+    name:
+        label: 'store.store::lang.model.size.name'
+        span: auto
+        type: text

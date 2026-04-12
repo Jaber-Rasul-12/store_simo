@@ -1,0 +1,12 @@
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+items:
+    label: store.store::lang.controller.cartitems.cartitems
+    view:
+        list: $/store/store/models/cartitem/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/store/store/models/cartitem/fields.yaml
+        recordsPerPage: 10

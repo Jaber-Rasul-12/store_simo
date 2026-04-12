@@ -1,0 +1,10 @@
+name: 'wallet.wallet::lang.controller.wallets.wallets'
+form: $/wallet/wallet/models/wallet/fields.yaml
+modelClass: Wallet\Wallet\Models\Wallet
+defaultRedirect: wallet/wallet/wallets
+create:
+    redirect: 'wallet/wallet/wallets/update/:id'
+    redirectClose: wallet/wallet/wallets
+update:
+    redirect: wallet/wallet/wallets
+    redirectClose: wallet/wallet/wallets

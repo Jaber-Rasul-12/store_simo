@@ -1,0 +1,24 @@
+columns:
+    id:
+        label: 'store.store::lang.model.comment.id'
+        type: number
+    user:
+        label: 'store.store::lang.model.comment.user'
+        relation: user
+        select: name
+    product:
+        label: 'store.store::lang.model.comment.product'
+        relation: product
+        select: name
+    comment:
+        label: 'store.store::lang.model.comment.comment'
+        type: text
+    rating:
+        label: 'store.store::lang.model.comment.rating'
+        type: text
+    created_at:
+        label: 'store.store::lang.model.comment.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.comment.updated_at'
+        type: datetime

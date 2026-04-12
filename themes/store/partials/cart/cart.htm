@@ -1,0 +1,233 @@
+    <!-- Cart Start -->
+    <div class="container-fluid pt-5"  id="cart-items">
+        <div class="row px-xl-5">
+            <div class="col-lg-8 table-responsive mb-5">
+                <table class="table table-bordered text-center mb-0">
+                    <thead class="bg-secondary text-dark">
+                        <tr>
+                            <th>{{ 'المنتجات' }}</th>
+                            <th>{{ 'السعر' }}</th>
+                            <th>{{ 'السعر بعد الضرائب' }}</th>
+                            <th>{{ 'الكمية' }}</th>
+                            <th>{{ 'المجموع' }}</th>
+                            <th>{{ 'إزالة' }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        {% set totalprice = 0 %}
+                        {% set totaltaxes = 0 %}
+
+                         {% for item in Cart.cartItems %}
+                        <tr>
+                            <td class="align-middle"><img src="{{ item.image_path }}" alt="" style="width: 50px;"> {{ item.name }}</td>
+                            <td class="align-middle">$ {{ item.price_main }}</td>
+                            <td class="align-middle">$ {{ item.price_after_taxes }}</td>
+
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-sm btn-primary btn-minus" data-value="{{ item.id }}" >
+                                        <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="{{ item.quantity }}">
+                                    <div class="input-group-btn">
+                                        <button data-value="{{ item.id }}" class="btn btn-sm btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">$ {{ item.price_after_taxes * item.quantity }}</td>
+                            <td class="align-middle"><a data-request="onRemoveFromCart" data-request-flash data-request-data="product_id: {{ item.id }}" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
+                        </tr>
+                        {% set totalprice = totalprice + (item.price_after_taxes * item.quantity) %}
+                        {% set totaltaxes = totaltaxes + (item.taxes * item.quantity) %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4">
+                <form class="mb-5" data-request="onApplyCoupon" data-request-flash data-request-data="total: {{ totalprice + totaltaxes }}">
+                    <div class="">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" id="apply-coupon-btn">{{ 'تطبيق الكوبون' }}</button>
+                        </div>
+                        <input type="text" name="coupon_code" class="form-control p-4" placeholder="{{ 'كود الخصم' }}">
+                    </div>
+                </form>
+                <div class="card border-secondary mb-5">
+                    <div class="card-header bg-secondary border-0">
+                        <h4 class="font-weight-semi-bold m-0 text-right">{{ 'ملخص السلة' }}</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-3 pt-1">
+                            <h6 class="font-weight-medium text-right">{{ 'المجموع الفرعي' }}</h6>
+                            <h6 class="font-weight-medium">$ {{ totalprice }}</h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium text-right">{{ 'الضرائب' }}</h6>
+                            <h6 class="font-weight-medium">$ {{ totaltaxes }}</h6>
+                        </div>
+                    </div>
+                    <div class="card-footer border-secondary bg-transparent">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5 class="font-weight-bold text-right">{{ 'الإجمالي' }}</h5>
+                            <h5 class="font-weight-bold" id="cart-total">$ {{ totalprice + totaltaxes }}</h5>
+                        </div>
+                        <form hidden-data data-request="onSetCartTotal" data-request-flash>
+                            <input type="hidden" name="total_price" value="{{ totalprice }}">
+                            <input type="hidden" name="total_promotions" value="{{ totaltaxes }}">
+                            <input type="hidden" name="final_price" value="{{ totalprice + totaltaxes }}">
+                            <button class="btn btn-block btn-primary my-3 py-3">{{ 'تحويل السلة الى عملية الدفع' }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+// منع تحميل السكريبت أكثر من مرة
+if (typeof window.cartHandlerInitialized === 'undefined') {
+    window.cartHandlerInitialized = true;
+    
+    $(document).ready(function() {
+
+
+        // إزالة جميع المستمعين القديمة
+        $('.btn-plus, .btn-minus').replaceWith(function() {
+            return $(this).clone(true);
+        });
+        
+        // إضافة مستمعين جدد
+        $('.btn-plus').each(function() {
+            $(this).off('click').on('click', function(event) {
+
+                event.preventDefault();
+                event.stopPropagation();
+                event.stopImmediatePropagation();
+                
+                var $button = $(this);
+                var $input = $button.closest('.input-group').find('input.form-control');
+                var currentVal = parseInt($input.val());
+                var newVal = currentVal + 1;
+
+                
+                if (!isNaN(newVal) && newVal > 0) {
+
+                    $.request('onUpdateQuantityPluseOrSub', {
+                        data: {
+                
+                            idProduct: $button.data('value'), 
+                            Quantity: newVal
+                        },
+                    });
+                    $input.val(newVal);
+                    
+                    // تحديث المجموع للعنصر
+                    var $row = $button.closest('tr');
+                    var priceAfterTaxes = parseFloat($row.find('td').eq(2).text().replace('$', '').trim());
+                    var newTotal = priceAfterTaxes * newVal;
+                    $row.find('td').eq(4).text('$ ' + newTotal.toFixed(2));
+                    
+                    // تحديث الإجمالي الكلي
+                    calculateAndUpdateTotals();
+                }
+                
+                return false;
+            });
+        });
+        
+        $('.btn-minus').each(function() {
+            $(this).off('click').on('click', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                event.stopImmediatePropagation();
+                
+                var $button = $(this);
+                var $input = $button.closest('.input-group').find('input.form-control');
+                var currentVal = parseInt($input.val());
+                var newVal = currentVal - 1;
+                
+                if (!isNaN(newVal) && newVal >= 1) {
+                    $.request('onUpdateQuantityPluseOrSub', {
+                        data: {
+                
+                            idProduct: $button.data('value'), 
+                            Quantity: newVal
+                        },
+                    });
+                    $input.val(newVal);
+                    
+                    // تحديث المجموع للعنصر
+                    var $row = $button.closest('tr');
+                    var priceAfterTaxes = parseFloat($row.find('td').eq(2).text().replace('$', '').trim());
+                    var newTotal = priceAfterTaxes * newVal;
+                    $row.find('td').eq(4).text('$ ' + newTotal.toFixed(2));
+                    
+                    // تحديث الإجمالي الكلي
+                    calculateAndUpdateTotals();
+                }
+                
+                return false;
+            });
+        });
+        
+        // تحديث الإجمالي عند التغيير اليدوي
+        $('.input-group input.form-control').off('change').on('change', function(event) {
+            event.preventDefault();
+            
+            var $input = $(this);
+            var newVal = parseInt($input.val());
+            
+            if (isNaN(newVal) || newVal < 1) {
+                newVal = 1;
+                $input.val(1);
+            }
+            
+            var $row = $input.closest('tr');
+            var priceAfterTaxes = parseFloat($row.find('td').eq(2).text().replace('$', '').trim());
+            var newTotal = priceAfterTaxes * newVal;
+            $row.find('td').eq(4).text('$ ' + newTotal.toFixed(2));
+            
+            calculateAndUpdateTotals();
+        });
+        
+        function calculateAndUpdateTotals() {
+            
+            var subtotal = 0;
+            var totalTaxes = 0;
+            
+            $('#cart-items tbody tr').each(function() {
+                var $row = $(this);
+                var priceAfter = parseFloat($row.find('td').eq(2).text().replace('$', '').trim());
+                var priceMain = parseFloat($row.find('td').eq(1).text().replace('$', '').trim());
+                var quantity = parseInt($row.find('.input-group input.form-control').val());
+                
+                if (!isNaN(priceAfter) && !isNaN(quantity)) {
+                    subtotal += priceAfter * quantity;
+                    totalTaxes += (priceAfter - priceMain) * quantity;
+                }
+            });
+            
+            var finalTotal = subtotal + totalTaxes;
+            
+            // تحديث العرض
+            $('.card-body .d-flex').eq(0).find('h6:last-child').text('$ ' + subtotal.toFixed(2));
+            $('.card-body .d-flex').eq(1).find('h6:last-child').text('$ ' + totalTaxes.toFixed(2));
+            $('#cart-total').text('$ ' + finalTotal.toFixed(2));
+            
+            // تحديث الحقول المخفية
+            $('input[name="total_price"]').val(subtotal.toFixed(2));
+            $('input[name="total_promotions"]').val(totalTaxes.toFixed(2));
+            $('input[name="final_price"]').val(finalTotal.toFixed(2));
+        }
+        
+        // حساب أولي
+        calculateAndUpdateTotals();
+    });
+}
+</script>

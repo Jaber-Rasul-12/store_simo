@@ -1,0 +1,24 @@
+fields:
+    product:
+        label: 'store.store::lang.model.cartitem.product'
+        span: auto
+        type: relation
+        slect: name 
+    promotion:
+        label: 'store.store::lang.model.cartitem.promotion'
+        span: auto
+        type: relation
+        select: name
+    user:
+        label: 'store.store::lang.model.cartitem.user'
+        span: auto
+        type: relation
+        select: name
+    qty:
+        label: 'store.store::lang.model.cartitem.qty'
+        span: auto
+        type: number
+    price:
+        label: 'store.store::lang.model.cartitem.price'
+        span: auto
+        type: number

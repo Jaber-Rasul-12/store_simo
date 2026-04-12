@@ -1,0 +1,12 @@
+list: $/store/store/models/category/columns.yaml
+modelClass: Store\Store\Models\Category
+title: 'store.store::lang.controller.categories.categories'
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'store/store/categories/update/:id'

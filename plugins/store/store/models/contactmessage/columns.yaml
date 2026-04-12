@@ -1,0 +1,33 @@
+columns:
+    id:
+        label: 'store.store::lang.model.contactmessage.id'
+        type: number
+    is_read:
+        label: 'store.store::lang.model.contactmessage.is_read'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20
+    full_name:
+        label: 'store.store::lang.model.contactmessage.full_name'
+        type: text
+        searchable: true
+    email:
+        label: 'store.store::lang.model.contactmessage.email'
+        type: text
+        searchable: true
+    subject:
+        label: 'store.store::lang.model.contactmessage.subject'
+        type: text
+        searchable: true
+    message:
+        label: 'store.store::lang.model.contactmessage.message'
+        type: acornassociated-list-truncate
+        truncate: true
+        truncate_limit: 12
+        show_more: true
+    created_at:
+        label: 'store.store::lang.model.contactmessage.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.contactmessage.updated_at'
+        type: datetime

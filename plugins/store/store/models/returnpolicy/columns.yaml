@@ -1,0 +1,26 @@
+columns:
+    id:
+        label: 'store.store::lang.model.returnpolicy.id'
+        type: number
+    title:
+        label: 'store.store::lang.model.returnpolicy.title'
+        type: text
+        searchable: true
+    details:
+        label: 'store.store::lang.model.returnpolicy.details'
+        type: text
+    status:
+        label: 'store.store::lang.model.returnpolicy.status'
+        type: acornassociated-list-switch  
+        icon: true
+        font-size: 20 
+    icon:
+        label: Content
+        type: partial
+        path: ~/plugins/store/store/models/returnpolicy/_icons.php
+    created_at:
+        label: 'store.store::lang.model.returnpolicy.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.returnpolicy.updated_at'
+        type: datetime

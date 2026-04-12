@@ -1,0 +1,31 @@
+<h4 class="mb-4">{{ 'التقييمات' }}</h4>
+{% if product_comments %}
+        {% for comment in product_comments %}
+                <div class="media mb-4">
+                    <img src="{% if comment.user.avatar %}{{ comment.user.avatar.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="لا يوجد صورة" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                    <div class="media-body">
+                        <h6 class="mr-3">{{ comment.user.name }}<small> - <i>{{ comment.created_at|date('Y-m-d') }}</i></small></h6>
+                        <div class="text-primary mb-2 mr-3">
+                            {% set rating = comment.rating %}
+                            
+                            {# Show full stars #}
+                            {% for i in 1..5 %}
+                                {% if rating >= i %}
+                                    <i class="fas fa-star"></i>
+                                {% elseif rating >= (i - 0.5) %}
+                                    <i class="fas fa-star-half-alt"></i>
+                                {% else %}
+                                    <i class="far fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                            
+                            {# Optional: Show rating number #}
+                            <span class="ml-2 text-dark">{{ rating|number_format(1) }}/5</span>
+                        </div>
+                        <p>{{ comment.comment }}</p>
+                    </div>
+                </div>
+        {% endfor %}
+{% else %}
+        <p>{{ 'لا يوجد اي تعليق بعد' |_ }}</p>
+{% endif %}

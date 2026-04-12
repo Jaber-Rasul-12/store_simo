@@ -1,0 +1,18 @@
+title = "تصفح متجرنا"
+url = "/category/:slug"
+layout = "default"
+slug = "{{ :slug }}"
+[localePicker]
+[Store]
+[session]
+[Cart]
+== 
+
+   {% partial 'home/topbar' %}
+
+   {% partial 'navbar' home=false  shop=true contact=false %}
+
+   {# {% partial 'page_header' title='تصفح متجرنا' name_page='قسم التصنيفات'  %} #}
+
+   {% if Store.onGetProductsWhereCategory is not empty %} {% partial 'category/products' relateds=Store.onGetRelatedCategories title_product='منتجات مميزة' name_component=Store.onGetProductsWhereCategory %} {% endif %}
+
