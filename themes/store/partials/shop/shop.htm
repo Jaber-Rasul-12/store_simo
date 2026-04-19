@@ -1,166 +1,750 @@
-  <!-- Shop Start -->
-    <div class="container-fluid pt-5">
-        <div class="row px-xl-5" id="shop-row">
-            <!-- Shop Sidebar Start -->
-            <div class="col-lg-3 col-md-12" id="shop-sidebar">
-                <!-- Price Start -->
-                <div class="border-bottom mb-4 pb-4">
-                    <h5 class="font-weight-semi-bold mb-4">{{ 'تصفية حسب السعر' }}</h5>
-                    <form data-request="onFilterProductsWithPrice" data-request-flash>
-                        <!-- Price Inputs -->
-                        <div class="row g-2 mb-3" id="price-inputs">
-                            <div class="col-5">
-                                <label class="form-label small  mb-1" id="minPriceLabel">{{ 'السعر الأدنى' }}</label>
-                                <div class="input-group input-group-">
-                                    <span class="input-group-text" id="minPriceSpan">$</span>
-                                    <input type="number" name="minPrice" class="form-control" id="minPrice" value="0" min="0" max="10000">
-                                </div>
-                            </div>
-                            {# <div class="col-2 text-center align-self-end" id="price-separator">
-                                <span class="text-muted">—</span>
-                            </div> #}
-                            <div class="col-5">
-                                <label class="form-label small mb-1" id="maxPriceLabel">{{ 'السعر الأعلى' }}</label>
-                                <div class="input-group input-group-">
-                                    <span class="input-group-text" id="maxPriceSpan">$</span>
-                                    <input type="number" name="maxPrice" class="form-control " id="maxPrice" value="500" min="0" max="10000">
-                                </div>
+
+    <style>
+        /* ========================================
+        MOBILE SHOP - CUSTOM CLASSES (NO CONFLICT)
+        ======================================== */
+        
+        /* CSS Variables */
+        :root {
+            --mshop-primary: #D19C97;
+            --mshop-primary-dark: #343a40;
+            --mshop-primary-light: #b46962;
+            --mshop-secondary: #EDF1FF;
+            --mshop-success: #10b981;
+            --mshop-danger: #ef4444;
+            --mshop-warning: #f59e0b;
+            --mshop-dark: #1e293b;
+            --mshop-gray: #64748b;
+            --mshop-light: #f8fafc;
+            --mshop-border: #e2e8f0;
+            --mshop-shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --mshop-shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+            --mshop-shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+            --mshop-radius-sm: 12px;
+            --mshop-radius-md: 16px;
+            --mshop-radius-lg: 20px;
+
+        }
+        
+
+        body {
+            background: #f5f7fb;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Tajawal', sans-serif;
+        }
+        
+        /* ========================================
+        MAIN CONTAINER
+        ======================================== */
+        .mshop-container {
+            max-width: 85%;
+            overflow-x: hidden;
+            padding: 12px;
+            min-height: 100vh;
+                    }
+        
+        /* ========================================
+        SIDEBAR - MOBILE FRIENDLY
+        ======================================== */
+        .mshop-sidebar {
+            background: white;
+            border-radius: var(--mshop-radius-lg);
+            padding: 20px 16px;
+            margin-bottom: 20px;
+            box-shadow: var(--mshop-shadow-sm);
+        }
+        
+        .mshop-filter-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--mshop-dark);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--mshop-border);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .mshop-filter-title i {
+            color: var(--mshop-primary);
+            font-size: 18px;
+        }
+        
+        .mshop-filter-section {
+            margin-bottom: 28px;
+        }
+        
+        .mshop-filter-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--mshop-dark);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Price Inputs */
+        .mshop-price-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .mshop-price-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .mshop-price-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--mshop-gray);
+        }
+        
+        .mshop-price-wrapper {
+            display: flex;
+            align-items: center;
+            border: 2px solid var(--mshop-border);
+            border-radius: var(--mshop-radius-sm);
+            background: white;
+            transition: all 0.2s;
+        }
+        
+        .mshop-price-wrapper:focus-within {
+            border-color: var(--mshop-primary);
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+        }
+        
+        .mshop-price-symbol {
+            padding: 10px 12px;
+            background: #f1f5f9;
+            color: var(--mshop-gray);
+            font-weight: 600;
+            border-radius: 10px 0 0 10px;
+        }
+        
+        .mshop-price-input {
+            flex: 1;
+            padding: 10px 12px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        /* Checkbox Styles */
+        .mshop-checkbox-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--mshop-border);
+        }
+        
+        .mshop-checkbox-item:last-child {
+            border-bottom: none;
+        }
+        
+        .mshop-checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .mshop-checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--mshop-primary);
+        }
+        
+        .mshop-checkbox-text {
+            font-size: 14px;
+            color: var(--mshop-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .mshop-color-dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1px solid var(--mshop-border);
+        }
+        
+        .mshop-count-badge {
+            background: #f1f5f9;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--mshop-gray);
+        }
+        
+        /* Scrollable List */
+        .mshop-scroll-list {
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 16px;
+        }
+        
+        .mshop-scroll-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .mshop-scroll-list::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        
+        .mshop-scroll-list::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        
+        /* Buttons */
+        .mshop-btn {
+            padding: 12px 20px;
+            border-radius: var(--mshop-radius-sm);
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .mshop-btn-primary {
+            background: linear-gradient(135deg, var(--mshop-primary) 0%, var(--mshop-primary-dark) 100%);
+            color: white;
+            width: 100%;
+        }
+        
+        .mshop-btn-primary:active {
+            transform: scale(0.97);
+        }
+        
+        .mshop-btn-outline {
+            background: white;
+            border: 2px solid var(--mshop-border);
+            color: var(--mshop-gray);
+        }
+        
+        .mshop-btn-outline:active {
+            transform: scale(0.97);
+        }
+        
+        .mshop-filter-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        
+        /* ========================================
+        SEARCH BAR
+        ======================================== */
+        .mshop-search-wrapper {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .mshop-search-input {
+            width: 100%;
+            padding: 14px 16px 14px 48px;
+            border: 2px solid var(--mshop-border);
+            border-radius: var(--mshop-radius-md);
+            font-size: 14px;
+            background: white;
+            transition: all 0.2s;
+        }
+        
+        .mshop-search-input:focus {
+            outline: none;
+            border-color: var(--mshop-primary);
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
+        }
+        
+        .mshop-search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--mshop-gray);
+            font-size: 18px;
+        }
+        
+        /* ========================================
+        PRODUCT GRID
+        ======================================== */
+        .mshop-products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        
+        /* Product Card */
+        .mshop-product-card {
+            background: white;
+            border-radius: var(--mshop-radius-md);
+            overflow: hidden;
+            box-shadow: var(--mshop-shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+            animation: mshopFadeIn 0.4s ease-out;
+        }
+        
+        .mshop-product-card:active {
+            transform: scale(0.98);
+        }
+        
+        @keyframes mshopFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Sale Badge */
+        .mshop-sale-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, var(--mshop-danger) 0%, #dc2626 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: var(--mshop-shadow-sm);
+        }
+        
+        /* Rating */
+        .mshop-rating {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+            color: #fbbf24;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        /* Image Container */
+        .mshop-image-wrapper {
+            position: relative;
+            padding-top: 100%;
+            overflow: hidden;
+            background: #f8fafc;
+        }
+        
+        .mshop-product-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .mshop-product-card:hover .mshop-product-img {
+            transform: scale(1.05);
+        }
+        
+        /* Product Info */
+        .mshop-product-info {
+            padding: 12px;
+        }
+        
+        .mshop-product-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--mshop-dark);
+            margin-bottom: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .mshop-price-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .mshop-current-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--mshop-primary);
+        }
+        
+        .mshop-old-price {
+            font-size: 11px;
+            color: var(--mshop-gray);
+            text-decoration: line-through;
+        }
+        
+        /* Product Actions */
+        .mshop-product-actions {
+            display: flex;
+            gap: 8px;
+            padding: 0 12px 12px;
+        }
+        
+        .mshop-action-btn {
+            flex: 1;
+            padding: 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .mshop-action-btn:hover {
+            cursor: pointer;
+            
+        }
+        
+        .mshop-action-view {
+            background: #f1f5f9;
+            color: var(--mshop-gray);
+        }
+        
+        .mshop-action-cart {
+            background: linear-gradient(135deg, var(--mshop-primary) 0%, var(--mshop-primary-dark) 100%);
+            color: white;
+        }
+        
+        .mshop-action-btn:active {
+            transform: scale(0.96);
+        }
+        
+        /* ========================================
+        PAGINATION
+        ======================================== */
+        .mshop-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .mshop-page-link {
+            min-width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 12px;
+            border-radius: var(--mshop-radius-sm);
+            background: white;
+            color: var(--mshop-dark);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: 1px solid var(--mshop-border);
+        }
+        
+        .mshop-page-link:active {
+            transform: scale(0.95);
+        }
+        
+        .mshop-page-active {
+            background: linear-gradient(135deg, var(--mshop-primary) 0%, var(--mshop-primary-dark) 100%);
+            color: white;
+            border: none;
+        }
+        
+        /* ========================================
+        EMPTY STATE
+        ======================================== */
+        .mshop-empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: var(--mshop-radius-lg);
+        }
+        
+        .mshop-empty-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        
+        .mshop-empty-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--mshop-dark);
+            margin-bottom: 8px;
+        }
+        
+        .mshop-empty-text {
+            font-size: 14px;
+            color: var(--mshop-gray);
+        }
+        
+        /* ========================================
+        RESPONSIVE
+        ======================================== */
+        @media (min-width: 640px) {
+            .mshop-products-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+        }
+
+         @media (max-width: 768px) {
+            .mshop-container {
+                padding: 2px;
+                max-width: 98%!important;
+            }
+            }
+        
+        @media (min-width: 768px) {
+        
+
+            
+            .mshop-layout {
+                display: flex;
+                gap: 24px;
+                align-items: flex-start;
+            }
+            
+            .mshop-sidebar {
+                width: 300px;
+                position: sticky;
+                top: 20px;
+                margin-bottom: 0;
+            }
+            
+            .mshop-products-section {
+                flex: 1;
+            }
+            
+            .mshop-products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .mshop-products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 1280px) {
+            .mshop-products-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+        
+        /* Touch optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .mshop-product-card:hover .mshop-product-img {
+                transform: none;
+            }
+            
+            .mshop-btn,
+            .mshop-action-btn,
+            .mshop-page-link {
+                cursor: default;
+            }
+        }
+    </style>
+
+
+<!-- Mobile Shop Start -->
+<div class="mshop-container">
+    <div class="mshop-layout">
+        
+        <!-- Sidebar Filters -->
+        <div class="mshop-sidebar">
+            
+            <!-- Price Filter -->
+            <div class="mshop-filter-section">
+                <div class="mshop-filter-label">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span>تصفية حسب السعر</span>
+                </div>
+                <form data-request="onFilterProductsWithPrice" data-request-flash>
+                    <div class="mshop-price-row">
+                        <div class="mshop-price-group">
+                            <label class="mshop-price-label">السعر الأدنى</label>
+                            <div class="mshop-price-wrapper">
+                                <span class="mshop-price-symbol">$</span>
+                                <input type="number" name="minPrice" class="mshop-price-input" value="0" min="0" max="10000">
                             </div>
                         </div>
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-filter"></i> {{ 'تطبيق التصفية' }}</button>
-                        
-                        
-                    </form>
+                        <div class="mshop-price-group">
+                            <label class="mshop-price-label">السعر الأعلى</label>
+                            <div class="mshop-price-wrapper">
+                                <span class="mshop-price-symbol">$</span>
+                                <input type="number" name="maxPrice" class="mshop-price-input" value="500" min="0" max="10000">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="mshop-btn mshop-btn-primary">
+                        <i class="fas fa-filter"></i> تطبيق التصفية
+                    </button>
+                </form>
+            </div>
+            
+            <!-- Color Filter -->
+            <div class="mshop-filter-section">
+                <div class="mshop-filter-label">
+                    <i class="fas fa-palette"></i>
+                    <span>تصفية حسب اللون</span>
                 </div>
-                <!-- Price End -->
                 
-               <!-- Color Start -->
-               <div class="border-bottom mb-4 pb-4">
-                   <h5 class="font-weight-semi-bold mb-4">{{ 'تصفية حسب اللون' }}</h5>
-                   
-                   <!-- All Colors Checkbox (Outside Scroll) -->
-                       <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                           <input type="checkbox" class="custom-control-input" checked id="color-all">
-                           <label class="custom-control-label" for="color-all">{{ 'كل الألوان' }}</label>
-                       </div>
-                       
-                       <!-- Scrollable Color List -->
-                           <!-- Scrollable Color List -->
-                            <form   data-request="onFilterProductsWithColor" data-request-flash>
-                                <div class="overflow-auto" style="max-height: 300px; width: auto;">
-                                    {% for color in Store.onGetAllColors %}
-                                    {% if color.products.count > 0 %}
-                                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                <div class="mshop-checkbox-item">
+                    <label class="mshop-checkbox-wrapper">
+                        <input type="checkbox" class="mshop-checkbox" checked id="mshop-color-all">
+                        <span class="mshop-checkbox-text">كل الألوان</span>
+                    </label>
+                </div>
+                
+                <form data-request="onFilterProductsWithColor" data-request-flash>
+                    <div class="mshop-scroll-list">
+                        {% for color in Store.onGetAllColors %}
+                            {% if color.products.count > 0 %}
+                                <div class="mshop-checkbox-item">
+                                    <label class="mshop-checkbox-wrapper">
                                         <input type="checkbox" 
                                                name="colors[]" 
                                                value="{{ color.code }}" 
-                                               class="custom-control-input" 
-                                               id="color-{{ color.id }}"
+                                               class="mshop-checkbox" 
+                                               id="mshop-color-{{ color.id }}"
                                                {% if color.code in selected_colors %}checked{% endif %}>
-                                        <label class="custom-control-label" for="color-{{ color.id }}">
-                                            {{ color.name }} 
-                                            <div style="display: inline-block; border-radius: 50%; width: 10px; height: 10px; background-color: {{ color.code }}; margin-right: 5px;"></div>
-                                        </label>
-                                        <span class="badge border font-weight-normal">{{ color.products.count }}</span>
-                                    </div>
-                                    {% endif %}
-                                    {% endfor %}
+                                        <span class="mshop-checkbox-text">
+                                            {{ color.name }}
+                                            <span class="mshop-color-dot" style="background-color: {{ color.code }};"></span>
+                                        </span>
+                                    </label>
+                                    <span class="mshop-count-badge">{{ color.products.count }}</span>
                                 </div>
-                                <br>
-                                <button class="btn btn-primary" type="submit">
-                                    <i class="fa fa-filter"></i> {{ 'تطبيق التصفية' }}
-                                </button>
-                                {% if selected_colors %}
-                                <a href="{{ current_url_without_filters }}" class="btn btn-outline-secondary">
-                                    <i class="fa fa-times"></i> {{ 'إعادة التعيين' }}
-                                </a>
-                                {% endif %}
-                            </form>
-                   </div>
-                <!-- Color End -->
-                <!-- Size Start -->
-                <div class="mb-5">
-                    <h5 class="font-weight-semi-bold mb-4">{{ 'تصفية حسب الحجم' }}</h5>
-                    <form data-request="onFilterProductsWithSizes" data-request-flash>
-                       
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="size-all">
-                            <label class="custom-control-label" for="size-all">{{ 'كل الأحجام' }}</label>
-                            {# <span class="badge border font-weight-normal">1000</span> #}
-                        </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="mshop-filter-actions">
+                        <button type="submit" class="mshop-btn mshop-btn-primary">
+                            <i class="fas fa-filter"></i> تطبيق
+                        </button>
+                        {% if selected_colors %}
+                            <a href="{{ current_url_without_filters }}" class="mshop-btn mshop-btn-outline">
+                                <i class="fas fa-times"></i> إعادة تعيين
+                            </a>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Size Filter -->
+            <div class="mshop-filter-section">
+                <div class="mshop-filter-label">
+                    <i class="fas fa-ruler"></i>
+                    <span>تصفية حسب الحجم</span>
+                </div>
+                
+                <div class="mshop-checkbox-item">
+                    <label class="mshop-checkbox-wrapper">
+                        <input type="checkbox" class="mshop-checkbox" checked id="mshop-size-all">
+                        <span class="mshop-checkbox-text">كل الأحجام</span>
+                    </label>
+                </div>
+                
+                <form data-request="onFilterProductsWithSizes" data-request-flash>
+                    <div class="mshop-scroll-list">
                         {% for size in Store.onGetAllSizes %}
-                        {% if size.products.count > 0 %}
-                            <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                                <input type="checkbox" class="custom-control-input" value="{{ size.name }}" name="sizes[]" id="size-{{ size.id }}">
-                                <label class="custom-control-label" for="size-{{ size.id }}">{{ size.name }}</label>
-                                <span class="badge border font-weight-normal">{{ size.products.count }}</span>
+                            {% if size.products.count > 0 %}
+                                <div class="mshop-checkbox-item">
+                                    <label class="mshop-checkbox-wrapper">
+                                        <input type="checkbox" class="mshop-checkbox" value="{{ size.name }}" name="sizes[]" id="mshop-size-{{ size.id }}">
+                                        <span class="mshop-checkbox-text">{{ size.name }}</span>
+                                    </label>
+                                    <span class="mshop-count-badge">{{ size.products.count }}</span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="mshop-filter-actions">
+                        <button type="submit" class="mshop-btn mshop-btn-primary">
+                            <i class="fas fa-filter"></i> تطبيق
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Products Section -->
+        <div class="mshop-products-section">
+            
+            <!-- Search Bar -->
+            <div class="mshop-search-wrapper">
+                <form data-request="onSearchProductsOnShop">
+                    <input type="text" name="text" data-track-input class="mshop-search-input" placeholder="ابحث عن منتج...">
+                    <i class="fas fa-search mshop-search-icon"></i>
+                </form>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="mshop-products-grid" id="mshop-products-list">
+                {% for product in Store.onGetAllProducts %}
+                    <div class="mshop-product-card">
+                        {% if product.HasPromotions == true %}
+                            <div class="mshop-sale-badge">
+                                {{ product.promotionsActive.discount_value }}% OFF
                             </div>
                         {% endif %}
-                        {% endfor %}
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-filter"></i> {{ 'تطبيق التصفية' }}</button>
-                    </form>
-                </div>
-                <!-- Size End -->
-            </div>
-            <!-- Shop Sidebar End -->
-
-
-            <!-- Shop Product Start -->
-            <div class="col-lg-9 col-md-12">
-                <div class="row pb-3">
-                    <div class="col-12 pb-1">
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <form data-request="onSearchProductsOnShop" >
-                                <div class="input-group">
-                                    <input type="text"  name="text" data-track-input class="form-control" placeholder="{{ 'ابحث عن منتج'|_ }}">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text bg-transparent text-primary">
-                                            <i class="fa fa-search"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </form>
-                            {# <div class="dropdown ml-4">
-                                <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="false">
-                                            {{ 'ترتيب حسب الافتراضي' |_ }}
-                                        </button>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                    <a class="dropdown-item" href="#">{{ 'ترتيب تصاعدي' |_ }}</a>
-                                    <a class="dropdown-item" href="#">{{ 'ترتيب تنازلي' |_ }}</a>
-                                </div>
-                            </div> #}
+                        
+                        <div class="mshop-rating">
+                            <i class="fas fa-star"></i> {{ product.averageRating | default(0) }}
                         </div>
-                    </div>
-
-                <div style="width: 100%; display: flex; flex-wrap: wrap;" id="products-list_container">
-                    <div style="width: 100%; display: flex; flex-wrap: wrap;" id="products-list">
-                    
-{% for product in Store.onGetAllProducts %}
-
-           
-
-            <div class="col-lg-2 col-md-4 col-sm-6 pb-1 animate-on-scroll">
-                <div class="card product-item border-0 mb-4">
-                    {% if product.HasPromotions == true  %}
-                    <div class="badge-sale">{{ product.promotionsActive.discount_value }} %</div>
-                    {% endif %}
-                    {# <div class="featured-tag">{{ title_product }}</div> #}
-                    <div class="star-rating">
-                        <i class="fas fa-star"></i> {{ product.averageRating | default(0) }}
-                    </div>
-                    
-                    <div class="card-header bg-transparent border p-0">
-                        <div class="image-container">
+                        
+                        <div class="mshop-image-wrapper">
                             <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}"
-                                 class="product-image">
+                                 class="mshop-product-img"
+                                 alt="{{ product.name }}">
                         </div>
-                    </div>
-                    
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <h6 class="text-truncate mb-3">{{ product.name }}</h6>
-                        <div class="d-flex justify-content-center product-flex position-relative ">
-                          {% set activePrice = null %}
+                        
+                        <div class="mshop-product-info">
+                            <h6 class="mshop-product-name">{{ product.name }}</h6>
+                            
+                            {% set activePrice = null %}
                             {% set previousPrice = null %}
                             
                             {% for price in product.prices %}
@@ -171,67 +755,67 @@
                                     {% endif %}
                                 {% endif %}
                             {% endfor %}
-                            {% if activePrice %}
-                            {# <div class="discount-badge">-30%</div> #}
-                            <h6 class="text-primary-product-custom" style="padding: 10px">{{ activePrice.price }}$</h6>
-                            {% if previousPrice %}
-                            <h6 class="text-muted ml-2" style="padding: 10px"><del>{{ previousPrice.price }}$</del></h6>
-                            {% endif %}
-
-                            {% endif %}
-
-
+                            
+                            <div class="mshop-price-container">
+                                {% if activePrice %}
+                                    <span class="mshop-current-price">{{ activePrice.price }}$</span>
+                                    {% if previousPrice %}
+                                        <span class="mshop-old-price">{{ previousPrice.price }}$</span>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="mshop-product-actions">
+                            <a href="detail/{{ product.slug }}" class="mshop-action-btn mshop-action-view">
+                                <i class="fas fa-eye"></i> عرض
+                            </a>
+                            <a {% if user %} data-request="onAddToCart" data-request-flash data-request-data="product_id: {{ product.id }}" {% else %} href="/login" {% endif %} class="mshop-action-btn mshop-action-cart">
+                                <i class="fas fa-shopping-cart"></i> إضافة
+                            </a>
                         </div>
                     </div>
-                    
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                        <a href="detail/{{ product.slug }}" class="btn btn-custom btn-sm text-dark p-0">
-                            <i class="fas fa-eye text-primary-product-custom mr-1"></i>{{ 'عرض التفاصيل' |_ }}
-                        </a>
-                        <a {% if user %} data-request="onAddToCart" data-request-flash data-request-data="product_id: {{ product.id }}" {% else %} href="/login" {% endif %} class="btn btn-custom btn-sm text-dark p-0">
-                            <i class="fas fa-shopping-cart   mr-1"></i>{{ 'أضف إلى السلة' |_ }}
-                        </a>
+                {% else %}
+                    <div class="mshop-empty-state">
+                        <div class="mshop-empty-icon">🛍️</div>
+                        <div class="mshop-empty-title">لا توجد منتجات</div>
+                        <div class="mshop-empty-text">لم يتم العثور على منتجات مطابقة</div>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-                    
-                    </div>
-                    
-                    <div class="col-12 pb-1">
-                    <br>
-                        <nav aria-label="Page navigation">
-                        {% if Store.onGetAllProducts.lastPage() > 1 %}
-                          <ul class="pagination justify-content-center mb-3">
-                           {% if Store.onGetAllProducts.currentPage() > 1 %}
-                            <li class="page-item disabled">
-                              <a class="page-link" href="{{ Store.onGetAllProducts.previousPageUrl() }}" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">{{ 'السابق' }}</span>
-                              </a>
-                            </li>
-                            {% endif %}
-                            
-                            {% for page in 1..Store.onGetAllProducts.lastPage() %}
-                            <li class="page-item {{ Store.onGetAllProducts.currentPage() == page ? 'active' : '' }}"><a class="page-link" href="{{ Store.onGetAllProducts.url(page) }}">{{ page }}</a></li>
-                            {% endfor %}
-
-                            <li class="page-item">
-                              <a class="page-link" href="{{ Store.onGetAllProducts.nextPageUrl() }}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">{{ 'التالي' }}</span>
-                              </a>
-                            </li>
-                          </ul>
-                        {% endif %}
-                        </nav>
-                    </div>
-                </div>
-
-                </div>
-            </div>
-            <!-- Shop Product End -->
             
+            <!-- Pagination -->
+            {% if Store.onGetAllProducts.lastPage() > 1 %}
+                <div class="mshop-pagination">
+                    {% if Store.onGetAllProducts.currentPage() > 1 %}
+                        <a href="{{ Store.onGetAllProducts.previousPageUrl() }}" class="mshop-page-link">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    {% endif %}
+                    
+                    {% for page in 1..Store.onGetAllProducts.lastPage() %}
+                        <a href="{{ Store.onGetAllProducts.url(page) }}" class="mshop-page-link {% if Store.onGetAllProducts.currentPage() == page %}mshop-page-active{% endif %}">
+                            {{ page }}
+                        </a>
+                    {% endfor %}
+                    
+                    {% if Store.onGetAllProducts.currentPage() < Store.onGetAllProducts.lastPage() %}
+                        <a href="{{ Store.onGetAllProducts.nextPageUrl() }}" class="mshop-page-link">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div>
+        
     </div>
-    <!-- Shop End -->
+</div>
+
+
+
+
+
+
+
+
+

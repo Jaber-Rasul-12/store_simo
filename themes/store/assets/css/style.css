@@ -325,9 +325,9 @@ body {
     #price-inputs div {
       max-width: none!important;
     }
-    .form-control{
+    /* .form-control{
       width: 120px!important;
-    }    
+    }     */
 }
 
 

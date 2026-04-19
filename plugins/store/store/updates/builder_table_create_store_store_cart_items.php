@@ -17,8 +17,19 @@ class BuilderTableCreateStoreStoreCartItems extends Migration
             $table->double('qty', 10, 0);
             $table->double('price', 10, 0);
             $table->bigInteger('cart_id')->unsigned();
+            $table->bigInteger('size_id')->unsigned();
+            $table->bigInteger('color_id')->unsigned();
+
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->foreign('color_id')
+                ->references('id')
+                ->on('store_store_colors')
+                ->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('size_id')
+                ->references('id')
+                ->on('store_store_sizes')
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users')

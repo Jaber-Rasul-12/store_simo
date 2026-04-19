@@ -1,233 +1,605 @@
-    <!-- Cart Start -->
-    <div class="container-fluid pt-5"  id="cart-items">
-        <div class="row px-xl-5">
-            <div class="col-lg-8 table-responsive mb-5">
-                <table class="table table-bordered text-center mb-0">
-                    <thead class="bg-secondary text-dark">
-                        <tr>
-                            <th>{{ 'المنتجات' }}</th>
-                            <th>{{ 'السعر' }}</th>
-                            <th>{{ 'السعر بعد الضرائب' }}</th>
-                            <th>{{ 'الكمية' }}</th>
-                            <th>{{ 'المجموع' }}</th>
-                            <th>{{ 'إزالة' }}</th>
-                        </tr>
-                    </thead>
-                    <tbody class="align-middle">
-                        {% set totalprice = 0 %}
-                        {% set totaltaxes = 0 %}
-
-                         {% for item in Cart.cartItems %}
-                        <tr>
-                            <td class="align-middle"><img src="{{ item.image_path }}" alt="" style="width: 50px;"> {{ item.name }}</td>
-                            <td class="align-middle">$ {{ item.price_main }}</td>
-                            <td class="align-middle">$ {{ item.price_after_taxes }}</td>
-
-                            <td class="align-middle">
-                                <div class="input-group quantity mx-auto" style="width: 100px;">
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-sm btn-primary btn-minus" data-value="{{ item.id }}" >
-                                        <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="{{ item.quantity }}">
-                                    <div class="input-group-btn">
-                                        <button data-value="{{ item.id }}" class="btn btn-sm btn-primary btn-plus">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="align-middle">$ {{ item.price_after_taxes * item.quantity }}</td>
-                            <td class="align-middle"><a data-request="onRemoveFromCart" data-request-flash data-request-data="product_id: {{ item.id }}" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
-                        </tr>
-                        {% set totalprice = totalprice + (item.price_after_taxes * item.quantity) %}
-                        {% set totaltaxes = totaltaxes + (item.taxes * item.quantity) %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-lg-4">
-                <form class="mb-5" data-request="onApplyCoupon" data-request-flash data-request-data="total: {{ totalprice + totaltaxes }}">
-                    <div class="">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" id="apply-coupon-btn">{{ 'تطبيق الكوبون' }}</button>
-                        </div>
-                        <input type="text" name="coupon_code" class="form-control p-4" placeholder="{{ 'كود الخصم' }}">
-                    </div>
-                </form>
-                <div class="card border-secondary mb-5">
-                    <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0 text-right">{{ 'ملخص السلة' }}</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between mb-3 pt-1">
-                            <h6 class="font-weight-medium text-right">{{ 'المجموع الفرعي' }}</h6>
-                            <h6 class="font-weight-medium">$ {{ totalprice }}</h6>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium text-right">{{ 'الضرائب' }}</h6>
-                            <h6 class="font-weight-medium">$ {{ totaltaxes }}</h6>
-                        </div>
-                    </div>
-                    <div class="card-footer border-secondary bg-transparent">
-                        <div class="d-flex justify-content-between mt-2">
-                            <h5 class="font-weight-bold text-right">{{ 'الإجمالي' }}</h5>
-                            <h5 class="font-weight-bold" id="cart-total">$ {{ totalprice + totaltaxes }}</h5>
-                        </div>
-                        <form hidden-data data-request="onSetCartTotal" data-request-flash>
-                            <input type="hidden" name="total_price" value="{{ totalprice }}">
-                            <input type="hidden" name="total_promotions" value="{{ totaltaxes }}">
-                            <input type="hidden" name="final_price" value="{{ totalprice + totaltaxes }}">
-                            <button class="btn btn-block btn-primary my-3 py-3">{{ 'تحويل السلة الى عملية الدفع' }}</button>
-                        </form>
+<!-- Cart Start - Mobile Beautiful Design -->
+<div class="mobile-cart-container" id="cart-items">
+    {% set totalprice = 0 %}
+    {% set totaltaxes = 0 %}
+    
+    <!-- Cart Items List -->
+    <div class="cart-items-list">
+        {% for item in Cart.cartItems %}
+        <div class="cart-item-card" data-product-id="{{ item.id }}">
+            <!-- Product Header -->
+            <div class="item-header">
+                <img src="{{ item.image_path }}" alt="{{ item.name }}" class="item-image">
+                <div class="item-info">
+                    <h4 class="item-name">{{ item.name }}</h4>
+                    <div class="price-badge">
+                        <span class="original-price">$ {{ item.price_main }}</span>
+                        <span class="taxed-price">$ {{ item.price_after_taxes }}</span>
                     </div>
                 </div>
+                <button class="remove-btn" data-request="onRemoveFromCart" data-request-flash data-request-data="product_id: {{ item.id }}">
+                    <i class="fa fa-trash-alt"></i>
+                </button>
             </div>
+            
+            <!-- Variants Section -->
+            {% if item.quantity != 0 %}
+            <div class="variants-section">
+                {% for itemquantity in item.quantity %}
+                <div class="variant-item">
+                    <div class="variant-tags">
+                        {% if itemquantity.size_name %}
+                        <span class="variant-tag size-tag">
+                            <i class="fa fa-tshirt"></i> {{ itemquantity.size_name }}
+                        </span>
+                        {% endif %}
+                        
+                        {% if itemquantity.color_name %}
+                        <span class="variant-tag color-tag">
+                            <i class="fa fa-palette"></i> {{ itemquantity.color_name }}
+                        </span>
+                        {% endif %}
+                        
+                        <span class="variant-tag quantity-tag">
+                            <i class="fa fa-cubes"></i> {{ itemquantity.quantity }}
+                        </span>
+                    </div>
+                    <button class="remove-btn" 
+                            data-request="onRemoveColorSizeFromCart"
+                            data-request-flash
+                            data-request-data="product_id: {{ item.id }} , size_id: {{ itemquantity.size_id }} , color_id: {{ itemquantity.color_id }}"
+                            >
+                        <i class="fa fa-trash-alt"></i>
+                    </button>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <!-- Add More Button -->
+            <button class="add-more-btn"
+                    data-request="onLoadPageContent"
+                    data-request-data="id: {{ item.id }}"
+                    data-request-success="openWinterPopup(data)">
+                <i class="fa fa-plus-circle"></i>
+                <span>إضافة كميات جديدة</span>
+                <i class="fa fa-shopping-cart"></i>
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% if Cart.cartItems is not empty %}
+    <!-- Cart Summary -->
+<div class="cart-summary">
+    <div class="summary-header">
+        <h3>ملخص الطلب</h3>
+        <i class="fa fa-receipt"></i>
+    </div>
+    
+    <div class="summary-details">
+        {% set totalprice = 0 %}
+        {% set totaltaxes = 0 %}
+        {% set totalfinal = 0 %}
+        
+        {% for item in Cart.cartItems %}
+            {% if item.quantity is iterable %}
+                {% for variant in item.quantity %}
+                    {% set item_total = item.price_main * variant.quantity %}
+                    {% set totalprice = totalprice + item_total %}
+                    
+                    {% set tax_amount = (item.price_after_taxes - item.price_main) * variant.quantity %}
+                    {% set totaltaxes = totaltaxes + tax_amount %}
+                    
+                    {% set totalfinal = totalfinal + (item.price_after_taxes * variant.quantity) %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        
+        <div class="summary-row">
+            <span>المجموع الفرعي</span>
+            <span>$ {{ totalprice|number_format(2) }}</span>
+        </div>
+        <div class="summary-row">
+            <span>الضرائب</span>
+            <span>$ {{ totaltaxes|number_format(2) }}</span>
+        </div>
+        {% if discount_total > 0 %}
+        <div class="summary-row discount">
+            <span>الخصم</span>
+            <span>- $ {{ discount_total|number_format(2) }}</span>
+        </div>
+        {% endif %}
+        <div class="summary-row total">
+            <span>الإجمالي</span>
+            <span id="cart-total">$ {{ totalfinal|number_format(2) }}</span>
         </div>
     </div>
-    <!-- Cart End -->
+    
+    <form data-request="onSetCartTotal" data-request-flash>
+        <input type="hidden" name="total_price" value="{{ totalprice }}">
+        <input type="hidden" name="total_promotions" value="{{ totaltaxes }}">
+        <input type="hidden" name="final_price" value="{{ totalfinal }}">
+        <button class="checkout-btn">
+            <i class="fa fa-credit-card"></i>
+            <span>متابعة الدفع</span>
+            <i class="fa fa-arrow-left"></i>
+        </button>
+    </form>
+</div>
+       {% else %}
+        <div class="xcheckout-empty-state">
+            <div class="xcheckout-empty-icon">🛒</div>
+            <h3 style="color: #4a5568;">لا توجد طلبات قيد المعالجة</h3>
+            <p style="color: #718096; margin-top: 8px;">يمكنك إضافة منتجات إلى السلة وبدء طلب جديد</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Popup Structure -->
+<div id="winter-popup-overlay" style="display: none;">
+    <div class="popup-container">
+        <div class="popup-header">
+            <h3>تعديل المنتج</h3>
+            <button onclick="closeWinterPopup()" class="popup-close">&times;</button>
+        </div>
+        <div id="winter-popup-content" class="popup-content">
+            <div class="loading-spinner">⏳ جاري التحميل...</div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Mobile Beautiful Design - CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+        /* Empty State */
+        .xcheckout-empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 20px;
+        }
+        
+        .xcheckout-empty-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+.mobile-cart-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 16px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #f8f9fc 100%);
+    min-height: 100vh;
+    direction: rtl;
+}
+
+/* Cart Items List */
+.cart-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+/* Cart Item Card */
+.cart-item-card {
+    background: white;
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(52, 152, 219, 0.1);
+}
+
+.cart-item-card:active {
+    transform: scale(0.98);
+}
+
+/* Item Header */
+.item-header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px dashed #f0f0f0;
+}
+
+.item-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+.price-badge {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.original-price {
+    font-size: 12px;
+    color: #95a5a6;
+    text-decoration: line-through;
+}
+
+.taxed-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #27ae60;
+    background: linear-gradient(135deg, #e8f8f5, #d5f4e6);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.remove-btn {
+    background: linear-gradient(135deg, #fee, #ffe5e5);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    color: #e74c3c;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-btn:active {
+    transform: scale(0.9);
+    background: #e74c3c;
+    color: white;
+}
+
+/* Variants Section */
+.variants-section {
+    margin: 12px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.variant-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8f9fa;
+    padding: 10px 12px;
+    border-radius: 14px;
+    transition: all 0.3s;
+}
+
+.variant-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.variant-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.size-tag {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    color: #1976d2;
+}
+
+.color-tag {
+    background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+    color: #7b1fa2;
+}
+
+.quantity-tag {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    color: #388e3c;
+}
+
+.edit-variant-btn {
+    background: white;
+    border: 1px solid #ddd;
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    color: #3498db;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-variant-btn:active {
+    background: #3498db;
+    color: white;
+    transform: scale(0.95);
+}
+
+/* Add More Button */
+.add-more-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #f8f9fa, white);
+    border: 2px dashed #3498db;
+    padding: 12px;
+    border-radius: 16px;
+    color: #3498db;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.add-more-btn:active {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #e3f2fd, white);
+    border-color: #2980b9;
+}
+
+/* Cart Summary */
+.cart-summary {
+    background: white;
+    border-radius: 24px;
+    padding: 20px;
+    margin-top: 8px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(52, 152, 219, 0.15);
+}
+
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.summary-header h3 {
+    font-size: 18px;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.summary-header i {
+    font-size: 24px;
+    color: #3498db;
+}
+
+.summary-details {
+    margin-bottom: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+.summary-row.total {
+    padding-top: 15px;
+    margin-top: 10px;
+    border-top: 2px solid #f0f0f0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #2c3e50;
+}
+
+.summary-row.total span:last-child {
+    color: #27ae60;
+    font-size: 22px;
+}
+
+.checkout-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    border: none;
+    padding: 16px;
+    border-radius: 50px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+}
+
+.checkout-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 3px 10px rgba(46, 204, 113, 0.3);
+}
+
+/* Popup Styles */
+#winter-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    backdrop-filter: blur(5px);
+}
+
+.popup-container {
+    background: white;
+    border-radius: 28px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow: hidden;
+    direction: rtl;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+}
+
+.popup-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.popup-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.popup-close:active {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.popup-content {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+    color: #3498db;
+}
+
+/* Scrollbar Styling */
+.variants-section::-webkit-scrollbar {
+    width: 4px;
+}
+
+.variants-section::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.variants-section::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 10px;
+}
+
+/* Empty State */
+.cart-items-list:empty::before {
+    content: "🛒 سلة التسوق فارغة";
+    display: block;
+    text-align: center;
+    padding: 60px 20px;
+    color: #95a5a6;
+    font-size: 16px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cart-item-card {
+    animation: fadeIn 0.4s ease;
+}
+
+
+@media (min-width: 769px)  {
+    .mobile-cart-container {
+        max-width: 1200px!important;
+    }
+}
+
+
+</style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-// منع تحميل السكريبت أكثر من مرة
-if (typeof window.cartHandlerInitialized === 'undefined') {
-    window.cartHandlerInitialized = true;
-    
-    $(document).ready(function() {
-
-
-        // إزالة جميع المستمعين القديمة
-        $('.btn-plus, .btn-minus').replaceWith(function() {
-            return $(this).clone(true);
-        });
-        
-        // إضافة مستمعين جدد
-        $('.btn-plus').each(function() {
-            $(this).off('click').on('click', function(event) {
-
-                event.preventDefault();
-                event.stopPropagation();
-                event.stopImmediatePropagation();
-                
-                var $button = $(this);
-                var $input = $button.closest('.input-group').find('input.form-control');
-                var currentVal = parseInt($input.val());
-                var newVal = currentVal + 1;
-
-                
-                if (!isNaN(newVal) && newVal > 0) {
-
-                    $.request('onUpdateQuantityPluseOrSub', {
-                        data: {
-                
-                            idProduct: $button.data('value'), 
-                            Quantity: newVal
-                        },
-                    });
-                    $input.val(newVal);
-                    
-                    // تحديث المجموع للعنصر
-                    var $row = $button.closest('tr');
-                    var priceAfterTaxes = parseFloat($row.find('td').eq(2).text().replace('$', '').trim());
-                    var newTotal = priceAfterTaxes * newVal;
-                    $row.find('td').eq(4).text('$ ' + newTotal.toFixed(2));
-                    
-                    // تحديث الإجمالي الكلي
-                    calculateAndUpdateTotals();
-                }
-                
-                return false;
-            });
-        });
-        
-        $('.btn-minus').each(function() {
-            $(this).off('click').on('click', function(event) {
-                event.preventDefault();
-                event.stopPropagation();
-                event.stopImmediatePropagation();
-                
-                var $button = $(this);
-                var $input = $button.closest('.input-group').find('input.form-control');
-                var currentVal = parseInt($input.val());
-                var newVal = currentVal - 1;
-                
-                if (!isNaN(newVal) && newVal >= 1) {
-                    $.request('onUpdateQuantityPluseOrSub', {
-                        data: {
-                
-                            idProduct: $button.data('value'), 
-                            Quantity: newVal
-                        },
-                    });
-                    $input.val(newVal);
-                    
-                    // تحديث المجموع للعنصر
-                    var $row = $button.closest('tr');
-                    var priceAfterTaxes = parseFloat($row.find('td').eq(2).text().replace('$', '').trim());
-                    var newTotal = priceAfterTaxes * newVal;
-                    $row.find('td').eq(4).text('$ ' + newTotal.toFixed(2));
-                    
-                    // تحديث الإجمالي الكلي
-                    calculateAndUpdateTotals();
-                }
-                
-                return false;
-            });
-        });
-        
-        // تحديث الإجمالي عند التغيير اليدوي
-        $('.input-group input.form-control').off('change').on('change', function(event) {
-            event.preventDefault();
-            
-            var $input = $(this);
-            var newVal = parseInt($input.val());
-            
-            if (isNaN(newVal) || newVal < 1) {
-                newVal = 1;
-                $input.val(1);
-            }
-            
-            var $row = $input.closest('tr');
-            var priceAfterTaxes = parseFloat($row.find('td').eq(2).text().replace('$', '').trim());
-            var newTotal = priceAfterTaxes * newVal;
-            $row.find('td').eq(4).text('$ ' + newTotal.toFixed(2));
-            
-            calculateAndUpdateTotals();
-        });
-        
-        function calculateAndUpdateTotals() {
-            
-            var subtotal = 0;
-            var totalTaxes = 0;
-            
-            $('#cart-items tbody tr').each(function() {
-                var $row = $(this);
-                var priceAfter = parseFloat($row.find('td').eq(2).text().replace('$', '').trim());
-                var priceMain = parseFloat($row.find('td').eq(1).text().replace('$', '').trim());
-                var quantity = parseInt($row.find('.input-group input.form-control').val());
-                
-                if (!isNaN(priceAfter) && !isNaN(quantity)) {
-                    subtotal += priceAfter * quantity;
-                    totalTaxes += (priceAfter - priceMain) * quantity;
-                }
-            });
-            
-            var finalTotal = subtotal + totalTaxes;
-            
-            // تحديث العرض
-            $('.card-body .d-flex').eq(0).find('h6:last-child').text('$ ' + subtotal.toFixed(2));
-            $('.card-body .d-flex').eq(1).find('h6:last-child').text('$ ' + totalTaxes.toFixed(2));
-            $('#cart-total').text('$ ' + finalTotal.toFixed(2));
-            
-            // تحديث الحقول المخفية
-            $('input[name="total_price"]').val(subtotal.toFixed(2));
-            $('input[name="total_promotions"]').val(totalTaxes.toFixed(2));
-            $('input[name="final_price"]').val(finalTotal.toFixed(2));
-        }
-        
-        // حساب أولي
-        calculateAndUpdateTotals();
-    });
+function openWinterPopup(data) {
+    document.getElementById('winter-popup-overlay').style.display = 'flex';
 }
+
+function closeWinterPopup() {
+    document.getElementById('winter-popup-overlay').style.display = 'none';
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeWinterPopup();
+    }
+});
+
+document.getElementById('winter-popup-overlay').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeWinterPopup();
+    }
+});
 </script>

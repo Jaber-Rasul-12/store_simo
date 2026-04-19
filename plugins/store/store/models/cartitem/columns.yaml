@@ -6,6 +6,17 @@ columns:
         label: 'store.store::lang.model.cartitem.product'
         relation: product
         select: name
+    size:
+        label: 'store.store::lang.model.cartitem.size'
+        relation: size
+        select: name
+    color:
+        label: 'store.store::lang.model.cartitem.color'
+        relation: color
+        select: name
+
+        
+
     promotion:
         label: 'store.store::lang.model.cartitem.promotion'
         relation: promotion

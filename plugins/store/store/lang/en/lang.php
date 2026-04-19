@@ -160,6 +160,8 @@ return [
             'notes' => 'Notes',
             'created_at' => 'Created at',
             'updated_at' => 'Updated at',
+            'size'=>'Size',
+            'color'=>'Color',
         ],
         'product' => [
             'id' => 'Id',

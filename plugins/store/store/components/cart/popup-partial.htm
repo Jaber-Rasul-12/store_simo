@@ -1,0 +1,250 @@
+<!-- partials/popup-product-options.htm -->
+<div class="simple-product-options">
+    <!-- معلومات المنتج -->
+    <div class="simple-product-info">
+        <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="منتج" class="simple-product-img">
+        <div class="simple-product-details">
+            <h3>{{ product.name }}</h3>
+             {% set activePrice = null %}
+                            {% set previousPrice = null %}
+                            
+                            {% for price in product.prices %}
+                                {% if price.status == true %}
+                                    {% set activePrice = price %}
+                                    {% if loop.index0 > 0 %}
+                                        {% set previousPrice = product.prices[loop.index0 - 1] %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if activePrice %}
+                            {# <div class="discount-badge">-30%</div> #}
+                            <h6 class=""  style="padding: 10px; color: green;">{{ activePrice.price }}$</h6>
+                            {% if previousPrice %}
+                            <h6 class="text-muted ml-2" style="padding: 10px"><del>{{ previousPrice.price }}$</del></h6>
+                            {% endif %}
+
+                            {% endif %}
+        </div>
+    </div>
+   <form>
+    <!-- خيارات المنتج في صف واحد -->
+    <div class="simple-options-row">
+        <!-- اختيار اللون -->
+        <div class="simple-option">
+            <label>🎨 اللون:</label>
+            <select id="productColor" name="color_id" class="simple-select">
+               {% for color in product.colors %}
+                <option value="{{ color.id }}">{{ color.name }}</option>
+               {% endfor %}
+            </select>
+        </div>
+
+        <!-- اختيار القياس -->
+        <div class="simple-option">
+            <label>📏 القياس:</label>
+            <select id="productSize" name="size_id" class="simple-select">
+               {% for size in product.sizes %}
+                <option value="{{ size.id }}">{{ size.name }}</option>
+               {% endfor %}
+            </select>
+        </div>
+
+        <!-- اختيار الكمية -->
+        <div class="simple-option">
+            <label>🔢 الكمية:</label>
+            <div class="simple-quantity">
+                <button type="button" onclick="changeQty(-1)">-</button>
+                <input type="number" id="productQuantity" name="quantity" value="1" min="1" max="99">
+                <button type="button" onclick="changeQty(1)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- أزرار التحكم -->
+    <div class="simple-buttons">
+        <button class="simple-cancel-btn" type="button" onclick="closeWinterPopup()">إلغاء</button>
+        <button class="simple-add-btn" data-request="onAddQuantityToProduct" data-request-form data-request-data="product_id: {{ product.id }}" data-request-flash type="button">إضافة إلى السلة</button>
+    </div>
+    </form>
+</div>
+
+<script>
+// تغيير الكمية
+function changeQty(delta) {
+    var input = document.getElementById('productQuantity');
+    var newVal = parseInt(input.value) + delta;
+    if (newVal >= 1 && newVal <= 99) {
+        input.value = newVal;
+    }
+}
+
+// إضافة إلى السلة
+function addToCart() {
+    var color = document.getElementById('productColor').value;
+    var size = document.getElementById('productSize').value;
+    var quantity = document.getElementById('productQuantity').value;
+    
+    // عرض ملخص الطلب
+    alert(`✅ تم الإضافة بنجاح!\n\nاللون: ${color}\nالقياس: ${size}\nالكمية: ${quantity}\nالسعر الإجمالي: $${(99.99 * quantity).toFixed(2)}`);
+    
+    // إغلاق النافذة
+    closeProductPopup();
+}
+</script>
+
+<style>
+
+
+/* تصميم بسيط ونظيف */
+.simple-product-options {
+    padding: 20px;
+}
+
+.simple-product-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.simple-product-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.simple-product-details h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+}
+
+.simple-price {
+    color: #27ae60;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.simple-options-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.simple-option {
+    flex: 1;
+    min-width: 120px;
+}
+
+.simple-option label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.simple-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+}
+
+.simple-select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.simple-quantity {
+    display: flex;
+    
+    gap: 10px;
+    justify-content: center;
+}
+
+.simple-quantity button {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s;
+}
+
+.simple-quantity button:hover {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.simple-quantity input {
+    width: 60px;
+    height: 35px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.simple-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.simple-cancel-btn {
+    padding: 10px 20px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.simple-cancel-btn:hover {
+    background: #c0392b;
+}
+
+.simple-add-btn {
+    padding: 10px 20px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.simple-add-btn:hover {
+    background: #219a52;
+}
+
+/* للشاشات الصغيرة */
+@media (max-width: 600px) {
+    .simple-options-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .simple-buttons {
+        flex-direction: column;
+    }
+    
+    .simple-cancel-btn,
+    .simple-add-btn {
+        width: 100%;
+    }
+}
+
+</style>

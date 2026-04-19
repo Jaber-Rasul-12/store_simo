@@ -55,6 +55,17 @@ class Cart extends ComponentBase
         return ['#cart-count' => $cartManager->getCartCount()];
     }
 
+  
+function onLoadPageContent()
+{
+    $id = post('id', 1);   
+    $Product = Product::with(['colors' , 'sizes'])->where('id', $id)->get()->first();   
+        return ['#winter-popup-content' =>   $this->renderPartial('@popup-partial.htm', ['product' => $Product])];
+    
+}
+
+
+
     public function getCountCarts()
     {
         $cartManager = new CartManager();
@@ -79,8 +90,36 @@ class Cart extends ComponentBase
         
         Flash::success('تمت إزالة المنتج من السلة بنجاح!');
 
-        return ['#cart-count' => $cartManager->getCartCount() , '#cart-items' =>  $this->renderPartial('@cart_itmes.htm', ['cartItems' => $cartManager->getCartItems()])];
+        return redirect('cart');
     }
+
+    public function onAddQuantityToProduct(){
+        $cartManager = new CartManager();
+        $productId = post('product_id');
+        $quantity = post('quantity', 1);
+        $sizeId = post('size_id', null);
+        $colorId = post('color_id', null);
+        $cartManager->addQuantityToProduct($productId, $quantity, $sizeId, $colorId);
+
+        Flash::success('تم تحديث كمية المنتج في السلة بنجاح!');
+        return redirect('cart');
+        
+    }
+
+
+    public function onRemoveColorSizeFromCart(){
+        $cartManager = new CartManager();
+        $productId = post('product_id');
+        $sizeId = post('size_id', null);
+        $colorId = post('color_id', null);
+        $cartManager->removeQuantityFromProduct($productId, $sizeId, $colorId);
+
+        Flash::success('تم تحديث كمية المنتج في السلة بنجاح!');
+        return redirect('cart');
+        
+    }
+
+    
 
    
 
@@ -165,19 +204,31 @@ public function onApplyCoupon()
             'type' => 'cashe',
         ]);
         
-        $cartItems = (new CartManager())->getCartItems();
+$cartItems = (new CartManager())->getCartItems();
+$cartItemsToInsert = [];
+
+foreach ($cartItems as $item) {
+
+        foreach ($item['quantity'] as $variant) {
+            $cartItemsToInsert[] = [
+                'product_id' => $item['id'],
+                'qty' => $variant['quantity'], 
+                'price' => $item['price_after_taxes'],
+                'user_id' => $user_id,
+                'color_id' => $variant['color_id'] ,
+                'size_id' => $variant['size_id'],
+                'promotion_id' => null,
+            ];
+        }
         
-        $cart->items()->createMany(
-            array_map(function($item) use ($user_id) {
-                return [
-                    'product_id' => $item['id'],
-                    'qty' => $item['quantity'],
-                    'price' => $item['price_after_taxes'],
-                    'user_id' => $user_id,
-                    'promotion_id' => null,
-                ];
-            }, $cartItems)
-        );
+    
+}
+
+// إدراج جميع العناصر دفعة واحدة
+if (!empty($cartItemsToInsert)) {
+    $cart->items()->createMany($cartItemsToInsert);
+}
+
         
         (new CartManager())->removeFromSessionCart(); 
         

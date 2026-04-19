@@ -4,6 +4,21 @@ fields:
         span: auto
         type: relation
         slect: name 
+        placeholder: store.store::lang.plugin.select
+    size_id:
+        label: store.store::lang.model.cartitem.size
+        span: auto
+        type: dropdown
+        context: 'create'
+        dependsOn: product
+        placeholder: store.store::lang.plugin.select
+    color_id:
+        label: store.store::lang.model.cartitem.color
+        span: auto
+        type: dropdown
+        context: 'create'
+        dependsOn: product
+        placeholder: store.store::lang.plugin.select
     promotion:
         label: 'store.store::lang.model.cartitem.promotion'
         span: auto

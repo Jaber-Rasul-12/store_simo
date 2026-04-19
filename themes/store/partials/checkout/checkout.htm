@@ -3,8 +3,11 @@
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 
-<!-- Checkout Start -->
-<div class="container-fluid pt-5">
+
+
+
+<!-- Checkout Container -->
+<div class="xcheckout-container">
     
     {% set allCarts = Cart.GetAllCartItems %}
     {% set pendingCarts = [] %}
@@ -19,369 +22,836 @@
     {% endfor %}
 
     <!-- ========================================== -->
-    <!-- قسم الطلبات غير المكتملة (قيد المعالجة) -->
+    <!-- Pending Orders Section -->
     <!-- ========================================== -->
     {% if pendingCarts|length > 0 %}
-        <div class="row px-xl-5 mb-5">
-            <div class="col-12">
-                <div class="alert alert-warning d-flex align-items-center" role="alert">
-                    <i class="fa fa-clock fa-lg ml-2"></i>
-                    <span class="font-weight-bold">{{ 'الطلبات قيد المعالجة' |_ }} ({{ pendingCarts|length }})</span>
-                </div>
+        <div class="xcheckout-section-header">
+            <div class="xcheckout-section-title">
+                <i class="fa fa-clock-o"></i>
+                <span>الطلبات قيد المعالجة</span>
+                <span class="xcheckout-badge">{{ pendingCarts|length }}</span>
             </div>
         </div>
-        <div class="row px-xl-5">
+        
+        <div class="xcheckout-grid">
             {% for cart in pendingCarts %}
-                <div class="col-lg-4 text-right">
-                    <!-- Cart Summary Card -->
-                    <div class="card border-secondary mb-5">
-                        <div class="card-header border-0">
-                            <h4 class="font-weight-semi-bold m-0" style="padding: 10px;">{{ 'إجمالي الطلب' |_ }} #{{ cart.id }}</h4>
-                        </div>
-                        <div class="card-body">
-                            <div style="display: flex; justify-content: space-between;">
-                                <h5 class="font-weight-medium mb-3 text-success">{{ 'اسم المنتج' |_ }}</h5>
-                                <h5 class="font-weight-medium mb-3 text-success">{{ 'الكمية' |_ }}</h5>
-                                <h5 class="font-weight-medium mb-3 text-success">{{ 'السعر' |_ }}</h5>
-                            </div>
-
+                <!-- Order Card -->
+                <div class="xcheckout-card">
+                    <div class="xcheckout-card-header">
+                        <h4>
+                            <span>طلب #{{ cart.id }}</span>
+                            <span style="color: #ed8936; font-size: 12px;">⏳ قيد المعالجة</span>
+                        </h4>
+                    </div>
+                    
+                    <div class="xcheckout-card-body">
+                        <!-- Cart Items -->
+                        <div class="xcheckout-cart-items">
                             {% for item in cart.items %}
-                                <div class="d-flex justify-content-between">
-                                    <p>{{ item.product.name }}</p>
-                                    <p>{{ item.qty }}</p>
-                                    <p>{{ item.price }} $</p>
+                                <div class="xcheckout-cart-item">
+                                    <span class="xcheckout-item-name">{{ item.product.name }}</span>
+                                    <span class="xcheckout-item-qty">× {{ item.qty }}</span>
+                                    <span class="xcheckout-item-qty">{{ item.color.name }}</span>
+                                    <span class="xcheckout-item-qty">{{ item.size.name }}</span>
+                                    <span class="xcheckout-item-price">{{ item.price }} $</span>
                                 </div>
                             {% endfor %}
-                            <hr class="mt-0">
-                            <div class="d-flex justify-content-between mb-3 pt-1">
-                                <h6 class="font-weight-medium">{{ 'المجموع الفرعي' |_ }}</h6>
-                                <h6 class="font-weight-medium">{{ cart.total_price }} $</h6>
+                        </div>
+                        
+                        <div class="xcheckout-separator"></div>
+                        
+                        <!-- Summary -->
+                        <div class="xcheckout-summary">
+                            <div class="xcheckout-summary-row">
+                                <span>المجموع الفرعي</span>
+                                <span>{{ cart.total_price }} $</span>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">{{ 'الضرائب' |_ }}</h6>
-                                <h6 class="font-weight-medium">{{ cart.total_promotions }} $</h6>
+                            <div class="xcheckout-summary-row">
+                                <span>الضرائب</span>
+                                <span>{{ cart.total_promotions }} $</span>
+                            </div>
+                            <div class="xcheckout-summary-row xcheckout-summary-total">
+                                <span>الإجمالي</span>
+                                <span>{{ cart.final_price }} $</span>
                             </div>
                         </div>
-                        <div class="card-footer border-secondary bg-transparent">
-                            <div class="d-flex justify-content-between mt-2">
-                                <h5 class="font-weight-bold">{{ 'الإجمالي' |_ }}</h5>
-                                <h5 class="font-weight-bold">{{ cart.final_price }} $</h5>
+                    </div>
+                </div>
+
+                <!-- Delivery Info Card -->
+                <div class="xcheckout-card">
+                    <div class="xcheckout-card-header">
+                        <h4>
+                            <i class="fa fa-truck"></i>
+                            <span>معلومات التوصيل</span>
+                        </h4>
+                    </div>
+                    
+                    <div class="xcheckout-card-body">
+                        <!-- Map -->
+                        <div class="xcheckout-form-group">
+                            <label class="xcheckout-label">
+                                <i class="fa fa-map-marker"></i>
+                                موقع التسليم
+                            </label>
+                            <div id="xmap_{{ cart.id }}" class="xcheckout-map"></div>
+                            <div class="xcheckout-map-help">
+                                <i class="fa fa-hand-pointer"></i>
+                                <span>انقر على الخريطة لتحديد موقعك</span>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="xcheckout-form-group">
+                            <label class="xcheckout-label">
+                                <i class="fa fa-address-card"></i>
+                                العنوان المفصل
+                            </label>
+                            <textarea class="xcheckout-textarea" id="xaddress_{{ cart.id }}" rows="2" placeholder="الشارع، الحي، رقم البناء، الطابق..." readonly></textarea>
+                        </div>
+
+                        <!-- Coordinates -->
+                        <div class="xcheckout-form-group">
+                            <label class="xcheckout-label">
+                                <i class="fa fa-globe"></i>
+                                الإحداثيات
+                            </label>
+                            <div class="xcheckout-coords-row">
+                                <input type="text" class="xcheckout-input" id="xlat_{{ cart.id }}" placeholder="خط العرض" readonly>
+                                <input type="text" class="xcheckout-input" id="xlng_{{ cart.id }}" placeholder="خط الطول" readonly>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="xcheckout-form-group">
+                            <label class="xcheckout-label">
+                                <i class="fa fa-credit-card"></i>
+                                طريقة الدفع
+                            </label>
+                            <div class="xcheckout-radio-group">
+                                <div class="xcheckout-radio">
+                                    <input type="radio" name="xpayment_{{ cart.id }}" id="xcash_{{ cart.id }}" value="cash" checked>
+                                    <label for="xcash_{{ cart.id }}">💰 الدفع النقدي عند الاستلام</label>
+                                </div>
+                                <div class="xcheckout-radio">
+                                    <input type="radio" name="xpayment_{{ cart.id }}" id="xcard_{{ cart.id }}" value="card">
+                                    <label for="xcard_{{ cart.id }}">💳 بطاقة ائتمان</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Fee -->
+                        <div id="xdelivery_fee_{{ cart.id }}" style="display: none;">
+                            <div class="xcheckout-delivery-fee">
+                                <span class="xcheckout-delivery-fee-label">
+                                    <i class="fa fa-motorcycle"></i>
+                                    رسوم التوصيل
+                                </span>
+                                <span class="xcheckout-delivery-fee-amount" id="xfee_amount_{{ cart.id }}">0 $</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Payment and Location Card with Map -->
-                    <div class="card border-secondary mb-5">
-                        <div class="card-header bg-secondary border-0">
-                            <h4 class="font-weight-semi-bold m-0">{{ 'معلومات التوصيل' |_ }}</h4>
+                    <!-- Form -->
+                    <form data-request="onPlaceOrder" data-request-data="my_id: '{{ cart.id }}'" data-request-flash>
+                        <input type="hidden" name="cart_id" value="{{ cart.id }}">
+                        <input type="hidden" name="location_lat" id="xlocation_lat_{{ cart.id }}">
+                        <input type="hidden" name="location_lng" id="xlocation_lng_{{ cart.id }}">
+                        <input type="hidden" name="address" id="xaddress_input_{{ cart.id }}">
+                        <input type="hidden" name="payment_method" id="xpayment_method_{{ cart.id }}" value="cash">
+                        
+                        <div class="xcheckout-card-footer">
+                            <button type="submit" class="xcheckout-btn" id="xsubmit_btn_{{ cart.id }}" disabled>
+                                <i class="fa fa-check-circle"></i>
+                                تأكيد الطلب
+                            </button>
                         </div>
-                        <div class="card-body">
-                            <!-- Map Container -->
-                            <div class="form-group">
-                                <label class="font-weight-medium mb-2">{{ 'اختر موقعك على الخريطة' |_ }}</label>
-                                <div id="map_{{ cart.id }}" style="height: 300px; width: 100%; border-radius: 8px; margin-bottom: 10px;"></div>
-                                <small class="form-text text-muted">{{ 'انقر على الخريطة لتحديد موقع التسليم' |_ }}</small>
-                            </div>
-
-                            <!-- Selected Location Details -->
-                            <div class="form-group">
-                                <label class="font-weight-medium mb-2">{{ 'العنوان المفصل' |_ }}</label>
-                                <textarea class="form-control" name="address" id="address_{{ cart.id }}" rows="2" placeholder="{{ 'الشارع، الحي، رقم البناء، الطابق...' |_ }}" readonly></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="font-weight-medium mb-2">{{ 'الإحداثيات' |_ }}</label>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <input type="text" class="form-control" id="lat_{{ cart.id }}" placeholder="خط العرض" readonly>
-                                    </div>
-                                    <div class="col-6">
-                                        <input type="text" class="form-control" id="lng_{{ cart.id }}" placeholder="خط الطول" readonly>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Payment Options -->
-                            <div class="form-group mt-3">
-                                <label class="font-weight-medium mb-2">{{ 'طريقة الدفع' |_ }}</label>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" name="payment" id="directcheck{{ cart.id }}" value="cash" checked>
-                                    <label class="custom-control-label" for="directcheck{{ cart.id }}">{{ 'الدفع النقدي عند الاستلام' |_ }}</label>
-                                </div>
-                            </div>
-
-                            <!-- Delivery Fee Display -->
-                            <div class="d-flex justify-content-between mt-3 p-2 bg-light rounded" id="delivery_fee_display_{{ cart.id }}" style="display: none;">
-                                <h6 class="font-weight-medium">{{ 'رسوم التوصيل' |_ }}</h6>
-                                <h6 class="font-weight-medium text-primary delivery-fee-amount">0 $</h6>
-                            </div>
-                        </div>
-
-                        <form data-request="onPlaceOrder" data-request-data="my_id: '{{ cart.id }}'" data-request-flash>
-                            <input type="hidden" name="cart_id" value="{{ cart.id }}">
-                            <input type="hidden" name="location_lat" id="location_lat_{{ cart.id }}">
-                            <input type="hidden" name="location_lng" id="location_lng_{{ cart.id }}">
-                            <input type="hidden" name="address" id="address_input_{{ cart.id }}">
-                            <div class="card-footer border-secondary bg-transparent" id="id_button-{{ cart.id }}">
-                                <button type="submit" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" id="submit_btn_{{ cart.id }}">
-                                    {{ 'تقديم الطلب' |_ }}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                    </form>
                 </div>
             {% endfor %}
         </div>
     {% else %}
-        <div class="row px-xl-5 mb-5">
-            <div class="col-12">
-                <div class="alert alert-info text-center" role="alert">
-                    <i class="fa fa-info-circle ml-2"></i>
-                    {{ 'لا توجد طلبات قيد المعالجة' |_ }}
-                </div>
-            </div>
+        <div class="xcheckout-empty-state">
+            <div class="xcheckout-empty-icon">🛒</div>
+            <h3 style="color: #4a5568;">لا توجد طلبات قيد المعالجة</h3>
+            <p style="color: #718096; margin-top: 8px;">يمكنك إضافة منتجات إلى السلة وبدء طلب جديد</p>
         </div>
     {% endif %}
 
     <!-- ========================================== -->
-    <!-- قسم الطلبات المكتملة -->
+    <!-- Completed Orders Section -->
     <!-- ========================================== -->
     {% if completedCarts|length > 0 %}
-        <div class="row px-xl-5 mt-5 mb-3">
-            <div class="col-12">
-                <hr class="my-4">
-                <div class="alert alert-success d-flex align-items-center" role="alert">
-                    <i class="fa fa-check-circle fa-lg ml-2"></i>
-                    <span class="font-weight-bold">{{ 'الطلبات المكتملة' |_ }} ({{ completedCarts|length }})</span>
+        <div style="margin-top: 32px;">
+            <div class="xcheckout-section-header" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);">
+                <div class="xcheckout-section-title">
+                    <i class="fa fa-check-circle"></i>
+                    <span>الطلبات المكتملة</span>
+                    <span class="xcheckout-badge">{{ completedCarts|length }}</span>
                 </div>
             </div>
-        </div>
-        <div class="row px-xl-5">
-            {% for cart in completedCarts %}
-                <div class="col-lg-4 text-right">
-                    <!-- Cart Summary Card -->
-                    <div class="card border-success mb-5">
-                        <div class="card-header border-success bg-success text-white">
-                            <h4 class="font-weight-semi-bold m-0" style="padding: 10px;">
-                                {{ 'إجمالي الطلب' |_ }} #{{ cart.id }}
-                                <i class="fa fa-check-circle mr-2"></i>
+            
+            <div class="xcheckout-grid">
+                {% for cart in completedCarts %}
+                    <div class="xcheckout-card xcheckout-card-completed">
+                        <div class="xcheckout-card-header">
+                            <h4>
+                                <span>طلب #{{ cart.id }}</span>
+                                <span class="xcheckout-completed-badge">
+                                    <i class="fa fa-check"></i> مكتمل
+                                </span>
                             </h4>
                         </div>
-                        <div class="card-body">
-                            <div style="display: flex; justify-content: space-between;">
-                                <h5 class="font-weight-medium mb-3 text-success">{{ 'اسم المنتج' |_ }}</h5>
-                                <h5 class="font-weight-medium mb-3 text-success">{{ 'الكمية' |_ }}</h5>
-                                <h5 class="font-weight-medium mb-3 text-success">{{ 'السعر' |_ }}</h5>
+                        
+                        <div class="xcheckout-card-body">
+                            <div class="xcheckout-cart-items">
+                                {% for item in cart.items %}
+                                    <div class="xcheckout-cart-item">
+                                        <span class="xcheckout-item-name">{{ item.product.name }}</span>
+                                        <span class="xcheckout-item-qty">× {{ item.qty }}</span>
+                                        <span class="xcheckout-item-price">{{ item.price }} $</span>
+                                    </div>
+                                {% endfor %}
                             </div>
-
-                            {% for item in cart.items %}
-                                <div class="d-flex justify-content-between">
-                                    <p>{{ item.product.name }}</p>
-                                    <p>{{ item.qty }}</p>
-                                    <p>{{ item.price }} $</p>
+                            
+                            <div class="xcheckout-separator"></div>
+                            
+                            <div class="xcheckout-summary">
+                                <div class="xcheckout-summary-row">
+                                    <span>المجموع الفرعي</span>
+                                    <span>{{ cart.total_price }} $</span>
                                 </div>
-                            {% endfor %}
-                            <hr class="mt-0">
-                            <div class="d-flex justify-content-between mb-3 pt-1">
-                                <h6 class="font-weight-medium">{{ 'المجموع الفرعي' |_ }}</h6>
-                                <h6 class="font-weight-medium">{{ cart.total_price }} $</h6>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">{{ 'الضرائب' |_ }}</h6>
-                                <h6 class="font-weight-medium">{{ cart.total_promotions }} $</h6>
+                                <div class="xcheckout-summary-row">
+                                    <span>الضرائب</span>
+                                    <span>{{ cart.total_promotions }} $</span>
+                                </div>
+                                <div class="xcheckout-summary-row xcheckout-summary-total">
+                                    <span>الإجمالي</span>
+                                    <span>{{ cart.final_price }} $</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-footer border-success bg-transparent">
-                            <div class="d-flex justify-content-between mt-2">
-                                <h5 class="font-weight-bold">{{ 'الإجمالي' |_ }}</h5>
-                                <h5 class="font-weight-bold">{{ cart.final_price }} $</h5>
-                            </div>
-                            <div class="mt-3">
-                                <button type="button" class="btn btn-lg btn-block btn-success font-weight-bold my-3 py-3">
-                                    <i class="fa fa-check ml-2"></i>
-                                    {{ 'الطلب مكتمل' |_ }}
-                                </button>
-                            </div>
+                        
+                        <div class="xcheckout-card-footer">
+                            <button class="xcheckout-btn xcheckout-btn-success" disabled>
+                                <i class="fa fa-check-double"></i>
+                                تم التسليم بنجاح
+                            </button>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <div class="row px-xl-5 mt-5 mb-3">
-            <div class="col-12">
-                <hr class="my-4">
-                <div class="alert alert-light text-center" role="alert">
-                    <i class="fa fa-history ml-2"></i>
-                    {{ 'لا توجد طلبات مكتملة حتى الآن' |_ }}
-                </div>
+                {% endfor %}
             </div>
         </div>
     {% endif %}
 
 </div>
 
-<!-- JavaScript for Map Integration (للمكتملة فقط) -->
+<!-- JavaScript -->
 <script>
-    // إحداثيات المركز الافتراضي (وسط المدينة - دمشق كمثال)
-    const defaultCenter = [33.5138, 36.2765];
-    const defaultZoom = 13;
-
-    // تعريف رسوم التوصيل بناءً على المسافة أو المنطقة
-    function calculateDeliveryFee(lat, lng) {
-        const storeLat = 33.5138;
-        const storeLng = 36.2765;
-        const distance = calculateDistance(storeLat, storeLng, lat, lng);
-        let fee = distance * 1000;
-        fee = Math.min(Math.max(fee, 2000), 15000);
-        return Math.round(fee);
-    }
-
-    function calculateDistance(lat1, lon1, lat2, lon2) {
-        const R = 6371;
-        const dLat = deg2rad(lat2 - lat1);
-        const dLon = deg2rad(lon2 - lon1);
-        const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                  Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-                  Math.sin(dLon/2) * Math.sin(dLon/2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        return R * c;
-    }
-
-    function deg2rad(deg) {
-        return deg * (Math.PI/180);
-    }
-
-    async function reverseGeocode(lat, lng, cartId) {
-        try {
-            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1&accept-language=ar`);
-            const data = await response.json();
-            if (data && data.display_name) {
-                const addressTextarea = document.getElementById(`address_${cartId}`);
-                if (addressTextarea) {
-                    addressTextarea.value = data.display_name;
-                    document.getElementById(`address_input_${cartId}`).value = data.display_name;
+    (function() {
+        // Configuration
+        const XCHECKOUT_CONFIG = {
+            defaultCenter: [33.5138, 36.2765],
+            defaultZoom: 13,
+            storeLocation: { lat: 33.5138, lng: 36.2765 }
+        };
+        
+        // Utility Functions
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+        
+        function calculateDeliveryFee(lat, lng) {
+            const distance = calculateDistance(
+                XCHECKOUT_CONFIG.storeLocation.lat,
+                XCHECKOUT_CONFIG.storeLocation.lng,
+                lat, lng
+            );
+            let fee = distance * 1000;
+            fee = Math.min(Math.max(fee, 2000), 15000);
+            return Math.round(fee);
+        }
+        
+        async function reverseGeocode(lat, lng, cartId) {
+            try {
+                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1&accept-language=ar`);
+                const data = await response.json();
+                if (data && data.display_name) {
+                    const addressTextarea = document.getElementById(`xaddress_${cartId}`);
+                    if (addressTextarea) {
+                        addressTextarea.value = data.display_name;
+                        document.getElementById(`xaddress_input_${cartId}`).value = data.display_name;
+                    }
                 }
-            }
-        } catch (error) {
-            console.error('خطأ في الحصول على العنوان:', error);
-            const addressTextarea = document.getElementById(`address_${cartId}`);
-            if (addressTextarea) {
-                addressTextarea.value = `الإحداثيات: ${lat}, ${lng}`;
+            } catch (error) {
+                console.error('Geocoding error:', error);
             }
         }
-    }
-
-    // تهيئة الخرائط فقط للطلبات غير المكتملة
-    {% for cart in pendingCarts %}
-        (function() {
-            const cartId = '{{ cart.id }}';
-            const mapContainer = document.getElementById(`map_${cartId}`);
-            
-            if (!mapContainer) return;
-            
-            const map = L.map(`map_${cartId}`).setView(defaultCenter, defaultZoom);
-            
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                subdomains: 'abcd',
-                maxZoom: 19
-            }).addTo(map);
-            
-            let marker = null;
-            
-            const geocoder = L.Control.geocoder({
-                defaultMarkGeocode: false,
-                placeholder: 'ابحث عن عنوان...',
-                errorMessage: 'لم يتم العثور على العنوان'
-            }).on('markgeocode', function(e) {
-                const center = e.geocode.center;
-                map.setView(center, 15);
-                placeMarker(center.lat, center.lng, cartId, map);
-            }).addTo(map);
-            
-            function placeMarker(lat, lng, cartId, map) {
-                if (marker) {
-                    marker.remove();
-                }
+        
+        // Initialize Maps
+        {% for cart in pendingCarts %}
+            (function() {
+                const cartId = '{{ cart.id }}';
+                const mapElement = document.getElementById(`xmap_${cartId}`);
                 
-                marker = L.marker([lat, lng], {
-                    draggable: true
+                if (!mapElement) return;
+                
+                const map = L.map(`xmap_${cartId}`).setView(
+                    XCHECKOUT_CONFIG.defaultCenter,
+                    XCHECKOUT_CONFIG.defaultZoom
+                );
+                
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; OpenStreetMap contributors',
+                    subdomains: 'abcd',
+                    maxZoom: 19
                 }).addTo(map);
                 
-                document.getElementById(`location_lat_${cartId}`).value = lat;
-                document.getElementById(`location_lng_${cartId}`).value = lng;
-                document.getElementById(`lat_${cartId}`).value = lat.toFixed(6);
-                document.getElementById(`lng_${cartId}`).value = lng.toFixed(6);
+                let marker = null;
                 
-                const fee = calculateDeliveryFee(lat, lng);
-                const feeDisplay = document.getElementById(`delivery_fee_display_${cartId}`);
-                if (feeDisplay) {
-                    feeDisplay.querySelector('.delivery-fee-amount').textContent = fee + ' $';
-                    feeDisplay.style.display = 'flex';
+                // Add geocoder
+                const geocoder = L.Control.geocoder({
+                    defaultMarkGeocode: false,
+                    placeholder: '🔍 ابحث عن عنوان...',
+                    errorMessage: 'لم يتم العثور على العنوان'
+                }).on('markgeocode', function(e) {
+                    const center = e.geocode.center;
+                    map.setView(center, 15);
+                    placeMarker(center.lat, center.lng, cartId, map);
+                }).addTo(map);
+                
+                function placeMarker(lat, lng, cartId, map) {
+                    if (marker) marker.remove();
+                    
+                    marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+                    
+                    document.getElementById(`xlocation_lat_${cartId}`).value = lat;
+                    document.getElementById(`xlocation_lng_${cartId}`).value = lng;
+                    document.getElementById(`xlat_${cartId}`).value = lat.toFixed(6);
+                    document.getElementById(`xlng_${cartId}`).value = lng.toFixed(6);
+                    
+                    const fee = calculateDeliveryFee(lat, lng);
+                    const feeDiv = document.getElementById(`xdelivery_fee_${cartId}`);
+                    if (feeDiv) {
+                        document.getElementById(`xfee_amount_${cartId}`).textContent = fee + ' $';
+                        feeDiv.style.display = 'block';
+                    }
+                    
+                    reverseGeocode(lat, lng, cartId);
+                    
+                    marker.on('dragend', function(e) {
+                        const newPos = marker.getLatLng();
+                        placeMarker(newPos.lat, newPos.lng, cartId, map);
+                    });
                 }
                 
-                reverseGeocode(lat, lng, cartId);
-                
-                marker.on('dragend', function(e) {
-                    const newPos = marker.getLatLng();
-                    placeMarker(newPos.lat, newPos.lng, cartId, map);
+                map.on('click', function(e) {
+                    placeMarker(e.latlng.lat, e.latlng.lng, cartId, map);
                 });
-            }
-            
-            map.on('click', function(e) {
-                placeMarker(e.latlng.lat, e.latlng.lng, cartId, map);
-            });
-            
-            const submitBtn = document.getElementById(`submit_btn_${cartId}`);
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.style.opacity = '0.5';
                 
-                const checkLocation = setInterval(function() {
-                    const lat = document.getElementById(`location_lat_${cartId}`).value;
-                    if (lat && lat !== '') {
-                        submitBtn.disabled = false;
-                        submitBtn.style.opacity = '1';
-                        clearInterval(checkLocation);
-                    }
-                }, 500);
-            }
-        })();
-    {% endfor %}
+                // Enable submit button when location selected
+                const submitBtn = document.getElementById(`xsubmit_btn_${cartId}`);
+                if (submitBtn) {
+                    const checkLocation = setInterval(function() {
+                        const lat = document.getElementById(`xlocation_lat_${cartId}`).value;
+                        if (lat && lat !== '') {
+                            submitBtn.disabled = false;
+                            clearInterval(checkLocation);
+                        }
+                    }, 500);
+                }
+                
+                // Handle payment method change
+                const cashRadio = document.getElementById(`xcash_${cartId}`);
+                const cardRadio = document.getElementById(`xcard_${cartId}`);
+                const paymentInput = document.getElementById(`xpayment_method_${cartId}`);
+                
+                if (cashRadio && cardRadio && paymentInput) {
+                    cashRadio.addEventListener('change', function() {
+                        if (this.checked) paymentInput.value = 'cash';
+                    });
+                    cardRadio.addEventListener('change', function() {
+                        if (this.checked) paymentInput.value = 'card';
+                    });
+                }
+            })();
+        {% endfor %}
+        
+        // Add loading effect to forms
+        document.querySelectorAll('form[data-request="onPlaceOrder"]').forEach(form => {
+            form.addEventListener('submit', function() {
+                const btn = this.querySelector('button[type="submit"]');
+                if (btn && !btn.disabled) {
+                    btn.classList.add('xcheckout-btn-loading');
+                    btn.disabled = true;
+                }
+            });
+        });
+    })();
 </script>
-
-<style>
-    .leaflet-control-geocoder {
-        direction: rtl;
-        font-family: inherit;
-    }
-    
-    .leaflet-control-geocoder-form input {
-        padding: 8px;
-        font-size: 14px;
-    }
-    
-    @media (max-width: 768px) {
-        #mapContainer {
-            height: 250px;
+  <style>
+        /* ========================================
+        CUSTOM CHECKOUT STYLES - Mobile Optimized
+        ======================================== */
+        
+        /* Container */
+        .xcheckout-container {
+            max-width: 100%;
+            overflow-x: hidden;
+            padding: 12px !important;
+            background: #f5f7fb;
+            min-height: 100vh;
         }
-    }
-    
-    /* تنسيق إضافي للفصل بين الأقسام */
-    .card.border-success {
-        opacity: 0.95;
-        transition: all 0.3s ease;
-    }
-    
-    .card.border-success:hover {
-        opacity: 1;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-    
-    hr {
-        border-top: 2px dashed #dee2e6;
-    }
-</style>
-<!-- Checkout End -->
+        
+        /* Section Headers */
+        .xcheckout-section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .xcheckout-section-title {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .xcheckout-badge {
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 14px;
+            margin-right: auto;
+        }
+        
+        /* Cards */
+        .xcheckout-card {
+            background: white;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .xcheckout-card:active {
+            transform: scale(0.99);
+        }
+        
+        .xcheckout-card-header {
+            background: white;
+            padding: 18px 16px;
+            border-bottom: 2px solid #f0f2f5;
+        }
+        
+        .xcheckout-card-header h4 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .xcheckout-card-body {
+            padding: 16px;
+        }
+        
+        .xcheckout-card-footer {
+            padding: 16px;
+            background: #fafbfc;
+            border-top: 1px solid #eef2f6;
+        }
+        
+        /* Cart Items */
+        .xcheckout-cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .xcheckout-cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+        
+        .xcheckout-item-name {
+            flex: 2;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2d3748;
+        }
+        
+        .xcheckout-item-qty {
+            flex: 0.5;
+            text-align: center;
+            font-size: 13px;
+            color: #718096;
+            background: #f7fafc;
+            padding: 4px 8px;
+            border-radius: 8px;
+            margin: 0 8px;
+        }
+        
+        .xcheckout-item-price {
+            flex: 0.8;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            color: #48bb78;
+        }
+        
+        /* Summary */
+        .xcheckout-summary {
+            margin-top: 16px;
+        }
+        
+        .xcheckout-summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #4a5568;
+        }
+        
+        .xcheckout-summary-total {
+            border-top: 2px dashed #e2e8f0;
+            margin-top: 8px;
+            padding-top: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #2d3748;
+        }
+        
+        .xcheckout-summary-total span:last-child {
+            color: #48bb78;
+            font-size: 18px;
+        }
+        
+        /* Form Elements */
+        .xcheckout-form-group {
+            margin-bottom: 18px;
+        }
+        
+        .xcheckout-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+        
+        .xcheckout-label i {
+            margin-left: 6px;
+            color: #667eea;
+        }
+        
+        .xcheckout-input,
+        .xcheckout-textarea {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: white;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        
+        .xcheckout-input:focus,
+        .xcheckout-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .xcheckout-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .xcheckout-input[readonly],
+        .xcheckout-textarea[readonly] {
+            background: #f7fafc;
+            cursor: default;
+        }
+        
+        /* Radio Buttons */
+        .xcheckout-radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .xcheckout-radio {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 12px;
+            background: #f7fafc;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .xcheckout-radio:hover {
+            background: #edf2f7;
+        }
+        
+        .xcheckout-radio input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            margin-left: 10px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+        
+        .xcheckout-radio label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            color: #2d3748;
+            margin: 0;
+        }
+        
+        /* Map Container */
+        .xcheckout-map {
+            height: 280px;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .xcheckout-map-help {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        /* Delivery Fee */
+        .xcheckout-delivery-fee {
+            background: linear-gradient(135deg, #fef5e7 0%, #fff9f0 100%);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .xcheckout-delivery-fee-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ed8936;
+        }
+        
+        .xcheckout-delivery-fee-amount {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ed8936;
+        }
+        
+        /* Button */
+        .xcheckout-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .xcheckout-btn:active {
+            transform: scale(0.97);
+        }
+        
+        .xcheckout-btn:disabled {
+            opacity: 0.6;
+            transform: none;
+            cursor: not-allowed;
+        }
+        
+        .xcheckout-btn-success {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        }
+        
+        /* Completed Orders Card */
+        .xcheckout-card-completed {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 2px solid #c6f6d5;
+        }
+        
+        .xcheckout-completed-badge {
+            background: #48bb78;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* Alerts */
+        .xcheckout-alert {
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .xcheckout-alert-warning {
+            background: #fef5e7;
+            border-right: 4px solid #ed8936;
+            color: #9b2c2c;
+        }
+        
+        .xcheckout-alert-info {
+            background: #ebf8ff;
+            border-right: 4px solid #4299e1;
+            color: #2c5282;
+        }
+        
+        .xcheckout-alert-success {
+            background: #f0fff4;
+            border-right: 4px solid #48bb78;
+            color: #22543d;
+        }
+        
+        /* Empty State */
+        .xcheckout-empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            background: white;
+            border-radius: 20px;
+        }
+        
+        .xcheckout-empty-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        /* Grid System */
+        .xcheckout-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        /* Loading State */
+        .xcheckout-btn-loading {
+            position: relative;
+            pointer-events: none;
+        }
+        
+        .xcheckout-btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            top: 50%;
+            left: 20px;
+            margin-top: -9px;
+            border: 2px solid white;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: xcheckout-spin 0.6s linear infinite;
+        }
+        
+        @keyframes xcheckout-spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Coordinates Row */
+        .xcheckout-coords-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        /* Separator */
+        .xcheckout-separator {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+            margin: 16px 0;
+        }
+        
+        /* Tablet & Desktop Responsive */
+        @media (min-width: 768px) {
+            .xcheckout-container {
+                padding: 20px !important;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            
+            .xcheckout-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .xcheckout-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 28px;
+            }
+        }
+        
+        /* Touch Optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .xcheckout-btn,
+            .xcheckout-radio,
+            .xcheckout-card {
+                cursor: default;
+            }
+            
+            input, textarea, select, button {
+                font-size: 16px !important;
+            }
+        }
+        
+        /* Animation */
+        @keyframes xcheckout-fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .xcheckout-card {
+            animation: xcheckout-fadeIn 0.3s ease-out;
+        }
+    </style>

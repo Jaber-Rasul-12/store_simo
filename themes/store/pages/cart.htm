@@ -8,9 +8,14 @@ layout = "default"
 security = "user"
 redirect = "home"
 
+
 ==
 
-   {% partial 'home/topbar' %}
-   {% partial 'navbar' home=false  shop=false cart=true checkout=false contact=false %}
-   {# {% partial 'page_header' title='سلة التسوق' name_page='سلة التسوق'  %}    #}
-   {% partial 'cart/cart' %}
+
+
+
+
+<!-- باقي محتوى صفحة سلة التسوق -->
+{% partial 'home/topbar' %}
+{% partial 'navbar' home=false shop=false cart=true checkout=false contact=false %}
+{% partial 'cart/cart' %}

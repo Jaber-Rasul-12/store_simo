@@ -50,9 +50,7 @@ class Store extends ComponentBase
 
             $product_comments = Comment::where('product_id', $product_id)->get();
             
-            return [
-            '#comments-section' =>  $this->renderPartial('@comments_section.htm', ['product_comments' => $product_comments]), '#count_comment' => 'التقييمات (' . $product_comments->count() . ')'
-        ];
+         return redirect('detail/' . $this->param('slug'));
         } else {
             Flash::error(trans('store.store::lang.plugin.please_check_your_input'));
         }
@@ -354,7 +352,7 @@ public function getCateogriesOnHomePage()
     {
         $queryString = post('text');
         $GetAllProducts = Product::where('name', 'LIKE', "%" . $queryString . "%")->where('status' ,'=', true)->orderBy('id' , 'desc')->paginate(6);
-        return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $GetAllProducts])];
+        return ['#mshop-products-list' => $this->renderPartial('@mshop_products_list.htm', ['GetAllProducts' => $GetAllProducts])];
     }
 
     public function onFilterProductsWithPrice()
@@ -378,7 +376,7 @@ public function getCateogriesOnHomePage()
             $GetAllProducts = Product::where('status' ,'=', true)->orderBy('id' , 'desc')->paginate(6);
         }
        
-        return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $GetAllProducts])];
+        return ['#mshop-products-list' => $this->renderPartial('@mshop_products_list.htm', ['GetAllProducts' => $GetAllProducts])];
     }
 
     public function onFilterProductsWithColor()
@@ -391,7 +389,7 @@ public function getCateogriesOnHomePage()
         })->where('status' ,'=', true)->get();
       
        
-        return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $GetAllProducts])];
+        return ['#mshop-products-list' => $this->renderPartial('@mshop_products_list.htm', ['GetAllProducts' => $GetAllProducts])];
     }
 
     public function onFilterProductsWithSizes()
@@ -404,7 +402,7 @@ public function getCateogriesOnHomePage()
         })->where('status' ,'=', true)->get();
       
        
-        return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $GetAllProducts])];
+        return ['#mshop-products-list' => $this->renderPartial('@mshop_products_list.htm', ['GetAllProducts' => $GetAllProducts])];
     }
 
     
