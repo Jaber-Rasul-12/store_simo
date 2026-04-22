@@ -15,186 +15,393 @@ paramCode = "code"
 {% partial 'home/topbar' %}
 {% partial 'navbar' home=false shop=false contact=false %}
 
-<div class="container py-5">
+<!-- Custom Styles for Register Page Only (same system as login) -->
+<style>
+    /* ===== AUTH MASTER CLASSES (no conflicts) ===== */
+    .authmaster-container {
+        --auth-primary: #4361ee;
+        --auth-primary-dark: #3a56d4;
+        --auth-secondary: #7209b7;
+        --auth-success: #06ffa5;
+        --auth-gray: #6c757d;
+        --auth-light: #f8f9fa;
+        --auth-white: #ffffff;
+        --auth-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+        --auth-radius: 28px;
+        --auth-radius-sm: 20px;
+    }
+    
+    .authmaster-card {
+        background: var(--auth-white);
+        border-radius: var(--auth-radius);
+        box-shadow: var(--auth-shadow);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+    }
+    
+    .authmaster-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 30px 45px -12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .authmaster-header {
+        background-image: linear-gradient(135deg, #804747, #a39898);
+        padding: 1.8rem 1.5rem;
+        text-align: center;
+        border-bottom: none;
+    }
+    
+    .authmaster-header h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        margin: 0;
+        color: white;
+    }
+    
+    .authmaster-header i {
+        font-size: 1.8rem;
+        vertical-align: middle;
+    }
+    
+    .authmaster-body {
+        padding: 2rem 2rem 1.5rem;
+    }
+    
+    .authmaster-field {
+        margin-bottom: 1.5rem;
+        text-align: right;
+    }
+    
+    .authmaster-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.6rem;
+        color: #1e293b;
+        font-size: 0.95rem;
+    }
+    
+    .authmaster-label i {
+        color: var(--auth-primary);
+        margin-left: 8px;
+        font-size: 1rem;
+    }
+    
+    .authmaster-input {
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 16px;
+        transition: all 0.25s ease;
+        background: var(--auth-white);
+        font-family: inherit;
+    }
+    
+    .authmaster-input:focus {
+        border-color: var(--auth-primary);
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+        transform: translateY(-2px);
+    }
+    
+    .authmaster-input-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    
+    .authmaster-input-group .authmaster-input {
+        flex: 1;
+        padding-left: 3rem;
+    }
+    
+    .authmaster-toggle-btn {
+        position: absolute;
+        left: 12px;
+        background: none;
+        border: none;
+        color: #94a3b8;
+        cursor: pointer;
+        font-size: 1.2rem;
+        padding: 0;
+        transition: color 0.2s;
+        z-index: 2;
+    }
+    
+    .authmaster-toggle-btn:hover {
+        color: var(--auth-primary);
+    }
+    
+    .authmaster-btn-primary {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 16px;
+        background-image: linear-gradient(135deg, #804747, #a39898);
+        color: white;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .authmaster-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -5px rgba(67, 97, 238, 0.4);
+        filter: brightness(1.02);
+    }
+    
+    .authmaster-btn-outline {
+        width: 100%;
+        padding: 0.9rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border: 2px solid var(--auth-primary);
+        border-radius: 16px;
+        background: transparent;
+        color: var(--auth-primary);
+        transition: all 0.25s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .authmaster-btn-outline:hover {
+        background: var(--auth-primary);
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .authmaster-info-text {
+        font-size: 0.8rem;
+        color: #64748b;
+        margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .authmaster-info-text i {
+        font-size: 0.75rem;
+        color: var(--auth-primary);
+    }
+    
+    .authmaster-footer {
+        background: #fafcff;
+        text-align: center;
+        padding: 1.2rem;
+        border-top: 1px solid #eef2ff;
+        font-size: 0.85rem;
+        color: #5b6e8c;
+    }
+    
+    .authmaster-footer i {
+        margin-left: 5px;
+    }
+    
+    .authmaster-alert {
+        background: linear-gradient(135deg, #fff3e0 0%, #ffe8cc 100%);
+        border: none;
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: var(--auth-shadow);
+    }
+    
+    .authmaster-alert i {
+        color: #f59e0b;
+        margin-bottom: 1rem;
+    }
+    
+    .authmaster-alert h4 {
+        color: #92400e;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* mobile fine-tuning */
+    @media (max-width: 768px) {
+        .authmaster-body {
+            padding: 1.5rem;
+        }
+        .authmaster-header h2 {
+            font-size: 1.5rem;
+        }
+        .authmaster-header i {
+            font-size: 1.4rem;
+        }
+        .authmaster-input {
+            padding: 0.8rem 1rem;
+            font-size: 0.95rem;
+        }
+        .authmaster-btn-primary,
+        .authmaster-btn-outline {
+            padding: 0.8rem;
+            font-size: 1rem;
+        }
+        .authmaster-label {
+            font-size: 0.9rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .authmaster-body {
+            padding: 1.2rem;
+        }
+        .authmaster-header h2 {
+            font-size: 1.35rem;
+        }
+        .authmaster-field {
+            margin-bottom: 1.2rem;
+        }
+    }
+    
+    /* RTL native adjustments */
+    .authmaster-field,
+    .authmaster-checkbox {
+        text-align: right;
+    }
+    .authmaster-toggle-btn {
+        left: 12px;
+        right: auto;
+    }
+</style>
+
+<div class="container py-3 py-md-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
             {% if canRegister %}
-                <div class="card shadow-sm border-0">
-                    <div class="card-header  text-white text-center py-4">
-                        <h2 class="mb-0"><i class="fas fa-user-plus me-2"></i> {{ 'إنشاء حساب جديد' |_ }}</h2>
-                       
+                <div class="authmaster-card">
+                    <div class="authmaster-header">
+                        <h2><i class="fas fa-user-plus me-2"></i> {{ 'إنشاء حساب جديد' |_ }}</h2>
                     </div>
                     
-                    <div class="card-body p-4 p-md-5">
+                    <div class="authmaster-body">
                         
                         <form data-request="onRegister" data-request-flash>
                         
-                            <div class="mb-4 text-right">
-                                <label for="registerName" class="form-label fw-bold text-right">
-                                    <i class="fas fa-user me-2 text-primary text-right"></i> {{ 'الاسم الكامل' |_ }}
+                            <div class="authmaster-field">
+                                <label for="registerName" class="authmaster-label">
+                                    <i class="fas fa-user me-2"></i> {{ 'الاسم الكامل' |_ }}
                                 </label>
                                 <input
                                     name="name"
                                     type="text"
-                                    class="form-control form-control-lg border-2"
+                                    class="authmaster-input"
                                     id="registerName"
                                     placeholder="{{ 'أدخل اسمك الكامل' |_ }}"
                                     required
-                                    />
-                                <div class="invalid-feedback">
-                                    {{ 'الرجاء إدخال اسمك الكامل.' |_ }}
+                                />
+                                <div class="authmaster-info-text">
+                                    <i class="fas fa-info-circle"></i> {{ 'سيظهر هذا الاسم في ملفك الشخصي' |_ }}
                                 </div>
                             </div>
 
-                            <div class="mb-4 text-right">
-                                <label for="registerEmail" class="form-label fw-bold">
-                                    <i class="fas fa-envelope me-2 text-primary"></i>{{ 'البريد الإلكتروني' |_ }}
+                            <div class="authmaster-field">
+                                <label for="registerEmail" class="authmaster-label">
+                                    <i class="fas fa-envelope me-2"></i>{{ 'البريد الإلكتروني' |_ }}
                                 </label>
                                 <input
                                     name="email"
                                     type="email"
-                                    class="form-control form-control-lg border-2"
+                                    class="authmaster-input"
                                     id="registerEmail"
                                     placeholder="example@email.com"
                                     required
-                                    />
-                                <div class="invalid-feedback">
-                                    {{ 'الرجاء إدخال بريد إلكتروني صحيح.' |_ }}
-                                </div>
+                                />
                             </div>
 
                             {% if loginAttribute == "username" %}
-                                <div class="mb-4 text-right">
-                                    <label for="registerUsername" class="form-label fw-bold">
-                                        <i class="fas fa-at me-2 text-primary"></i>{{ 'اسم المستخدم' |_ }}
+                                <div class="authmaster-field">
+                                    <label for="registerUsername" class="authmaster-label">
+                                        <i class="fas fa-at me-2"></i>{{ 'اسم المستخدم' |_ }}
                                     </label>
                                     <input
                                         name="username"
                                         type="text"
-                                        class="form-control form-control-lg border-2"
+                                        class="authmaster-input"
                                         id="registerUsername"
                                         placeholder="{{ 'اختر اسم مستخدم' |_ }}"
                                         required
-                                        />
-                                    <div class="invalid-feedback">
-                                        {{ 'الرجاء إدخال اسم المستخدم.' |_ }}
-                                    </div>
+                                    />
                                 </div>
                             {% endif %}
 
-                            <div class="mb-4 text-right">
-                                <label for="registerPassword" class="form-label fw-bold">
-                                    <i class="fas fa-lock me-2 text-primary"></i>{{ 'كلمة المرور' |_ }}
+                            <div class="authmaster-field">
+                                <label for="registerPassword" class="authmaster-label">
+                                    <i class="fas fa-lock me-2"></i>{{ 'كلمة المرور' |_ }}
                                 </label>
-                                <div class="input-group">
+                                <div class="authmaster-input-group">
                                     <input
                                         name="password"
                                         type="password"
-                                        class="form-control form-control-lg border-2"
+                                        class="authmaster-input"
                                         id="registerPassword"
                                         placeholder="{{ 'اختر كلمة مرور قوية' |_ }}"
                                         autocomplete="new-password"
                                         required
-                                        />
-                                    <button class="btn btn-outline-secondary border-2" type="button" id="togglePassword">
+                                    />
+                                    <button class="authmaster-toggle-btn" type="button" id="toggleRegisterPassword">
                                         <i class="fas fa-eye"></i>
                                     </button>
                                 </div>
-                                <div class="form-text text-muted mt-2">
-                                    <small><i class="fas fa-info-circle me-1"></i>{{ 'يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل' |_ }}</small>
-                                </div>
-                                <div class="invalid-feedback">
-                                    {{ 'الرجاء إدخال كلمة مرور صحيحة.' |_ }}
+                                <div class="authmaster-info-text">
+                                    <i class="fas fa-shield-alt"></i> {{ 'يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل' |_ }}
                                 </div>
                             </div>
 
-                            <div class="d-grid mb-4 text-center">
-                                <button type="submit" class="btn btn-primary btn-lg fw-bold py-3">
+                            <div class="d-grid mb-4">
+                                <button type="submit" class="authmaster-btn-primary">
                                     <i class="fas fa-user-plus me-2"></i>{{ 'إنشاء حساب' |_ }}
                                 </button>
                             </div>
 
-                            <div class="text-center mb-4">
-                                <div class="border-top pt-4">
-                                    <p class="text-muted mb-2">{{ 'لديك حساب بالفعل؟' |_ }}</p>
-                                    <a href="{{ '/login' }}" class="btn btn-outline-primary btn-lg">
-                                        <i class="fas fa-sign-in-alt me-2"></i>{{ 'تسجيل الدخول' |_ }}
-                                    </a>
-                                </div>
+                            <div class="text-center">
+                                <p class="text-muted mb-3">{{ 'لديك حساب بالفعل؟' |_ }}</p>
+                                <a href="{{ '/login' }}" class="authmaster-btn-outline">
+                                    <i class="fas fa-sign-in-alt me-2"></i>{{ 'تسجيل الدخول' |_ }}
+                                </a>
                             </div>
-                            
-
-                   
+                       
                         </form>
                     </div>
                     
-                    <div class="card-footer bg-light text-center py-3">
-                        <small class="text-muted">
-                            <i class="fas fa-shield-alt me-1"></i>{{ 'بياناتك محمية وفق سياسة الخصوصية' |_ }}
-                        </small>
+                    <div class="authmaster-footer">
+                        <i class="fas fa-shield-alt me-1"></i>{{ 'بياناتك محمية وفق سياسة الخصوصية' |_ }}
                     </div>
                 </div>
             {% else %}
-                <div class="alert alert-warning text-center shadow-sm">
-                    <div class="py-5">
-                        <i class="fas fa-user-lock fa-3x mb-3 text-warning"></i>
-                        <h4 class="fw-bold">{{ 'التسجيل غير متاح حالياً' |_ }}</h4>
-                        <p class="mb-0">{{ 'نأسف، التسجيل مغلق مؤقتاً. يرجى المحاولة لاحقاً.' |_ }}</p>
-                    </div>
+                <div class="authmaster-alert">
+                    <i class="fas fa-user-lock fa-3x"></i>
+                    <h4 class="fw-bold">{{ 'التسجيل غير متاح حالياً' |_ }}</h4>
+                    <p class="mb-0">{{ 'نأسف، التسجيل مغلق مؤقتاً. يرجى المحاولة لاحقاً.' |_ }}</p>
                 </div>
             {% endif %}
         </div>
     </div>
 </div>
 
-<style>
-.card {
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.card-header {
-    border-radius: 15px 15px 0 0 !important;
-}
-
-.form-control-lg {
-    border-radius: 10px;
-    border-color: #dee2e6;
-    transition: all 0.3s;
-}
-
-.form-control-lg:focus {
-    border-color: #dfdfdf;
-    box-shadow: 0 0 0 0.25rem #946b6b;
-    transform: translateY(-2px);
-    background: white!important;
-}
-
-.btn-lg {
-    border-radius: 10px;
-    transition: all 0.3s;
-}
-
-.btn-lg:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.invalid-feedback {
-    font-size: 0.875rem;
-}
-
-.form-text {
-    font-size: 0.85rem;
-}
-
-.input-group .btn {
-    border-radius: 0 10px 10px 0;
-    border-left: none;
-}
-
-.alert {
-    border-radius: 15px;
-    border: none;
-}
-</style>
+<script>
+    // Toggle password visibility for registration form
+    (function() {
+        const toggleBtn = document.getElementById('toggleRegisterPassword');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function(e) {
+                const passwordInput = document.getElementById('registerPassword');
+                if (passwordInput) {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.querySelector('i').classList.toggle('fa-eye');
+                    this.querySelector('i').classList.toggle('fa-eye-slash');
+                }
+            });
+        }
+    })();
+</script>
