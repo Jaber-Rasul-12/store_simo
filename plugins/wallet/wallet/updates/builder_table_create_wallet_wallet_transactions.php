@@ -12,7 +12,7 @@ class BuilderTableCreateWalletWalletTransactions extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->text('public_id')->unique();
-            $table->bigInteger('wallet_id')->unsigned();
+            $table->unsignedInteger('wallet_id');  
             $table->double('amount', 10, 0);
             $table->string('description');
             $table->boolean('status');
