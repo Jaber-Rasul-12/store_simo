@@ -208,7 +208,7 @@
         
         .top-links {
             display: flex;
-            gap: 50px;
+            gap: 20px;
             align-items: center;
         }
         
@@ -988,7 +988,7 @@
             .top-links {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 15px;
+                gap: 50px;
             }
             .top-links a {
                 font-size: 8px;
