@@ -9,7 +9,7 @@ layout = "default"
 
    
    {# {% component "notifications" %} #}
-   {% partial 'home/topbar' %}
+   {# {% partial 'home/topbar' %} #}
    {% partial 'home/navbar' show_clouser=true %}
    
    {% if Store.onGetProductsIsBest is not empty %} {% partial 'home/products' title_product='أفضل المنتجات' name_component=Store.onGetProductsIsBest %} {% endif %}
