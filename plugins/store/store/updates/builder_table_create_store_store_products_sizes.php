@@ -10,8 +10,8 @@ class BuilderTableCreateStoreStoreProductsSizes extends Migration
         Schema::create('store_store_products_sizes', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->bigInteger('product_id')->unsigned();
-            $table->bigInteger('size_id')->unsigned();
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('size_id');
             $table->primary(['product_id','size_id']);
             $table->foreign('product_id')
                 ->references('id')

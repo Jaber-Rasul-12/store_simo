@@ -10,8 +10,8 @@ class BuilderTableCreateStoreStoreProductsColors extends Migration
         Schema::create('store_store_products_colors', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->bigInteger('product_id')->unsigned();
-            $table->bigInteger('color_id')->unsigned();
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('color_id');
             $table->primary(['product_id','color_id']);
 
             $table->foreign('product_id')

@@ -11,10 +11,10 @@ class BuilderTableCreateStoreStoreInputProducts extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->bigInteger('product_id')->unsigned();
+            $table->unsignedInteger('product_id');
             $table->string('notes')->nullable();
             $table->double('qty', 10, 0);
-            $table->bigInteger('backend_user_id')->unsigned();
+            $table->unsignedInteger('backend_user_id');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->foreign('backend_user_id')

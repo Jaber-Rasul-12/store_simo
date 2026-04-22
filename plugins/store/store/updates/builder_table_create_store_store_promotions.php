@@ -18,7 +18,7 @@ class BuilderTableCreateStoreStorePromotions extends Migration
             $table->dateTime('end_date');
             $table->text('description');
             $table->boolean('status');
-            $table->bigInteger('product_id')->unsigned();
+            $table->unsignedInteger('product_id');
             $table->foreign('product_id')
                 ->references('id')
                 ->on('store_store_products')

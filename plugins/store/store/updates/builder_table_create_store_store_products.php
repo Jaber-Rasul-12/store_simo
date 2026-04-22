@@ -14,10 +14,10 @@ class BuilderTableCreateStoreStoreProducts extends Migration
             $table->string('name');
             $table->string('short_name');
             $table->string('slug');
-            $table->bigInteger('backend_user_id')->unsigned();
-            $table->bigInteger('merchant_id')->unsigned();
+            $table->unsignedInteger('backend_user_id');
+            $table->unsignedInteger('merchant_id');
 
-            $table->bigInteger('brand_id')->unsigned();
+            $table->unsignedInteger('brand_id');
             $table->string('short_description');
             $table->text('long_description');
             $table->text('video_link');

@@ -10,8 +10,8 @@ class BuilderTableCreateStoreStoreCategoriesProducts extends Migration
         Schema::create('store_store_categories_products', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->bigInteger('category_id')->unsigned();
-            $table->bigInteger('product_id')->unsigned();
+            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('product_id');
             $table->primary(['category_id','product_id']);
             $table->foreign('category_id')
                 ->references('id')

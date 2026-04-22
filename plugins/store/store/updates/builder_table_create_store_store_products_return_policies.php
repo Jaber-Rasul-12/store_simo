@@ -10,8 +10,8 @@ class BuilderTableCreateStoreStoreProductsReturnPolicies extends Migration
         Schema::create('store_store_products_return_policies', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->bigInteger('product_id')->unsigned();
-            $table->bigInteger('return_policy_id')->unsigned();
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('return_policy_id');
             $table->primary(['product_id','return_policy_id']);
             $table->foreign('return_policy_id')
                 ->references('id')

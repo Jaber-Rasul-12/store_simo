@@ -10,8 +10,8 @@ class BuilderTableCreateStoreStoreProductTaxesProducts extends Migration
         Schema::create('store_store_product_taxes_products', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->bigInteger('product_taxe_id')->unsigned();
-            $table->bigInteger('product_id')->unsigned();
+            $table->unsignedInteger('product_taxe_id');
+            $table->unsignedInteger('product_id');
             $table->primary(['product_taxe_id','product_id']);
             $table->foreign('product_taxe_id')
                 ->references('id')

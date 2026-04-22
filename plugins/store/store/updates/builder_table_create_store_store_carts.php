@@ -11,10 +11,10 @@ class BuilderTableCreateStoreStoreCarts extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->unsignedInteger('user_id');
             $table->string('type');
-            $table->bigInteger('wallet_id')->nullable()->unsigned();
-            $table->bigInteger('coupon_id')->nullable()->unsigned();
+            $table->unsignedInteger('wallet_id')->nullable();
+            $table->unsignedInteger('coupon_id')->nullable();
             $table->string('notes')->nullable();
             $table->string('contacts')->nullable();
             $table->text('location_lat')->nullable();

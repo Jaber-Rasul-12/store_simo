@@ -12,7 +12,7 @@ class BuilderTableCreateStoreStorePrices extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->double('price', 10, 0);
-            $table->bigInteger('product_id')->unsigned();
+            $table->unsignedInteger('product_id');
             $table->boolean('status');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

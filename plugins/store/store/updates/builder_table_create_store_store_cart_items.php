@@ -11,14 +11,14 @@ class BuilderTableCreateStoreStoreCartItems extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-            $table->bigInteger('product_id')->unsigned();
-            $table->bigInteger('promotion_id')->nullable()->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('promotion_id')->nullable();
+            $table->unsignedInteger('user_id');
             $table->double('qty', 10, 0);
             $table->double('price', 10, 0);
-            $table->bigInteger('cart_id')->unsigned();
-            $table->bigInteger('size_id')->unsigned();
-            $table->bigInteger('color_id')->unsigned();
+            $table->unsignedInteger('cart_id');
+            $table->unsignedInteger('size_id');
+            $table->unsignedInteger('color_id');
 
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
