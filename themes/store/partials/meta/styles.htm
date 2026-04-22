@@ -1,5 +1,5 @@
 
-
+{% set version = random(999999) %}
     <link href="{{ 'assets/img/file.svg' | theme }}" rel="icon">
     <link href="{{ 'assets/img/file.svg' | theme }}" rel="apple-touch-icon">
 
@@ -17,13 +17,13 @@
     <link href="{{ 'assets/lib/owlcarousel/assets/owl.carousel.min.css' | theme }}" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{ 'assets/css/style.css' | theme }}" rel="stylesheet">
-    <link href="{{ 'assets/css/topbardesign.css' | theme }}" rel="stylesheet">
-    <link href="{{ 'assets/css/navbar.css' | theme }}" rel="stylesheet">
-    <link href="{{ 'assets/css/product.css' | theme }}" rel="stylesheet">
-    <link href="{{ 'assets/css/category.css' | theme }}" rel="stylesheet">
+    <link href="{{ 'assets/css/style.css' | theme }}?v={{ version }}" rel="stylesheet">
+    <link href="{{ 'assets/css/topbardesign.css' | theme }}?v={{ version }}" rel="stylesheet">
+    <link href="{{ 'assets/css/navbar.css' | theme }}?v={{ version }}" rel="stylesheet">
+    <link href="{{ 'assets/css/product.css' | theme }}?v={{ version }}" rel="stylesheet">
+    <link href="{{ 'assets/css/category.css' | theme }}?v={{ version }}" rel="stylesheet">
 
-    <link href="{{ 'assets/css/featured.css' | theme }}" rel="stylesheet">
+    <link href="{{ 'assets/css/featured.css' | theme }}?v={{ version }}" rel="stylesheet">
 
 {% styles %}
 {% placeholder head %}
