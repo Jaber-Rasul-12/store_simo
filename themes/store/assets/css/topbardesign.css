@@ -907,7 +907,7 @@
             #navbar-row {
                 display: grid;
                 grid-template-rows: 1fr;
-                padding: 20px;
+                padding: 4px;
             }
 
             #navbar-categories{
