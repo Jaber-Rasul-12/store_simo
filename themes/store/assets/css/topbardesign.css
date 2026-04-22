@@ -854,10 +854,10 @@
 
 
             .action-btn{
-                padding: 7px;
+                padding: 4px;
                 min-width: 20px;
                 min-height: 20px;
-                top: -2px;
+                top: 0px;
             }
             .badge-topbar {
                 width: 13px;
