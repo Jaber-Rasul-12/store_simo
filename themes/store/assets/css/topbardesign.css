@@ -852,9 +852,7 @@
                   display: none;
             }
 
-            .user-actions {
-                gap: 5px;
-            }
+
             .action-btn{
                 padding: 7px;
                 min-width: 20px;
@@ -1009,9 +1007,9 @@
             }
             
             .main-section {
-                padding: 15px;
+                padding: 5px;
                 flex-direction: column;
-                gap: 20px;
+                gap: 2px;
             }
             
             .logo-container {
@@ -1020,8 +1018,9 @@
             
             .user-actions {
                 width: 100%;
-                justify-content: center;
-                gap: 10px;
+                gap: 5px;
+                margin-left: 50px;
+                
             }
             
             .demo-content {
