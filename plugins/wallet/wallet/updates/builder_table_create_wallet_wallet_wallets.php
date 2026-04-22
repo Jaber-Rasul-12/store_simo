@@ -11,7 +11,7 @@ class BuilderTableCreateWalletWalletWallets extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
-             $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('user_id');  
             $table->text('public_id')->unique();
             $table->double('current_balance', 10, 0);
             $table->boolean('status');
