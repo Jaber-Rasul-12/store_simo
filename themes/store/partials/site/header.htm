@@ -1,25 +1,114 @@
 <!DOCTYPE html>
-<html lang="en" dir='rtl'>
+<html lang="ar" dir='rtl'>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
         <title>{% placeholder page_title default %}{{ this.page.title }}{% endplaceholder %}</title>
         {% partial "meta/styles" %}
         {% partial "meta/seo" %}
-        <meta name="generator" content="Simo">
-            <meta charset="utf-8">
-        <title>Simo</title>
-        <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Simo" name="keywords">
-        <meta content="Simo" name="description">
+        <meta name="generator" content="Simo - Women's Store">
+        
+        <!-- ========================================= -->
+        <!-- سمو - متجر المنتجات النسائية - جميع عناصر Meta -->
+        <!-- ========================================= -->
+        
+        <!-- أساسيات SEO للمتجر -->
+        <meta name="description" content="{% if this.page.meta_description %}{{ this.page.meta_description }}{% else %}سمو ✨ متجرك الأول للمنتجات النسائية الفاخرة. اكتشفي أحدث صيحات الموضة، العطور، الإكسسوارات، ومنتجات العناية بالبشرة. تسوقي بأمان وتوصيل سريع لجميع أنحاء المملكة.{% endif %}">
+        <meta name="keywords" content="سمو, متجر نسائي, منتجات نسائية, موضة, أزياء, عطور, إكسسوارات, مكياج, عناية بالبشرة, تسوق أونلاين, هدايا نسائية, فساتين, حقائب, مجوهرات">
+        <meta name="author" content="Semo Store">
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+        <meta name="googlebot" content="index, follow">
+        <meta name="bingbot" content="index, follow">
+        
+        <!-- روابط أساسية -->
+        <link rel="canonical" href="{{ '/' | app }}">
+        <link rel="alternate" hreflang="ar" href="{{ '/' | app }}">
+        <link rel="alternate" hreflang="en" href="{{ '/en' | app }}">
+        
+        <!-- معلومات جغرافية (دمشق، سوريا) -->
+        <meta name="language" content="ar">
+        <meta name="geo.region" content="SY-DI">
+        <meta name="geo.placename" content="دمشق، سوريا">
+        <meta name="geo.position" content="33.5138;36.2765">
+        <meta name="ICBM" content="33.5138, 36.2765">
+        
+        <!-- Open Graph / فيسبوك - واتساب - تيليجرام - لينكدإن (للتسويق) -->
+        <meta property="og:title" content="{% if this.page.og_title %}{{ this.page.og_title }}{% else %}سمو | متجر المنتجات النسائية الفاخرة{% endif %}">
+        <meta property="og:description" content="{% if this.page.og_description %}{{ this.page.og_description }}{% else %}تسوقي من سمو أحدث التشكيلات من الملابس، العطور، الإكسسوارات ومنتجات التجميل. تجربة تسوق فريدة تناسب ذوقك الرفيع.{% endif %}">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="{{ '/' | app }}">
+        <meta property="og:image" content="{{ 'assets/images/semo-og-image.jpg' | theme }}">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="سمو - أحدث صيحات الموضة والمنتجات النسائية">
+        <meta property="og:site_name" content="سمو | Semo Store">
+        <meta property="og:locale" content="ar_AR">
+        <meta property="og:locale:alternate" content="en_US">
+        
+        <!-- تويتر كارد (مهم للترويج) -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@SemoWomen">
+        <meta name="twitter:creator" content="@SemoFashion">
+        <meta name="twitter:title" content="سمو - متجر المنتجات النسائية | تسوقي بأسلوبك">
+        <meta name="twitter:description" content="تشكيلة واسعة من الملابس، العطور، المكياج والإكسسوارات. توصيل مجاني للطلبات فوق 200 ريال.">
+        <meta name="twitter:image" content="{{ 'assets/images/semo-twitter-card.jpg' | theme }}">
+        <meta name="twitter:image:alt" content="بطاقة سمو - إطلالات مميزة">
+        
+        <!-- Pinterest (هام للمنتجات النسائية والموضة) -->
+        <meta name="pinterest-rich-pin" content="true">
+        <meta name="p:domain_verify" content="your-pinterest-verification-code">
+        
+        <!-- إضافات تطبيقات الجوال والويب -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-title" content="سمو">
+        <meta name="application-name" content="سمو | Semo">
+        <meta name="theme-color" content="#d4af7a">
+        <meta name="msapplication-TileColor" content="#d4af7a">
+        <meta name="msapplication-TileImage" content="{{ 'assets/images/ms-icon-144x144.png' | theme }}">
+        <meta name="msapplication-config" content="browserconfig.xml">
+        
+        <!-- إضافات للمنتجات والتحليلات -->
+        <meta name="facebook-domain-verification" content="your-facebook-verification-code">
+        <meta name="google-site-verification" content="your-google-verification-code">
+        
+        <!-- إدارة الزحف والذاكرة المؤقتة -->
+        <meta name="revisit-after" content="3 days">
+        <meta name="distribution" content="global">
+        <meta name="rating" content="general">
+        <meta name="referrer" content="strict-origin-when-cross-origin">
+        
+        <!-- منع التخمين التلقائي للهواتف والبريد (للمتجر) -->
+        <meta name="format-detection" content="telephone=no, email=no, address=no">
+        
+        <!-- حقوق الملكية والتأليف -->
+        <meta name="copyright" content="سمو - جميع الحقوق محفوظة © 2025">
+        <meta name="owner" content="Semo Store">
+        
+
+        
+        <!-- إعادة تعريف العنوان الأساسي -->
+        <meta name="title" content="سمو | متجر المنتجات النسائية - تسوقي الآن">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <!-- تذييل سريع للأمان (Content Security Policy اختياري) -->
+        <meta http-equiv="X-Content-Type-Options" content="nosniff">
+        <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+        
+        <!-- إعادة تعيين بعض التكرارات لكن بدون مشاكل -->
+        <title>سمو | متجر المنتجات النسائية - {% placeholder page_title default %}{{ this.page.title }}{% endplaceholder %}</title>
     </head>
+    
     {% set pageId = this.page.id %}
     {% set pageTitle = this.page.title %}
     {% if pageId is empty %}
         {% set pageId = page.id %}
     {% endif %}
     {% if pageTitle is empty %}
-        {% set pageTitle = page.title %}
+        {% set pageTitle = 'الرئيسية' %}
     {% endif %}
-    <body class="page-{{ pageId }} layout-{{ this.layout.id }}">
+    
+    <body class="page-{{ pageId }} layout-{{ this.layout.id }} women-store semo-theme">
+      
