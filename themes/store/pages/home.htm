@@ -10,9 +10,9 @@ layout = "default"
    
    {# {% component "notifications" %} #}
    {% partial 'home/topbar' %}
-   {# {% partial 'home/navbar' show_clouser=true %} #}
+   {% partial 'home/navbar' show_clouser=true %}
    
-   {% if Store.onGetProductsIsBest is not empty %} {% partial 'home/products' title_product='أفضل المنتجات' name_component=Store.onGetProductsIsBest %} {% endif %}
+   {# {% if Store.onGetProductsIsBest is not empty %} {% partial 'home/products' title_product='أفضل المنتجات' name_component=Store.onGetProductsIsBest %} {% endif %}
    {% if Store.onGetProductsIsFeatured is not empty %} {% partial 'home/products' title_product='منتجات مميزة' name_component=Store.onGetProductsIsFeatured %} {% endif %}
    {% if Store.onGetProductsNew is not empty %} {% partial 'home/products' title_product='منتجات جديدة' name_component=Store.onGetProductsNew %} {% endif %}
    {% if Store.onGetProductsIsTop is not empty %} {% partial 'home/products' title_product='منتجات عالية الجودة' name_component=Store.onGetProductsIsTop %} {% endif %}
@@ -22,7 +22,7 @@ layout = "default"
    {# {% partial 'home/subscribe' %} #}
    {# {% partial 'home/products_tow' %} #}
 
-{% partial 'home/featured' %}
+{# {% partial 'home/featured' %} #} 
 
 
 
