@@ -11,7 +11,7 @@ columns:
         type: text
     status:
         label: 'store.store::lang.model.returnpolicy.status'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20 
     icon:

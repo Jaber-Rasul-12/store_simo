@@ -7,7 +7,7 @@ columns:
         type: text
     status:
         label: 'store.store::lang.model.price.status'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20
     created_at:

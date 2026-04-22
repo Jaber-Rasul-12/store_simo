@@ -8,7 +8,7 @@ A user-friendly, visual plugin scaffolding tool that makes it trivial to get a n
 # Install Builder
 
 ```bash  
-cd plugins/ ; mkdir -p winter ; cd winter ; git clone git@dev.acornassociated.org:justice-project/builder.git ; cd ../../; 
+cd plugins/ ; mkdir -p winter ; cd winter ; git clone git@dev.store.org:justice-project/builder.git ; cd ../../; 
 
 ```
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace AcornAssociated\ListTruncate;
+namespace Store\ListTruncate;
 
 use ApplicationException;
 use Backend\Behaviors\RelationController;
@@ -11,7 +11,7 @@ use System\Classes\PluginBase;
 /**
  * ListTruncate Plugin 
  * @author Jaber Rasul 
- * @package AcornAssociated
+ * @package Store
  */
 
 class Plugin extends PluginBase
@@ -24,9 +24,9 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'acornassociated.listtruncate::lang.acornassociated.plugin.name',
-            'description' => 'acornassociated.listtruncate::lang.acornassociated.plugin.description',
-            'author'      => 'acornassociated',
+            'name'        => 'store.listtruncate::lang.store.plugin.name',
+            'description' => 'store.listtruncate::lang.store.plugin.description',
+            'author'      => 'store',
             'icon'        => 'icon-toggle-on',
         ];
     }
@@ -39,7 +39,7 @@ class Plugin extends PluginBase
     public function registerListColumnTypes()
     {
         return [
-            'acornassociated-list-truncate' => [ListTruncateField::class, 'render'],
+            'store-list-truncate' => [ListTruncateField::class, 'render'],
         ];
     }
 
@@ -52,7 +52,7 @@ class Plugin extends PluginBase
             /** @var \Backend\Widgets\Lists $widget */
             /** @var \Backend\Classes\ListColumn $listColumn */
             foreach ($widget->getColumns() as $name => $listColumn) {
-                if (data_get($listColumn, 'config.type') !== 'acornassociated-list-truncate') {
+                if (data_get($listColumn, 'config.type') !== 'store-list-truncate') {
                     continue;
                 }
 

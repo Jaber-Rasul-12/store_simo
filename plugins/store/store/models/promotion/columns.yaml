@@ -19,12 +19,12 @@ columns:
         type: text
     status:
         label: 'store.store::lang.model.promotion.status'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20
     description: 
         label: 'store.store::lang.model.promotion.description'
-        type: acornassociated-list-truncate
+        type: store-list-truncate
         truncate: true
         truncate_limit: 12
         show_more: true 

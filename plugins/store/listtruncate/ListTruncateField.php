@@ -1,6 +1,6 @@
 <?php
 
-namespace AcornAssociated\ListTruncate;
+namespace Store\ListTruncate;
 
 use Backend\Classes\ListColumn;
 use Lang;
@@ -10,7 +10,7 @@ use Str;
 /**
  * ListTruncate Plugin 
  * @author Jaber Rasul 
- * @package AcornAssociated
+ * @package Store
  */
 class ListTruncateField
 {
@@ -21,10 +21,10 @@ class ListTruncateField
      */
     private static $defaultFieldConfig = [
         'icon'       => true,
-        'titleTrue'  => 'acornassociated.listtruncate::lang.acornassociated.listtruncate.title_true',
-        'titleFalse' => 'acornassociated.listtruncate::lang.acornassociated.listtruncate.title_false',
-        'textTrue'   => 'acornassociated.listtruncate::lang.acornassociated.listtruncate.text_true',
-        'textFalse'  => 'acornassociated.listtruncate::lang.acornassociated.listtruncate.text_false',
+        'titleTrue'  => 'store.listtruncate::lang.store.listtruncate.title_true',
+        'titleFalse' => 'store.listtruncate::lang.store.listtruncate.title_false',
+        'textTrue'   => 'store.listtruncate::lang.store.listtruncate.text_true',
+        'textFalse'  => 'store.listtruncate::lang.store.listtruncate.text_false',
         'text-color' => true,
         'font-size' => '16',
         'truncate'   => false,

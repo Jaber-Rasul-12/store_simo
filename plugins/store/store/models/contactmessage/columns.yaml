@@ -4,7 +4,7 @@ columns:
         type: number
     is_read:
         label: 'store.store::lang.model.contactmessage.is_read'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20
     full_name:
@@ -21,7 +21,7 @@ columns:
         searchable: true
     message:
         label: 'store.store::lang.model.contactmessage.message'
-        type: acornassociated-list-truncate
+        type: store-list-truncate
         truncate: true
         truncate_limit: 12
         show_more: true

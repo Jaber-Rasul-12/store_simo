@@ -55,19 +55,19 @@ columns:
         type: text
     short_description:
         label: 'store.store::lang.model.product.short_description'
-        type: acornassociated-list-truncate
+        type: store-list-truncate
         truncate: true
         truncate_limit: 12
         show_more: true 
     long_description:
         label: 'store.store::lang.model.product.long_description'
-        type: acornassociated-list-truncate
+        type: store-list-truncate
         truncate: true
         truncate_limit: 12
         show_more: true 
     video_link:
         label: 'store.store::lang.model.product.video_link'
-        type: acornassociated-list-truncate
+        type: store-list-truncate
         truncate: true
         truncate_limit: 12
         show_more: true 
@@ -79,27 +79,27 @@ columns:
         type: text
     is_featured:
         label: 'store.store::lang.model.product.is_featured'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20
     new_product:
         label: 'store.store::lang.model.product.new_product'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20
     is_top:
         label: 'store.store::lang.model.product.is_top'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20
     is_best:
         label: 'store.store::lang.model.product.is_best'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20
     status:
         label: 'store.store::lang.model.product.status'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20
     created_at:

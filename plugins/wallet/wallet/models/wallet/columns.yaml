@@ -15,7 +15,7 @@ columns:
         type: text
     status:
         label: 'wallet.wallet::lang.model.wallet.status'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20  
     created_at:

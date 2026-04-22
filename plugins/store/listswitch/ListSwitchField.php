@@ -1,6 +1,6 @@
 <?php
 
-namespace AcornAssociated\ListSwitch;
+namespace Store\ListSwitch;
 
 use Backend\Classes\ListColumn;
 use Lang;
@@ -10,7 +10,7 @@ use Model;
 /**
  * listSwitch Plugin 
  * @author Jaber Rasul 
- * @package AcornAssociated
+ * @package Store
  */
 class ListSwitchField
 {
@@ -21,13 +21,13 @@ class ListSwitchField
      */
     private static $defaultFieldConfig = [
         'icon'       => true,
-        'titleTrue'  => 'acornassociated.listswitch::lang.acornassociated.listswitch.title_true',
-        'titleFalse' => 'acornassociated.listswitch::lang.acornassociated.listswitch.title_false',
-        'textTrue'   => 'acornassociated.listswitch::lang.acornassociated.listswitch.text_true',
-        'textFalse'  => 'acornassociated.listswitch::lang.acornassociated.listswitch.text_false',
+        'titleTrue'  => 'store.listswitch::lang.store.listswitch.title_true',
+        'titleFalse' => 'store.listswitch::lang.store.listswitch.title_false',
+        'textTrue'   => 'store.listswitch::lang.store.listswitch.text_true',
+        'textFalse'  => 'store.listswitch::lang.store.listswitch.text_false',
         'text-color' => true,
         'font-size' => '16',
-        'request'    => 'onSwitchAcornassociatedListField'
+        'request'    => 'onSwitchStoreListField'
     ];
 
     private $name;

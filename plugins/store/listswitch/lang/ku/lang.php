@@ -1,5 +1,5 @@
 <?php return [
-    'acornassociated' => [
+    'store' => [
         'plugin' => [
             'name'        => 'Guherandina Lîste',
             'description' => 'Der barê zêdekirina destûra afirandina bişkokan li listeyên pêşve ya backend de guherandina taybetmendiyên modelê daxistin.',

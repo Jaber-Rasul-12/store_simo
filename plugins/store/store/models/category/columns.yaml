@@ -15,37 +15,37 @@ columns:
         select: name
     status:
         label: 'store.store::lang.model.category.status'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20  
     is_featured:
         label: 'store.store::lang.model.category.is_featured'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20 
     is_top:
         label: 'store.store::lang.model.category.is_top'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20 
     is_popular:
         label: 'store.store::lang.model.category.is_popular'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20 
     is_trending:
         label: 'store.store::lang.model.category.is_trending'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20 
     show_homepage:
         label: 'store.store::lang.model.category.show_homepage'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20 
     description:
         label: 'store.store::lang.model.category.description'
-        type: acornassociated-list-truncate
+        type: store-list-truncate
         truncate: true
         truncate_limit: 12
         show_more: true  

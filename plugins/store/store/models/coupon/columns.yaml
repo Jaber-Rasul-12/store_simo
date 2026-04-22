@@ -4,7 +4,7 @@ columns:
         type: number
     status:
         label: 'store.store::lang.model.coupon.status'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20 
     full_name:

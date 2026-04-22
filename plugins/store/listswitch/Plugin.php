@@ -1,4 +1,4 @@
-<?php namespace AcornAssociated\ListSwitch;
+<?php namespace Store\ListSwitch;
 
 use ApplicationException;
 use Backend\Behaviors\RelationController;
@@ -9,7 +9,7 @@ use System\Classes\PluginBase;
 /**
  * listSwitch Plugin 
  * @author Jaber Rasul 
- * @package AcornAssociated
+ * @package Store
  */
 
 class Plugin extends PluginBase
@@ -22,9 +22,9 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'acornassociated.listswitch::lang.acornassociated.plugin.name',
-            'description' => 'acornassociated.listswitch::lang.acornassociated.plugin.description',
-            'author'      => 'acornassociated',
+            'name'        => 'store.listswitch::lang.store.plugin.name',
+            'description' => 'store.listswitch::lang.store.plugin.description',
+            'author'      => 'store',
             'icon'        => 'icon-toggle-on',
         ];
     }
@@ -37,7 +37,7 @@ class Plugin extends PluginBase
     public function registerListColumnTypes()
     {
         return [
-            'acornassociated-list-switch' => [ListSwitchField::class, 'render'],
+            'store-list-switch' => [ListSwitchField::class, 'render'],
         ];
     }
 
@@ -50,7 +50,7 @@ class Plugin extends PluginBase
             /** @var \Backend\Widgets\Lists $widget */
             /** @var \Backend\Classes\ListColumn $listColumn */
             foreach ($widget->getColumns() as $name => $listColumn) {
-                if (data_get($listColumn, 'config.type') !== 'acornassociated-list-switch') {
+                if (data_get($listColumn, 'config.type') !== 'store-list-switch') {
                     continue;
                 }
 
@@ -67,13 +67,13 @@ class Plugin extends PluginBase
          */
         Controller::extend(function ($controller) {
             /** @var Controller $controller */
-            $controller->addDynamicMethod('index_onSwitchAcornassociatedListField', function () use ($controller) {
+            $controller->addDynamicMethod('index_onSwitchStoreListField', function () use ($controller) {
                 $this->processInvertField(post('model'), post('id'), post('field'));
 
                 return $controller->listRefresh($controller->primaryDefinition);
             });
 
-            $controller->addDynamicMethod('onSwitchAcornassociatedListField', function ($recordId) use ($controller) {
+            $controller->addDynamicMethod('onSwitchStoreListField', function ($recordId) use ($controller) {
                 $this->processInvertField(post('model'), post('id'), post('field'));
 
                 if ($controller->isClassExtendedWith(RelationController::class)) {

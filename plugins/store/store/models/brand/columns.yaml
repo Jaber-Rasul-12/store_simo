@@ -15,32 +15,32 @@ columns:
         select: name
     status:
         label: 'store.store::lang.model.brand.status'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20  
     is_featured:
         label: 'store.store::lang.model.brand.is_featured'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20  
     is_top:
         label: 'store.store::lang.model.brand.is_top'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20  
     is_popular:
         label: 'store.store::lang.model.brand.is_popular'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20  
     is_trending:
         label: 'store.store::lang.model.brand.is_trending'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20  
     description:
         label: 'store.store::lang.model.brand.description'
-        type: acornassociated-list-truncate
+        type: store-list-truncate
         truncate: true
         truncate_limit: 12
         show_more: true 

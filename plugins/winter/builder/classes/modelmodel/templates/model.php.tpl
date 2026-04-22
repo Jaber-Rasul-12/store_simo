@@ -32,11 +32,11 @@ class {classname} extends Model
      */
     // protected $revisionable = ['name'];
     // On Column 
-    // acornassociated-list-revision-history:
+    // store-list-revision-history:
     //     label: old_changes
     //     span: auto
     //     permissions: old_changes
-    //     type: acornassociated-list-revision-history
+    //     type: store-list-revision-history
     //     searchable: false
     //     sortable: false
 
@@ -47,10 +47,10 @@ class {classname} extends Model
      * - Implements the `TranslatableModel` behavior from WinterCMS to support 
      *   multilingual fields.
      *
-     * @package AcornAssociated\Backendlocalization
+     * @package Store\Backendlocalization
     */
     
-    // use \AcornAssociated\Backendlocalization\Class\TranslateBackend;
+    // use \Store\Backendlocalization\Class\TranslateBackend;
      
     // public $implement = ['Winter.Translate.Behaviors.TranslatableModel'];
      
@@ -98,7 +98,7 @@ class {classname} extends Model
     *     'name'         => 'required|string|max:255',
     *     'uuid'         => 'nullable|uuid',
     *     'level'        => 'required|in:damaged,basic',
-    *     'warehouse_id' => 'required|exists:acornassociated_warehouses_warehouses,id',
+    *     'warehouse_id' => 'required|exists:store_warehouses_warehouses,id',
     *     'user_id' => 'nullable|exists:backend_users,id',
     *     'status' => 'nullable|boolean',
     * 

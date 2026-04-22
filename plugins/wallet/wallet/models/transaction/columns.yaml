@@ -16,13 +16,13 @@ columns:
         type: text
     description:
         label: 'wallet.wallet::lang.model.transaction.description'
-        type: acornassociated-list-truncate
+        type: store-list-truncate
         truncate: true
         truncate_limit: 12
         show_more: true 
     status:
         label: 'wallet.wallet::lang.model.transaction.status'
-        type: acornassociated-list-switch  
+        type: store-list-switch  
         icon: true
         font-size: 20  
     created_at:
