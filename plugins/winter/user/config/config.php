@@ -17,7 +17,7 @@ return [
     |
     */
 
-    'activateMode' => Settings::ACTIVATE_AUTO,
+    'activateMode' => Settings::ACTIVATE_USER,
 
     /*
     |--------------------------------------------------------------------------
