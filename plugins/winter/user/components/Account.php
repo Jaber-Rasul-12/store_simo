@@ -316,7 +316,7 @@ class Account extends ComponentBase
 
             $requireActivation = UserSettings::get('require_activation', true);
             $automaticActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_AUTO;
-            $userActivation = true;
+            $userActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_USER;
             $adminActivation = UserSettings::get('activate_mode') == UserSettings::ACTIVATE_ADMIN;
             $user = Auth::register($data, $automaticActivation);
 
