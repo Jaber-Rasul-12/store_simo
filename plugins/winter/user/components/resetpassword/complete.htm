@@ -1,1 +1,113 @@
-<p>Password reset complete, you may now sign in.</p>
+    <div style="max-width: 500px; margin: 0 auto; padding: 30px 20px;">
+        
+        <!-- Success Card -->
+        <div style="background: #ffffff; border-radius: 48px; box-shadow: 0 30px 50px -15px rgba(0,0,0,0.25); overflow: hidden; animation: fadeInUp 0.5s ease;">
+            
+            <!-- Animated Checkmark -->
+            <div style="padding: 45px 25px 25px; text-align: center;">
+                <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(16,185,129,0.3); animation: scaleIn 0.5s ease 0.2s both;">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6L9 17L4 12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                </div>
+                
+                <h1 style="color: #1e293b; font-size: 28px; font-weight: 800; margin: 15px 0 10px; letter-spacing: -0.5px;">
+                    تم بنجاح! 🎉
+                </h1>
+                
+                <div style="width: 60px; height: 4px; background: linear-gradient(135deg, #10b981, #059669); margin: 0 auto; border-radius: 4px;"></div>
+            </div>
+            
+            <!-- Content -->
+            <div style="padding: 10px 30px 35px;">
+                
+                <!-- Success Message Box -->
+                <div style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); padding: 22px 20px; border-radius: 24px; text-align: center; margin: 10px 0 25px;">
+                    <span style="font-size: 45px; display: block; margin-bottom: 12px;">✅</span>
+                    <p style="color: #065f46; font-size: 17px; font-weight: 600; margin: 0; line-height: 1.6;">
+                        تم إعادة تعيين كلمة المرور بنجاح
+                    </p>
+                    <p style="color: #047857; font-size: 14px; margin: 12px 0 0;">
+                        يمكنك الآن تسجيل الدخول إلى حسابك
+                    </p>
+                </div>
+                
+                <!-- Information Box -->
+                <div style="background: #f8fafc; border-radius: 20px; padding: 20px; margin-bottom: 30px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                        <span style="font-size: 24px;">🔐</span>
+                        <p style="color: #1e293b; font-size: 13px; margin: 0; font-weight: 600;">ما يمكنك فعله الآن:</p>
+                    </div>
+                    
+                    <ul style="margin: 0; padding-right: 20px; color: #475569; font-size: 13px; line-height: 1.8;">
+                        <li>✅ تسجيل الدخول باستخدام كلمة المرور الجديدة</li>
+                        <li>✅ الاستمرار في استخدام جميع خدماتنا</li>
+                        <li>✅ يمكنك تغيير كلمة المرور لاحقاً من إعدادات الحساب</li>
+                    </ul>
+                </div>
+                
+                <!-- Button -->
+                <div style="text-align: center; margin: 15px 0 10px;">
+                    <a href="{{ login_url | default('/login') }}" style="display: inline-block; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; font-size: 16px; font-weight: 700; padding: 16px 35px; border-radius: 60px; box-shadow: 0 8px 20px rgba(102,126,234,0.35); transition: all 0.3s ease; min-width: 200px;">
+                        🔑 تسجيل الدخول الآن
+                    </a>
+                </div>
+                
+                <!-- Help Text -->
+                <div style="text-align: center; margin-top: 25px;">
+                    <p style="color: #94a3b8; font-size: 12px; margin: 0;">
+                        تواجه مشكلة؟ <a href="{{ support_url | default('/contact') }}" style="color: #667eea; text-decoration: none;">اتصل بالدعم</a>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="background: #f1f5f9; padding: 20px 25px; text-align: center; border-top: 1px solid #e2e8f0;">
+                <div style="margin-bottom: 8px;">
+                    <span style="font-size: 24px;">🛡️</span>
+                </div>
+                <p style="color: #64748b; font-size: 11px; margin: 0;">
+                    هذا بريد إلكتروني تلقائي - يرجى عدم الرد عليه
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            div[style*="max-width: 500px"] {
+                padding: 15px 12px;
+            }
+            div[style*="border-radius: 48px"] {
+                border-radius: 32px !important;
+            }
+            h1 {
+                font-size: 24px !important;
+            }
+            div[style*="padding: 10px 30px 35px"] {
+                padding: 10px 20px 30px !important;
+            }
+        }
+    </style>
