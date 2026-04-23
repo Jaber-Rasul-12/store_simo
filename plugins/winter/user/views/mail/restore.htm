@@ -6,80 +6,132 @@ description = "إعادة تعيين كلمة المرور"
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>إعادة تعيين كلمة المرور</title>
+    <style>
+        @media only screen and (max-width: 600px) {
+            .main-padding {
+                padding: 8px 6px !important;
+            }
+            .card-padding {
+                padding: 18px 14px !important;
+            }
+            .header-padding {
+                padding: 18px 15px !important;
+            }
+            .header-img {
+                width: 50px !important;
+                height: 50px !important;
+            }
+            .header-title {
+                font-size: 18px !important;
+                margin: 8px 0 0 !important;
+            }
+            .greeting-icon {
+                font-size: 32px !important;
+            }
+            .greeting-title {
+                font-size: 16px !important;
+            }
+            .warning-box {
+                padding: 8px 10px !important;
+                margin: 12px 0 !important;
+            }
+            .warning-text {
+                font-size: 11px !important;
+            }
+            .code-label {
+                font-size: 12px !important;
+                margin-bottom: 6px !important;
+            }
+            .code-wrapper {
+                padding: 8px !important;
+            }
+            .code-box {
+                font-size: 14px !important;
+                letter-spacing: 1px !important;
+                padding: 6px 12px !important;
+            }
+            .btn-wrapper {
+                margin: 15px 0 !important;
+            }
+            .btn-reset {
+                padding: 10px 20px !important;
+                font-size: 13px !important;
+            }
+            .link-backup {
+                padding: 8px 10px !important;
+                margin-top: 12px !important;
+            }
+            .link-label {
+                font-size: 9px !important;
+            }
+            .link-url {
+                font-size: 9px !important;
+                padding: 6px 8px !important;
+            }
+            .footer {
+                padding: 10px 12px !important;
+            }
+            .footer-text {
+                font-size: 9px !important;
+            }
+        }
+    </style>
 </head>
 <body style="margin: 0; padding: 0; background: #eef2ff; font-family: 'Cairo', 'Tahoma', sans-serif;">
     
-    <table width="100%" cellpadding="0" cellspacing="0" style="background: #eef2ff; padding: 25px 12px;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background: #eef2ff; padding: 8px 6px;">
         <tr>
             <td align="center">
-                <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 480px; background: white; border-radius: 30px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
-                    
+                <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; background: white; border-radius: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
                     <!-- Header -->
                     <tr>
-                        <td style="background: linear-gradient(135deg, #1e3a5f, #2c5282); padding: 35px 20px; text-align: center;">
-                            <div style="font-size: 55px;">🔐</div>
-                            <h1 style="color: white; font-size: 25px; margin: 12px 0 0;">إعادة تعيين كلمة المرور</h1>
+                        <td style="background: linear-gradient(135deg, #1e3a5f, #2c5282); padding: 18px 15px; text-align: center;">
+                            <img src="https://simooshop.com/themes/store/assets/img/file.svg" width="55" height="55" style="border-radius: 14px; text-align: center;" />
+                            <h1 style="color: white; font-size: 12px; text-align: center;">إعادة تعيين كلمة المرور</h1>
                         </td>
                     </tr>
-                    
                     <!-- Body -->
                     <tr>
-                        <td style="padding: 35px 25px;">
+                        <td style="padding: 18px 14px;">
                             
-                            <!-- Greeting -->
+                            <div style="background: #fffbeb; padding: 8px 10px; border-radius: 12px; margin: 12px 0; text-align: center;">
+                                <span style="font-size: 16px;">⚠️</span>
+                                <p style="color: #92400e; font-size: 11px; margin: 4px 0 0;">قام شخص ما بطلب إعادة تعيين كلمة المرور لحسابك. إذا لم تكن أنت، يرجى تجاهل هذا البريد.</p>
+                            </div>
+                            
                             <div style="text-align: center;">
-                                <span style="font-size: 45px;">👋</span>
-                                <h2 style="color: #1e293b; margin: 8px 0 0;">أهلاً <span style="color: #2c5282;">{{ name }}</span></h2>
-                            </div>
-                            
-                            <!-- Warning -->
-                            <div style="background: #fffbeb; padding: 15px; border-radius: 16px; margin: 25px 0; text-align: center;">
-                                <span style="font-size: 20px;">⚠️</span>
-                                <p style="color: #92400e; font-size: 13px; margin: 8px 0 0;">
-                                    قام شخص ما بطلب إعادة تعيين كلمة المرور لحسابك. إذا لم تكن أنت، يرجى تجاهل هذا البريد.
-                                </p>
-                            </div>
-                            
-                            <!-- Activation Code -->
-                            <div style="text-align: center; margin: 25px 0;">
-                                <p style="color: #475569; font-size: 14px; margin-bottom: 12px;">📋 رمز التفعيل</p>
-                                <div style="background: #f1f5f9; padding: 18px; border-radius: 18px; direction: ltr;">
-                                    <code style="font-size: 28px; font-weight: bold; letter-spacing: 5px; color: #2c5282; background: white; padding: 12px 20px; border-radius: 12px; display: inline-block;">
+                                <p style="color: #475569; font-size: 12px; margin-bottom: 6px;text-align: right;">📋 رمز التفعيل</p>
+                                <div style="background: #f1f5f9; padding: 0px; border-radius: 12px;">
+                                    <code style="font-size: 12px; font-weight: bold; letter-spacing: 2px; color: #2c5282; background: white; padding: 3px; border-radius: 10px; display: inline-block;">
                                         {{ code }}
                                     </code>
                                 </div>
                             </div>
                             
-                            <!-- Button -->
-                            <div style="text-align: center; margin: 30px 0;">
-                                <a href="{{ link }}" style="background: linear-gradient(135deg, #1e3a5f, #2c5282); color: white; text-decoration: none; padding: 14px 30px; border-radius: 50px; display: inline-block; font-weight: bold; font-size: 15px; min-width: 190px;">
+                            <div style="text-align: center; margin: 15px 0;">
+                                <a href="{{ link }}" style="background: linear-gradient(135deg, #1e3a5f, #2c5282); color: white; text-decoration: none; padding: 10px 22px; border-radius: 50px; display: inline-block; font-weight: bold; font-size: 13px;">
                                     🔄 إعادة تعيين
                                 </a>
                             </div>
                             
-                            <!-- Link Backup -->
-                            <div style="background: #f8fafc; padding: 12px; border-radius: 12px; text-align: center;">
-                                <p style="color: #666; font-size: 11px; margin: 0 0 5px;">الرابط المباشر:</p>
-                                <p style="color: #2c5282; font-size: 10px; word-break: break-all; margin: 0;">{{ link }}</p>
+                            <div style="background: #f8fafc; padding: 8px 10px; border-radius: 12px; text-align: center; margin-top: 12px;">
+                                <p style="color: #666; font-size: 9px; margin: 0 0 4px; text-align: right;">الرابط المباشر:</p>
+                                <p style="color: #2c5282; font-size: 9px; word-break: break-all; margin: 0; padding: 4px 6px; background: white; border-radius: 8px;">{{ link }}</p>
                             </div>
                             
                         </td>
                     </tr>
-                    
                     <!-- Footer -->
                     <tr>
-                        <td style="background: #f8fafc; padding: 18px; text-align: center; border-top: 1px solid #e2e8f0;">
-                            <p style="color: #94a3b8; font-size: 11px; margin: 0;">
-                                📧 هذا بريد إلكتروني تلقائي - يرجى عدم الرد عليه
-                            </p>
+                        <td style="background: #f8fafc; padding: 10px 12px; text-align: center; border-top: 1px solid #e2e8f0;">
+                            <p style="color: #94a3b8; font-size: 9px; margin: 0; text-align: right">📧 هذا بريد إلكتروني تلقائي - يرجى عدم الرد عليه</p>
                         </td>
                     </tr>
-                    
                 </table>
             </td>
-        \)"
+        </tr>
     </table>
     
 </body>
