@@ -297,10 +297,10 @@ class User extends UserBase
     {
         $this->restorePurgedValues();
 
+        Event::fire('winter.user.activate', [$this]);
         if ($this->send_invite) {
 
-            Event::fire('winter.user.activate', [$this]);
-            // $this->sendInvitation();
+            $this->sendInvitation();
         }
     }
 
