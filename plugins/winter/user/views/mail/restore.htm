@@ -1,22 +1,86 @@
-subject = "Requested Password Reset"
-description = "User requests a password reset"
+subject = "طلب إعادة تعيين كلمة المرور"
+description = "إعادة تعيين كلمة المرور"
 ==
-Hello {{ name }}
 
-Somebody has requested a password reset for your account, if this was not you, please ignore this email.
-
-Use this activation code to restore your password:
-
-{% partial 'promotion' body %}
-{{ code }}
-{% endpartial %}
-
-You can use the following link:
-
-{% partial 'button' url=link type='positive' body %}
-Restore password
-{% endpartial %}
-
-{% partial 'subcopy' body %}
-    **This is an automatic message. Please do not reply to it.**
-{% endpartial %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إعادة تعيين كلمة المرور</title>
+</head>
+<body style="margin: 0; padding: 0; background: #eef2ff; font-family: 'Cairo', 'Tahoma', sans-serif;">
+    
+    <table width="100%" cellpadding="0" cellspacing="0" style="background: #eef2ff; padding: 25px 12px;">
+        <tr>
+            <td align="center">
+                <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 480px; background: white; border-radius: 30px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.1);">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #1e3a5f, #2c5282); padding: 35px 20px; text-align: center;">
+                            <div style="font-size: 55px;">🔐</div>
+                            <h1 style="color: white; font-size: 25px; margin: 12px 0 0;">إعادة تعيين كلمة المرور</h1>
+                        </td>
+                    </tr>
+                    
+                    <!-- Body -->
+                    <tr>
+                        <td style="padding: 35px 25px;">
+                            
+                            <!-- Greeting -->
+                            <div style="text-align: center;">
+                                <span style="font-size: 45px;">👋</span>
+                                <h2 style="color: #1e293b; margin: 8px 0 0;">أهلاً <span style="color: #2c5282;">{{ name }}</span></h2>
+                            </div>
+                            
+                            <!-- Warning -->
+                            <div style="background: #fffbeb; padding: 15px; border-radius: 16px; margin: 25px 0; text-align: center;">
+                                <span style="font-size: 20px;">⚠️</span>
+                                <p style="color: #92400e; font-size: 13px; margin: 8px 0 0;">
+                                    قام شخص ما بطلب إعادة تعيين كلمة المرور لحسابك. إذا لم تكن أنت، يرجى تجاهل هذا البريد.
+                                </p>
+                            </div>
+                            
+                            <!-- Activation Code -->
+                            <div style="text-align: center; margin: 25px 0;">
+                                <p style="color: #475569; font-size: 14px; margin-bottom: 12px;">📋 رمز التفعيل</p>
+                                <div style="background: #f1f5f9; padding: 18px; border-radius: 18px; direction: ltr;">
+                                    <code style="font-size: 28px; font-weight: bold; letter-spacing: 5px; color: #2c5282; background: white; padding: 12px 20px; border-radius: 12px; display: inline-block;">
+                                        {{ code }}
+                                    </code>
+                                </div>
+                            </div>
+                            
+                            <!-- Button -->
+                            <div style="text-align: center; margin: 30px 0;">
+                                <a href="{{ link }}" style="background: linear-gradient(135deg, #1e3a5f, #2c5282); color: white; text-decoration: none; padding: 14px 30px; border-radius: 50px; display: inline-block; font-weight: bold; font-size: 15px; min-width: 190px;">
+                                    🔄 إعادة تعيين
+                                </a>
+                            </div>
+                            
+                            <!-- Link Backup -->
+                            <div style="background: #f8fafc; padding: 12px; border-radius: 12px; text-align: center;">
+                                <p style="color: #666; font-size: 11px; margin: 0 0 5px;">الرابط المباشر:</p>
+                                <p style="color: #2c5282; font-size: 10px; word-break: break-all; margin: 0;">{{ link }}</p>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background: #f8fafc; padding: 18px; text-align: center; border-top: 1px solid #e2e8f0;">
+                            <p style="color: #94a3b8; font-size: 11px; margin: 0;">
+                                📧 هذا بريد إلكتروني تلقائي - يرجى عدم الرد عليه
+                            </p>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        \)"
+    </table>
+    
+</body>
+</html>

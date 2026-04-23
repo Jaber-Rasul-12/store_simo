@@ -1,19 +1,474 @@
-<p class="lead">
-    If your account exists, you will receive an email with the activation code for resetting your password.
-</p>
+<div class="reset-complete-container">
+    <div class="reset-complete-card">
+        <div class="reset-complete-header">
+            <div class="reset-complete-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15 7.5V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3v1.5M12 12v3M5 12h14a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1z"/>
+                </svg>
+            </div>
+            <h2 class="reset-complete-title">إعادة تعيين كلمة المرور</h2>
+            <p class="reset-complete-subtitle">أدخل رمز التفعيل وكلمة المرور الجديدة</p>
+        </div>
 
-<form
-    data-request="{{ __SELF__ }}::onResetPassword"
-    data-request-update="'{{ __SELF__ }}::complete': '#partialUserResetForm'">
-    <div class="form-group">
-        <label for="resetCode">Activation Code</label>
-        <input name="code" type="text" class="form-control" id="resetCode" placeholder="Enter the activation code" value="{{ __SELF__.code }}">
+        <div class="alert-info">
+            إذا كان حسابك موجوداً، ستتلقى بريداً إلكترونياً يحتوي على رمز التفعيل لإعادة تعيين كلمة المرور الخاصة بك.
+        </div>
+
+        <form class="reset-complete-form"
+              data-request="{{ __SELF__ }}::onResetPassword"
+              data-request-update="'{{ __SELF__ }}::complete': '#partialUserResetForm'">
+            
+            <div class="form-group">
+                <label>رمز التفعيل <i>*</i></label>
+                <div class="input-wrapper">
+                    <div class="input-icon">🔑</div>
+                    <input name="code" type="text" class="form-control" 
+                           placeholder="أدخل رمز التفعيل" 
+                           value="{{ __SELF__.code }}" dir="ltr">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>كلمة المرور الجديدة <i>*</i></label>
+                <div class="input-wrapper">
+                    <div class="input-icon">🔒</div>
+                    <input name="password" type="password" class="form-control" 
+                           placeholder="أدخل كلمة المرور الجديدة">
+                </div>
+                <div class="password-strength">
+                    <span id="strength-text">قوة كلمة المرور</span>
+                    <div class="strength-bar">
+                        <div class="strength-progress" id="strength-bar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-reset-complete">
+                🔄 إعادة تعيين كلمة المرور
+            </button>
+        </form>
+
+        <div class="reset-complete-footer">
+            <a href="/login" class="back-to-login">
+                <svg viewBox="0 0 24 24" style="transform: rotate(180deg);">
+                    <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" fill="none"/>
+                </svg>
+                العودة إلى تسجيل الدخول
+            </a>
+        </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <label for="resetPassword">New Password</label>
-        <input name="password" type="password" class="form-control" id="resetPassword" placeholder="Enter a new password">
-    </div>
+<!-- JavaScript لقياس قوة كلمة المرور -->
+<script>
+document.querySelector('input[name="password"]')?.addEventListener('input', function(e) {
+    const password = e.target.value;
+    const strengthBar = document.getElementById('strength-bar');
+    const strengthText = document.getElementById('strength-text');
+    
+    let strength = 0;
+    if (password.length >= 6) strength++;
+    if (password.length >= 10) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^A-Za-z0-9]/.test(password)) strength++;
+    
+    const percent = (strength / 5) * 100;
+    strengthBar.style.width = percent + '%';
+    
+    if (percent < 20) {
+        strengthBar.style.background = '#ef4444';
+        strengthText.textContent = 'ضعيفة';
+        strengthText.style.color = '#ef4444';
+    } else if (percent < 60) {
+        strengthBar.style.background = '#f59e0b';
+        strengthText.textContent = 'متوسطة';
+        strengthText.style.color = '#f59e0b';
+    } else {
+        strengthBar.style.background = '#10b981';
+        strengthText.textContent = 'قوية';
+        strengthText.style.color = '#10b981';
+    }
+});
+</script>
 
-    <button type="submit" class="btn btn-default">Reset password</button>
-</form>
+<style>
+
+
+/* Reset Password Complete Form - Professional RTL Arabic Design */
+
+.reset-complete-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Cairo', 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.reset-complete-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    border-radius: 28px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    padding: 36px 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.reset-complete-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border-radius: 0 0 0 60px;
+    pointer-events: none;
+}
+
+.reset-complete-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.reset-complete-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    animation: fadeInDown 0.5s ease;
+}
+
+.reset-complete-icon svg {
+    width: 38px;
+    height: 38px;
+    fill: white;
+}
+
+.reset-complete-title {
+    font-size: 26px;
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.3px;
+}
+
+.reset-complete-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.6;
+    background: #f1f5f9;
+    padding: 12px 20px;
+    border-radius: 60px;
+    display: inline-block;
+}
+
+/* Form Styles */
+.reset-complete-form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.form-group label i {
+    color: #ef4444;
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+.input-wrapper {
+    position: relative;
+    direction: rtl;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 18px;
+    pointer-events: none;
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    background: #ffffff;
+    color: #1e293b;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.form-control::placeholder {
+    color: #cbd5e1;
+    text-align: right;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    margin-top: 8px;
+    font-size: 12px;
+    text-align: right;
+}
+
+.strength-bar {
+    height: 4px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.strength-progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981);
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+/* Button Styles */
+.btn-reset-complete {
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 60px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.35);
+    margin-top: 12px;
+    letter-spacing: 0.5px;
+}
+
+.btn-reset-complete:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-reset-complete:active {
+    transform: translateY(0);
+}
+
+.btn-reset-complete:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Footer */
+.reset-complete-footer {
+    text-align: center;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.back-to-login {
+    color: #667eea;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-to-login:hover {
+    color: #764ba2;
+    transform: translateX(-4px);
+}
+
+.back-to-login svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+/* Alert Messages */
+.alert-info {
+    background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+    border: 1px solid #c7d2fe;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #3730a3;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.alert-info::before {
+    content: "🔐";
+    font-size: 20px;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 1px solid #bbf7d0;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #15803d;
+    font-size: 14px;
+}
+
+.alert-success::before {
+    content: "✅";
+    font-size: 18px;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border: 1px solid #fecaca;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    color: #991b1b;
+    font-size: 14px;
+}
+
+/* Loading State */
+.btn-reset-complete.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn-reset-complete.loading::after {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 50%;
+    left: 50%;
+    margin-left: -11px;
+    margin-top: -11px;
+    border: 2px solid white;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .reset-complete-container {
+        padding: 12px;
+    }
+    
+    .reset-complete-card {
+        padding: 24px 20px;
+    }
+    
+    .reset-complete-title {
+        font-size: 22px;
+    }
+    
+    .reset-complete-icon {
+        width: 65px;
+        height: 65px;
+    }
+    
+    .reset-complete-icon svg {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .form-control {
+        padding: 12px 16px;
+    }
+    
+    .btn-reset-complete {
+        padding: 14px 20px;
+    }
+    
+    .alert-info {
+        font-size: 13px;
+        padding: 12px 16px;
+    }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .reset-complete-card {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    }
+    
+    .reset-complete-title {
+        color: #f1f5f9;
+    }
+    
+    .reset-complete-subtitle {
+        background: #334155;
+        color: #cbd5e1;
+    }
+    
+    .form-group label {
+        color: #cbd5e1;
+    }
+    
+    .form-control {
+        background: #0f172a;
+        border-color: #334155;
+        color: #f1f5f9;
+    }
+    
+    .reset-complete-footer {
+        border-top-color: #334155;
+    }
+}
+
+</style>

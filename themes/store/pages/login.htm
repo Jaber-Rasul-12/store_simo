@@ -387,6 +387,7 @@ redirect = "home"
                         </div>
                     </form>
                     
+                     <a href="{{ 'forgot-password'|page }}">لقد نسيت كلمة المرور؟</a>
                     <div class="authmaster-divider">
                         <span>{{ 'أو' |_ }}</span>
                     </div>
@@ -397,6 +398,7 @@ redirect = "home"
                             <i class="fas fa-user-plus me-2"></i>{{ 'تسجيل في الموقع' |_ }}
                         </a>
                     </div>
+                   
                     
                     {% if social_login_links is defined and social_login_links is not empty %}
                     <div class="text-center mt-3">
