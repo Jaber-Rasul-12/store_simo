@@ -1,12 +1,63 @@
-subject = "Confirm your account"
-description = "Activate a new user"
+subject = "التحقق من بريدك الإلكتروني لتفعيل حسابك"
+description = "تفاصيل البريد الإلكتروني الذي يتم إرساله إلى المستخدمين الجدد لتفعيل حساباتهم من خلال رابط التفعيل المرفق في البريد."
 ==
-Hello {{ name }}
-
-We need to verify that this is your email address.
-
-Please click the link below to confirm your account:
-
-{% partial 'button' url=link type='positive' body %}
-Confirm account
-{% endpartial %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفعيل الحساب</title>
+</head>
+<body style="margin: 0; padding: 0; background: #f5f7fb; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Cairo', 'Tahoma', sans-serif;">
+    
+    <div style="max-width: 500px; margin: 0 auto; background: #fff; min-height: 100vh;">
+        
+        <!-- Hero Section -->
+        <div style="background: #1a1a2e; padding: 60px 20px 40px; text-align: center; border-radius: 0 0 30px 30px;">
+            <div style="width: 80px; height: 80px; background: #0f3460; border-radius: 40px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                <span style="font-size: 45px;">📧</span>
+            </div>
+            <h1 style="text-align: center;color: white; font-size: 28px; margin: 0; font-weight: 700;">تفعيل الحساب</h1>
+        </div>
+        
+        <!-- Content -->
+        <div style="padding: 40px 25px;">
+            
+            <!-- Greeting -->
+            <div style="background: #f8f9ff; padding: 20px; border-radius: 20px; margin-bottom: 30px; text-align: center;">
+                <span style="font-size: 50px; display: block; margin-bottom: 10px;">👋</span>
+                <h2 style="color: #1a1a2e; font-size: 24px; margin: 0;">
+                    مرحباً <span style="color: #0f3460; border-bottom: 3px solid #0f3460;">{{ name }}</span>
+                </h2>
+            </div>
+        
+            
+            <!-- Button -->
+            <div style="text-align: center; margin: 35px 0;">
+                <a href="{{ link }}" style="display: inline-block; background: #0f3460; color: white; text-decoration: none; font-size: 18px; font-weight: 600; padding: 18px 40px; border-radius: 50px; width: auto; min-width: 200px; text-align: center;">
+                    تأكيد الحساب ✅
+                </a>
+            </div>
+            
+            <!-- Fallback Link -->
+            <div style="background: #f7f7f7; padding: 20px; border-radius: 15px; margin-top: 25px;">
+                <p style="color: #666; font-size: 12px; text-align: center; margin: 0 0 10px;">
+                    🔗 رابط بديل
+                </p>
+                <p style="color: #0f3460; font-size: 11px; word-break: break-all; text-align: center; margin: 0;">
+                    {{ link }}
+                </p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div style="background: #f5f7fb; padding: 20px; text-align: center; margin-top: 20px;">
+            <p style="color: #999; font-size: 11px; margin: 0;">
+                هذا بريد إلكتروني تلقائي، يرجى عدم الرد عليه
+            </p>
+        </div>
+        
+    </div>
+    
+</body>
+</html>
