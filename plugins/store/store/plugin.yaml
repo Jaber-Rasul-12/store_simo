@@ -59,6 +59,9 @@ permissions:
     merchants:
         tab: 'store.store::lang.plugin.setting_store'
         label: 'store.store::lang.plugin.merchants'
+    subcategories:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.subcategories'
 navigation:
     setting_store:
         label: 'store.store::lang.plugin.setting store'
@@ -73,6 +76,12 @@ navigation:
                 icon: icon-folder
                 permissions:
                     - category
+            subcategories:
+                label: 'store.store::lang.plugin.subcategories'
+                url: store/store/subcategories
+                icon: icon-sitemap
+                permissions:
+                    - subcategories
             brand:
                 label: 'store.store::lang.plugin.brand'
                 url: store/store/brands

@@ -1,0 +1,14 @@
+fields:
+    category:
+        label: 'store.store::lang.model.categoriesproducts.category'
+        span: auto
+        type: relation
+        select: name
+        placeholder: store.store::lang.plugin.select
+    subcategory_id:
+        label: store.store::lang.model.categoriesproducts.subcategory
+        span: auto
+        type: dropdown
+        context: 'create'
+        dependsOn: category
+        placeholder: store.store::lang.plugin.select

@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.subcategories.subcategories'
+form: $/store/store/models/subcategory/fields.yaml
+modelClass: Store\Store\Models\SubCategory
+defaultRedirect: store/store/subcategories
+create:
+    redirect: 'store/store/subcategories/update/:id'
+    redirectClose: store/store/subcategories
+update:
+    redirect: store/store/subcategories
+    redirectClose: store/store/subcategories

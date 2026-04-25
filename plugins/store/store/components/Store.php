@@ -304,7 +304,7 @@ class Store extends ComponentBase
 
     public function getCateogries()
     {
-        return Category::withCount('products')->where('status' ,'=', true)->get();
+        return Category::with('subcategories')->withCount('products')->where('status' ,'=', true)->get();
     }
 
     public function getBrands()

@@ -1,0 +1,32 @@
+fields:
+    category:
+        label: 'store.store::lang.model.subcategory.category'
+        span: auto
+        type: relation
+        select: name
+        placeholder: 'store.store::lang.plugin.select'
+    name:
+        label: 'store.store::lang.model.subcategory.name'
+        span: auto
+        type: text
+    description:
+        label: 'store.store::lang.model.subcategory.description'
+        span: auto
+        type: text
+    image:
+            label: store.store::lang.model.subcategory.image
+            type: fileupload
+            mode: image
+            span: auto
+            imageHeight: 260
+            imageWidth: 260
+            tab: 'store.store::lang.plugin.files'
+            thumbOptions:
+                mode: crop
+                offset:
+                    - 0
+                    - 0
+                quality: 90
+                sharpen: 0
+                interlace: false
+                extension: auto

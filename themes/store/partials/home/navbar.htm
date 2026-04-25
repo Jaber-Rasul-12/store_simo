@@ -1,7 +1,7 @@
-<!-- Navbar Start - تصميم مطابق لـ Shein 100% -->
+<!-- Navbar Start - تصميم مطابق لـ Shein 100% مع تحسين Subcategories -->
 <style>
 /* ============================================ */
-/* تصميم مطابق لشي إن Shein - بدون أيقونات */
+/* تصميم مطابق لشي إن Shein - مع Sub Categories محسّن */
 /* ============================================ */
 
 /* الشريط العلوي الرئيسي - مثل شي إن */
@@ -11,7 +11,7 @@
     border-bottom: 1px solid #e5e5e5;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 1001;
 }
 
 .shein-logo {
@@ -83,14 +83,21 @@
 }
 
 /* ============================================ */
-/* شريط التصنيفات - مثل شي إن بالضبط */
+/* شريط التصنيفات الرئيسي - مثل شي إن */
 /* ============================================ */
 .shein-categories-wrapper {
     background: white;
     border-bottom: 1px solid #e5e5e5;
     position: sticky;
     top: 60px;
-    z-index: 999;
+    z-index: 1000;
+}
+
+/* حاوية التمرير */
+.shein-categories-container {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .shein-categories-scroll {
@@ -99,6 +106,7 @@
     white-space: nowrap;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    flex: 1;
     padding: 0 12px;
 }
 
@@ -106,7 +114,36 @@
     display: none;
 }
 
-/* عنصر التصنيف - بدون أيقونة، نص فقط مثل شي إن */
+/* سهم التمرير */
+.shein-scroll-arrow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(90deg, white 30%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.shein-scroll-arrow i {
+    background: white;
+    border-radius: 50%;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    color: #ff6b6b;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.shein-scroll-arrow i:hover {
+    transform: scale(1.1);
+}
+
+/* عنصر التصنيف الرئيسي */
 .shein-cat-item {
     display: inline-block;
     padding: 12px 16px;
@@ -116,6 +153,9 @@
     text-decoration: none;
     position: relative;
     transition: all 0.2s;
+    cursor: pointer;
+    background: transparent;
+    border: none;
 }
 
 .shein-cat-item.active {
@@ -137,8 +177,208 @@
     color: #ff6b6b;
 }
 
+/* أيقونة السهم للتصنيف الذي يحتوي على فئات فرعية */
+.shein-cat-item.has-children {
+    position: relative;
+}
+
+.shein-cat-item.has-children::after {
+    content: '▼';
+    font-size: 10px;
+    margin-right: 5px;
+    color: #999;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.shein-cat-item.has-children:hover::after {
+    transform: rotate(180deg);
+}
+
 /* ============================================ */
-/* شريط الإجراءات السريعة - مثل شي إن */
+/* القائمة المنسدلة - تصميم محسن مثل شي إن */
+/* ============================================ */
+.shein-dropdown {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    z-index: 1002;
+    display: none;
+    padding: 30px 0;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.shein-dropdown.show {
+    display: block;
+}
+
+/* حاوية التصنيفات الفرعية */
+.shein-subcategories {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+/* عمود التصنيفات الفرعية */
+.shein-subcategory-column {
+    flex: 1;
+    min-width: 180px;
+}
+
+/* عنوان التصنيف الرئيسي داخل القائمة */
+.shein-subcategory-main {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #ff6b6b;
+    text-decoration: none;
+    position: relative;
+}
+
+.shein-subcategory-main:hover {
+    color: #ff6b6b;
+}
+
+/* قائمة التصنيفات الفرعية */
+.shein-subcategory-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+
+}
+
+.shein-subcategory-list li {
+    margin-bottom: 10px;
+}
+
+.shein-subcategory-list a {
+    font-size: 13px;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: block;
+    padding: 4px 0;
+    position: relative;
+}
+
+.shein-subcategory-list a:hover {
+    color: #ff6b6b;
+    transform: translateX(-5px);
+}
+
+.shein-subcategory-list a:hover::before {
+    opacity: 1;
+}
+
+/* زر عرض الكل */
+.shein-view-all {
+    font-size: 12px;
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* قائمة من عمودين */
+.shein-two-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+}
+
+/* ============================================ */
+/* تصميم خاص للقائمة المنسدلة للموبايل */
+/* ============================================ */
+@media (max-width: 768px) {
+    .shein-subcategories {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .shein-subcategory-column {
+        width: 100%;
+    }
+    
+    .shein-subcategory-main {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+    .shein-subcategory-list{
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    }
+    .shein-subcategory-list a {
+        font-size: 12px;
+        padding: 6px 0;
+    }
+    
+    .shein-dropdown {
+        padding: 20px 0;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+/* ============================================ */
+/* طبقة الخلفية */
+/* ============================================ */
+.shein-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 999;
+    display: none;
+}
+
+.shein-overlay.show {
+    display: block;
+}
+
+/* ============================================ */
+/* شريط العلامات التجارية */
+/* ============================================ */
+.shein-brands-wrapper {
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.shein-brands-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 12px;
+}
+
+.shein-brands-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ============================================ */
+/* شريط الإجراءات السريعة */
 /* ============================================ */
 .shein-actions-bar {
     background: white;
@@ -295,6 +535,10 @@
         padding: 6px 18px;
         font-size: 11px;
     }
+    
+    .shein-scroll-arrow {
+        width: 30px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -316,38 +560,319 @@
         font-size: 11px;
     }
 }
+
+
+/* ============================================ */
+/* CSS للقائمة المنسدلة مع الصور الدائرية */
+/* ============================================ */
+
+/* القائمة المنسدلة */
+.shein-dropdown {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    z-index: 1002;
+    display: none;
+    padding: 30px 0;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.shein-dropdown.show {
+    display: block;
+}
+
+/* حاوية التصنيفات الفرعية */
+.shein-subcategories {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+/* عمود التصنيفات الفرعية */
+.shein-subcategory-column {
+    flex: 1;
+    min-width: 180px;
+}
+
+/* عنوان التصنيف الرئيسي داخل القائمة */
+.shein-subcategory-main {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #ff4757;
+    text-decoration: none;
+    position: relative;
+}
+
+.shein-subcategory-main:hover {
+    color: #ff4757;
+}
+
+/* قائمة التصنيفات الفرعية */
+.shein-subcategory-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* عنصر القائمة الواحد */
+.subcategory-list-item {
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+
+.subcategory-list-item:hover {
+    transform: translateX(-5px);
+}
+
+/* رابط التصنيف الفرعي */
+.subcategory-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #555;
+    font-size: 13px;
+    transition: color 0.2s;
+    padding: 4px 0;
+}
+
+.subcategory-link:hover {
+    color: #ff4757;
+}
+
+/* حاوية الصورة الدائرية */
+.subcategory-image-wrapper {
+    flex-shrink: 0;
+}
+
+/* الصورة الدائرية */
+.subcategory-circle-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f5f5f5;
+    border: 1px solid #e8e8e8;
+    transition: all 0.2s ease;
+}
+
+.subcategory-link:hover .subcategory-circle-img {
+    transform: scale(1.1);
+    border-color: #ff4757;
+    box-shadow: 0 4px 10px rgba(255,71,87,0.2);
+}
+
+/* اسم التصنيف الفرعي */
+.subcategory-name {
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* ============================================ */
+/* تحسين للموبايل */
+/* ============================================ */
+@media (max-width: 768px) {
+    .shein-subcategories {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .shein-subcategory-column {
+        width: 100%;
+    }
+    
+    .shein-subcategory-main {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+    
+    .subcategory-circle-img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .subcategory-name {
+        font-size: 12px;
+    }
+    
+    .shein-dropdown {
+        padding: 20px 0;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .subcategory-circle-img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .subcategory-name {
+        font-size: 11px;
+    }
+    
+    .subcategory-link {
+        gap: 8px;
+    }
+}
+
+/* ============================================ */
+/* شريط العلامات التجارية - صور دائرية */
+/* ============================================ */
+.shein-brands-section {
+    background: white;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.shein-brands-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    padding-right: 20px;
+}
+
+.shein-brands-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    padding: 0 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.shein-brands-scroll::-webkit-scrollbar {
+    height: 3px;
+}
+
+.shein-brands-scroll::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.shein-brands-scroll::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 10px;
+}
+
+.shein-brands-items {
+    display: inline-flex;
+    gap: 20px;
+}
+
+.shein-brand-item {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+    min-width: 65px;
+}
+
+.shein-brand-item:hover {
+    transform: translateY(-3px);
+}
+
+.shein-brand-img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f5f5f5;
+    border: 1px solid #eee;
+    transition: all 0.2s;
+}
+
+.shein-brand-item:hover .shein-brand-img {
+    border-color: #ff4757;
+    box-shadow: 0 5px 10px rgba(255,71,87,0.15);
+}
+
+.shein-brand-name {
+    font-size: 11px;
+    color: #555;
+    font-weight: 500;
+    text-align: center;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 </style>
 
-
+<!-- ============================================ -->
+<!-- طبقة الخلفية المظللة -->
+<!-- ============================================ -->
+<div class="shein-overlay" id="sheinOverlay"></div>
 
 <!-- ============================================ -->
-<!-- شريط التصنيفات (نص فقط) - مثل شي إن بالضبط -->
+<!-- شريط التصنيفات مع سهم التمرير -->
 <!-- ============================================ -->
-<div class="shein-categories-wrapper">
-    <div class="shein-categories-scroll" id="categoriesScroll">
-        <a href="/" class="shein-cat-item active">{{ 'الكل' |_ }}</a>
-        
-        {% for category in Store.getCateogries %}
-            <a href="/category/{{ category.slug }}" class="shein-cat-item">{{ category.name }}</a>
-        {% endfor %}
+<div class="shein-categories-wrapper" id="categoriesWrapper">
+    <div class="shein-categories-container">
+        <div class="shein-categories-scroll" id="categoriesScroll">
+            <button class="shein-cat-item active has-children" 
+                       >
+                    جميع التصنيفات
+            </button>
+            {% for category in Store.getCateogries %}
+                <button class="shein-cat-item {% if category.subcategories is not empty %}has-children{% endif %}" 
+                        data-category-id="{{ category.id }}"
+                        data-category-name="{{ category.name|escape('html') }}"
+                        data-category-slug="{{ category.slug }}"
+                        data-has-children="{% if category.subcategories is not empty %}true{% else %}false{% endif %}">
+                    {{ category.name }}
+                </button>
+            {% endfor %}
+        </div>
+        <div class="shein-scroll-arrow" id="scrollArrow">
+            <i class="fas fa-chevron-left"></i>
+        </div>
     </div>
 </div>
 
 <!-- ============================================ -->
-<!-- شريط العلامات التجارية (نص فقط) -->
+<!-- القائمة المنسدلة للتصنيفات الفرعية - تصميم محسن -->
 <!-- ============================================ -->
-<div class="shein-categories-wrapper">
-    <div class="shein-categories-scroll" id="brandsScroll">
-        <a href="/" class="shein-cat-item active">{{ 'جميع الماركات' |_ }}</a>
-        
+<div class="shein-dropdown" id="categoryDropdown">
+    <div class="shein-subcategories" id="subcategoriesContent">
+        <!-- سيتم ملء المحتوى ديناميكياً عبر JavaScript -->
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- شريط العلامات التجارية -->
+<!-- ============================================ -->
+<div class="shein-brands-wrapper">
+    <div class="shein-brands-scroll" id="brandsScroll">
         {% for brand in Store.Brands %}
             <a href="/brand/{{ brand.slug }}" class="shein-cat-item">{{ brand.name }}</a>
         {% endfor %}
     </div>
+    
 </div>
 
 <!-- ============================================ -->
-<!-- شريط الإجراءات السريعة - مثل شي إن -->
+<!-- شريط الإجراءات السريعة -->
 <!-- ============================================ -->
 <div class="shein-actions-bar">
     <a href="#" class="shein-action-item">
@@ -399,10 +924,190 @@
 </div>
 
 <!-- ============================================ -->
-<!-- سكريبت للتمرير -->
+<!-- سكريبت متكامل مع دعم subcategories -->
 <!-- ============================================ -->
 <script>
-// جعل أشرطة التصنيفات قابلة للتمرير
+// بيانات التصنيفات الفرعية - تستخدم العلاقة hasMany من موديل Category و SubCategory
+const categoriesData = {
+    {% for category in Store.getCateogries %}
+        "{{ category.id }}": {
+            id: "{{ category.id }}",
+            name: "{{ category.name|escape('js') }}",
+            slug: "{{ category.slug }}",
+            subcategories: [
+                {% if category.subcategories is not empty %}
+                    {% for subcategory in category.subcategories %}
+                        {
+                            id: "{{ subcategory.id }}",
+                            name: "{{ subcategory.name|escape('js') }}",
+                            slug: "{{ subcategory.slug|default(subcategory.id) }}",
+                            description: "{{ subcategory.description|escape('js')|default('') }}",
+                            imagePath: "{{ subcategory.image.path|default('') }}"
+                        },
+                    {% endfor %}
+                {% endif %}
+            ]
+        },
+    {% endfor %}
+};
+
+// عناصر DOM
+const dropdown = document.getElementById('categoryDropdown');
+const overlay = document.getElementById('sheinOverlay');
+const subcategoriesContent = document.getElementById('subcategoriesContent');
+let activeCategoryId = null;
+let hideTimeout;
+
+// عرض القائمة المنسدلة - مع الصور الدائرية
+function showDropdown(categoryId, categoryName, categorySlug, triggerElement) {
+    if (hideTimeout) clearTimeout(hideTimeout);
+    
+    const category = categoriesData[categoryId];
+    
+    // إذا لم توجد تصنيفات فرعية، لا نعرض القائمة
+    if (!category || !category.subcategories || category.subcategories.length === 0) {
+        hideDropdown();
+        return;
+    }
+    
+    activeCategoryId = categoryId;
+    
+    // بناء محتوى التصنيفات الفرعية مع الصور - في قائمة واحدة فقط
+    let html = `
+        <div class="shein-subcategory-column-full">
+            <a href="/category/${categorySlug}" class="shein-subcategory-main">
+                ${category.name}
+            </a>
+            <ul class="shein-subcategory-list shein-subcategory-list-full">
+    `;
+    
+    for (const sub of category.subcategories) {
+        const subSlug = sub.slug || sub.id;
+        // استخدام المسار من البيانات
+        let imageSrc = 'https://placehold.co/42x42?text=' + encodeURIComponent(sub.name.charAt(0));
+        
+        // التحقق من وجود مسار الصورة
+        if (sub.imagePath && sub.imagePath !== '') {
+            imageSrc = sub.imagePath;
+        }
+        
+        html += `
+            <li class="subcategory-list-item">
+                <a href="/category/${subSlug}" class="subcategory-link">
+                    <div class="subcategory-image-wrapper">
+                        <img class="subcategory-circle-img" 
+                             src="${imageSrc}" 
+                             alt="${sub.name}"
+                             onerror="this.onerror=null; this.src='https://placehold.co/42x42?text=${encodeURIComponent(sub.name.charAt(0))}'">
+                    </div>
+                    <span class="subcategory-name">${sub.name}</span>
+                </a>
+            </li>
+        `;
+    }
+    
+    html += `
+            </ul>
+        </div>
+    `;
+    
+    subcategoriesContent.innerHTML = html;
+    
+    // تحديد موقع القائمة
+    if (triggerElement) {
+        const rect = triggerElement.getBoundingClientRect();
+        dropdown.style.top = `${rect.bottom}px`;
+        dropdown.style.position = 'fixed';
+    }
+    
+    dropdown.classList.add('show');
+    overlay.classList.add('show');
+}
+// إخفاء القائمة المنسدلة
+function hideDropdown() {
+    dropdown.classList.remove('show');
+    overlay.classList.remove('show');
+    activeCategoryId = null;
+}
+
+// التمرير التلقائي
+function scrollCategories() {
+    const container = document.getElementById('categoriesScroll');
+    const scrollAmount = 200;
+    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+}
+
+// ربط أحداث التصنيفات
+function bindCategoryEvents() {
+    const categoryButtons = document.querySelectorAll('#categoriesScroll .shein-cat-item');
+    
+    categoryButtons.forEach(btn => {
+        btn.removeEventListener('mouseenter', handleMouseEnter);
+        btn.removeEventListener('mouseleave', handleMouseLeave);
+        btn.removeEventListener('click', handleClick);
+        
+        btn.addEventListener('mouseenter', handleMouseEnter);
+        btn.addEventListener('mouseleave', handleMouseLeave);
+        btn.addEventListener('click', handleClick);
+    });
+}
+
+function handleMouseEnter(e) {
+    const btn = e.currentTarget;
+    const categoryId = btn.dataset.categoryId;
+    const categoryName = btn.dataset.categoryName;
+    const categorySlug = btn.dataset.categorySlug;
+    const hasChildren = btn.dataset.hasChildren === 'true';
+    
+    if (hideTimeout) clearTimeout(hideTimeout);
+    
+    if (hasChildren) {
+        showDropdown(categoryId, categoryName, categorySlug, btn);
+    }
+}
+
+function handleMouseLeave(e) {
+    hideTimeout = setTimeout(() => {
+        hideDropdown();
+    }, 200);
+}
+
+function handleClick(e) {
+    const btn = e.currentTarget;
+    const categoryId = btn.dataset.categoryId;
+    const categorySlug = btn.dataset.categorySlug;
+    const hasChildren = btn.dataset.hasChildren === 'true';
+    
+    // إزالة active من الكل
+    document.querySelectorAll('#categoriesScroll .shein-cat-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    btn.classList.add('active');
+    
+    if (!hasChildren) {
+        window.location.href = `/category/${categorySlug}`;
+    }
+}
+
+// إغلاق القائمة عند مغادرة الماوس
+dropdown.addEventListener('mouseenter', () => {
+    if (hideTimeout) clearTimeout(hideTimeout);
+});
+
+dropdown.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+        hideDropdown();
+    }, 200);
+});
+
+overlay.addEventListener('click', () => {
+    hideDropdown();
+});
+
+// سهم التمرير
+document.getElementById('scrollArrow')?.addEventListener('click', scrollCategories);
+
+// جعل أشرطة التصنيفات قابلة للتمرير بالماوس
 function makeScrollable(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -439,16 +1144,24 @@ function makeScrollable(containerId) {
     container.style.cursor = 'grab';
 }
 
+// تهيئة السكريبتات
 makeScrollable('categoriesScroll');
 makeScrollable('brandsScroll');
+bindCategoryEvents();
 
-// تفعيل العنصر النشط عند النقر
-document.querySelectorAll('.shein-cat-item').forEach(item => {
-    item.addEventListener('click', function() {
-        // إزالة active من جميع العناصر في نفس القسم
-        const parent = this.parentElement;
-        parent.querySelectorAll('.shein-cat-item').forEach(i => i.classList.remove('active'));
-        this.classList.add('active');
-    });
-});
+// إظهار/إخفاء سهم التمرير
+function checkScrollArrow() {
+    const container = document.getElementById('categoriesScroll');
+    const arrow = document.getElementById('scrollArrow');
+    if (container && arrow) {
+        if (container.scrollWidth > container.clientWidth) {
+            arrow.style.display = 'flex';
+        } else {
+            arrow.style.display = 'none';
+        }
+    }
+}
+
+checkScrollArrow();
+window.addEventListener('resize', checkScrollArrow);
 </script>

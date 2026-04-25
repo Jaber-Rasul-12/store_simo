@@ -1,0 +1,18 @@
+columns:
+    id:
+        label: 'store.store::lang.model.categoriesproducts.id'
+        type: text
+    category:
+        label: 'store.store::lang.model.categoriesproducts.category'
+        relation: category
+        select: name
+    subcategory:
+        label: 'store.store::lang.model.categoriesproducts.subcategory'
+        relation: subcategory
+        select: name
+    created_at:
+        label: 'store.store::lang.model.categoriesproducts.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.categoriesproducts.updated_at'
+        type: datetime

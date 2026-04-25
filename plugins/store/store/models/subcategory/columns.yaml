@@ -1,0 +1,21 @@
+columns:
+    id:
+        label: 'store.store::lang.model.subcategory.id'
+        type: number
+    category:
+        label: 'store.store::lang.model.subcategory.category'
+        relation: category
+        select: name
+    name:
+        label: 'store.store::lang.model.subcategory.name'
+        type: text
+        searchable: true
+    description:
+        label: 'store.store::lang.model.subcategory.description'
+        type: text
+    created_at:
+        label: 'store.store::lang.model.subcategory.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.subcategory.updated_at'
+        type: datetime

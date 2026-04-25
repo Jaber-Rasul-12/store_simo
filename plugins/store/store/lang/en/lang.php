@@ -45,6 +45,7 @@ return [
         'comments' => 'Comments',
         'related' => 'Related',
         'merchants' => 'Merchants',
+        'subcategories' => 'Sub Categories',
     ],
     'model' => [
         'category' => [
@@ -160,8 +161,8 @@ return [
             'notes' => 'Notes',
             'created_at' => 'Created at',
             'updated_at' => 'Updated at',
-            'size'=>'Size',
-            'color'=>'Color',
+            'size' => 'Size',
+            'color' => 'Color',
         ],
         'product' => [
             'id' => 'Id',
@@ -267,6 +268,23 @@ return [
             'created_at' => 'Created at',
             'updated_at' => 'Updated at',
         ],
+        'subcategory' => [
+            'id' => 'Id',
+            'category' => 'Category',
+            'name' => 'Name',
+            'description' => 'Description',
+            'image' => 'Image',
+            'created_at' => 'Created at',
+            'updated_at' => 'Updated at',
+        ],
+        'categoriesproducts' => [
+            'id' => 'Id',
+            'category' => 'Category',
+            'product' => 'Product',
+            'subcategory' => 'Sub Category',
+            'created_at' => 'Created at',
+            'updated_at' => 'Updated at',
+        ],
     ],
     'controller' => [
         'categories' => [
@@ -319,6 +337,9 @@ return [
         ],
         'merchants' => [
             'merchants' => 'Merchants',
+        ],
+        'subcategories' => [
+            'subcategories' => 'Subcategories',
         ],
     ],
 ];

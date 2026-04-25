@@ -22,10 +22,6 @@ columns:
         label: 'store.store::lang.model.product.merchant'
         relation: merchant
         select: full_name
-    categories:
-        label: 'store.store::lang.model.product.categories'
-        relation: categories
-        select: name
     taxes_products:
         label: 'store.store::lang.model.product.taxes_products'
         relation: taxes_products

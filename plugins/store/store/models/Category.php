@@ -37,9 +37,12 @@ class Category extends Model
     ]
     ];
 
-    public $attachOne = [
-        'image' =>[\System\Models\File::class] 
+    public $hasMany = [
+        'subcategories' => ['Store\Store\Models\SubCategory'],
+        'categories_products' => ['Store\Store\Models\CategoriesProducts']
     ];
+
+
 
  
 

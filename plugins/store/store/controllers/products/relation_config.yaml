@@ -18,3 +18,16 @@ promotions:
     manage:
         form: $/store/store/models/promotion/fields.yaml
         recordsPerPage: 10
+
+# ===================================
+#  Relation Behavior Config
+# ===================================
+
+subcategory_products:
+    label: 'التنصنيفات'
+    view:
+        list: $/store/store/models/categoriesproducts/columns.yaml
+        toolbarButtons: create|delete
+    manage:
+        form: $/store/store/models/categoriesproducts/fields.yaml
+        recordsPerPage: 10

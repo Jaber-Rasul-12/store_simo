@@ -114,10 +114,10 @@ tabs:
             tab: 'store.store::lang.plugin.prices'
             type: relationmanager
         # Categories Tab    
-        categories:
+        subcategory_products:
             label: store.store::lang.model.product.categories
-            type: relation
-            nameFrom: name
+            type: relationmanager
+            context: ['update', 'preview']
             tab: 'store.store::lang.plugin.categories'
         # taxes_products Tab    
         taxes_products:

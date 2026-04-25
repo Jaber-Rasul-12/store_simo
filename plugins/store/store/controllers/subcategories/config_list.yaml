@@ -1,0 +1,12 @@
+list: $/store/store/models/subcategory/columns.yaml
+modelClass: Store\Store\Models\SubCategory
+title: 'store.store::lang.controller.subcategories.subcategories'
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'store/store/subcategories/update/:id'

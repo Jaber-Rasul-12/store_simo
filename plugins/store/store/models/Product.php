@@ -57,7 +57,6 @@ class Product extends Model
 
     ];
     public $belongsToMany = [
-        'categories' => ['Store\Store\Models\Category', 'table' => 'store_store_categories_products'],
         'taxes_products' => ['Store\Store\Models\ProductTaxe', 'table' => 'store_store_product_taxes_products'],
         'return_policies' => ['Store\Store\Models\ReturnPolicy', 'table' => 'store_store_products_return_policies'],
         'colors' => ['Store\Store\Models\Color', 'table' => 'store_store_products_colors'],
@@ -76,6 +75,7 @@ class Product extends Model
         'prices' => 'Store\Store\Models\Price',
         'promotions' => ['Store\Store\Models\Promotion', 'key' => 'product_id'],
         'comments' => ['Store\Store\Models\Comment', 'key' => 'product_id'],
+        'subcategory_products' => ['Store\Store\Models\CategoriesProducts', 'key' => 'product_id']
 
     ];
 
