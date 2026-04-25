@@ -10,6 +10,13 @@ columns:
         label: 'store.store::lang.model.subcategory.name'
         type: text
         searchable: true
+    slug:
+        label: 'store.store::lang.model.category.slug'
+        type: text
+    related_subcategories:
+        label: 'store.store::lang.model.subcategory.related_subcategories'
+        relation: related_subcategories
+        select: name
     description:
         label: 'store.store::lang.model.subcategory.description'
         type: text

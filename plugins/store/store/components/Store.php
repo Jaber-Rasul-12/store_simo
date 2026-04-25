@@ -12,6 +12,7 @@ use Store\Store\Models\Color;
 use Store\Store\Models\Comment;
 use Store\Store\Models\ContactMessage;
 use Store\Store\Models\Size;
+use Store\Store\Models\SubCategory;
 
 class Store extends ComponentBase
 {
@@ -60,7 +61,6 @@ class Store extends ComponentBase
     {
         $queryString = post('text');
         $slug =  $this->param('slug');
-        $Categories = Category::where('name', 'LIKE', "%" . $queryString . "%")->where('status' ,'=', true)->get();
         if (isset($slug) && !empty($slug)) {
             $products = Product::with('prices')->whereHas('categories', function($query) use ($slug) {
                 $query->where('slug', $slug);
@@ -70,6 +70,22 @@ class Store extends ComponentBase
             return null;
         }
         
+    }
+
+    public function onSearchProductsWithSubCategory(){
+                $queryString = post('text');
+        $slug =  $this->param('slug');
+       
+        if (isset($slug) && !empty($slug)) {
+            $products = Product::with('prices')->whereHas('subcategory_products', function($query) use ($slug) {
+                $query->whereHas('subcategory', function($query) use ($slug) {
+                    $query->where('slug', $slug);
+                });
+            })->where('status', '=', true)->where('name', 'like', '%' . $queryString . '%')->orderBy('id' , 'desc')->get();
+            return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products])];
+        } else {
+            return null;
+        }
     }
 
      public function onSearchProductsWithBrand()
@@ -99,10 +115,24 @@ class Store extends ComponentBase
     public function onGetProductsWhereCategory()
     {
         $slug =  $this->param('slug');
+        $category_id = Category::where('slug', $slug)->first()->id;
         if (isset($slug) && !empty($slug)) {
-            return Product::with('prices')->whereHas('categories', function($query) use ($slug) {
-                $query->where('slug', $slug);
+            return Product::with('prices')->whereHas('subcategory_products', function($query) use ($category_id) {
+                $query->where('category_id', $category_id);
             })->where('status', '=', true)->orderBy('id' , 'desc')->get();
+        } else {
+            return null;
+        }
+    }
+
+        public function onGetProductsWhereSubCategory()
+    {
+        $slug =  $this->param('slug');
+        $subcategory_id = SubCategory::where('slug', $slug)->first()->id;
+        if (isset($slug) && !empty($slug)) {
+            return Product::with('prices')->whereHas('subcategory_products', function($query) use ($subcategory_id) {
+                $query->where('subcategory_id', $subcategory_id);
+            })->orderBy('id' , 'desc')->get();
         } else {
             return null;
         }
@@ -125,6 +155,26 @@ class Store extends ComponentBase
         }
     
         return $category->related_categories()->withCount('products')->where('status', true)->get();
+    }
+
+
+
+        public function onGetRelatedSubCategories()
+    {
+        $slug = $this->param('slug');
+    
+        if (!$slug) {
+            return null;
+        }
+    
+        $subcategory = SubCategory::where('slug', $slug)
+            ->first();
+    
+        if (!$subcategory) {
+            return null;
+        }
+    
+        return $subcategory->related_subcategories()->get();
     }
     public function onGetRelatedProducts()
     {

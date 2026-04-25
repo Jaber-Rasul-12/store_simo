@@ -276,6 +276,7 @@ return [
             'image' => 'Image',
             'created_at' => 'Created at',
             'updated_at' => 'Updated at',
+            'related_subcategories' => 'Related subcategories',
         ],
         'categoriesproducts' => [
             'id' => 'Id',

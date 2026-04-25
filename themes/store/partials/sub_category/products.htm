@@ -1,15 +1,16 @@
 <!-- Products Start -->
 <div class="container-fluid ">
+  
 <div class="suggestions-wrapper">
-   {% if relateds is not empty %}
+    {% if relateds is not empty %}
     <div class="suggestions-header">
         <div class="d-flex justify-content-between align-items-center">
             <div>
                 <h5 class="fw-bold mb-0">
                     <i class="bi bi-star-fill text-warning me-2"></i>
-                    {{ 'علامات تجارية  قد تعجبك' |_ }}
+                    {{ 'تصنيفات قد تعجبك' |_ }}
                 </h5>
-                <p class="text-muted small mt-1 mb-0">{{ 'اكتشف المزيد من العلامات التجارية المميزة' |_ }}</p>
+                <p class="text-muted small mt-1 mb-0">{{ 'اكتشف المزيد من الاصناف المميزة' |_ }}</p>
             </div>
            
         </div>
@@ -18,7 +19,7 @@
     <div class="suggestions-scroll-container">
         <div class="suggestions-suggestions">
             {% for related in relateds %}
-                <div class="suggestions-card" onclick="location.href='/brand/{{ related.slug }}'">
+                <div class="suggestions-card" onclick="location.href='/category/{{ related.slug }}'">
                     <div class="suggestions-image-wrapper">
                         <div class="suggestions-image">
                             <img src="{% if related.image.path %}{{ related.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" 
@@ -31,7 +32,7 @@
                     </div>
                     <div class="suggestions-info">
                         <h6 class="related-name">{{ related.name }}</h6>
-                        <small class="product-count">
+                        <small class="product-count text-muted">
                             {% if related.products_count %}
                                 {{ related.products_count }} {{ 'منتج' |_ }}
                             {% else %}
@@ -46,13 +47,14 @@
 </div>
 
 
-
-
+   
+                 
 <hr>
 <div class="d-flex justify-content-center align-items-center mb-4" style="width: 100%;">
-            
+   
+
      <div class="search-container">
-                <form class="search-form" method="post" role="form" data-request="onSearchProductsWithBrand">
+                <form class="search-form" method="post" role="form" data-request="onSearchProductsWithSubCategory">
                   <div class="search-input-group">
                     <input 
                       type="text" 
@@ -70,11 +72,11 @@
 
                 </form>
             </div>
-</div>
+    
+    </div>
 <hr>
 
-
-      <div class="row px-xl-5 pb-3 row-product" style="justify-content: center;" id="products-list_container">
+      <div class="row px-xl-5 pb-3 row-product"  style="justify-content: center;" id="products-list_container">
 
         {% for product in name_component %}
 
@@ -85,7 +87,7 @@
                     {% if product.HasPromotions == true  %}
                     <div class="badge-sale">{{ product.promotionsActive.discount_value }} %</div>
                     {% endif %}
-                   
+                    
                     <div class="star-rating">
                         <i class="fas fa-star"></i> {{ product.averageRating | default(0) }}
                     </div>
@@ -138,6 +140,3 @@
         </div>
     </div>
     <!-- Products End -->
-
-
-    

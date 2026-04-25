@@ -32,6 +32,7 @@ class CategoriesProducts extends Model
           'product' => ['Store\Store\Models\Product'],
           'subcategory' => ['Store\Store\Models\SubCategory']
       ];
+      
     /**
      * @var array Attribute names to encode and decode using JSON.
      */

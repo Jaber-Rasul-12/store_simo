@@ -864,6 +864,9 @@
 <!-- ============================================ -->
 <div class="shein-brands-wrapper">
     <div class="shein-brands-scroll" id="brandsScroll">
+               <a href="/" class="shein-cat-item active">جميع العلامات التجارية</a>
+                    
+     
         {% for brand in Store.Brands %}
             <a href="/brand/{{ brand.slug }}" class="shein-cat-item">{{ brand.name }}</a>
         {% endfor %}
@@ -885,7 +888,31 @@
         <i class="fas fa-star"></i> {{ 'الأكثر مبيعاً' |_ }}
     </a>
     <a href="#" class="shein-action-item">
+        <i class="fas fa-fire"></i> {{ 'عروض حصرية' |_ }}
+    </a>
+    <a href="#" class="shein-action-item">
+        <i class="fas fa-chart-line"></i> {{ 'الأعلى تقييماً' |_ }}
+    </a>
+    <a href="#" class="shein-action-item">
+        <i class="fas fa-clock"></i> {{ 'وصل حديثاً' |_ }}
+    </a>
+    <a href="#" class="shein-action-item">
+        <i class="fas fa-percent"></i> {{ 'خصم 50%' |_ }}
+    </a>
+    <a href="#" class="shein-action-item">
+        <i class="fas fa-gift"></i> {{ 'هدايا مجانية' |_ }}
+    </a>
+    <a href="#" class="shein-action-item">
         <i class="fas fa-truck"></i> {{ 'توصيل سريع' |_ }}
+    </a>
+    <a href="#" class="shein-action-item">
+        <i class="fas fa-shield-alt"></i> {{ 'ضمان الجودة' |_ }}
+    </a>
+    <a href="#" class="shein-action-item">
+        <i class="fas fa-hand-holding-usd"></i> {{ 'أفضل سعر' |_ }}
+    </a>
+    <a href="#" class="shein-action-item">
+        <i class="fas fa-users"></i> {{ 'الأكثر مشاهدة' |_ }}
     </a>
 </div>
 
@@ -940,7 +967,7 @@ const categoriesData = {
                         {
                             id: "{{ subcategory.id }}",
                             name: "{{ subcategory.name|escape('js') }}",
-                            slug: "{{ subcategory.slug|default(subcategory.id) }}",
+                            slug: "{{ subcategory.slug }}",
                             description: "{{ subcategory.description|escape('js')|default('') }}",
                             imagePath: "{{ subcategory.image.path|default('') }}"
                         },
@@ -993,7 +1020,7 @@ function showDropdown(categoryId, categoryName, categorySlug, triggerElement) {
         
         html += `
             <li class="subcategory-list-item">
-                <a href="/category/${subSlug}" class="subcategory-link">
+                <a href="/sub_category/${subSlug}" class="subcategory-link">
                     <div class="subcategory-image-wrapper">
                         <img class="subcategory-circle-img" 
                              src="${imageSrc}" 

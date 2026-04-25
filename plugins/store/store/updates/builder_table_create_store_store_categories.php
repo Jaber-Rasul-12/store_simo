@@ -12,7 +12,7 @@ class BuilderTableCreateStoreStoreCategories extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->string('name');
-            $table->string('slug')->unique();;
+            $table->string('slug')->unique();
             $table->boolean('status')->default(0);
             $table->boolean('show_homepage')->default(0);
             $table->boolean('is_featured')->default(0);

@@ -9,10 +9,23 @@ fields:
         label: 'store.store::lang.model.subcategory.name'
         span: auto
         type: text
+    slug:
+        label: 'store.store::lang.model.category.slug'
+        span: auto
+        readOnly: true
+        preset:
+            field: name
+            type: slug
     description:
         label: 'store.store::lang.model.subcategory.description'
         span: auto
         type: text
+    related_subcategories:
+        label: 'store.store::lang.model.subcategory.related_subcategories'
+        span: full
+        type: relation
+        nameFrom: name
+        context: 'update'
     image:
             label: store.store::lang.model.subcategory.image
             type: fileupload

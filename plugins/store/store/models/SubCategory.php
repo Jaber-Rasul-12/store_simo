@@ -26,14 +26,29 @@ class SubCategory extends Model
         'category_id' => 'required|integer|exists:store_store_categories,id'
     ];
 
-      public $belongsTo = [
+
+        public $belongsToMany = [
+       
+        'related_subcategories' => [
+        self::class,
+        'table' => 'store_store_subcategory_related',
+        'key' => 'subcategory_id',
+        'otherKey' => 'related_subcategory_id'
+    ]
+    ];
+
+    
+
+
+    public $belongsTo = [
           'category' => ['Store\Store\Models\Category']
       ];
           public $attachOne = [
         'image' =>[\System\Models\File::class] 
     ];
     public $hasMany = [
-      'categories_products' => ['Store\Store\Models\CategoriesProducts']
+      'categories_products' => ['Store\Store\Models\CategoriesProducts'],
+      'products' => ['Store\Store\Models\Product', 'table' => 'store_store_categories_products' , 'key' => 'subcategory_id']
     ];
     public $jsonable = [];
 

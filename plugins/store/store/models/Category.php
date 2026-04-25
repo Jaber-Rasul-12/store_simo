@@ -28,7 +28,7 @@ class Category extends Model
     ];
 
     public $belongsToMany = [
-        'products' => ['Store\Store\Models\Product', 'table' => 'store_store_categories_products'],
+                'products' => ['Store\Store\Models\Product', 'table' => 'store_store_categories_products'],
          'related_categories' => [
         self::class,
         'table' => 'store_store_category_related',

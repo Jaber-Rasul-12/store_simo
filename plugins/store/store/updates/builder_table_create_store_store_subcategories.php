@@ -12,6 +12,7 @@ class BuilderTableCreateStoreStoreSubcategories extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->unsigned();
             $table->text('name');
+            $table->string('slug')->unique();
             $table->text('description');
             $table->unsignedInteger('category_id');
             $table->timestamp('created_at')->nullable();
