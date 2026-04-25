@@ -20,10 +20,6 @@ class BuilderTableCreateStoreStoreCategoriesProducts extends Migration
                 ->references('id')
                 ->on('store_store_categories')
                 ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('store_store_categories')
-                ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('subcategory_id')
                 ->references('id')
                 ->on('store_store_subcategories')
