@@ -10200,7 +10200,9 @@ a.text-dark:hover, a.text-dark:focus {
     }
 }
 
-
+.bg-footer-custom{
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
 
 @media (max-width: 768px) {
     .offers-btn {
@@ -10254,4 +10256,227 @@ a.text-dark:hover, a.text-dark:focus {
       font-size: 14px;
     }
 
+}
+
+
+@media (max-width: 992px) {
+    .bg-footer-custom {
+        padding-top: 2rem !important;
+    }
+    
+    .px-xl-6 {
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+}
+
+/* شاشات أقل من 768px (موبايل) */
+@media (max-width: 768px) {
+    /* التباعد العام */
+    .bg-footer-custom {
+        margin-top: 2rem !important;
+        padding-top: 1.5rem !important;
+    }
+    
+    .px-xl-6 {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    
+    .pt-5 {
+        padding-top: 1rem !important;
+    }
+    
+    /* توسيط النصوص في الموبايل */
+    .col-lg-4, .col-md-6, .col-md-5 {
+        text-align: center;
+    }
+    
+    /* الشعار */
+    #footer-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    /* النصوص الوصفية */
+    .col-lg-4 p {
+        font-size: 0.85rem;
+        padding: 0 0.5rem;
+    }
+    
+    /* معلومات التواصل */
+    #footer-address {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 2px;
+        font-size: 0.8rem;
+    }
+    
+    #footer-address i {
+        margin-left: 5px;
+        margin-right: 0 !important;
+        order: 1;
+    }
+    
+    /* ترتيب الأيقونات بشكل صحيح */
+    #footer-address .fa-map-marker-alt,
+    #footer-address .fa-envelope,
+    #footer-address .fa-phone-alt {
+        margin-right: 0 !important;
+        margin-left: 5px;
+    }
+    
+    /* عناوين الأقسام */
+    #footer-links {
+        font-size: 1.1rem;
+        margin-bottom: 1rem !important;
+        text-align: center;
+    }
+    
+    .text-right {
+        text-align: center !important;
+    }
+    
+    /* الروابط السريعة - عرض أفقي منسدل */
+    .d-flex.flex-column {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    #footer-link {
+        background: rgba(0,0,0,0.03);
+        padding: 6px 12px;
+        border-radius: 25px;
+        font-size: 0.8rem;
+        margin-bottom: 0 !important;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    #footer-link i {
+        margin-right: 5px;
+        margin-left: 0 !important;
+        order: 1;
+    }
+    
+    /* النشرة الإخبارية */
+    .col-md-5.mb-5 {
+        margin-top: 1rem;
+    }
+    
+    .subscription-form .form-group {
+        margin-bottom: 10px;
+    }
+    
+    .form-control.border-0.py-4 {
+        padding: 10px 15px !important;
+        border-radius: 50px !important;
+        background: white;
+        border: 1px solid #ddd !important;
+        font-size: 0.85rem;
+        text-align: center;
+    }
+    
+    .btn-primary.btn-block.border-0.py-3 {
+        padding: 10px 15px !important;
+        border-radius: 50px !important;
+        font-size: 0.85rem;
+        width: 100%;
+    }
+    
+    /* إخفاء العمود الفارغ */
+    .col-md-1.mb-5 {
+        display: none;
+    }
+    
+    /* القسم السفلي - حقوق الملكية */
+    .border-top.border-light {
+        margin-top: 1rem;
+        padding: 1rem 0 !important;
+    }
+    
+    .col-md-6.px-xl-0 {
+        text-align: center;
+    }
+    
+    .col-md-6.px-xl-0 p {
+        font-size: 0.7rem;
+        line-height: 1.5;
+    }
+    
+    /* الروابط في القسم السفلي */
+    .text-dark a {
+        display: inline-block;
+    }
+}
+
+/* شاشات أقل من 480px (موبايل صغير جداً) */
+@media (max-width: 480px) {
+    .bg-footer-custom {
+        padding-top: 1rem !important;
+    }
+    
+    .px-xl-6 {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    
+    #footer-title {
+        font-size: 1.5rem;
+    }
+    
+    .col-lg-4 p {
+        font-size: 0.75rem;
+    }
+    
+    #footer-address {
+        font-size: 0.7rem;
+    }
+    
+    #footer-link {
+        padding: 4px 10px;
+        font-size: 0.7rem;
+    }
+    
+    .form-control.border-0.py-4 {
+        padding: 8px 12px !important;
+        font-size: 0.75rem;
+    }
+    
+    .btn-primary.btn-block.border-0.py-3 {
+        padding: 8px 12px !important;
+        font-size: 0.75rem;
+    }
+    
+    .col-md-6.px-xl-0 p {
+        font-size: 0.6rem;
+    }
+}
+
+/* تحسين للشاشات المتوسطة (تابلت عمودي) */
+@media (min-width: 769px) and (max-width: 991px) {
+    .col-lg-4, .col-md-6, .col-md-5 {
+        text-align: center;
+    }
+    
+    .d-flex.flex-column {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    #footer-link {
+        background: rgba(0,0,0,0.03);
+        padding: 6px 15px;
+        border-radius: 25px;
+    }
+    
+    .col-md-1.mb-5 {
+        display: none;
+    }
 }
