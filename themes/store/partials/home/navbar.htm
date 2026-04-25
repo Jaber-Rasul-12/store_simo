@@ -398,3 +398,57 @@
     </div>
 </div>
 
+<!-- ============================================ -->
+<!-- سكريبت للتمرير -->
+<!-- ============================================ -->
+<script>
+// جعل أشرطة التصنيفات قابلة للتمرير
+function makeScrollable(containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        container.style.cursor = 'grabbing';
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+    });
+    
+    container.addEventListener('mouseleave', () => {
+        isDown = false;
+        container.style.cursor = 'grab';
+    });
+    
+    container.addEventListener('mouseup', () => {
+        isDown = false;
+        container.style.cursor = 'grab';
+    });
+    
+    container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        container.scrollLeft = scrollLeft - walk;
+    });
+    
+    container.style.cursor = 'grab';
+}
+
+makeScrollable('categoriesScroll');
+makeScrollable('brandsScroll');
+
+// تفعيل العنصر النشط عند النقر
+document.querySelectorAll('.shein-cat-item').forEach(item => {
+    item.addEventListener('click', function() {
+        // إزالة active من جميع العناصر في نفس القسم
+        const parent = this.parentElement;
+        parent.querySelectorAll('.shein-cat-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+    });
+});
+</script>
