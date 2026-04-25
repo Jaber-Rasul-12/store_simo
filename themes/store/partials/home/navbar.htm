@@ -1,176 +1,47 @@
-
-
-<!-- Navbar Start - تصميم على طريقة Shein -->
+<!-- Navbar Start - تصميم مطابق لـ Shein 100% -->
 <style>
 /* ============================================ */
-/* تصميم شريط التصنيفات العلوي - مثل Shein */
+/* تصميم مطابق لشي إن Shein - بدون أيقونات */
 /* ============================================ */
 
-/* شريط التصنيفات الأفقي */
-.shein-categories-bar {
+/* الشريط العلوي الرئيسي - مثل شي إن */
+.shein-top-bar {
     background: white;
-    border-bottom: 1px solid #f0f0f0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e5e5;
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: white;
-}
-
-/* حاوية التمرير الأفقي */
-.shein-scroll-container {
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    scrollbar-width: thin;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 10px;
-}
-
-.shein-scroll-container::-webkit-scrollbar {
-    height: 3px;
-}
-
-.shein-scroll-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-.shein-scroll-container::-webkit-scrollbar-thumb {
-    background: #ff6b6b;
-    border-radius: 10px;
-}
-
-/* عنصر التصنيف الواحد */
-.shein-category-item {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 16px;
-    min-width: 80px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    color: #333;
-    background: transparent;
-    border: none;
-    position: relative;
-}
-
-.shein-category-item:hover {
-    transform: translateY(-2px);
-}
-
-.shein-category-item.active {
-    color: #ff6b6b;
-}
-
-.shein-category-item.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 2px;
-    background: #ff6b6b;
-    border-radius: 2px;
-}
-
-/* أيقونة التصنيف */
-.shein-category-icon {
-    width: 48px;
-    height: 48px;
-    background: #f8f9fa;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 8px;
-    transition: all 0.2s ease;
-}
-
-.shein-category-item:hover .shein-category-icon {
-    background: #ffe8e8;
-    transform: scale(1.05);
-}
-
-.shein-category-item.active .shein-category-icon {
-    background: #ff6b6b;
-    box-shadow: 0 4px 12px rgba(255,107,107,0.3);
-}
-
-.shein-category-item.active .shein-category-icon img,
-.shein-category-item.active .shein-category-icon i {
-    filter: brightness(0) invert(1);
-}
-
-.shein-category-icon img {
-    width: 28px;
-    height: 28px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.shein-category-icon i {
-    font-size: 22px;
-    color: #666;
-}
-
-.shein-category-item.active .shein-category-icon i {
-    color: white;
-}
-
-/* اسم التصنيف */
-.shein-category-name {
-    font-size: 12px;
-    font-weight: 500;
-    text-align: center;
-    max-width: 70px;
-    white-space: normal;
-    word-break: break-word;
-    line-height: 1.3;
-}
-
-/* سهم التمرير للأجهزة اللمسية */
-.shein-scroll-indicator {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 40px;
-    background: linear-gradient(90deg, transparent, white);
-    pointer-events: none;
-    display: none;
-}
-
-/* شريط Navbar الرئيسي */
-.shein-navbar {
-    background: white;
-    padding: 12px 20px;
-    border-bottom: 1px solid #f0f0f0;
 }
 
 .shein-logo {
-    font-size: 24px;
-    font-weight: 800;
-    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    font-size: 22px;
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
 }
 
-.shein-search-box {
+.shein-logo span {
+    color: #ff6b6b;
+}
+
+/* شريط البحث - مثل شي إن */
+.shein-search {
     background: #f5f5f5;
-    border-radius: 30px;
-    padding: 8px 16px;
+    border-radius: 25px;
+    padding: 10px 16px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    width: 100%;
 }
 
-.shein-search-box input {
+.shein-search i {
+    color: #999;
+    font-size: 16px;
+}
+
+.shein-search input {
     background: transparent;
     border: none;
     outline: none;
@@ -178,207 +49,352 @@
     font-size: 14px;
 }
 
-.shein-search-box input::placeholder {
-    color: #999;
+.shein-search input::placeholder {
+    color: #aaa;
 }
 
-.shein-icon-btn {
-    background: transparent;
-    border: none;
+/* أيقونات المستخدم - مثل شي إن */
+.shein-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+.shein-icon {
     position: relative;
+    color: #222;
     font-size: 22px;
-    color: #333;
-    cursor: pointer;
-    padding: 8px;
+    text-decoration: none;
 }
 
 .shein-badge {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -8px;
+    right: -10px;
     background: #ff6b6b;
     color: white;
     font-size: 10px;
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 20px;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: 50%;
     min-width: 18px;
     text-align: center;
 }
 
-/* استجابة للموبايل */
+/* ============================================ */
+/* شريط التصنيفات - مثل شي إن بالضبط */
+/* ============================================ */
+.shein-categories-wrapper {
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+    position: sticky;
+    top: 60px;
+    z-index: 999;
+}
+
+.shein-categories-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 12px;
+}
+
+.shein-categories-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* عنصر التصنيف - بدون أيقونة، نص فقط مثل شي إن */
+.shein-cat-item {
+    display: inline-block;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.shein-cat-item.active {
+    color: #ff6b6b;
+    font-weight: 600;
+}
+
+.shein-cat-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    height: 2px;
+    background: #ff6b6b;
+}
+
+.shein-cat-item:hover {
+    color: #ff6b6b;
+}
+
+/* ============================================ */
+/* شريط الإجراءات السريعة - مثل شي إن */
+/* ============================================ */
+.shein-actions-bar {
+    background: white;
+    padding: 8px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+
+.shein-actions-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.shein-action-item {
+    font-size: 13px;
+    color: #555;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.shein-action-item i {
+    font-size: 14px;
+    color: #ff6b6b;
+}
+
+/* ============================================ */
+/* البانر / الكاروسيل */
+/* ============================================ */
+.shein-carousel {
+    position: relative;
+    background: #f5f5f5;
+}
+
+.shein-carousel-item {
+    height: 280px;
+    position: relative;
+}
+
+.shein-carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.shein-carousel-caption {
+    position: absolute;
+    bottom: 20%;
+    left: 20px;
+    right: auto;
+    text-align: right;
+    background: transparent;
+}
+
+.shein-carousel-caption h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.shein-carousel-caption p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+}
+
+.shein-carousel-caption .btn-shop {
+    background: white;
+    color: #222;
+    border-radius: 25px;
+    padding: 8px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* أزرار التنقل */
+.shein-carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #222;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.shein-carousel-control.prev {
+    right: 15px;
+}
+
+.shein-carousel-control.next {
+    left: 15px;
+}
+
+/* ============================================ */
+/* استجابة الموبايل */
+/* ============================================ */
 @media (max-width: 768px) {
-    .shein-navbar {
-        padding: 10px 15px;
-    }
-    
-    .shein-category-icon {
-        width: 42px;
-        height: 42px;
-    }
-    
-    .shein-category-icon img,
-    .shein-category-icon i {
-        width: 22px;
-        height: 22px;
-        font-size: 18px;
-    }
-    
-    .shein-category-name {
-        font-size: 11px;
-    }
-    
-    .shein-category-item {
-        padding: 8px 12px;
-        min-width: 70px;
+    .shein-top-bar {
+        padding: 10px 12px;
     }
     
     .shein-logo {
-        font-size: 20px;
+        font-size: 18px;
+    }
+    
+    .shein-search {
+        padding: 7px 12px;
+    }
+    
+    .shein-search input {
+        font-size: 12px;
+    }
+    
+    .shein-icons {
+        gap: 15px;
+    }
+    
+    .shein-icon {
+        font-size: 18px;
+    }
+    
+    .shein-cat-item {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .shein-carousel-item {
+        height: 200px;
+    }
+    
+    .shein-carousel-caption h3 {
+        font-size: 18px;
+    }
+    
+    .shein-carousel-caption p {
+        font-size: 11px;
+    }
+    
+    .shein-carousel-caption .btn-shop {
+        padding: 6px 18px;
+        font-size: 11px;
     }
 }
 
 @media (max-width: 480px) {
-    .shein-category-icon {
-        width: 36px;
-        height: 36px;
+    .shein-carousel-item {
+        height: 160px;
     }
     
-    .shein-category-name {
-        font-size: 10px;
+    .shein-cat-item {
+        padding: 8px 10px;
+        font-size: 12px;
     }
     
-    .shein-category-item {
-        padding: 6px 10px;
-        min-width: 60px;
+    .shein-actions-bar {
+        padding: 6px 12px;
+        gap: 15px;
+    }
+    
+    .shein-action-item {
+        font-size: 11px;
     }
 }
 </style>
 
 
 
-<!-- شريط التصنيفات الأفقي (مثل Shein) -->
-<div class="shein-categories-bar">
-    <div class="container-fluid position-relative">
-        <div class="shein-scroll-container" id="categoriesScroll">
-            <a href="/" class="shein-category-item active">
-                    <div class="shein-category-icon">
-                            <img src="{{ 'assets/img/file.svg' | theme }}" alt="الكل">
-                    </div>
-                    <span class="shein-category-name">الكل</span>
-            </a> 
-            <!-- التصنيفات -->
-            {% for category in Store.getCateogries %}
-                {# {% if category.products_count > 0 %} #}
-                <a href="/category/{{ category.slug }}" class="shein-category-item">
-                    <div class="shein-category-icon">
-                            <img src="{% if category.image.path %}{{ category.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="{{ category.name }}">
-                        
-                    </div>
-                    <span class="shein-category-name">{{ category.name }}</span>
-                </a>
-                {# {% endif %} #}
-            {% endfor %}
-        </div>
-        <div class="shein-scroll-indicator"></div>
+<!-- ============================================ -->
+<!-- شريط التصنيفات (نص فقط) - مثل شي إن بالضبط -->
+<!-- ============================================ -->
+<div class="shein-categories-wrapper">
+    <div class="shein-categories-scroll" id="categoriesScroll">
+        <a href="/" class="shein-cat-item active">{{ 'الكل' |_ }}</a>
+        
+        {% for category in Store.getCateogries %}
+            <a href="/category/{{ category.slug }}" class="shein-cat-item">{{ category.name }}</a>
+        {% endfor %}
     </div>
 </div>
 
-<!-- شريط التصنيفات الأفقي (مثل Shein) -->
-<div class="shein-categories-bar">
-    <div class="container-fluid position-relative">
-        <div class="shein-scroll-container" id="categoriesScroll">            
-            <!-- العلامات التجارية -->
-            <a href="/" class="shein-category-item active">
-                    <div class="shein-category-icon">
-                            <img src="{{ 'assets/img/file.svg' | theme }}" alt="الكل">
-                    </div>
-                    <span class="shein-category-name">الكل</span>
-            </a>         
-            {% for brand in Store.Brands %}
-                {# {% if brand.products_count > 0 %} #}
-                <a href="/brand/{{ brand.slug }}" class="shein-category-item">
-                    <div class="shein-category-icon">
-                            <img src="{% if brand.image.path %}{{ brand.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="{{ brand.name }}">
-                    </div>
-                    <span class="shein-category-name">{{ brand.name }}</span>
-                </a>
-                {# {% endif %} #}
-            {% endfor %}
-        </div>
-        <div class="shein-scroll-indicator"></div>
+<!-- ============================================ -->
+<!-- شريط العلامات التجارية (نص فقط) -->
+<!-- ============================================ -->
+<div class="shein-categories-wrapper">
+    <div class="shein-categories-scroll" id="brandsScroll">
+        <a href="/" class="shein-cat-item active">{{ 'جميع الماركات' |_ }}</a>
+        
+        {% for brand in Store.Brands %}
+            <a href="/brand/{{ brand.slug }}" class="shein-cat-item">{{ brand.name }}</a>
+        {% endfor %}
     </div>
 </div>
 
+<!-- ============================================ -->
+<!-- شريط الإجراءات السريعة - مثل شي إن -->
+<!-- ============================================ -->
+<div class="shein-actions-bar">
+    <a href="#" class="shein-action-item">
+        <i class="fas fa-tags"></i> {{ 'تخفيضات' |_ }}
+    </a>
+    <a href="#" class="shein-action-item">
+        <i class="fas fa-gem"></i> {{ 'جديد' |_ }}
+    </a>
+    <a href="#" class="shein-action-item">
+        <i class="fas fa-star"></i> {{ 'الأكثر مبيعاً' |_ }}
+    </a>
+    <a href="#" class="shein-action-item">
+        <i class="fas fa-truck"></i> {{ 'توصيل سريع' |_ }}
+    </a>
+</div>
 
-<!-- البانر أو الكاروسيل (السلايدر) -->
-<div class="container-fluid px-0 mt-2">
+<!-- ============================================ -->
+<!-- البانر / الكاروسيل -->
+<!-- ============================================ -->
+<div class="shein-carousel">
     <div id="header-carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             {% for product in Store.getProductsShowHomePage %}
-            <div class="carousel-item {% if loop.first %}active{% endif %}" style="height: 300px;">
-                <img class="img-fluid w-100" src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" 
-                     alt="{{ product.name }}" style="height: 100%; object-fit: cover;">
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <div class="p-3" style="max-width: 700px;">
-                        <h4 class="text-white text-uppercase font-weight-medium mb-3">{{ product.promotions.first.description }}</h4>
-                        <h3 class="display-4 text-white font-weight-semi-bold mb-4">{{ product.promotions.first.name }}</h3>
-                        <a href="detail/{{ product.slug }}" class="btn btn-outline-light py-2 px-4 rounded-pill">{{ 'تسوق الآن' |_ }}</a>
+            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                <div class="shein-carousel-item">
+                    <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" 
+                         alt="{{ product.name }}">
+                    <div class="shein-carousel-caption">
+                        {% if product.promotions.first %}
+                            <p>{{ product.promotions.first.description }}</p>
+                            <h3>{{ product.promotions.first.name }}</h3>
+                        {% else %}
+                            <h3>{{ product.name }}</h3>
+                        {% endif %}
+                        <a href="detail/{{ product.slug }}" class="btn-shop">{{ 'تسوق الآن' |_ }} →</a>
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
-        <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
-            <div class="btn btn-dark btn-sm rounded-circle">
-                <i class="fas fa-chevron-left"></i>
-            </div>
+        
+        <a class="shein-carousel-control prev" href="#header-carousel" data-slide="prev">
+            <i class="fas fa-chevron-right"></i>
         </a>
-        <a class="carousel-control-next" href="#header-carousel" data-slide="next">
-            <div class="btn btn-dark btn-sm rounded-circle">
-                <i class="fas fa-chevron-right"></i>
-            </div>
+        <a class="shein-carousel-control next" href="#header-carousel" data-slide="next">
+            <i class="fas fa-chevron-left"></i>
         </a>
     </div>
 </div>
 
-<!-- سكريبت للتمرير والتفاعل -->
-<script>
-// جعل شريط التصنيفات قابل للتمرير باللمس
-const scrollContainer = document.getElementById('categoriesScroll');
-if (scrollContainer) {
-    // تمكين السحب بالماوس للتمرير
-    let isDown = false;
-    let startX;
-    let scrollLeft;
-    
-    scrollContainer.addEventListener('mousedown', (e) => {
-        isDown = true;
-        scrollContainer.style.cursor = 'grabbing';
-        startX = e.pageX - scrollContainer.offsetLeft;
-        scrollLeft = scrollContainer.scrollLeft;
-    });
-    
-    scrollContainer.addEventListener('mouseleave', () => {
-        isDown = false;
-        scrollContainer.style.cursor = 'grab';
-    });
-    
-    scrollContainer.addEventListener('mouseup', () => {
-        isDown = false;
-        scrollContainer.style.cursor = 'grab';
-    });
-    
-    scrollContainer.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - scrollContainer.offsetLeft;
-        const walk = (x - startX) * 2;
-        scrollContainer.scrollLeft = scrollLeft - walk;
-    });
-    
-    scrollContainer.style.cursor = 'grab';
-}
-
-
-</script>
