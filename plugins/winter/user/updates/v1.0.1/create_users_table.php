@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('activation_code')->nullable()->index();
             $table->string('persist_code')->nullable();
+            $table->string('role_frontend')->default('user');
             $table->string('reset_password_code')->nullable()->index();
             $table->text('permissions')->nullable();
             $table->boolean('is_activated')->default(0);

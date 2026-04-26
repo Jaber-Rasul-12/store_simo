@@ -25,6 +25,12 @@ columns:
     email:
         label: winter.user::lang.user.email
         searchable: true
+    rolefrontend_list:
+        label: winter.user::lang.user.role
+        type: text
+        sortable: false
+        searchable: false
+        
 
     created_at:
         label: winter.user::lang.user.created_at

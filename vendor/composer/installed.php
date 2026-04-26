@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'wintercms/winter',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '40287a9974d86813a0b52230c2d5d7508ff8804e',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -823,6 +823,12 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'rainlab/notify-plugin' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '~1.0',
+            ),
+        ),
         'rainlab/translate-plugin' => array(
             'dev_requirement' => false,
             'replaced' => array(
@@ -1399,6 +1405,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'winter/wn-notify-plugin' => array(
+            'pretty_version' => 'v2.1.0',
+            'version' => '2.1.0.0',
+            'reference' => '51f9646e272fa332bdfbe668b70a750760d88afd',
+            'type' => 'winter-plugin',
+            'install_path' => __DIR__ . '/../../plugins/winter/notify',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'winter/wn-system-module' => array(
             'pretty_version' => 'v1.2.9',
             'version' => '1.2.9.0',
@@ -1418,9 +1433,9 @@
             'dev_requirement' => false,
         ),
         'wintercms/winter' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '40287a9974d86813a0b52230c2d5d7508ff8804e',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

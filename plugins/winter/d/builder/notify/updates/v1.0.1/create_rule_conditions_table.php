@@ -8,7 +8,7 @@ class CreateConditionsRulesTable extends Migration
 {
     public function up()
     {
-        Schema::create('rainlab_notify_rule_conditions', function(Blueprint $table) {
+        Schema::create('winter_notify_rule_conditions', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('class_name')->nullable();
@@ -17,13 +17,13 @@ class CreateConditionsRulesTable extends Migration
             $table->string('rule_host_type', 100)->nullable();
             $table->integer('rule_host_id')->unsigned()->nullable()->index();
             $table->integer('rule_parent_id')->unsigned()->nullable()->index();
-            $table->index(['rule_host_id', 'rule_host_type'], 'host_rule_id_type');
+            $table->index(['rule_host_id_new', 'rule_host_type_new'], 'host_rule_id_type_new');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('rainlab_notify_rule_conditions');
+        Schema::dropIfExists('winter_notify_rule_conditions');
     }
 }

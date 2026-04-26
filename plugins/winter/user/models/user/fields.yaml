@@ -11,6 +11,13 @@ fields:
     surname:
         label: winter.user::lang.user.surname
         span: auto
+    role_frontend:
+        label: winter.user::lang.user.role
+        type: dropdown
+        options:
+            user: winter.user::lang.user.user
+            agent: winter.user::lang.user.agent
+        span: auto
 
 tabs:
     fields:

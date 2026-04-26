@@ -29,6 +29,7 @@ class User extends UserBase
         'username' => 'required|between:2,255|unique:users',
         'password' => 'required:create|between:8,255|confirmed',
         'password_confirmation' => 'required_with:password|between:8,255',
+        'role_frontend' => 'required|in:user,agent'
     ];
 
     /**
@@ -54,8 +55,10 @@ class User extends UserBase
         'password',
         'password_confirmation',
         'created_ip_address',
-        'last_ip_address'
+        'last_ip_address',
+        'role_frontend'
     ];
+
 
     /**
      * Reset guarded fields, because we use $fillable instead.
@@ -262,14 +265,16 @@ class User extends UserBase
      * Before validation event
      * @return void
      */
+    
     public function beforeValidate()
     {
         /*
-         * Guests are special
-         */
+        * Guests are special
+        */
         if ($this->is_guest && !$this->password) {
             $this->generatePassword();
-        }
+            }
+
 
         /*
          * When the username is not used, the email is substituted.
@@ -281,12 +286,41 @@ class User extends UserBase
             $this->username = $this->email;
         }
 
+
         /*
          * Apply Password Length Settings
          */
         $minPasswordLength = static::getMinPasswordLength();
         $this->rules['password'] = "required:create|between:$minPasswordLength,255|confirmed";
         $this->rules['password_confirmation'] = "required_with:password|between:$minPasswordLength,255";
+    }
+
+      public function isAgent()
+    {
+        return $this->role_frontend === 'agent';
+    }
+    
+    public function isUser()
+    {
+        return $this->role_frontend === 'user';
+    }
+
+      public function scopeUsers($query)
+    {
+        return $query->where('role_frontend', 'user');
+    }
+
+    public function getRolefrontendListAttribute()
+    {
+      return (!empty($this->attributes['role_frontend'])) ? trans('winter.user::lang.user.' . $this->attributes['role_frontend']) : trans('winter.user::lang.unknown');
+    }
+    
+    /**
+     * نطاق لجلب الوكلاء فقط
+     */
+    public function scopeAgents($query)
+    {
+        return $query->where('role_frontend', 'agent');
     }
 
     /**

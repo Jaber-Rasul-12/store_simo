@@ -13,7 +13,7 @@ class BuilderTableCreateStoreStoreCategoriesProducts extends Migration
             $table->increments('id')->unsigned();
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('product_id');
-            $table->unsignedInteger('subcategory_id');
+            $table->unsignedInteger('subcategory_id')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->foreign('category_id')

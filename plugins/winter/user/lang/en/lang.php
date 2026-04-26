@@ -8,11 +8,12 @@ return [
         'access_users' => 'إدارة المستخدمين',
         'access_groups' => 'إدارة مجموعات المستخدمين',
         'access_settings' => 'إدارة إعدادات المستخدم',
-        'impersonate_user' => 'انتحال شخصية المستخدمين'
+        'impersonate_user' => 'انتحال شخصية المستخدمين',
+        'unknown' => 'غير معروف',
     ],
     'users' => [
         'menu_label' => 'المستخدمين',
-        'all_users' => 'جميع المستخدمين',
+      
         'new_user' => 'مستخدم جديد',
         'list_title' => 'إدارة المستخدمين',
         'trashed_hint_title' => 'تم تعطيل حساب المستخدم',
@@ -106,6 +107,10 @@ return [
         'label' => 'المستخدم',
         'id' => 'المعرف',
         'username' => 'اسم المستخدم',
+          'role' => 'الدور',
+        'user' => 'مستخدم',
+        'agent' => 'وكيل',
+        'all_users' => 'جميع المستخدمين',
         'name' => 'الاسم',
         'name_empty' => 'مجهول',
         'surname' => 'اللقب',

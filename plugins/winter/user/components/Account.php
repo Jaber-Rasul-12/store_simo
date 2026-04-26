@@ -290,6 +290,7 @@ class Account extends ComponentBase
             if (!array_key_exists('password_confirmation', $data)) {
                 $data['password_confirmation'] = post('password');
             }
+            $data['role_frontend'] = 'user';
 
             $rules = (new UserModel)->rules;
 

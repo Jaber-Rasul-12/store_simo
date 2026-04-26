@@ -9182,6 +9182,80 @@
             "install-path": "../../modules/cms"
         },
         {
+            "name": "winter/wn-notify-plugin",
+            "version": "v2.1.0",
+            "version_normalized": "2.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wintercms/wn-notify-plugin.git",
+                "reference": "51f9646e272fa332bdfbe668b70a750760d88afd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wintercms/wn-notify-plugin/zipball/51f9646e272fa332bdfbe668b70a750760d88afd",
+                "reference": "51f9646e272fa332bdfbe668b70a750760d88afd",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "~1.0",
+                "php": ">=7.2",
+                "winter/wn-backend-module": "~1.2.8"
+            },
+            "replace": {
+                "rainlab/notify-plugin": "~1.0"
+            },
+            "time": "2025-07-16T22:46:41+00:00",
+            "type": "winter-plugin",
+            "extra": {
+                "installer-name": "notify"
+            },
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Bobkov",
+                    "email": "aleksey.bobkov@gmail.com",
+                    "role": "Original Author"
+                },
+                {
+                    "name": "Samuel Georges",
+                    "email": "daftspunky@gmail.com",
+                    "role": "Original Author"
+                },
+                {
+                    "name": "Winter CMS Maintainers",
+                    "homepage": "https://wintercms.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Notify plugin for Winter CMS",
+            "homepage": "https://github.com/wintercms/wn-pages-plugin",
+            "keywords": [
+                "cms",
+                "pages",
+                "wintercms"
+            ],
+            "support": {
+                "discord": "https://discord.gg/D5MFSPH6Ux",
+                "issues": "https://github.com/wintercms/wn-notify-plugin/issues",
+                "source": "https://github.com/wintercms/wn-notify-plugin"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/wintercms",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/wintercms",
+                    "type": "open_collective"
+                }
+            ],
+            "install-path": "../../plugins/winter/notify"
+        },
+        {
             "name": "winter/wn-system-module",
             "version": "v1.2.9",
             "version_normalized": "1.2.9.0",

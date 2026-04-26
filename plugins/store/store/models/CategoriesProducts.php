@@ -10,13 +10,16 @@ class CategoriesProducts extends Model
 {
     use \Winter\Storm\Database\Traits\Validation;
     
- 
+    use \Winter\Storm\Database\Traits\Nullable;
+
 
 
     /**
      * @var string The database table used by the model.
      */
     public $table = 'store_store_categories_products';
+
+    protected $nullable = ['subcategory_id'];
 
     /**
      * @var array Validation rules
