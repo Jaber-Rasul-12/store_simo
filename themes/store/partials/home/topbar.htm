@@ -65,10 +65,12 @@
                         <div class="offers-shine"></div>
                     </a>
                 </div>
+
+                <a href="/shop" class="action-btn register-btn">
+    <i class="fas fa-search" style="padding: 2px;"></i>
+    <span class="action-text">أبحث أكثر</span>
+</a>
             {% if user %}
-
-
-
                 <a href="/checkout" class="action-btn cart-btn">
                     <i class="fas fa-check-circle" style="color: var(--primary-color);"></i>
                     <span class="badge-topbar">{{ Cart.getCountCartsCheckout }}</span>
@@ -92,14 +94,15 @@
                 
                 
                 <a href="/login" class="action-btn login-btn">
-                    <i class="fas fa-sign-in-alt" style="color: var(--primary-color);"></i>
+                    <i class="fas fa-sign-in-alt" style="color: var(--primary-color); padding: 2px;"></i>
                     <span class="action-text">{{ 'تسجيل دخول' }}</span>
                 </a>
                 <a href="/register" class="action-btn register-btn">
-                    <i class="fas fa-user-plus"></i>
+                    <i class="fas fa-user-plus" style=" padding: 2px;"></i>
                     <span class="action-text">{{ 'التسجيل في الموقع' }}</span>
                 </a>
                 {% endif %}
+
                 
             </div>
         </div>
