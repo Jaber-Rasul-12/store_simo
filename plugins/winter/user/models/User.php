@@ -29,8 +29,8 @@ class User extends UserBase
         'username' => 'required|between:2,255|unique:users',
         'password' => 'required:create|between:8,255|confirmed',
         'password_confirmation' => 'required_with:password|between:8,255',
-        'role_frontend' => 'required|in:user,agent',
-        'phone' => 'required|string|max:100',
+        'role_frontend' => 'nullable|in:user,agent',
+        'phone' => 'nullable|string|max:100',
     ];
 
     /**
@@ -269,13 +269,11 @@ class User extends UserBase
     
     public function beforeValidate()
     {
-        /*
-        * Guests are special
-        */
-        if ($this->is_guest && !$this->password) {
-            $this->generatePassword();
-            }
 
+
+       if(empty($this->role_frontend)) {
+            $this->role_frontend = 'user';
+        }
 
         /*
          * When the username is not used, the email is substituted.
