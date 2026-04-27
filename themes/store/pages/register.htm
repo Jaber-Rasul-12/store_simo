@@ -318,6 +318,20 @@ paramCode = "code"
                                 />
                             </div>
 
+                            <div class="authmaster-field">
+                                <label for="registerPhone" class="authmaster-label">
+                                    <i class="fas fa-phone me-2"></i>{{ 'رقم الموبايل' |_ }}
+                                </label>
+                                <input
+                                    name="phone"
+                                    type="tel"
+                                    class="authmaster-input"
+                                    id="registerPhone"
+                                    placeholder="0934240928"
+                                    required
+                                />
+                            </div>
+
                             {% if loginAttribute == "username" %}
                                 <div class="authmaster-field">
                                     <label for="registerUsername" class="authmaster-label">

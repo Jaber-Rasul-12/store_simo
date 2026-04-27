@@ -29,7 +29,8 @@ class User extends UserBase
         'username' => 'required|between:2,255|unique:users',
         'password' => 'required:create|between:8,255|confirmed',
         'password_confirmation' => 'required_with:password|between:8,255',
-        'role_frontend' => 'required|in:user,agent'
+        'role_frontend' => 'required|in:user,agent',
+        'phone' => 'required|string|max:100',
     ];
 
     /**
