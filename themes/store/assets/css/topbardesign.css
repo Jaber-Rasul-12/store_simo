@@ -975,24 +975,22 @@
             }
 
             
-            .top-section {
-                padding: 10px 0;
-            }
+  
             
-            .top-section .row {
-                flex-direction: column;
-                gap: 8px;
-                padding: 0 5px;
-            }
+
             
             .top-links {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 50px;
+                gap: 8px;
             }
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
             .top-links a {
                 font-size: 8px;
-                padding: 5px 10px;
+                /* padding: 5px 10px; */
             }
 
             .top-links span {
