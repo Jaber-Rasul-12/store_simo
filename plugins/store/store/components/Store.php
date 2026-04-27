@@ -362,6 +362,42 @@ class Store extends ComponentBase
         return Brand::withCount('products')->where('status' ,'=', true)->get();
     }
 
+
+public function getTopSubcategories()
+{
+    // جلب التصنيفات التي لها منتجات فقط
+    $subcategories = SubCategory::whereHas('products')
+        
+        ->get();
+    
+    // إضافة عدد المنتجات يدوياً
+    foreach ($subcategories as $subcategory) {
+        $subcategory->products_count = $subcategory->products()->count();
+    }
+    
+    // ترتيب حسب عدد المنتجات وأخذ أول 10
+    return $subcategories->sortByDesc('products_count')->take(10);
+}
+
+
+public function getTopBrands()
+{
+    // جلب التصنيفات التي لها منتجات فقط
+    $brands = Brand::whereHas('products')
+        
+        ->get();
+    
+    // إضافة عدد المنتجات يدوياً
+    foreach ($brands as $brand) {
+        $brand->products_count = $brand->products()->count();
+    }
+    
+    // ترتيب حسب عدد المنتجات وأخذ أول 10
+    return $brands->sortByDesc('products_count')->take(10);
+}
+
+
+
 public function getCateogriesOnHomePage()
 {
 

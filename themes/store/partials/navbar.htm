@@ -917,39 +917,7 @@
     </a>
 </div>
 
-<!-- ============================================ -->
-<!-- البانر / الكاروسيل -->
-<!-- ============================================ -->
-<div class="shein-carousel">
-    <div id="header-carousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            {% for product in Store.getProductsShowHomePage %}
-            <div class="carousel-item {% if loop.first %}active{% endif %}">
-                <div class="shein-carousel-item">
-                    <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" 
-                         alt="{{ product.name }}">
-                    <div class="shein-carousel-caption">
-                        {% if product.promotions.first %}
-                            <p>{{ product.promotions.first.description }}</p>
-                            <h3>{{ product.promotions.first.name }}</h3>
-                        {% else %}
-                            <h3>{{ product.name }}</h3>
-                        {% endif %}
-                        <a href="detail/{{ product.slug }}" class="btn-shop">{{ 'تسوق الآن' |_ }} →</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        
-        <a class="shein-carousel-control prev" href="#header-carousel" data-slide="prev">
-            <i class="fas fa-chevron-right"></i>
-        </a>
-        <a class="shein-carousel-control next" href="#header-carousel" data-slide="next">
-            <i class="fas fa-chevron-left"></i>
-        </a>
-    </div>
-</div>
+
 
 <!-- ============================================ -->
 <!-- سكريبت متكامل مع دعم subcategories -->

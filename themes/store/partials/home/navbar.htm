@@ -919,36 +919,939 @@
 <!-- ============================================ -->
 <!-- البانر / الكاروسيل -->
 <!-- ============================================ -->
-<div class="shein-carousel">
-    <div id="header-carousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            {% for product in Store.getProductsShowHomePage %}
-            <div class="carousel-item {% if loop.first %}active{% endif %}">
-                <div class="shein-carousel-item">
-                    <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" 
-                         alt="{{ product.name }}">
-                    <div class="shein-carousel-caption">
-                        {% if product.promotions.first %}
-                            <p>{{ product.promotions.first.description }}</p>
-                            <h3>{{ product.promotions.first.name }}</h3>
-                        {% else %}
-                            <h3>{{ product.name }}</h3>
-                        {% endif %}
-                        <a href="detail/{{ product.slug }}" class="btn-shop">{{ 'تسوق الآن' |_ }} →</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+
+
+<style>
+/* ============================================ */
+/* تصميم ممتلئ بالكامل - بدون أي مسافات جانبية */
+/* كثافة عالية في الموبايل - منتجات أكثر في الشاشة */
+/* ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.shein-full-section {
+    background: #f5f7fa;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* إلغاء المسافات الجانبية تمامًا */
+.shein-full-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* إضافة مسافة داخلية خفيفة للقراءة فقط */
+.content-padding {
+    padding: 0 15px;
+}
+
+/* ============================================ */
+/* القسم 1: عروض سريعة - بدون مسافات */
+/* ============================================ */
+.quick-offers {
+    margin: 0;
+    padding: 15px;
+    background: #f5f7fa;
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.offer-mini-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 18px;
+    color: white;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+.offer-mini-card:nth-child(2) {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.offer-mini-card:nth-child(3) {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.offer-mini-card:nth-child(4) {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.offer-mini-card h4 {
+    font-size: 13px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.offer-mini-card .percentage {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+/* ============================================ */
+/* القسم 2: التصنيفات - كثيفة */
+/* ============================================ */
+/* ============================================ */
+/* تحسين عرض الصور في التصنيفات الرئيسية */
+/* ============================================ */
+
+.main-categories {
+    margin: 0;
+    padding: 20px 15px;
+    background: white;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 15px;
+}
+
+.category-icon-card {
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.category-icon-card:hover {
+    transform: translateY(-5px);
+}
+
+/* الحاوية الدائرية للصورة */
+.category-icon-circle {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.category-icon-card:hover .category-icon-circle {
+    box-shadow: 0 5px 15px rgba(255,71,87,0.2);
+    transform: scale(1.05);
+}
+
+/* الصورة داخل الدائرة */
+.category-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.category-icon-card:hover .category-image {
+    transform: scale(1.1);
+}
+
+/* مكان مؤقت عند عدم وجود صورة */
+.category-icon-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+    color: white;
+    font-size: 28px;
+}
+
+/* اسم التصنيف */
+.category-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #222;
+    display: block;
+    margin-bottom: 4px;
+    transition: color 0.3s ease;
+}
+
+.category-icon-card:hover .category-name {
+    color: #ff4757;
+}
+
+/* عدد المنتجات */
+.category-count {
+    font-size: 10px;
+    color: #999;
+    display: block;
+}
+
+/* ============================================ */
+/* استجابة للموبايل */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    .categories-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+    }
+    
+    .category-icon-circle {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .category-icon-placeholder {
+        font-size: 22px;
+    }
+    
+    .category-name {
+        font-size: 11px;
+    }
+    
+    .category-count {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 480px) {
+    .categories-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+    
+    .category-icon-circle {
+        width: 50px;
+        height: 50px;
+    }
+}
+/* ============================================ */
+/* القسم 3: بانر - بعرض كامل */
+/* ============================================ */
+.mid-banner {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+}
+
+.mid-banner img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.banner-content {
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+    color: white;
+    text-align: right;
+}
+
+/* ============================================ */
+/* القسم 4: منتجات ساخنة - 6 منتجات في الموبايل */
+/* ============================================ */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 20px 15px 15px;
+    background: #f5f7fa;
+}
+
+.section-header h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #222;
+}
+
+.hot-products-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    padding: 0 15px 15px;
+}
+
+/* تصميم بطاقة المنتج - مضغوط */
+.product-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-img-wrapper {
+    position: relative;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: #f5f7fa;
+}
+
+.product-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #ff4757;
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.product-info-card {
+    padding: 8px;
+}
+
+.product-title-card {
+    font-size: 12px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 5px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 30px;
+}
+
+.product-price-card {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+}
+
+.current-price-card {
+    font-size: 14px;
+    font-weight: 800;
+    color: #ff4757;
+}
+
+.old-price-card {
+    font-size: 10px;
+    color: #bbb;
+    text-decoration: line-through;
+}
+
+.rating-card {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stars-card {
+    color: #ffb800;
+    font-size: 9px;
+}
+
+/* ============================================ */
+/* القسم 5: عروض محدودة مع تايمر */
+/* ============================================ */
+.limited-offers {
+    margin: 0;
+    background: linear-gradient(135deg, #1e1e2f 0%, #2d2d44 100%);
+    padding: 25px 15px;
+}
+
+.limited-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.limited-header h3 {
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 12px;
+}
+
+.timer-item {
+    text-align: center;
+    background: rgba(255,255,255,0.15);
+    padding: 8px 12px;
+    border-radius: 10px;
+    min-width: 65px;
+}
+
+.timer-number {
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+}
+
+.limited-products {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 25px;
+}
+
+/* ============================================ */
+/* القسم 6: ماركات - كثيفة */
+/* ============================================ */
+.brands-showcase {
+    padding: 20px 15px;
+    background: white;
+}
+
+.brands-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 12px;
+}
+
+.brand-card {
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    background: #f5f7fa;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.brand-card img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-bottom: 6px;
+}
+
+.brand-card h4 {
+    font-size: 12px;
+    color: #222;
+}
+
+/* ============================================ */
+/* القسم 7: وصل حديثاً - 8 منتجات */
+/* ============================================ */
+.new-arrivals {
+    padding: 0 15px 20px;
+    background: #f5f7fa;
+}
+
+.new-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+}
+
+.new-item {
+    text-decoration: none;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.new-img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.new-info {
+    padding: 8px;
+}
+
+.new-info h4 {
+    font-size: 11px;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.new-price {
+    color: #ff4757;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+/* ============================================ */
+/* القسم 8: توصيات - 6 منتجات */
+/* ============================================ */
+.recommendations {
+    padding: 0 15px 20px;
+    background: #f5f7fa;
+}
+
+.recommend-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+}
+
+/* ============================================ */
+/* ========== استجابة الموبايل ========== */
+/* ============================================ */
+
+/* شاشات 1200px فأقل */
+@media (max-width: 1200px) {
+    .categories-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+    
+    .hot-products-grid,
+    .recommend-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .limited-products {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .brands-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .new-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+/* شاشات 992px فأقل */
+@media (max-width: 992px) {
+    .categories-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .hot-products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .limited-products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .brands-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .new-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .recommend-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ============================================ */
+/* الموبايل - منتجات أكثر في الشاشة */
+/* ============================================ */
+@media (max-width: 768px) {
+    /* عروض سريعة */
+    .offers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .offer-mini-card {
+        padding: 12px;
+    }
+    
+    .offer-mini-card .percentage {
+        font-size: 20px;
+    }
+    
+    /* التصنيفات - 5 أعمدة كثيفة */
+    
+    /* المنتجات الساخنة - 3 منتجات في الصف (أكثر كثافة) */
+    .hot-products-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    /* العروض المحدودة - صفين */
+    .limited-products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .limited-header h3 {
+        font-size: 18px;
+    }
+    
+    .timer-item {
+        min-width: 50px;
+        padding: 6px 8px;
+    }
+    
+    .timer-number {
+        font-size: 18px;
+    }
+    
+    .timer-label {
+        font-size: 9px;
+    }
+    
+    /* الماركات - 4 أعمدة */
+    .brands-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+    
+    .brand-card {
+        padding: 8px;
+    }
+    
+    .brand-card img {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .brand-card h4 {
+        font-size: 10px;
+    }
+    
+    /* وصل حديثاً - 4 أعمدة (أكثر كثافة) */
+    .new-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+    
+    .new-info h4 {
+        font-size: 10px;
+    }
+    
+    .new-price {
+        font-size: 11px;
+    }
+    
+    /* توصيات - 3 أعمدة */
+    .recommend-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    /* تصغير أحجام النصوص العامة */
+    .product-title-card {
+        font-size: 11px;
+        height: 26px;
+    }
+    
+    .current-price-card {
+        font-size: 12px;
+    }
+    
+    .section-header h3 {
+        font-size: 18px;
+    }
+}
+
+/* موبايل صغير جداً - كثافة قصوى */
+@media (max-width: 480px) {
+    /* التصنيفات - 4 أعمدة */
+   
+    
+    /* المنتجات الساخنة - عمودين (أكثر وضوحاً) */
+    .hot-products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* العروض المحدودة - عمود واحد مع تمرير أفقي */
+    .limited-products {
+        overflow-x: auto;
+        display: flex;
+        gap: 12px;
+        scrollbar-width: none;
+    }
+    
+    .limited-products .product-card {
+        min-width: 160px;
+        flex-shrink: 0;
+    }
+    
+    /* الماركات - 3 أعمدة */
+    .brands-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* وصل حديثاً - 3 أعمدة */
+    .new-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* توصيات - عمودين */
+    .recommend-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* البانر */
+    .banner-content h2 {
+        font-size: 16px;
+    }
+    
+    .banner-content p {
+        font-size: 10px;
+    }
+    
+    .banner-btn {
+        padding: 5px 12px;
+        font-size: 10px;
+    }
+}
+</style>
+
+<!-- ============================================ -->
+<!-- التصميم الرئيسي - بدون مسافات جانبية -->
+<!-- ============================================ -->
+<div class="shein-full-section">
+    
+    <!-- القسم 1: عروض سريعة -->
+    <div class="quick-offers">
+        <div class="offers-grid">
+            <a href="/promotions" class="offer-mini-card">
+                <h4>تخفيضات الصيف</h4>
+                <div class="percentage">-70%</div>
+            </a>
+            <a href="/promotions" class="offer-mini-card">
+                <h4>عرض سريع</h4>
+                <div class="percentage">-30%</div>
+            </a>
+            <a href="/promotions" class="offer-mini-card">
+                <h4>تشكيلة جديدة</h4>
+                <div class="percentage">-50%</div>
+            </a>
+            <a href="/promotions" class="offer-mini-card">
+                <h4>هدايا مجانية</h4>
+                <div class="percentage">Buy 1+1</div>
+            </a>
         </div>
-        
-        <a class="shein-carousel-control prev" href="#header-carousel" data-slide="prev">
-            <i class="fas fa-chevron-right"></i>
-        </a>
-        <a class="shein-carousel-control next" href="#header-carousel" data-slide="next">
-            <i class="fas fa-chevron-left"></i>
-        </a>
+    </div>
+    
+    <!-- القسم 2: التصنيفات الرئيسية -->
+<!-- القسم 2: التصنيفات الرئيسية -->
+<div class="main-categories">
+    <div class="categories-grid">
+        {% for subcategory in Store.getTopSubcategories %}
+            <a href="/sub_category/{{ subcategory.slug }}" class="category-icon-card">
+                <div class="category-icon-circle">
+                    {% if subcategory.image.path %}
+                        <img src="{{ subcategory.image.path }}" alt="{{ subcategory.name }}" class="category-image">
+                    {% else %}
+                        <div class="category-icon-placeholder">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                <span class="category-name">{{ subcategory.name }}</span>
+                {% if subcategory.products_count %}
+                    <span class="category-count">{{ subcategory.products_count }} منتج</span>
+                {% endif %}
+            </a>
+        {% endfor %}
     </div>
 </div>
+    
+
+    
+    <!-- القسم 4: منتجات ساخنة - 6 منتجات -->
+    <div class="section-header">
+        <h3>🔥 منتجات ساخنة</h3>
+        <a href="/shop" style="color:#ff4757;">شاهد الكل ›</a>
+    </div>
+    <div class="hot-products-grid">
+        {% for product in Store.onGetProductsIsFeatured %}
+        <a href="/detail/{{ product.slug }}" class="product-card">
+            <div class="product-img-wrapper">
+                <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="منتج">
+                <span class="product-badge">الأكثر مبيعاً</span>
+            </div>
+            <div class="product-info-card">
+                <h4 class="product-title-card">{{ product.name }}</h4>
+                <div class="product-price-card">
+                   {% set activePrice = null %}
+                            {% set previousPrice = null %}
+                            
+                            {% for price in product.prices %}
+                                {% if price.status == true %}
+                                    {% set activePrice = price %}
+                                    {% if loop.index0 > 0 %}
+                                        {% set previousPrice = product.prices[loop.index0 - 1] %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if activePrice %}
+                            {# <div class="discount-badge">-30%</div> #}
+                            <span class="current-price-card">{{ activePrice.price }}$</span>
+                            {% if previousPrice %}
+                            <span class="old-price-card">{{ previousPrice.price }}$</span>
+                            {% endif %}
+
+                            {% endif %}
+                </div>
+                <div class="rating-card">
+                    <span class="stars-card"><div class="review-rating">
+                                            {% for i in 1..5 %}
+                                                {% if comment.rating >= i %}
+                                                    <i class="fas fa-star"></i>
+                                                {% elseif comment.rating >= (i - 0.5) %}
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                {% else %}
+                                                    <i class="far fa-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                            </div>
+                                            <span>{{ comment.rating|number_format(1) }}</span> 
+                                            </span>
+                  
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+    
+
+
+  
+
+
+
+    
+    <!-- القسم 5: عروض محدودة مع تايمر -->
+    <div class="limited-offers">
+        <div class="limited-header">
+            <h3>⚡ عروض محدودة الوقت</h3>
+            <p style="color:rgba(255,255,255,0.8);">خصم يصل إلى 60%</p>
+            <div class="timer">
+                <div class="timer-item">
+                    <div class="timer-number" id="hours">24</div>
+                    <div class="timer-label">ساعة</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-number" id="minutes">00</div>
+                    <div class="timer-label">دقيقة</div>
+                </div>
+                <div class="timer-item">
+                    <div class="timer-number" id="seconds">00</div>
+                    <div class="timer-label">ثانية</div>
+                </div>
+            </div>
+        </div>
+        <div class="limited-products">
+            {% for product in Store.getProductsShowHomePage %}
+            <a href="/detail/{{ product.slug }}" class="product-card">
+                <div class="product-img-wrapper">
+                    <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="منتج">
+                    <span class="product-badge">-60%</span>
+                </div>
+                <div class="product-info-card">
+                    <h4 class="product-title-card">{{ product.name }}</h4>
+                    <div class="product-price-card">
+                    {% set activePrice = null %}
+                            {% set previousPrice = null %}
+                            
+                            {% for price in product.prices %}
+                                {% if price.status == true %}
+                                    {% set activePrice = price %}
+                                    {% if loop.index0 > 0 %}
+                                        {% set previousPrice = product.prices[loop.index0 - 1] %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if activePrice %}
+                            {# <div class="discount-badge">-30%</div> #}
+                            <span class="current-price-card">{{ activePrice.price }}$</span>
+                            {% if previousPrice %}
+                            <span class="old-price-card">{{ previousPrice.price }}$</span>
+                            {% endif %}
+
+                            {% endif %}
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+          
+        </div>
+    </div>
+    
+    <!-- القسم 6: ماركات شهيرة -->
+    <div class="section-header">
+        <h3>🏷️ ماركات شهيرة</h3>
+        <a href="/shop" style="color:#ff4757;">جميع الماركات ›</a>
+    </div>
+    <div class="brands-showcase">
+        <div class="brands-grid">
+           {% for brand in Store.getTopBrands %}
+            <a href="/brand/{{ brand.slug }}" class="brand-card">
+                <img src="{% if brand.image.path %}{{ brand.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="{{ brand.name }}">
+                <h4>{{ brand.name }}</h4>
+            </a>
+            {% endfor %}
+
+        </div>
+    </div>
+    
+</div>
+
+<!-- سكربت التايمر -->
+<script>
+function startTimer(hours, minutes, seconds) {
+    let totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
+    
+    const timerInterval = setInterval(() => {
+        totalSeconds--;
+        
+        if (totalSeconds < 0) {
+            clearInterval(timerInterval);
+            document.getElementById('hours').innerText = '00';
+            document.getElementById('minutes').innerText = '00';
+            document.getElementById('seconds').innerText = '00';
+            return;
+        }
+        
+        const hrs = Math.floor(totalSeconds / 3600);
+        const mins = Math.floor((totalSeconds % 3600) / 60);
+        const secs = totalSeconds % 60;
+        
+        document.getElementById('hours').innerText = hrs.toString().padStart(2, '0');
+        document.getElementById('minutes').innerText = mins.toString().padStart(2, '0');
+        document.getElementById('seconds').innerText = secs.toString().padStart(2, '0');
+    }, 1000);
+}
+
+startTimer(24, 0, 0);
+</script>
+
+
 
 <!-- ============================================ -->
 <!-- سكريبت متكامل مع دعم subcategories -->

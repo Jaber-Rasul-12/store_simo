@@ -28,7 +28,12 @@ class SubCategory extends Model
 
 
         public $belongsToMany = [
-       
+         'products' => [
+        'Store\Store\Models\Product',
+        'table' => 'store_store_categories_products',
+        'key' => 'subcategory_id',
+        'otherKey' => 'product_id'
+    ],
         'related_subcategories' => [
         self::class,
         'table' => 'store_store_subcategory_related',
@@ -48,7 +53,6 @@ class SubCategory extends Model
     ];
     public $hasMany = [
       'categories_products' => ['Store\Store\Models\CategoriesProducts'],
-      'products' => ['Store\Store\Models\Product', 'table' => 'store_store_categories_products' , 'key' => 'subcategory_id']
     ];
     public $jsonable = [];
 
