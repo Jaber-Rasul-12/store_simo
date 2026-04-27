@@ -1,821 +1,1067 @@
+<style>
+    /* ========================================
+    MOBILE SHOP - BACKEND STYLE FILTERS
+    ======================================== */
+    
+    /* CSS Variables */
+    :root {
+        --mshop-primary: #D19C97;
+        --mshop-primary-dark: #b87a74;
+        --mshop-primary-light: #fdf2f1;
+        --mshop-secondary: #EDF1FF;
+        --mshop-success: #10b981;
+        --mshop-danger: #ef4444;
+        --mshop-warning: #f59e0b;
+        --mshop-dark: #1e293b;
+        --mshop-gray: #64748b;
+        --mshop-gray-light: #94a3b8;
+        --mshop-light: #f8fafc;
+        --mshop-border: #e2e8f0;
+        --mshop-shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+        --mshop-shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+        --mshop-shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+        --mshop-radius-sm: 8px;
+        --mshop-radius-md: 12px;
+        --mshop-radius-lg: 16px;
+    }
 
-    <style>
-        /* ========================================
-        MOBILE SHOP - CUSTOM CLASSES (NO CONFLICT)
-        ======================================== */
-        
-        /* CSS Variables */
-        :root {
-            --mshop-primary: #D19C97;
-            --mshop-primary-dark: #343a40;
-            --mshop-primary-light: #b46962;
-            --mshop-secondary: #EDF1FF;
-            --mshop-success: #10b981;
-            --mshop-danger: #ef4444;
-            --mshop-warning: #f59e0b;
-            --mshop-dark: #1e293b;
-            --mshop-gray: #64748b;
-            --mshop-light: #f8fafc;
-            --mshop-border: #e2e8f0;
-            --mshop-shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-            --mshop-shadow-md: 0 4px 16px rgba(0,0,0,0.06);
-            --mshop-shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
-            --mshop-radius-sm: 12px;
-            --mshop-radius-md: 16px;
-            --mshop-radius-lg: 20px;
-
+    body {
+        background: #f5f7fb;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Tajawal', sans-serif;
+    }
+    
+    /* ========================================
+    MAIN CONTAINER
+    ======================================== */
+    .mshop-container {
+        max-width: 85%;
+        margin: 0 auto;
+        padding: 20px;
+        min-height: 100vh;
+    }
+    
+    /* ========================================
+    FILTER BAR - BACKEND STYLE
+    ======================================== */
+    .mshop-filter-bar {
+        background: white;
+        border-radius: var(--mshop-radius-md);
+        box-shadow: var(--mshop-shadow-sm);
+        margin-bottom: 24px;
+        overflow: hidden;
+    }
+    
+    /* Filter Header */
+    .mshop-filter-header {
+        padding: 16px 20px;
+        background: linear-gradient(135deg, var(--mshop-primary-light) 0%, white 100%);
+        border-bottom: 1px solid var(--mshop-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .mshop-filter-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--mshop-dark);
+    }
+    
+    .mshop-filter-title i {
+        color: var(--mshop-primary);
+        font-size: 18px;
+    }
+    
+    .mshop-filter-actions {
+        display: flex;
+        gap: 12px;
+    }
+    
+    /* Filter Scopes Container - Like Backend */
+    .mshop-filter-scopes {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        background: white;
+        border-bottom: 1px solid var(--mshop-border);
+    }
+    
+    /* Individual Filter Scope - Backend Style */
+    .mshop-filter-scope {
+        display: inline-flex;
+        align-items: center;
+        background: #f8fafc;
+        border: 1px solid var(--mshop-border);
+        border-radius: 6px;
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        gap: 10px;
+    }
+    
+    .mshop-filter-scope:hover {
+        background: white;
+        border-color: var(--mshop-primary);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .mshop-filter-scope.active {
+        background: linear-gradient(135deg, var(--mshop-primary) 0%, var(--mshop-primary-dark) 100%);
+        border-color: var(--mshop-primary);
+    }
+    
+    .mshop-filter-scope.active .filter-label,
+    .mshop-filter-scope.active .filter-setting {
+        color: white;
+    }
+    
+    .mshop-filter-scope .filter-label {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--mshop-gray);
+    }
+    
+    .mshop-filter-scope .filter-setting {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--mshop-dark);
+        background: rgba(0,0,0,0.05);
+        padding: 2px 8px;
+        border-radius: 12px;
+    }
+    
+    .mshop-filter-scope.active .filter-setting {
+        background: rgba(255,255,255,0.2);
+        color: white;
+    }
+    
+    /* Checkbox Scope - Backend Style */
+    .mshop-filter-scope.checkbox {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        padding: 8px 16px;
+        background: #f8fafc;
+        border: 1px solid var(--mshop-border);
+        border-radius: 6px;
+    }
+    
+    .mshop-filter-scope.checkbox:hover {
+        background: white;
+    }
+    
+    .mshop-filter-scope.checkbox input {
+        margin: 0;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        accent-color: var(--mshop-primary);
+    }
+    
+    .mshop-filter-scope.checkbox label {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--mshop-dark);
+        cursor: pointer;
+        margin: 0;
+    }
+    
+    /* Filter Dropdown Panel - Like Backend */
+    .mshop-filter-panel {
+        display: none;
+        background: white;
+        border-top: 1px solid var(--mshop-border);
+        padding: 20px;
+        animation: slideDown 0.2s ease;
+    }
+    
+    .mshop-filter-panel.active {
+        display: block;
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
         }
-        
-
-        body {
-            background: #f5f7fb;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Tajawal', sans-serif;
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
-        
-        /* ========================================
-        MAIN CONTAINER
-        ======================================== */
-        .mshop-container {
-            max-width: 85%;
-            overflow-x: hidden;
-            padding: 12px;
-            min-height: 100vh;
-                    }
-        
-        /* ========================================
-        SIDEBAR - MOBILE FRIENDLY
-        ======================================== */
-        .mshop-sidebar {
-            background: white;
-            border-radius: var(--mshop-radius-lg);
-            padding: 20px 16px;
-            margin-bottom: 20px;
-            box-shadow: var(--mshop-shadow-sm);
-        }
-        
-        .mshop-filter-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--mshop-dark);
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--mshop-border);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .mshop-filter-title i {
-            color: var(--mshop-primary);
-            font-size: 18px;
-        }
-        
-        .mshop-filter-section {
-            margin-bottom: 28px;
-        }
-        
-        .mshop-filter-label {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--mshop-dark);
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        /* Price Inputs */
-        .mshop-price-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        
-        .mshop-price-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        
-        .mshop-price-label {
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--mshop-gray);
-        }
-        
-        .mshop-price-wrapper {
-            display: flex;
-            align-items: center;
-            border: 2px solid var(--mshop-border);
-            border-radius: var(--mshop-radius-sm);
-            background: white;
-            transition: all 0.2s;
-        }
-        
-        .mshop-price-wrapper:focus-within {
-            border-color: var(--mshop-primary);
-            box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
-        }
-        
-        .mshop-price-symbol {
-            padding: 10px 12px;
-            background: #f1f5f9;
-            color: var(--mshop-gray);
-            font-weight: 600;
-            border-radius: 10px 0 0 10px;
-        }
-        
-        .mshop-price-input {
-            flex: 1;
-            padding: 10px 12px;
-            border: none;
-            outline: none;
-            font-size: 14px;
-            border-radius: 0 10px 10px 0;
-        }
-        
-        /* Checkbox Styles */
-        .mshop-checkbox-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--mshop-border);
-        }
-        
-        .mshop-checkbox-item:last-child {
-            border-bottom: none;
-        }
-        
-        .mshop-checkbox-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            flex: 1;
-        }
-        
-        .mshop-checkbox {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: var(--mshop-primary);
-        }
-        
-        .mshop-checkbox-text {
-            font-size: 14px;
-            color: var(--mshop-dark);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .mshop-color-dot {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            border: 1px solid var(--mshop-border);
-        }
-        
-        .mshop-count-badge {
-            background: #f1f5f9;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--mshop-gray);
-        }
-        
-        /* Scrollable List */
-        .mshop-scroll-list {
-            max-height: 280px;
-            overflow-y: auto;
-            margin-bottom: 16px;
-        }
-        
-        .mshop-scroll-list::-webkit-scrollbar {
-            width: 4px;
-        }
-        
-        .mshop-scroll-list::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 10px;
-        }
-        
-        .mshop-scroll-list::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
-        }
-        
-        /* Buttons */
-        .mshop-btn {
-            padding: 12px 20px;
-            border-radius: var(--mshop-radius-sm);
-            font-size: 14px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        
-        .mshop-btn-primary {
-            background: linear-gradient(135deg, var(--mshop-primary) 0%, var(--mshop-primary-dark) 100%);
-            color: white;
-            width: 100%;
-        }
-        
-        .mshop-btn-primary:active {
-            transform: scale(0.97);
-        }
-        
-        .mshop-btn-outline {
-            background: white;
-            border: 2px solid var(--mshop-border);
-            color: var(--mshop-gray);
-        }
-        
-        .mshop-btn-outline:active {
-            transform: scale(0.97);
-        }
-        
-        .mshop-filter-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-        }
-        
-        /* ========================================
-        SEARCH BAR
-        ======================================== */
-        .mshop-search-wrapper {
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .mshop-search-input {
-            width: 100%;
-            padding: 14px 16px 14px 48px;
-            border: 2px solid var(--mshop-border);
-            border-radius: var(--mshop-radius-md);
-            font-size: 14px;
-            background: white;
-            transition: all 0.2s;
-        }
-        
-        .mshop-search-input:focus {
-            outline: none;
-            border-color: var(--mshop-primary);
-            box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
-        }
-        
-        .mshop-search-icon {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--mshop-gray);
-            font-size: 18px;
-        }
-        
-        /* ========================================
-        PRODUCT GRID
-        ======================================== */
+    }
+    
+    /* Panel Content */
+    .mshop-panel-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    
+    .mshop-panel-section {
+        flex: 1;
+        min-width: 200px;
+    }
+    
+    .mshop-panel-section h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--mshop-dark);
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 2px solid var(--mshop-border);
+    }
+    
+    /* Options List */
+    .mshop-options-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 250px;
+        overflow-y: auto;
+    }
+    
+    .mshop-option-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 8px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: all 0.2s;
+    }
+    
+    .mshop-option-item:hover {
+        background: var(--mshop-light);
+    }
+    
+    .mshop-option-item label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        flex: 1;
+        font-size: 13px;
+        color: var(--mshop-dark);
+    }
+    
+    .mshop-option-item input {
+        margin: 0;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        accent-color: var(--mshop-primary);
+    }
+    
+    .mshop-option-count {
+        font-size: 11px;
+        color: var(--mshop-gray);
+        background: #f1f5f9;
+        padding: 2px 8px;
+        border-radius: 12px;
+    }
+    
+    /* Color Option */
+    .mshop-color-dot {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 1px solid var(--mshop-border);
+    }
+    
+    /* Price Range in Panel */
+    .mshop-price-range-panel {
+        padding: 10px;
+    }
+    
+    .mshop-slider-container {
+        position: relative;
+        height: 40px;
+        margin-bottom: 20px;
+    }
+    
+    .mshop-slider-track {
+        position: absolute;
+        top: 18px;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--mshop-border);
+        border-radius: 4px;
+    }
+    
+    .mshop-slider-range {
+        position: absolute;
+        top: 18px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--mshop-primary) 0%, var(--mshop-primary-dark) 100%);
+        border-radius: 4px;
+    }
+    
+    .mshop-slider {
+        position: absolute;
+        top: 8px;
+        width: 100%;
+        height: 4px;
+        -webkit-appearance: none;
+        background: transparent;
+        pointer-events: none;
+    }
+    
+    .mshop-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border: 2px solid var(--mshop-primary);
+        border-radius: 50%;
+        cursor: pointer;
+        pointer-events: auto;
+        box-shadow: var(--mshop-shadow-sm);
+    }
+    
+    .mshop-price-inputs {
+        display: flex;
+        gap: 12px;
+        margin-top: 10px;
+    }
+    
+    .mshop-price-input-group {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid var(--mshop-border);
+        border-radius: 6px;
+        background: white;
+    }
+    
+    .mshop-price-input-group span {
+        color: var(--mshop-gray);
+        font-weight: 600;
+    }
+    
+    .mshop-price-input-group input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 13px;
+    }
+    
+    /* Panel Actions */
+    .mshop-panel-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid var(--mshop-border);
+    }
+    
+    .mshop-btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .mshop-btn-primary {
+        background: linear-gradient(135deg, var(--mshop-primary) 0%, var(--mshop-primary-dark) 100%);
+        color: white;
+    }
+    
+    .mshop-btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--mshop-shadow-sm);
+    }
+    
+    .mshop-btn-outline {
+        background: white;
+        border: 1px solid var(--mshop-border);
+        color: var(--mshop-gray);
+    }
+    
+    .mshop-btn-outline:hover {
+        background: var(--mshop-light);
+    }
+    
+    /* Search Bar */
+    .mshop-search-wrapper {
+        margin-bottom: 24px;
+        position: relative;
+    }
+    
+    .mshop-search-input {
+        width: 100%;
+        padding: 12px 16px 12px 44px;
+        border: 1px solid var(--mshop-border);
+        border-radius: var(--mshop-radius-md);
+        font-size: 14px;
+        background: white;
+        transition: all 0.2s;
+    }
+    
+    .mshop-search-input:focus {
+        outline: none;
+        border-color: var(--mshop-primary);
+        box-shadow: 0 0 0 3px rgba(209, 156, 151, 0.1);
+    }
+    
+    .mshop-search-icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--mshop-gray);
+    }
+    
+    /* Products Grid */
+    .mshop-products-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    /* Product Card */
+    .mshop-product-card {
+        background: white;
+        border-radius: var(--mshop-radius-md);
+        overflow: hidden;
+        box-shadow: var(--mshop-shadow-sm);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .mshop-product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--mshop-shadow-md);
+    }
+    
+    .mshop-sale-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: linear-gradient(135deg, var(--mshop-danger) 0%, #dc2626 100%);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        z-index: 2;
+    }
+    
+    .mshop-rating {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        background: rgba(0,0,0,0.7);
+        backdrop-filter: blur(4px);
+        color: #fbbf24;
+        padding: 4px 8px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 600;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+    
+    .mshop-image-wrapper {
+        position: relative;
+        padding-top: 100%;
+        overflow: hidden;
+        background: #f8fafc;
+    }
+    
+    .mshop-product-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    .mshop-product-card:hover .mshop-product-img {
+        transform: scale(1.05);
+    }
+    
+    .mshop-product-info {
+        padding: 12px;
+    }
+    
+    .mshop-product-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--mshop-dark);
+        margin-bottom: 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .mshop-price-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .mshop-current-price {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--mshop-primary);
+    }
+    
+    .mshop-old-price {
+        font-size: 12px;
+        color: var(--mshop-gray);
+        text-decoration: line-through;
+    }
+    
+    .mshop-product-actions {
+        display: flex;
+        gap: 8px;
+        padding: 0 12px 12px;
+    }
+    
+    .mshop-action-btn {
+        flex: 1;
+        padding: 8px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+    
+    .mshop-action-view {
+        background: #f1f5f9;
+        color: var(--mshop-gray);
+    }
+    
+    .mshop-action-cart {
+        background: linear-gradient(135deg, var(--mshop-primary) 0%, var(--mshop-primary-dark) 100%);
+        color: white;
+    }
+    
+    /* Pagination */
+    .mshop-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 20px;
+    }
+    
+    .mshop-page-link {
+        min-width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+        border-radius: 6px;
+        background: white;
+        color: var(--mshop-dark);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+        border: 1px solid var(--mshop-border);
+    }
+    
+    .mshop-page-active {
+        background: linear-gradient(135deg, var(--mshop-primary) 0%, var(--mshop-primary-dark) 100%);
+        color: white;
+        border: none;
+    }
+    
+    /* Responsive */
+    @media (min-width: 640px) {
         .mshop-products-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(3, 1fr);
         }
-        
-        /* Product Card */
-        .mshop-product-card {
-            background: white;
-            border-radius: var(--mshop-radius-md);
-            overflow: hidden;
-            box-shadow: var(--mshop-shadow-sm);
-            transition: all 0.3s ease;
-            position: relative;
-            animation: mshopFadeIn 0.4s ease-out;
+    }
+    
+    @media (min-width: 768px) {
+        .mshop-products-grid {
+            grid-template-columns: repeat(4, 1fr);
         }
-        
-        .mshop-product-card:active {
-            transform: scale(0.98);
+    }
+    
+    @media (min-width: 1024px) {
+        .mshop-products-grid {
+            grid-template-columns: repeat(5, 1fr);
         }
-        
-        @keyframes mshopFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Sale Badge */
-        .mshop-sale-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: linear-gradient(135deg, var(--mshop-danger) 0%, #dc2626 100%);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            z-index: 2;
-            box-shadow: var(--mshop-shadow-sm);
-        }
-        
-        /* Rating */
-        .mshop-rating {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(4px);
-            color: #fbbf24;
-            padding: 4px 8px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        /* Image Container */
-        .mshop-image-wrapper {
-            position: relative;
-            padding-top: 100%;
-            overflow: hidden;
-            background: #f8fafc;
-        }
-        
-        .mshop-product-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .mshop-product-card:hover .mshop-product-img {
-            transform: scale(1.05);
-        }
-        
-        /* Product Info */
-        .mshop-product-info {
+    }
+    
+    @media (max-width: 768px) {
+        .mshop-container {
+            max-width: 100%;
             padding: 12px;
         }
         
-        .mshop-product-name {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--mshop-dark);
-            margin-bottom: 8px;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        .mshop-filter-scopes {
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .mshop-filter-scope {
             white-space: nowrap;
         }
         
-        .mshop-price-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 10px;
+        .mshop-panel-content {
+            flex-direction: column;
+            gap: 20px;
         }
         
-        .mshop-current-price {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--mshop-primary);
+        .mshop-products-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
         }
-        
-        .mshop-old-price {
-            font-size: 11px;
-            color: var(--mshop-gray);
-            text-decoration: line-through;
-        }
-        
-        /* Product Actions */
-        .mshop-product-actions {
-            display: flex;
-            gap: 8px;
-            padding: 0 12px 12px;
-        }
-        
-        .mshop-action-btn {
-            flex: 1;
-            padding: 8px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 500;
-            text-align: center;
-            text-decoration: none;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .mshop-action-btn:hover {
-            cursor: pointer;
-            
-        }
-        
-        .mshop-action-view {
-            background: #f1f5f9;
-            color: var(--mshop-gray);
-        }
-        
-        .mshop-action-cart {
-            background: linear-gradient(135deg, var(--mshop-primary) 0%, var(--mshop-primary-dark) 100%);
-            color: white;
-        }
-        
-        .mshop-action-btn:active {
-            transform: scale(0.96);
-        }
-        
-        /* ========================================
-        PAGINATION
-        ======================================== */
-        .mshop-pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .mshop-page-link {
-            min-width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 12px;
-            border-radius: var(--mshop-radius-sm);
-            background: white;
-            color: var(--mshop-dark);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
-            border: 1px solid var(--mshop-border);
-        }
-        
-        .mshop-page-link:active {
-            transform: scale(0.95);
-        }
-        
-        .mshop-page-active {
-            background: linear-gradient(135deg, var(--mshop-primary) 0%, var(--mshop-primary-dark) 100%);
-            color: white;
-            border: none;
-        }
-        
-        /* ========================================
-        EMPTY STATE
-        ======================================== */
-        .mshop-empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            background: white;
-            border-radius: var(--mshop-radius-lg);
-        }
-        
-        .mshop-empty-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-        }
-        
-        .mshop-empty-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--mshop-dark);
-            margin-bottom: 8px;
-        }
-        
-        .mshop-empty-text {
-            font-size: 14px;
-            color: var(--mshop-gray);
-        }
-        
-        /* ========================================
-        RESPONSIVE
-        ======================================== */
-        @media (min-width: 640px) {
-            .mshop-products-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 16px;
-            }
-        }
-
-         @media (max-width: 768px) {
-            .mshop-container {
-                padding: 2px;
-                max-width: 98%!important;
-            }
-            }
-        
-        @media (min-width: 768px) {
-        
-
-            
-            .mshop-layout {
-                display: flex;
-                gap: 24px;
-                align-items: flex-start;
-            }
-            
-            .mshop-sidebar {
-                width: 300px;
-                position: sticky;
-                top: 20px;
-                margin-bottom: 0;
-            }
-            
-            .mshop-products-section {
-                flex: 1;
-            }
-            
-            .mshop-products-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .mshop-products-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        @media (min-width: 1280px) {
-            .mshop-products-grid {
-                grid-template-columns: repeat(6, 1fr);
-            }
-        }
-        
-        /* Touch optimizations */
-        @media (hover: none) and (pointer: coarse) {
-            .mshop-product-card:hover .mshop-product-img {
-                transform: none;
-            }
-            
-            .mshop-btn,
-            .mshop-action-btn,
-            .mshop-page-link {
-                cursor: default;
-            }
-        }
-    </style>
-
+    }
+</style>
 
 <!-- Mobile Shop Start -->
 <div class="mshop-container">
-    <div class="mshop-layout">
+    
+    <!-- Filter Bar - Backend Style -->
+    <div class="mshop-filter-bar">
+        <div class="mshop-filter-header">
+            <div class="mshop-filter-title">
+                <i class="fas fa-filter"></i>
+                <span>فلترة المنتجات</span>
+            </div>
+            <div class="mshop-filter-actions">
+                <a class="mshop-btn mshop-btn-outline" href="/shop">
+                    <i class="fas fa-undo"></i> إعادة تعيين
+                </a>
+            </div>
+        </div>
         
-        <!-- Sidebar Filters -->
-        <div class="mshop-sidebar">
+        <!-- Filter Scopes -->
+        <div class="mshop-filter-scopes">
+            <!-- Price Filter Scope -->
+            <a href="javascript:;" class="mshop-filter-scope" data-scope="price">
+                <span class="filter-label">السعر:</span>
+                <span class="filter-setting" id="priceSetting">الكل</span>
+            </a>
             
-            <!-- Price Filter -->
-            <div class="mshop-filter-section">
-                <div class="mshop-filter-label">
-                    <i class="fas fa-dollar-sign"></i>
-                    <span>تصفية حسب السعر</span>
-                </div>
-                <form data-request="onFilterProductsWithPrice" data-request-flash>
-                    <div class="mshop-price-row">
-                        <div class="mshop-price-group">
-                            <label class="mshop-price-label">السعر الأدنى</label>
-                            <div class="mshop-price-wrapper">
-                                <span class="mshop-price-symbol">$</span>
-                                <input type="number" name="minPrice" class="mshop-price-input" value="0" min="0" max="10000">
-                            </div>
+            <!-- Colors Filter Scope -->
+            <a href="javascript:;" class="mshop-filter-scope" data-scope="colors">
+                <span class="filter-label">الألوان:</span>
+                <span class="filter-setting" id="colorSetting">الكل</span>
+            </a>
+            
+            <!-- Sizes Filter Scope -->
+            <a href="javascript:;" class="mshop-filter-scope" data-scope="sizes">
+                <span class="filter-label">الأحجام:</span>
+                <span class="filter-setting" id="sizeSetting">الكل</span>
+            </a>
+            <a href="javascript:;" class="mshop-filter-scope" data-scope="categories">
+                <span class="filter-label">التصنيفات:</span>
+                <span class="filter-setting" id="categorySetting">الكل</span>
+            </a>
+        </div>
+        
+        <!-- Price Filter Panel -->
+        <div class="mshop-filter-panel" data-panel="price">
+            <div class="mshop-panel-content">
+                <div class="mshop-panel-section" style="flex: 2">
+                    <h4>تحديد نطاق السعر</h4>
+                    <div class="mshop-price-range-panel">
+                        <div class="mshop-slider-container">
+                            <div class="mshop-slider-track"></div>
+                            <div class="mshop-slider-range" id="priceRangeBackend"></div>
+                            <input type="range" class="mshop-slider" id="minSliderBackend" min="0" max="1000" value="0" step="1">
+                            <input type="range" class="mshop-slider" id="maxSliderBackend" min="0" max="1000" value="500" step="1">
                         </div>
-                        <div class="mshop-price-group">
-                            <label class="mshop-price-label">السعر الأعلى</label>
-                            <div class="mshop-price-wrapper">
-                                <span class="mshop-price-symbol">$</span>
-                                <input type="number" name="maxPrice" class="mshop-price-input" value="500" min="0" max="10000">
+                        <div class="mshop-price-inputs">
+                            <div class="mshop-price-input-group">
+                                <span>$</span>
+                                <input type="number" id="minPriceBackend" value="0" min="0" max="1000">
+                            </div>
+                            <div class="mshop-price-input-group">
+                                <span>$</span>
+                                <input type="number" id="maxPriceBackend" value="500" min="0" max="1000">
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="mshop-btn mshop-btn-primary">
-                        <i class="fas fa-filter"></i> تطبيق التصفية
-                    </button>
-                </form>
+                </div>
             </div>
-            
-            <!-- Color Filter -->
-            <div class="mshop-filter-section">
-                <div class="mshop-filter-label">
-                    <i class="fas fa-palette"></i>
-                    <span>تصفية حسب اللون</span>
-                </div>
-                
-                <div class="mshop-checkbox-item">
-                    <label class="mshop-checkbox-wrapper">
-                        <input type="checkbox" class="mshop-checkbox" checked id="mshop-color-all">
-                        <span class="mshop-checkbox-text">كل الألوان</span>
-                    </label>
-                </div>
-                
-                <form data-request="onFilterProductsWithColor" data-request-flash>
-                    <div class="mshop-scroll-list">
+            <div class="mshop-panel-actions">
+                <button class="mshop-btn mshop-btn-primary" onclick="applyPriceFilterBackend()">
+                    <i class="fas fa-check"></i> تطبيق
+                </button>
+                <button class="mshop-btn mshop-btn-outline" onclick="clearPriceFilterBackend()">
+                    <i class="fas fa-times"></i> إلغاء
+                </button>
+            </div>
+        </div>
+        
+        <!-- Colors Filter Panel -->
+        <div class="mshop-filter-panel" data-panel="colors">
+            <div class="mshop-panel-content">
+                <div class="mshop-panel-section">
+                    <h4>اختر الألوان</h4>
+                    <div class="mshop-options-list">
                         {% for color in Store.onGetAllColors %}
                             {% if color.products.count > 0 %}
-                                <div class="mshop-checkbox-item">
-                                    <label class="mshop-checkbox-wrapper">
-                                        <input type="checkbox" 
-                                               name="colors[]" 
-                                               value="{{ color.code }}" 
-                                               class="mshop-checkbox" 
-                                               id="mshop-color-{{ color.id }}"
-                                               {% if color.code in selected_colors %}checked{% endif %}>
-                                        <span class="mshop-checkbox-text">
-                                            {{ color.name }}
+                                <div class="mshop-option-item">
+                                    <label>
+                                        <input type="checkbox" class="color-checkbox-backend" value="{{ color.code }}" data-color-name="{{ color.name }}">
+                                        <span>
                                             <span class="mshop-color-dot" style="background-color: {{ color.code }};"></span>
+                                            {{ color.name }}
                                         </span>
                                     </label>
-                                    <span class="mshop-count-badge">{{ color.products.count }}</span>
+                                    <span class="mshop-option-count">{{ color.products.count }}</span>
                                 </div>
                             {% endif %}
                         {% endfor %}
                     </div>
-                    
-                    <div class="mshop-filter-actions">
-                        <button type="submit" class="mshop-btn mshop-btn-primary">
-                            <i class="fas fa-filter"></i> تطبيق
-                        </button>
-                        {% if selected_colors %}
-                            <a href="{{ current_url_without_filters }}" class="mshop-btn mshop-btn-outline">
-                                <i class="fas fa-times"></i> إعادة تعيين
-                            </a>
-                        {% endif %}
-                    </div>
-                </form>
+                </div>
             </div>
-            
-            <!-- Size Filter -->
-            <div class="mshop-filter-section">
-                <div class="mshop-filter-label">
-                    <i class="fas fa-ruler"></i>
-                    <span>تصفية حسب الحجم</span>
-                </div>
-                
-                <div class="mshop-checkbox-item">
-                    <label class="mshop-checkbox-wrapper">
-                        <input type="checkbox" class="mshop-checkbox" checked id="mshop-size-all">
-                        <span class="mshop-checkbox-text">كل الأحجام</span>
-                    </label>
-                </div>
-                
-                <form data-request="onFilterProductsWithSizes" data-request-flash>
-                    <div class="mshop-scroll-list">
+            <div class="mshop-panel-actions">
+                <button class="mshop-btn mshop-btn-primary" onclick="applyColorsFilterBackend()">
+                    <i class="fas fa-check"></i> تطبيق
+                </button>
+                <button class="mshop-btn mshop-btn-outline" onclick="clearColorsFilterBackend()">
+                    <i class="fas fa-times"></i> إلغاء
+                </button>
+            </div>
+        </div>
+        
+        <!-- Sizes Filter Panel -->
+        <div class="mshop-filter-panel" data-panel="sizes">
+            <div class="mshop-panel-content">
+                <div class="mshop-panel-section">
+                    <h4>اختر الأحجام</h4>
+                    <div class="mshop-options-list">
                         {% for size in Store.onGetAllSizes %}
                             {% if size.products.count > 0 %}
-                                <div class="mshop-checkbox-item">
-                                    <label class="mshop-checkbox-wrapper">
-                                        <input type="checkbox" class="mshop-checkbox" value="{{ size.name }}" name="sizes[]" id="mshop-size-{{ size.id }}">
-                                        <span class="mshop-checkbox-text">{{ size.name }}</span>
+                                <div class="mshop-option-item">
+                                    <label>
+                                        <input type="checkbox" class="size-checkbox-backend" value="{{ size.name }}" data-size-name="{{ size.name }}">
+                                        {{ size.name }}
                                     </label>
-                                    <span class="mshop-count-badge">{{ size.products.count }}</span>
+                                    <span class="mshop-option-count">{{ size.products.count }}</span>
                                 </div>
                             {% endif %}
                         {% endfor %}
                     </div>
-                    
-                    <div class="mshop-filter-actions">
-                        <button type="submit" class="mshop-btn mshop-btn-primary">
-                            <i class="fas fa-filter"></i> تطبيق
-                        </button>
-                    </div>
-                </form>
+                </div>
+            </div>
+            <div class="mshop-panel-actions">
+                <button class="mshop-btn mshop-btn-primary" onclick="applySizesFilterBackend()">
+                    <i class="fas fa-check"></i> تطبيق
+                </button>
+                <button class="mshop-btn mshop-btn-outline" onclick="clearSizesFilterBackend()">
+                    <i class="fas fa-times"></i> إلغاء
+                </button>
             </div>
         </div>
-        
-        <!-- Products Section -->
-        <div class="mshop-products-section">
-            
-            <!-- Search Bar -->
-            <div class="mshop-search-wrapper">
-                <form data-request="onSearchProductsOnShop">
-                    <input type="text" name="text" data-track-input class="mshop-search-input" placeholder="ابحث عن منتج...">
-                    <i class="fas fa-search mshop-search-icon"></i>
-                </form>
-            </div>
-            
-            <!-- Products Grid -->
-            <div class="mshop-products-grid" id="mshop-products-list">
-                {% for product in Store.onGetAllProducts %}
-                    <div class="mshop-product-card">
-                        {% if product.HasPromotions == true %}
-                            <div class="mshop-sale-badge">
-                                {{ product.promotionsActive.discount_value }}% OFF
-                            </div>
-                        {% endif %}
-                        
-                        <div class="mshop-rating">
-                            <i class="fas fa-star"></i> {{ product.averageRating | default(0) }}
-                        </div>
-                        
-                        <div class="mshop-image-wrapper">
-                            <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}"
-                                 class="mshop-product-img"
-                                 alt="{{ product.name }}">
-                        </div>
-                        
-                        <div class="mshop-product-info">
-                            <h6 class="mshop-product-name">{{ product.name }}</h6>
-                            
-                            {% set activePrice = null %}
-                            {% set previousPrice = null %}
-                            
-                            {% for price in product.prices %}
-                                {% if price.status == true %}
-                                    {% set activePrice = price %}
-                                    {% if loop.index0 > 0 %}
-                                        {% set previousPrice = product.prices[loop.index0 - 1] %}
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
-                            
-                            <div class="mshop-price-container">
-                                {% if activePrice %}
-                                    <span class="mshop-current-price">{{ activePrice.price }}$</span>
-                                    {% if previousPrice %}
-                                        <span class="mshop-old-price">{{ previousPrice.price }}$</span>
-                                    {% endif %}
-                                {% endif %}
-                            </div>
-                        </div>
-                        
-                        <div class="mshop-product-actions">
-                            <a href="detail/{{ product.slug }}" class="mshop-action-btn mshop-action-view">
-                                <i class="fas fa-eye"></i> عرض
-                            </a>
-                            <a {% if user %} data-request="onAddToCart" data-request-flash data-request-data="product_id: {{ product.id }}" {% else %} href="/login" {% endif %} class="mshop-action-btn mshop-action-cart">
-                                <i class="fas fa-shopping-cart"></i> إضافة
-                            </a>
-                        </div>
+    </div>
+    
+    <!-- Search Bar -->
+    <div class="mshop-search-wrapper">
+        <form data-request="onSearchProductsOnShop">
+            <input type="text" name="text" data-track-input class="mshop-search-input" placeholder="ابحث عن منتج...">
+            <i class="fas fa-search mshop-search-icon"></i>
+        </form>
+    </div>
+    
+    <!-- Products Grid -->
+    <div class="mshop-products-grid" id="mshop-products-list">
+        {% for product in Store.onGetAllProducts %}
+            <div class="mshop-product-card">
+                {% if product.HasPromotions == true %}
+                    <div class="mshop-sale-badge">
+                        {{ product.promotionsActive.discount_value }}% OFF
                     </div>
-                {% else %}
-                    <div class="mshop-empty-state">
-                        <div class="mshop-empty-icon">🛍️</div>
-                        <div class="mshop-empty-title">لا توجد منتجات</div>
-                        <div class="mshop-empty-text">لم يتم العثور على منتجات مطابقة</div>
-                    </div>
-                {% endfor %}
-            </div>
-            
-            <!-- Pagination -->
-            {% if Store.onGetAllProducts.lastPage() > 1 %}
-                <div class="mshop-pagination">
-                    {% if Store.onGetAllProducts.currentPage() > 1 %}
-                        <a href="{{ Store.onGetAllProducts.previousPageUrl() }}" class="mshop-page-link">
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
-                    {% endif %}
+                {% endif %}
+                
+                <div class="mshop-rating">
+                    <i class="fas fa-star"></i> {{ product.averageRating | default(0) }}
+                </div>
+                
+                <div class="mshop-image-wrapper">
+                    <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}"
+                         class="mshop-product-img"
+                         alt="{{ product.name }}">
+                </div>
+                
+                <div class="mshop-product-info">
+                    <h6 class="mshop-product-name">{{ product.name }}</h6>
                     
-                    {% for page in 1..Store.onGetAllProducts.lastPage() %}
-                        <a href="{{ Store.onGetAllProducts.url(page) }}" class="mshop-page-link {% if Store.onGetAllProducts.currentPage() == page %}mshop-page-active{% endif %}">
-                            {{ page }}
-                        </a>
+                    {% set activePrice = null %}
+                    {% set previousPrice = null %}
+                    
+                    {% for price in product.prices %}
+                        {% if price.status == true %}
+                            {% set activePrice = price %}
+                            {% if loop.index0 > 0 %}
+                                {% set previousPrice = product.prices[loop.index0 - 1] %}
+                            {% endif %}
+                        {% endif %}
                     {% endfor %}
                     
-                    {% if Store.onGetAllProducts.currentPage() < Store.onGetAllProducts.lastPage() %}
-                        <a href="{{ Store.onGetAllProducts.nextPageUrl() }}" class="mshop-page-link">
-                            <i class="fas fa-chevron-left"></i>
-                        </a>
-                    {% endif %}
+                    <div class="mshop-price-container">
+                        {% if activePrice %}
+                            <span class="mshop-current-price">{{ activePrice.price }}$</span>
+                            {% if previousPrice %}
+                                <span class="mshop-old-price">{{ previousPrice.price }}$</span>
+                            {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
+                
+                <div class="mshop-product-actions">
+                    <a href="detail/{{ product.slug }}" class="mshop-action-btn mshop-action-view">
+                        <i class="fas fa-eye"></i> عرض
+                    </a>
+                    <a {% if user %} data-request="onAddToCart" data-request-flash data-request-data="product_id: {{ product.id }}" {% else %} href="/login" {% endif %} class="mshop-action-btn mshop-action-cart">
+                        <i class="fas fa-shopping-cart"></i> إضافة
+                    </a>
+                </div>
+            </div>
+        {% else %}
+            <div class="mshop-empty-state" style="grid-column: 1/-1; text-align: center; padding: 60px;">
+                <div style="font-size: 48px; margin-bottom: 16px;">🛍️</div>
+                <div style="font-size: 18px; font-weight: 600; color: var(--mshop-dark);">لا توجد منتجات</div>
+                <div style="font-size: 14px; color: var(--mshop-gray);">لم يتم العثور على منتجات مطابقة</div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Pagination -->
+    {% if Store.onGetAllProducts.lastPage() > 1 %}
+        <div class="mshop-pagination">
+            {% if Store.onGetAllProducts.currentPage() > 1 %}
+                <a href="{{ Store.onGetAllProducts.previousPageUrl() }}" class="mshop-page-link">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            {% endif %}
+            
+            {% for page in 1..Store.onGetAllProducts.lastPage() %}
+                <a href="{{ Store.onGetAllProducts.url(page) }}" class="mshop-page-link {% if Store.onGetAllProducts.currentPage() == page %}mshop-page-active{% endif %}">
+                    {{ page }}
+                </a>
+            {% endfor %}
+            
+            {% if Store.onGetAllProducts.currentPage() < Store.onGetAllProducts.lastPage() %}
+                <a href="{{ Store.onGetAllProducts.nextPageUrl() }}" class="mshop-page-link">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
             {% endif %}
         </div>
-        
-    </div>
+    {% endif %}
 </div>
 
-
-
-
-
-
-
-
-
+<script>
+    // Toggle filter panels - Like backend behavior
+    document.querySelectorAll('.mshop-filter-scope[data-scope]').forEach(scope => {
+        scope.addEventListener('click', function(e) {
+            e.preventDefault();
+            const scopeName = this.getAttribute('data-scope');
+            const targetPanel = document.querySelector(`.mshop-filter-panel[data-panel="${scopeName}"]`);
+            const allPanels = document.querySelectorAll('.mshop-filter-panel');
+            
+            // Close all panels
+            allPanels.forEach(panel => {
+                if (panel !== targetPanel) {
+                    panel.classList.remove('active');
+                }
+            });
+            
+            // Toggle target panel
+            targetPanel.classList.toggle('active');
+        });
+    });
+    
+    // Close panel when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.mshop-filter-bar')) {
+            document.querySelectorAll('.mshop-filter-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+        }
+    });
+    
+    // Price Range Slider Backend Style
+    const minSlider = document.getElementById('minSliderBackend');
+    const maxSlider = document.getElementById('maxSliderBackend');
+    const minPrice = document.getElementById('minPriceBackend');
+    const maxPrice = document.getElementById('maxPriceBackend');
+    const priceRange = document.getElementById('priceRangeBackend');
+    const priceSetting = document.getElementById('priceSetting');
+    
+    function updatePriceBackend() {
+        let min = parseInt(minSlider.value);
+        let max = parseInt(maxSlider.value);
+        
+        if (min > max) {
+            [min, max] = [max, min];
+            minSlider.value = min;
+            maxSlider.value = max;
+        }
+        
+        minPrice.value = min;
+        maxPrice.value = max;
+        
+        const percentMin = (min / minSlider.max) * 100;
+        const percentMax = (max / maxSlider.max) * 100;
+        
+        if (priceRange) {
+            priceRange.style.left = percentMin + '%';
+            priceRange.style.width = (percentMax - percentMin) + '%';
+        }
+    }
+    
+    if (minSlider && maxSlider) {
+        minSlider.addEventListener('input', updatePriceBackend);
+        maxSlider.addEventListener('input', updatePriceBackend);
+        minPrice.addEventListener('change', function() {
+            minSlider.value = this.value;
+            updatePriceBackend();
+        });
+        maxPrice.addEventListener('change', function() {
+            maxSlider.value = this.value;
+            updatePriceBackend();
+        });
+        updatePriceBackend();
+    }
+    
+    function applyPriceFilterBackend() {
+        const min = minPrice.value;
+        const max = maxPrice.value;
+        priceSetting.innerText = `$${min} - $${max}`;
+        
+        $.request('onFilterProductsWithPrice', {
+            data: { minPrice: min, maxPrice: max },
+            
+        });
+        
+        document.querySelector(`.mshop-filter-panel[data-panel="price"]`).classList.remove('active');
+    }
+    
+    function clearPriceFilterBackend() {
+        if (minSlider && maxSlider) {
+            minSlider.value = 0;
+            maxSlider.value = 1000;
+            updatePriceBackend();
+        }
+        priceSetting.innerText = 'الكل';
+        document.querySelector(`.mshop-filter-panel[data-panel="price"]`).classList.remove('active');
+    }
+    
+    // Colors Filter Backend
+    const colorSettingSpan = document.getElementById('colorSetting');
+    
+    function updateColorSetting() {
+        const selectedColors = document.querySelectorAll('.color-checkbox-backend:checked');
+        if (selectedColors.length === 0) {
+            colorSettingSpan.innerText = 'الكل';
+        } else if (selectedColors.length === 1) {
+            colorSettingSpan.innerText = selectedColors[0].getAttribute('data-color-name');
+        } else {
+            colorSettingSpan.innerText = `${selectedColors.length} ألوان`;
+        }
+    }
+    
+    function applyColorsFilterBackend() {
+        const selectedColors = Array.from(document.querySelectorAll('.color-checkbox-backend:checked')).map(cb => cb.value);
+        
+        if (selectedColors.length > 0) {
+            $.request('onFilterProductsWithColor', {
+                data: { colors: selectedColors },
+                
+            });
+        }
+        updateColorSetting();
+        document.querySelector(`.mshop-filter-panel[data-panel="colors"]`).classList.remove('active');
+    }
+    
+    function clearColorsFilterBackend() {
+        document.querySelectorAll('.color-checkbox-backend').forEach(cb => cb.checked = false);
+        updateColorSetting();
+        document.querySelector(`.mshop-filter-panel[data-panel="colors"]`).classList.remove('active');
+    }
+    
+    // Sizes Filter Backend
+    const sizeSettingSpan = document.getElementById('sizeSetting');
+    
+    function updateSizeSetting() {
+        const selectedSizes = document.querySelectorAll('.size-checkbox-backend:checked');
+        if (selectedSizes.length === 0) {
+            sizeSettingSpan.innerText = 'الكل';
+        } else if (selectedSizes.length === 1) {
+            sizeSettingSpan.innerText = selectedSizes[0].getAttribute('data-size-name');
+        } else {
+            sizeSettingSpan.innerText = `${selectedSizes.length} أحجام`;
+        }
+    }
+    
+    function applySizesFilterBackend() {
+        const selectedSizes = Array.from(document.querySelectorAll('.size-checkbox-backend:checked')).map(cb => cb.value);
+        
+        if (selectedSizes.length > 0) {
+            $.request('onFilterProductsWithSizes', {
+                data: { sizes: selectedSizes },
+                
+            });
+        }
+        updateSizeSetting();
+        document.querySelector(`.mshop-filter-panel[data-panel="sizes"]`).classList.remove('active');
+    }
+    
+    function clearSizesFilterBackend() {
+        document.querySelectorAll('.size-checkbox-backend').forEach(cb => cb.checked = false);
+        updateSizeSetting();
+        document.querySelector(`.mshop-filter-panel[data-panel="sizes"]`).classList.remove('active');
+    }
+    
+    function resetAllFiltersBackend() {
+        clearPriceFilterBackend();
+        clearColorsFilterBackend();
+        clearSizesFilterBackend();
+        
+        // Reset active checkbox
+        const activeCheckbox = document.getElementById('showActiveOnly');
+        if (activeCheckbox) activeCheckbox.checked = false;
+    }
+    
+    // Listen for checkbox changes
+    document.querySelectorAll('.color-checkbox-backend').forEach(cb => {
+        cb.addEventListener('change', updateColorSetting);
+    });
+    
+    document.querySelectorAll('.size-checkbox-backend').forEach(cb => {
+        cb.addEventListener('change', updateSizeSetting);
+    });
+</script>

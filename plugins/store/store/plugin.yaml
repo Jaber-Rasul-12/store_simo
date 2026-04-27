@@ -82,6 +82,12 @@ navigation:
                 icon: icon-sitemap
                 permissions:
                     - subcategories
+            merchants:
+                label: 'store.store::lang.plugin.merchants'
+                url: store/store/merchants
+                icon: icon-user-md
+                permissions:
+                    - merchants
             brand:
                 label: 'store.store::lang.plugin.brand'
                 url: store/store/brands
@@ -136,12 +142,7 @@ navigation:
                 icon: icon-comment
                 permissions:
                     - comments
-            merchants:
-                label: 'store.store::lang.plugin.merchants'
-                url: store/store/merchants
-                icon: icon-user-md
-                permissions:
-                    - merchants
+
     store:
         label: 'store.store::lang.plugin.store'
         url: store/store/products

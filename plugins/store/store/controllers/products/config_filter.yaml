@@ -1,0 +1,17 @@
+scopes:
+    created_at:
+        label: 'تاريخ الإنشاء'
+        type: date
+        conditions: created_at >= ':filtered'
+    brand:
+        label: 'الماركات'
+        modelClass: Store\Store\Models\Brand
+        conditions: brand_id in (:filtered)
+        nameFrom: name
+    merchant:
+        label: 'التجار'
+        modelClass: Store\Store\Models\Merchant
+        conditions: merchant_id in (:filtered)
+        nameFrom: full_name
+
+        
