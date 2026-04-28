@@ -13,7 +13,7 @@ class UserAddProfileFields extends Migration
 
         Schema::table('users', function($table)
         {
-            $table->string('phone', 100);
+            $table->string('phone', 100)->nullable();
             $table->string('company', 100)->nullable();
             $table->string('street_addr')->nullable();
             $table->string('city', 100)->nullable();
