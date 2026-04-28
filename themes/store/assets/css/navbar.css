@@ -543,3 +543,1473 @@
             transform: scale(0.95);
             transition: transform 0.1s;
         }
+
+.shein-full-section {
+    background: #f5f7fa;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* إلغاء المسافات الجانبية تمامًا */
+.shein-full-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* إضافة مسافة داخلية خفيفة للقراءة فقط */
+.content-padding {
+    padding: 0 15px;
+}
+
+/* ============================================ */
+/* القسم 1: عروض سريعة - بدون مسافات */
+/* ============================================ */
+.quick-offers {
+    margin: 0;
+    padding: 15px;
+    background: #f5f7fa;
+}
+
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.offer-mini-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 18px;
+    color: white;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+.offer-mini-card:nth-child(2) {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.offer-mini-card:nth-child(3) {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.offer-mini-card:nth-child(4) {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.offer-mini-card h4 {
+    font-size: 13px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.offer-mini-card .percentage {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 5px;
+}
+
+/* ============================================ */
+/* القسم 2: التصنيفات - كثيفة */
+/* ============================================ */
+/* ============================================ */
+/* تحسين عرض الصور في التصنيفات الرئيسية */
+/* ============================================ */
+
+.main-categories {
+    margin: 0;
+    padding: 20px 15px;
+    background: white;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 15px;
+}
+
+.category-icon-card {
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.category-icon-card:hover {
+    transform: translateY(-5px);
+}
+
+/* الحاوية الدائرية للصورة */
+.category-icon-circle {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.category-icon-card:hover .category-icon-circle {
+    box-shadow: 0 5px 15px rgba(255,71,87,0.2);
+    transform: scale(1.05);
+}
+
+/* الصورة داخل الدائرة */
+.category-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.category-icon-card:hover .category-image {
+    transform: scale(1.1);
+}
+
+/* مكان مؤقت عند عدم وجود صورة */
+.category-icon-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+    color: white;
+    font-size: 28px;
+}
+
+/* اسم التصنيف */
+.category-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #222;
+    display: block;
+    margin-bottom: 4px;
+    transition: color 0.3s ease;
+}
+
+.category-icon-card:hover .category-name {
+    color: #ff4757;
+}
+
+/* عدد المنتجات */
+.category-count {
+    font-size: 10px;
+    color: #999;
+    display: block;
+}
+
+/* ============================================ */
+/* استجابة للموبايل */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    .categories-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+    }
+    
+    .category-icon-circle {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .category-icon-placeholder {
+        font-size: 22px;
+    }
+    
+    .category-name {
+        font-size: 11px;
+    }
+    
+    .category-count {
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 480px) {
+    .categories-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+    
+    .category-icon-circle {
+        width: 50px;
+        height: 50px;
+    }
+}
+/* ============================================ */
+/* القسم 3: بانر - بعرض كامل */
+/* ============================================ */
+.mid-banner {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    width: 100%;
+}
+
+.mid-banner img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.banner-content {
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+    color: white;
+    text-align: right;
+}
+
+/* ============================================ */
+/* القسم 4: منتجات ساخنة - 6 منتجات في الموبايل */
+/* ============================================ */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 20px 15px 15px;
+    background: #f5f7fa;
+}
+
+.section-header h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #222;
+}
+
+.hot-products-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    padding: 0 15px 15px;
+}
+
+/* تصميم بطاقة المنتج - مضغوط */
+.product-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-img-wrapper {
+    position: relative;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: #f5f7fa;
+}
+
+.product-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #ff4757;
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.product-info-card {
+    padding: 8px;
+}
+
+.product-title-card {
+    font-size: 12px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 5px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 30px;
+}
+
+.product-price-card {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin-bottom: 4px;
+    flex-wrap: wrap;
+}
+
+.current-price-card {
+    font-size: 14px;
+    font-weight: 800;
+    color: #ff4757;
+}
+
+.old-price-card {
+    font-size: 10px;
+    color: #bbb;
+    text-decoration: line-through;
+}
+
+.rating-card {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stars-card {
+    color: #ffb800;
+    font-size: 9px;
+}
+
+/* ============================================ */
+/* القسم 5: عروض محدودة مع تايمر */
+/* ============================================ */
+.limited-offers {
+    margin: 0;
+    background: linear-gradient(135deg, #1e1e2f 0%, #2d2d44 100%);
+    padding: 25px 15px;
+}
+
+.limited-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.limited-header h3 {
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 12px;
+}
+
+.timer-item {
+    text-align: center;
+    background: rgba(255,255,255,0.15);
+    padding: 8px 12px;
+    border-radius: 10px;
+    min-width: 65px;
+}
+
+.timer-number {
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+}
+
+.limited-products {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 25px;
+}
+
+/* ============================================ */
+/* القسم 6: ماركات - كثيفة */
+/* ============================================ */
+.brands-showcase {
+    padding: 20px 15px;
+    background: white;
+}
+
+.brands-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 12px;
+}
+
+.brand-card {
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    background: #f5f7fa;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.brand-card img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-bottom: 6px;
+}
+
+.brand-card h4 {
+    font-size: 12px;
+    color: #222;
+}
+
+/* ============================================ */
+/* القسم 7: وصل حديثاً - 8 منتجات */
+/* ============================================ */
+.new-arrivals {
+    padding: 0 15px 20px;
+    background: #f5f7fa;
+}
+
+.new-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+}
+
+.new-item {
+    text-decoration: none;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.new-img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.new-info {
+    padding: 8px;
+}
+
+.new-info h4 {
+    font-size: 11px;
+    color: #222;
+    margin-bottom: 4px;
+}
+
+.new-price {
+    color: #ff4757;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+/* ============================================ */
+/* القسم 8: توصيات - 6 منتجات */
+/* ============================================ */
+.recommendations {
+    padding: 0 15px 20px;
+    background: #f5f7fa;
+}
+
+.recommend-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+}
+
+/* ============================================ */
+/* ========== استجابة الموبايل ========== */
+/* ============================================ */
+
+/* شاشات 1200px فأقل */
+@media (max-width: 1200px) {
+    .categories-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+    
+    .hot-products-grid,
+    .recommend-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .limited-products {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .brands-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .new-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+/* شاشات 992px فأقل */
+@media (max-width: 992px) {
+    .categories-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .hot-products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .limited-products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .brands-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .new-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .recommend-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ============================================ */
+/* الموبايل - منتجات أكثر في الشاشة */
+/* ============================================ */
+@media (max-width: 768px) {
+    /* عروض سريعة */
+    .offers-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .offer-mini-card {
+        padding: 12px;
+    }
+    
+    .offer-mini-card .percentage {
+        font-size: 20px;
+    }
+    
+    /* التصنيفات - 5 أعمدة كثيفة */
+    
+    /* المنتجات الساخنة - 3 منتجات في الصف (أكثر كثافة) */
+    .hot-products-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    /* العروض المحدودة - صفين */
+    .limited-products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .limited-header h3 {
+        font-size: 18px;
+    }
+    
+    .timer-item {
+        min-width: 50px;
+        padding: 6px 8px;
+    }
+    
+    .timer-number {
+        font-size: 18px;
+    }
+    
+    .timer-label {
+        font-size: 9px;
+    }
+    
+    /* الماركات - 4 أعمدة */
+    .brands-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+    
+    .brand-card {
+        padding: 8px;
+    }
+    
+    .brand-card img {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .brand-card h4 {
+        font-size: 10px;
+    }
+    
+    /* وصل حديثاً - 4 أعمدة (أكثر كثافة) */
+    .new-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+    
+    .new-info h4 {
+        font-size: 10px;
+    }
+    
+    .new-price {
+        font-size: 11px;
+    }
+    
+    /* توصيات - 3 أعمدة */
+    .recommend-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+    
+    /* تصغير أحجام النصوص العامة */
+    .product-title-card {
+        font-size: 11px;
+        height: 26px;
+    }
+    
+    .current-price-card {
+        font-size: 12px;
+    }
+    
+    .section-header h3 {
+        font-size: 18px;
+    }
+}
+
+/* موبايل صغير جداً - كثافة قصوى */
+@media (max-width: 480px) {
+    /* التصنيفات - 4 أعمدة */
+   
+    
+    /* المنتجات الساخنة - عمودين (أكثر وضوحاً) */
+    .hot-products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* العروض المحدودة - عمود واحد مع تمرير أفقي */
+    .limited-products {
+        overflow-x: auto;
+        display: flex;
+        gap: 12px;
+        scrollbar-width: none;
+    }
+    
+    .limited-products .product-card {
+        min-width: 160px;
+        flex-shrink: 0;
+    }
+    
+    /* الماركات - 3 أعمدة */
+    .brands-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* وصل حديثاً - 3 أعمدة */
+    .new-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* توصيات - عمودين */
+    .recommend-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* البانر */
+    .banner-content h2 {
+        font-size: 16px;
+    }
+    
+    .banner-content p {
+        font-size: 10px;
+    }
+    
+    .banner-btn {
+        padding: 5px 12px;
+        font-size: 10px;
+    }
+}
+.shein-top-bar {
+    background: white;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+}
+
+.shein-logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #000;
+    text-decoration: none;
+}
+
+.shein-logo span {
+    color: #ff6b6b;
+}
+
+/* شريط البحث - مثل شي إن */
+.shein-search {
+    background: #f5f5f5;
+    border-radius: 25px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.shein-search i {
+    color: #999;
+    font-size: 16px;
+}
+
+.shein-search input {
+    background: transparent;
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+}
+
+.shein-search input::placeholder {
+    color: #aaa;
+}
+
+/* أيقونات المستخدم - مثل شي إن */
+.shein-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+.shein-icon {
+    position: relative;
+    color: #222;
+    font-size: 22px;
+    text-decoration: none;
+}
+
+.shein-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #ff6b6b;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: 50%;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* ============================================ */
+/* شريط التصنيفات الرئيسي - مثل شي إن */
+/* ============================================ */
+.shein-categories-wrapper {
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+    position: sticky;
+    top: 60px;
+    z-index: 1000;
+}
+
+/* حاوية التمرير */
+.shein-categories-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.shein-categories-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+    padding: 0 12px;
+}
+
+.shein-categories-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* سهم التمرير */
+.shein-scroll-arrow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background: linear-gradient(90deg, white 30%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.shein-scroll-arrow i {
+    background: white;
+    border-radius: 50%;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    color: #ff6b6b;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.shein-scroll-arrow i:hover {
+    transform: scale(1.1);
+}
+
+/* عنصر التصنيف الرئيسي */
+.shein-cat-item {
+    display: inline-block;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+}
+
+.shein-cat-item.active {
+    color: #ff6b6b;
+    font-weight: 600;
+}
+
+.shein-cat-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    height: 2px;
+    background: #ff6b6b;
+}
+
+.shein-cat-item:hover {
+    color: #ff6b6b;
+}
+
+/* أيقونة السهم للتصنيف الذي يحتوي على فئات فرعية */
+.shein-cat-item.has-children {
+    position: relative;
+}
+
+.shein-cat-item.has-children::after {
+    content: '▼';
+    font-size: 10px;
+    margin-right: 5px;
+    color: #999;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.shein-cat-item.has-children:hover::after {
+    transform: rotate(180deg);
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
+/* عمود التصنيفات الفرعية */
+.shein-subcategory-column {
+    flex: 1;
+    min-width: 180px;
+}
+
+/* عنوان التصنيف الرئيسي داخل القائمة */
+.shein-subcategory-main {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #ff6b6b;
+    text-decoration: none;
+    position: relative;
+}
+
+.shein-subcategory-main:hover {
+    color: #ff6b6b;
+}
+
+/* قائمة التصنيفات الفرعية */
+.shein-subcategory-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+
+}
+
+.shein-subcategory-list li {
+    margin-bottom: 10px;
+}
+
+.shein-subcategory-list a {
+    font-size: 13px;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: block;
+    padding: 4px 0;
+    position: relative;
+}
+
+.shein-subcategory-list a:hover {
+    color: #ff6b6b;
+    transform: translateX(-5px);
+}
+
+.shein-subcategory-list a:hover::before {
+    opacity: 1;
+}
+
+/* زر عرض الكل */
+.shein-view-all {
+    font-size: 12px;
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* قائمة من عمودين */
+.shein-two-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 20px;
+}
+
+/* ============================================ */
+/* تصميم خاص للقائمة المنسدلة للموبايل */
+/* ============================================ */
+@media (max-width: 768px) {
+
+    
+    .shein-subcategory-column {
+        width: 100%;
+    }
+    
+    .shein-subcategory-main {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+    .shein-subcategory-list{
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    }
+    .shein-subcategory-list a {
+        font-size: 12px;
+        padding: 6px 0;
+    }
+    
+
+}
+
+/* ============================================ */
+/* طبقة الخلفية */
+/* ============================================ */
+.shein-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 999;
+    display: none;
+}
+
+.shein-overlay.show {
+    display: block;
+}
+
+/* ============================================ */
+/* شريط العلامات التجارية */
+/* ============================================ */
+.shein-brands-wrapper {
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.shein-brands-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 12px;
+}
+
+.shein-brands-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ============================================ */
+/* شريط الإجراءات السريعة */
+/* ============================================ */
+.shein-actions-bar {
+    background: white;
+    padding: 8px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+
+.shein-actions-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.shein-action-item {
+    font-size: 13px;
+    color: #555;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.shein-action-item i {
+    font-size: 14px;
+    color: #ff6b6b;
+}
+
+/* ============================================ */
+/* البانر / الكاروسيل */
+/* ============================================ */
+.shein-carousel {
+    position: relative;
+    background: #f5f5f5;
+}
+
+.shein-carousel-item {
+    height: 280px;
+    position: relative;
+}
+
+.shein-carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.shein-carousel-caption {
+    position: absolute;
+    bottom: 20%;
+    left: 20px;
+    right: auto;
+    text-align: right;
+    background: transparent;
+}
+
+.shein-carousel-caption h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.shein-carousel-caption p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+}
+
+.shein-carousel-caption .btn-shop {
+    background: white;
+    color: #222;
+    border-radius: 25px;
+    padding: 8px 24px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* أزرار التنقل */
+.shein-carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #222;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.shein-carousel-control.prev {
+    right: 15px;
+}
+
+.shein-carousel-control.next {
+    left: 15px;
+}
+
+/* ============================================ */
+/* استجابة الموبايل */
+/* ============================================ */
+@media (max-width: 768px) {
+    .shein-top-bar {
+        padding: 10px 12px;
+    }
+    
+    .shein-logo {
+        font-size: 18px;
+    }
+    
+    .shein-search {
+        padding: 7px 12px;
+    }
+    
+    .shein-search input {
+        font-size: 12px;
+    }
+    
+    .shein-icons {
+        gap: 15px;
+    }
+    
+    .shein-icon {
+        font-size: 18px;
+    }
+    
+    .shein-cat-item {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    .shein-carousel-item {
+        height: 200px;
+    }
+    
+    .shein-carousel-caption h3 {
+        font-size: 18px;
+    }
+    
+    .shein-carousel-caption p {
+        font-size: 11px;
+    }
+    
+    .shein-carousel-caption .btn-shop {
+        padding: 6px 18px;
+        font-size: 11px;
+    }
+    
+    .shein-scroll-arrow {
+        width: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .shein-carousel-item {
+        height: 160px;
+    }
+    
+    .shein-cat-item {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    
+    .shein-actions-bar {
+        padding: 6px 12px;
+        gap: 15px;
+    }
+    
+    .shein-action-item {
+        font-size: 11px;
+    }
+}
+
+
+/* ============================================ */
+/* CSS للقائمة المنسدلة مع الصور الدائرية */
+/* ============================================ */
+
+/* القائمة المنسدلة */
+.shein-dropdown {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    z-index: 1002;
+    display: none;
+    padding: 30px 0;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.shein-dropdown.show {
+    display: block;
+}
+
+/* حاوية التصنيفات الفرعية */
+.shein-subcategories {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+/* عمود التصنيفات الفرعية */
+.shein-subcategory-column {
+    flex: 1;
+    min-width: 180px;
+}
+
+/* عنوان التصنيف الرئيسي داخل القائمة */
+.shein-subcategory-main {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #ff4757;
+    text-decoration: none;
+    position: relative;
+}
+
+.shein-subcategory-main:hover {
+    color: #ff4757;
+}
+
+
+
+/* عنصر القائمة الواحد */
+.subcategory-list-item {
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+
+.subcategory-list-item:hover {
+    transform: translateX(-5px);
+}
+
+/* رابط التصنيف الفرعي */
+.subcategory-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #555;
+    font-size: 13px;
+    transition: color 0.2s;
+    padding: 4px 0;
+}
+
+.subcategory-link:hover {
+    color: #ff4757;
+}
+
+/* حاوية الصورة الدائرية */
+.subcategory-image-wrapper {
+    flex-shrink: 0;
+}
+
+/* الصورة الدائرية */
+.subcategory-circle-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f5f5f5;
+    border: 1px solid #e8e8e8;
+    transition: all 0.2s ease;
+}
+
+.subcategory-link:hover .subcategory-circle-img {
+    transform: scale(1.1);
+    border-color: #ff4757;
+    box-shadow: 0 4px 10px rgba(255,71,87,0.2);
+}
+
+/* اسم التصنيف الفرعي */
+.subcategory-name {
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* ============================================ */
+/* تحسين للموبايل */
+/* ============================================ */
+@media (max-width: 768px) {
+    .shein-subcategories {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .shein-subcategory-column {
+        width: 100%;
+    }
+    
+    .shein-subcategory-main {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+    
+    .subcategory-circle-img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .subcategory-name {
+        font-size: 12px;
+    }
+    
+    .shein-dropdown {
+        padding: 20px 0;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .subcategory-circle-img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .subcategory-name {
+        font-size: 11px;
+    }
+    
+    .subcategory-link {
+        gap: 8px;
+    }
+}
+
+/* ============================================ */
+/* شريط العلامات التجارية - صور دائرية */
+/* ============================================ */
+.shein-brands-section {
+    background: white;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.shein-brands-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    padding-right: 20px;
+}
+
+.shein-brands-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    padding: 0 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+.shein-brands-scroll::-webkit-scrollbar {
+    height: 3px;
+}
+
+.shein-brands-scroll::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.shein-brands-scroll::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 10px;
+}
+
+.shein-brands-items {
+    display: inline-flex;
+    gap: 20px;
+}
+
+.shein-brand-item {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+    min-width: 65px;
+}
+
+.shein-brand-item:hover {
+    transform: translateY(-3px);
+}
+
+.shein-brand-img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #f5f5f5;
+    border: 1px solid #eee;
+    transition: all 0.2s;
+}
+
+.shein-brand-item:hover .shein-brand-img {
+    border-color: #ff4757;
+    box-shadow: 0 5px 10px rgba(255,71,87,0.15);
+}
+
+.shein-brand-name {
+    font-size: 11px;
+    color: #555;
+    font-weight: 500;
+    text-align: center;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
