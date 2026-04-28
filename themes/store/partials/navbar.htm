@@ -1,13 +1,8 @@
 
 
-<!-- ============================================ -->
-<!-- طبقة الخلفية المظللة -->
-<!-- ============================================ -->
 <div class="shein-overlay" id="sheinOverlay"></div>
 
-<!-- ============================================ -->
-<!-- شريط التصنيفات مع سهم التمرير -->
-<!-- ============================================ -->
+
 <div class="shein-categories-wrapper" id="categoriesWrapper">
     <div class="shein-categories-container">
         <div class="shein-categories-scroll"  id="categoriesScroll">
@@ -31,18 +26,12 @@
     </div>
 </div>
 
-<!-- ============================================ -->
-<!-- القائمة المنسدلة للتصنيفات الفرعية - تصميم محسن -->
-<!-- ============================================ -->
+
 <div class="shein-dropdown" id="categoryDropdown">
     <div class="shein-subcategories" id="subcategoriesContent">
-        <!-- سيتم ملء المحتوى ديناميكياً عبر JavaScript -->
     </div>
 </div>
 
-<!-- ============================================ -->
-<!-- شريط العلامات التجارية -->
-<!-- ============================================ -->
 <div class="shein-brands-wrapper">
     <div class="shein-brands-scroll" id="brandsScroll">
             <a class="shein-cat-item"  href="/"
@@ -56,9 +45,6 @@
     
 </div>
 
-<!-- ============================================ -->
-<!-- شريط الإجراءات السريعة -->
-<!-- ============================================ -->
 <div class="shein-actions-bar">
     <a href="/promotions" class="shein-action-item">
         <i class="fas fa-tags"></i> {{ 'تخفيضات' |_ }}
@@ -99,12 +85,9 @@
 </div>
 
 
-
-<!-- ============================================ -->
-<!-- سكريبت متكامل مع دعم subcategories -->
-<!-- ============================================ -->
 <script>
-// بيانات التصنيفات الفرعية - تستخدم العلاقة hasMany من موديل Category و SubCategory
+
+
 const categoriesData = {
     {% for category in Store.getCateogries %}
         "{{ category.id }}": {
@@ -128,20 +111,17 @@ const categoriesData = {
     {% endfor %}
 };
 
-// عناصر DOM
 const dropdown = document.getElementById('categoryDropdown');
 const overlay = document.getElementById('sheinOverlay');
 const subcategoriesContent = document.getElementById('subcategoriesContent');
 let activeCategoryId = null;
 let hideTimeout;
 
-// عرض القائمة المنسدلة - مع الصور الدائرية
 function showDropdown(categoryId, categoryName, categorySlug, triggerElement) {
     if (hideTimeout) clearTimeout(hideTimeout);
     
     const category = categoriesData[categoryId];
     
-    // إذا لم توجد تصنيفات فرعية، لا نعرض القائمة
     if (!category || !category.subcategories || category.subcategories.length === 0) {
         hideDropdown();
         return;
@@ -149,7 +129,6 @@ function showDropdown(categoryId, categoryName, categorySlug, triggerElement) {
     
     activeCategoryId = categoryId;
     
-    // بناء محتوى التصنيفات الفرعية مع الصور - في قائمة واحدة فقط
     let html = `
         <div class="shein-subcategory-column-full">
             <a href="/category/${categorySlug}" class="shein-subcategory-main">
@@ -160,10 +139,8 @@ function showDropdown(categoryId, categoryName, categorySlug, triggerElement) {
     
     for (const sub of category.subcategories) {
         const subSlug = sub.slug || sub.id;
-        // استخدام المسار من البيانات
         let imageSrc = 'https://placehold.co/42x42?text=' + encodeURIComponent(sub.name.charAt(0));
         
-        // التحقق من وجود مسار الصورة
         if (sub.imagePath && sub.imagePath !== '') {
             imageSrc = sub.imagePath;
         }
@@ -190,7 +167,6 @@ function showDropdown(categoryId, categoryName, categorySlug, triggerElement) {
     
     subcategoriesContent.innerHTML = html;
     
-    // تحديد موقع القائمة
     if (triggerElement) {
         const rect = triggerElement.getBoundingClientRect();
         dropdown.style.top = `${rect.bottom}px`;
@@ -200,21 +176,18 @@ function showDropdown(categoryId, categoryName, categorySlug, triggerElement) {
     dropdown.classList.add('show');
     overlay.classList.add('show');
 }
-// إخفاء القائمة المنسدلة
 function hideDropdown() {
     dropdown.classList.remove('show');
     overlay.classList.remove('show');
     activeCategoryId = null;
 }
 
-// التمرير التلقائي
 function scrollCategories() {
     const container = document.getElementById('categoriesScroll');
     const scrollAmount = 200;
     container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
 }
 
-// ربط أحداث التصنيفات
 function bindCategoryEvents() {
     const categoryButtons = document.querySelectorAll('#categoriesScroll .shein-cat-item');
     
@@ -255,7 +228,6 @@ function handleClick(e) {
     const categorySlug = btn.dataset.categorySlug;
     const hasChildren = btn.dataset.hasChildren === 'true';
     
-    // إزالة active من الكل
     document.querySelectorAll('#categoriesScroll .shein-cat-item').forEach(item => {
         item.classList.remove('active');
     });
@@ -266,7 +238,6 @@ function handleClick(e) {
     }
 }
 
-// إغلاق القائمة عند مغادرة الماوس
 dropdown.addEventListener('mouseenter', () => {
     if (hideTimeout) clearTimeout(hideTimeout);
 });
@@ -281,10 +252,8 @@ overlay.addEventListener('click', () => {
     hideDropdown();
 });
 
-// سهم التمرير
 document.getElementById('scrollArrow')?.addEventListener('click', scrollCategories);
 
-// جعل أشرطة التصنيفات قابلة للتمرير بالماوس
 function makeScrollable(containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -321,12 +290,10 @@ function makeScrollable(containerId) {
     container.style.cursor = 'grab';
 }
 
-// تهيئة السكريبتات
 makeScrollable('categoriesScroll');
 makeScrollable('brandsScroll');
 bindCategoryEvents();
 
-// إظهار/إخفاء سهم التمرير
 function checkScrollArrow() {
     const container = document.getElementById('categoriesScroll');
     const arrow = document.getElementById('scrollArrow');

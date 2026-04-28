@@ -1,7 +1,5 @@
-<!-- Shop Detail Start -->
 <div class="modern-product-detail">
     
-    <!-- Suggestions Section -->
     <div class="suggestions-modern">
         {% if relateds is not empty %}
         <div class="suggestions-header-modern">
@@ -42,11 +40,9 @@
         {% endif %}
     </div>
 
-    <!-- Main Product Section -->
     <div class="product-main-modern">
         {% set product = Store.onGetProductWithSlug %}
         
-        <!-- Product Gallery -->
         <div class="product-gallery-modern">
             <div class="gallery-container">
                 <div class="gallery-main" id="mainGallery">
@@ -68,11 +64,9 @@
             </div>
         </div>
         
-        <!-- Product Info -->
         <div class="product-info-modern">
             <h1 class="product-title-modern">{{ product.name }}</h1>
             
-            <!-- Price Section -->
             <div class="product-price-modern">
                 {% set activePrice = null %}
                 {% set previousPrice = null %}
@@ -94,12 +88,10 @@
                 {% endif %}
             </div>
             
-            <!-- Short Description -->
             <div class="product-description-modern">
                 <p>{{ product.short_description }}</p>
             </div>
             
-            <!-- Sizes Section -->
             {% if product.sizes is not empty %}
             <div class="option-section-modern">
                 <label class="option-label-modern">
@@ -116,7 +108,6 @@
             </div>
             {% endif %}
             
-            <!-- Colors Section -->
             {% if product.colors is not empty %}
             <div class="option-section-modern">
                 <label class="option-label-modern">
@@ -134,7 +125,6 @@
             </div>
             {% endif %}
             
-            <!-- Add to Cart Button -->
             <div class="action-buttons-modern">
                 <button class="add-to-cart-modern {% if not user %}login-required{% endif %}" 
                         {% if user %} 
@@ -150,7 +140,6 @@
                 </button>
             </div>
             
-            <!-- Share Section -->
             <div class="share-section-modern">
                 <span class="share-label">
                     <i class="fas fa-share-alt"></i>
@@ -165,7 +154,6 @@
             </div>
         </div>
         
-        <!-- Tabs Section -->
         <div class="product-tabs-modern">
             <div class="tabs-header-modern">
                 <button class="tab-btn" data-tab="description">
@@ -182,17 +170,14 @@
             </div>
             
             <div class="tabs-content-modern">
-                <!-- Description Tab -->
                 <div class="tab-pane" id="tab-description">
                     <div class="description-content">
                         {{ product.long_description|raw }}
                     </div>
                 </div>
                 
-                <!-- Reviews Tab -->
                 <div class="tab-pane active" id="tab-reviews">
                     <div class="reviews-container">
-                        <!-- Existing Reviews -->
                         <div class="reviews-list">
                             {% if product.comments and product.comments.count() > 0 %}
                                 {% for comment in product.comments %}
@@ -235,7 +220,6 @@
                             {% endif %}
                         </div>
                         
-                        <!-- Add Review Form -->
                         {% if user %}
                         <div class="add-review-form">
                             <div class="form-header">
@@ -245,7 +229,6 @@
                             <form data-request="onAddComment" data-request-success="$('#commentText').val(''); resetRating();" data-request-flash id="commentForm">
                                 <input type="hidden" name="product_id" value="{{ product.id }}">
                                 
-                                <!-- Rating Stars -->
                                 <div class="rating-input">
                                     <label>{{ 'تقييمك' |_ }} <span class="required">*</span></label>
                                     <div class="stars-rating">
@@ -256,7 +239,6 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Comment Text -->
                                 <div class="comment-input">
                                     <label for="commentText">{{ 'تعليقك' |_ }} <span class="required">*</span></label>
                                     <textarea id="commentText" name="comment" rows="4" placeholder="اكتب تجربتك مع المنتج..."></textarea>
@@ -286,7 +268,6 @@
 </div>
 
 <script>
-// Gallery thumbnails
 document.querySelectorAll('.thumb-item').forEach(thumb => {
     thumb.addEventListener('click', function() {
         const imageUrl = this.dataset.image;
@@ -296,7 +277,6 @@ document.querySelectorAll('.thumb-item').forEach(thumb => {
     });
 });
 
-// Size selection
 document.querySelectorAll('.size-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
@@ -304,7 +284,6 @@ document.querySelectorAll('.size-btn').forEach(btn => {
     });
 });
 
-// Color selection
 document.querySelectorAll('.color-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
@@ -312,7 +291,6 @@ document.querySelectorAll('.color-btn').forEach(btn => {
     });
 });
 
-// Tabs
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         const tabId = this.dataset.tab;
@@ -323,7 +301,6 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     });
 });
 
-// Star rating
 let currentRating = 0;
 document.querySelectorAll('.stars-rating i').forEach(star => {
     star.addEventListener('click', function() {

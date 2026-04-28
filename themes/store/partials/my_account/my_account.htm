@@ -76,7 +76,6 @@
     </div>
 
     <div class="row g-4">
-        <!-- Profile Sidebar -->
         <div class="col-lg-3 col-md-4">
             <div class="card shadow-sm border-0 rounded-4">
                 <div class="card-body text-center p-4">
@@ -103,7 +102,6 @@
         </div>
 
         <div class="col-lg-9 col-md-8">
-            <!-- Wallet Card -->
             <div class="card shadow-sm border-0 rounded-4 mb-4 overflow-hidden">
                 <div class="balance-card">
                     <div class="d-flex justify-content-between align-items-center">
@@ -112,15 +110,12 @@
                             <h2 class="text-white mb-0 fw-bold">{{ user.wallets.current_balance|number_format(2) }} $</h2>
                             <small class="text-black">{{ 'الرصيد المتاح' |_ }}</small>
                         </div>
-                        {# <div class="bg-white bg-opacity-25 p-3 rounded-circle">
-                            <i class="fa fa-money fa-2x text-white"></i>
-                        </div> #}
+
                     </div>
                 </div>
             </div>
 
             <div class="row g-4">
-                <!-- Profile Information -->
                 <div class="col-md-6">
                     <div class="card shadow-sm border-0 rounded-4 h-100">
                         <div class="card-header bg-white border-bottom py-3">
@@ -145,7 +140,6 @@
                     </div>
                 </div>
 
-                <!-- Change Password -->
                 <div class="col-md-6">
                     <div class="card shadow-sm border-0 rounded-4 h-100">
                         <div class="card-header bg-white border-bottom py-3">
@@ -178,7 +172,6 @@
                 </div>
             </div>
 
-            <!-- Recent Activity -->
             <div class="card shadow-sm border-0 rounded-4 mt-4">
                 <div class="card-header bg-white border-bottom py-3">
                     <h5 class="mb-0">
@@ -235,7 +228,6 @@
     </div>
 </div>
 
-<!-- Custom Modal -->
 <div id="avatarModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
     <div style="background: white; border-radius: 20px; max-width: 500px; width: 90%; margin: 20px; padding: 0; direction: rtl;">
         <div style="padding: 20px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center;">
@@ -288,7 +280,6 @@
         document.body.style.overflow = 'auto';
     }
     
-    // Preview avatar before upload
     document.addEventListener('DOMContentLoaded', function() {
         const avatarInput = document.getElementById('avatarInput');
         if (avatarInput) {
@@ -306,7 +297,6 @@
             });
         }
         
-        // Close modal when clicking outside
         const modal = document.getElementById('avatarModal');
         if (modal) {
             modal.addEventListener('click', function(e) {
@@ -316,7 +306,6 @@
             });
         }
         
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeAvatarModal();

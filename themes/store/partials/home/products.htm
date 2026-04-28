@@ -1,6 +1,5 @@
 
 
-    <!-- Products Start -->
     <div class="container-fluid pt-4">
         <div class="text-center">
             <h2 class="section-title px-5"><span class="px-2">{{ title_product }}</span></h2>
@@ -43,7 +42,6 @@
                                 {% endif %}
                             {% endfor %}
                             {% if activePrice %}
-                            {# <div class="discount-badge">-30%</div> #}
                             <h6 class=""  style="padding: 10px; color: green;">{{ activePrice.price }}$</h6>
                             {% if previousPrice %}
                             <h6 class="text-muted ml-2" style="padding: 10px"><del>{{ previousPrice.price }}$</del></h6>
@@ -68,5 +66,4 @@
         {% endfor %}
         </div>
     </div>
-    <!-- Products End -->
     

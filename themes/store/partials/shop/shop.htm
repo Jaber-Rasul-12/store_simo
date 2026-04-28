@@ -1,9 +1,7 @@
 
 
-<!-- Mobile Shop Start -->
 <div class="mshop-container">
     
-    <!-- Filter Bar - Backend Style -->
     <div class="mshop-filter-bar">
         <div class="mshop-filter-header">
             <div class="mshop-filter-title">
@@ -17,21 +15,17 @@
             </div>
         </div>
         
-        <!-- Filter Scopes -->
         <div class="mshop-filter-scopes">
-            <!-- Price Filter Scope -->
             <a href="javascript:;" class="mshop-filter-scope" data-scope="price">
                 <span class="filter-label">السعر:</span>
                 <span class="filter-setting" id="priceSetting">الكل</span>
             </a>
             
-            <!-- Colors Filter Scope -->
             <a href="javascript:;" class="mshop-filter-scope" data-scope="colors">
                 <span class="filter-label">الألوان:</span>
                 <span class="filter-setting" id="colorSetting">الكل</span>
             </a>
             
-            <!-- Sizes Filter Scope -->
             <a href="javascript:;" class="mshop-filter-scope" data-scope="sizes">
                 <span class="filter-label">الأحجام:</span>
                 <span class="filter-setting" id="sizeSetting">الكل</span>
@@ -42,7 +36,6 @@
             </a>
         </div>
         
-        <!-- Price Filter Panel -->
         <div class="mshop-filter-panel" data-panel="price">
             <div class="mshop-panel-content">
                 <div class="mshop-panel-section" style="flex: 2">
@@ -77,7 +70,6 @@
             </div>
         </div>
         
-        <!-- Colors Filter Panel -->
         <div class="mshop-filter-panel" data-panel="colors">
             <div class="mshop-panel-content">
                 <div class="mshop-panel-section">
@@ -110,7 +102,6 @@
             </div>
         </div>
         
-        <!-- Sizes Filter Panel -->
         <div class="mshop-filter-panel" data-panel="sizes">
             <div class="mshop-panel-content">
                 <div class="mshop-panel-section">
@@ -141,7 +132,6 @@
         </div>
     </div>
     
-    <!-- Search Bar -->
     <div class="mshop-search-wrapper">
         <form data-request="onSearchProductsOnShop">
             <input type="text" name="text" data-track-input class="mshop-search-input" placeholder="ابحث عن منتج...">
@@ -149,7 +139,6 @@
         </form>
     </div>
     
-    <!-- Products Grid -->
     <div class="mshop-products-grid" id="mshop-products-list">
         {% for product in Store.onGetAllProducts %}
             <div class="mshop-product-card">
@@ -212,7 +201,6 @@
         {% endfor %}
     </div>
     
-    <!-- Pagination -->
     {% if Store.onGetAllProducts.lastPage() > 1 %}
         <div class="mshop-pagination">
             {% if Store.onGetAllProducts.currentPage() > 1 %}
@@ -237,7 +225,6 @@
 </div>
 
 <script>
-    // Toggle filter panels - Like backend behavior
     document.querySelectorAll('.mshop-filter-scope[data-scope]').forEach(scope => {
         scope.addEventListener('click', function(e) {
             e.preventDefault();
@@ -245,19 +232,16 @@
             const targetPanel = document.querySelector(`.mshop-filter-panel[data-panel="${scopeName}"]`);
             const allPanels = document.querySelectorAll('.mshop-filter-panel');
             
-            // Close all panels
             allPanels.forEach(panel => {
                 if (panel !== targetPanel) {
                     panel.classList.remove('active');
                 }
             });
             
-            // Toggle target panel
             targetPanel.classList.toggle('active');
         });
     });
     
-    // Close panel when clicking outside
     document.addEventListener('click', function(event) {
         if (!event.target.closest('.mshop-filter-bar')) {
             document.querySelectorAll('.mshop-filter-panel').forEach(panel => {
@@ -266,7 +250,6 @@
         }
     });
     
-    // Price Range Slider Backend Style
     const minSlider = document.getElementById('minSliderBackend');
     const maxSlider = document.getElementById('maxSliderBackend');
     const minPrice = document.getElementById('minPriceBackend');
@@ -333,7 +316,6 @@
         document.querySelector(`.mshop-filter-panel[data-panel="price"]`).classList.remove('active');
     }
     
-    // Colors Filter Backend
     const colorSettingSpan = document.getElementById('colorSetting');
     
     function updateColorSetting() {
@@ -366,7 +348,6 @@
         document.querySelector(`.mshop-filter-panel[data-panel="colors"]`).classList.remove('active');
     }
     
-    // Sizes Filter Backend
     const sizeSettingSpan = document.getElementById('sizeSetting');
     
     function updateSizeSetting() {
@@ -404,12 +385,10 @@
         clearColorsFilterBackend();
         clearSizesFilterBackend();
         
-        // Reset active checkbox
         const activeCheckbox = document.getElementById('showActiveOnly');
         if (activeCheckbox) activeCheckbox.checked = false;
     }
     
-    // Listen for checkbox changes
     document.querySelectorAll('.color-checkbox-backend').forEach(cb => {
         cb.addEventListener('change', updateColorSetting);
     });

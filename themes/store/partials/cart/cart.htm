@@ -1,13 +1,10 @@
-<!-- Cart Start - Mobile Beautiful Design -->
 <div class="mobile-cart-container" id="cart-items">
     {% set totalprice = 0 %}
     {% set totaltaxes = 0 %}
     
-    <!-- Cart Items List -->
     <div class="cart-items-list">
         {% for item in Cart.cartItems %}
         <div class="cart-item-card" data-product-id="{{ item.id }}">
-            <!-- Product Header -->
             <div class="item-header">
                 <img src="{{ item.image_path }}" alt="{{ item.name }}" class="item-image">
                 <div class="item-info">
@@ -22,7 +19,6 @@
                 </button>
             </div>
             
-            <!-- Variants Section -->
             {% if item.quantity != 0 %}
             <div class="variants-section">
                 {% for itemquantity in item.quantity %}
@@ -56,7 +52,6 @@
             </div>
             {% endif %}
             
-            <!-- Add More Button -->
             <button class="add-more-btn"
                     data-request="onLoadPageContent"
                     data-request-data="id: {{ item.id }}"
@@ -69,7 +64,6 @@
         {% endfor %}
     </div>
     {% if Cart.cartItems is not empty %}
-    <!-- Cart Summary -->
 <div class="cart-summary">
     <div class="summary-header">
         <h3>ملخص الطلب</h3>
@@ -135,7 +129,6 @@
     {% endif %}
 </div>
 
-<!-- Popup Structure -->
 <div id="winter-popup-overlay" style="display: none;">
     <div class="popup-container">
         <div class="popup-header">

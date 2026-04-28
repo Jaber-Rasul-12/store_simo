@@ -6,7 +6,6 @@
 
 
 
-<!-- Checkout Container -->
 <div class="xcheckout-container">
     
     {% set allCarts = Cart.GetAllCartItems %}
@@ -21,9 +20,7 @@
         {% endif %}
     {% endfor %}
 
-    <!-- ========================================== -->
-    <!-- Pending Orders Section -->
-    <!-- ========================================== -->
+
     {% if pendingCarts|length > 0 %}
         <div class="xcheckout-section-header">
             <div class="xcheckout-section-title">
@@ -35,7 +32,6 @@
         
         <div class="xcheckout-grid">
             {% for cart in pendingCarts %}
-                <!-- Order Card -->
                 <div class="xcheckout-card">
                     <div class="xcheckout-card-header">
                         <h4>
@@ -45,7 +41,6 @@
                     </div>
                     
                     <div class="xcheckout-card-body">
-                        <!-- Cart Items -->
                         <div class="xcheckout-cart-items">
                             {% for item in cart.items %}
                                 <div class="xcheckout-cart-item">
@@ -60,7 +55,6 @@
                         
                         <div class="xcheckout-separator"></div>
                         
-                        <!-- Summary -->
                         <div class="xcheckout-summary">
                             <div class="xcheckout-summary-row">
                                 <span>المجموع الفرعي</span>
@@ -78,7 +72,6 @@
                     </div>
                 </div>
 
-                <!-- Delivery Info Card -->
                 <div class="xcheckout-card">
                     <div class="xcheckout-card-header">
                         <h4>
@@ -88,7 +81,6 @@
                     </div>
                     
                     <div class="xcheckout-card-body">
-                        <!-- Map -->
                         <div class="xcheckout-form-group">
                             <label class="xcheckout-label">
                                 <i class="fa fa-map-marker"></i>
@@ -101,7 +93,6 @@
                             </div>
                         </div>
 
-                        <!-- Address -->
                         <div class="xcheckout-form-group">
                             <label class="xcheckout-label">
                                 <i class="fa fa-address-card"></i>
@@ -110,7 +101,6 @@
                             <textarea class="xcheckout-textarea" id="xaddress_{{ cart.id }}" rows="2" placeholder="الشارع، الحي، رقم البناء، الطابق..." readonly></textarea>
                         </div>
 
-                        <!-- Coordinates -->
                         <div class="xcheckout-form-group">
                             <label class="xcheckout-label">
                                 <i class="fa fa-globe"></i>
@@ -122,7 +112,6 @@
                             </div>
                         </div>
 
-                        <!-- Payment Method -->
                         <div class="xcheckout-form-group">
                             <label class="xcheckout-label">
                                 <i class="fa fa-credit-card"></i>
@@ -140,7 +129,6 @@
                             </div>
                         </div>
 
-                        <!-- Delivery Fee -->
                         <div id="xdelivery_fee_{{ cart.id }}" style="display: none;">
                             <div class="xcheckout-delivery-fee">
                                 <span class="xcheckout-delivery-fee-label">
@@ -152,7 +140,6 @@
                         </div>
                     </div>
 
-                    <!-- Form -->
                     <form data-request="onPlaceOrder" data-request-data="my_id: '{{ cart.id }}'" data-request-flash>
                         <input type="hidden" name="cart_id" value="{{ cart.id }}">
                         <input type="hidden" name="location_lat" id="xlocation_lat_{{ cart.id }}">
@@ -178,9 +165,7 @@
         </div>
     {% endif %}
 
-    <!-- ========================================== -->
-    <!-- Completed Orders Section -->
-    <!-- ========================================== -->
+
     {% if completedCarts|length > 0 %}
         <div style="margin-top: 32px;">
             <div class="xcheckout-section-header" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);">
@@ -246,17 +231,14 @@
 
 </div>
 
-<!-- JavaScript -->
 <script>
     (function() {
-        // Configuration
         const XCHECKOUT_CONFIG = {
             defaultCenter: [33.5138, 36.2765],
             defaultZoom: 13,
             storeLocation: { lat: 33.5138, lng: 36.2765 }
         };
         
-        // Utility Functions
         function calculateDistance(lat1, lon1, lat2, lon2) {
             const R = 6371;
             const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -295,7 +277,6 @@
             }
         }
         
-        // Initialize Maps
         {% for cart in pendingCarts %}
             (function() {
                 const cartId = '{{ cart.id }}';
@@ -356,7 +337,6 @@
                     placeMarker(e.latlng.lat, e.latlng.lng, cartId, map);
                 });
                 
-                // Enable submit button when location selected
                 const submitBtn = document.getElementById(`xsubmit_btn_${cartId}`);
                 if (submitBtn) {
                     const checkLocation = setInterval(function() {
@@ -368,7 +348,6 @@
                     }, 500);
                 }
                 
-                // Handle payment method change
                 const cashRadio = document.getElementById(`xcash_${cartId}`);
                 const cardRadio = document.getElementById(`xcard_${cartId}`);
                 const paymentInput = document.getElementById(`xpayment_method_${cartId}`);
@@ -384,7 +363,6 @@
             })();
         {% endfor %}
         
-        // Add loading effect to forms
         document.querySelectorAll('form[data-request="onPlaceOrder"]').forEach(form => {
             form.addEventListener('submit', function() {
                 const btn = this.querySelector('button[type="submit"]');
