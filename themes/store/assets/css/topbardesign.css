@@ -29,7 +29,6 @@
             animation: containerEntrance 1s ease-out;
         }
         
-        /* Top Section - أنيمشن متطور مع وميض */
         .top-section {
             background: linear-gradient(135deg, #5f3d3d 0%, var(--primary-color) 100%);
             color: white;
@@ -44,7 +43,6 @@
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
         
-        /* أنيمشن الوميض الاحترافي */
         @keyframes colorPulse {
             0%, 100% {
                 background: linear-gradient(135deg, 
@@ -84,7 +82,6 @@
             }
         }
         
-        /* تأثير الطفو الخفيف */
         @keyframes gentleFloat {
             0%, 100% {
                 transform: translateY(0);
@@ -94,7 +91,6 @@
             }
         }
         
-        /* موجة ضوئية ذهبية متطورة */
         .top-section::before {
             content: '';
             position: absolute;
@@ -123,7 +119,6 @@
             }
         }
         
-        /* تأثير جسيمات ذهبية */
         .top-section::after {
             content: '';
             position: absolute;
@@ -151,7 +146,6 @@
             }
         }
         
-        /* تأثير توهج الذهب حول الحواف */
         .top-section .edge-glow {
             position: absolute;
             top: -3px;
@@ -313,7 +307,6 @@
             border-color: rgba(212, 175, 55, 0.5);
         }
         
-        /* Main Section */
         .main-section {
             padding: 20px 30px;
             display: flex;
@@ -323,7 +316,6 @@
             border-bottom: 1px solid var(--border-color);
         }
         
-        /* Logo Design */
         .logo-container {
             display: flex;
             align-items: center;
@@ -687,7 +679,6 @@
             color: white;
         }
         
-        /* Demo Content */
         .demo-content {
             width: 100%;
             max-width: 1400px;
@@ -789,7 +780,6 @@
             color: var(--text-light);
         }
         
-        /* Responsive */
         @media (max-width: 1200px) {
             .main-section {
                 flex-wrap: wrap;
@@ -812,10 +802,7 @@
             visibility: hidden!important;
         }
         @media (max-width: 768px) {
-            /* body {
-                padding: 1px;
-                margin: 0px!important;
-            } */
+
             
                     #suggestions-wrapper-category-mobile{
             display: block!important;
@@ -990,7 +977,6 @@
         }
             .top-links a {
                 font-size: 8px;
-                /* padding: 5px 10px; */
             }
 
             .top-links span {
@@ -1035,7 +1021,6 @@
             }
         }
         
-        /* أنيمشن دخول الحاوية */
         @keyframes containerEntrance {
             0% {
                 opacity: 0;
@@ -1047,14 +1032,12 @@
             }
         }
         
-        /* تأثيرات إضافية للتفاعل */
         .action-btn:active {
             transform: scale(0.95);
         }
         
     
         
-        /* تأثير تحميل الصفحة */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -1084,7 +1067,6 @@
             }
         }
         
-        /* أنيمشن النقر على الأزرار */
         @keyframes clickEffect {
             0% {
                 transform: scale(1);
@@ -1120,7 +1102,6 @@
         display: block !important;
     }
 
-/* Main Button Design */
 .offers-btn {
     display: inline-flex;
     align-items: center;
@@ -1152,7 +1133,6 @@
 }
 
 
-/* Text Style */
 .offers-text {
     font-size: 14px;
     font-weight: 600;
@@ -1160,7 +1140,6 @@
     letter-spacing: 0.5px;
 }
 
-/* Badge Style */
 .offers-badge {
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(10px);
@@ -1186,7 +1165,6 @@
     color: #fff;
 }
 
-/* Shine Effect */
 .offers-shine {
     position: absolute;
     top: 0;
@@ -1202,7 +1180,6 @@
     left: 100%;
 }
 
-/* Animations */
 @keyframes pulsetopbar {
     0% {
         transform: scale(1);
@@ -1218,7 +1195,6 @@
     }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .offers-button-container {
         top: 10px;
@@ -1250,31 +1226,26 @@
     }
 }
 
-/* Alternative Style 1 - Gradient Orange */
 .offers-btn.alternative-1 {
     background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
 }
 
-/* Alternative Style 2 - Gradient Green */
 .offers-btn.alternative-2 {
     background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
     box-shadow: 0 4px 15px rgba(67, 233, 123, 0.3);
 }
 
-/* Alternative Style 3 - Gradient Blue */
 .offers-btn.alternative-3 {
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
 }
 
-/* Badge Animation on Hover */
 .offers-btn:hover .offers-badge {
     background: rgba(255, 255, 255, 0.4);
     transform: scale(1.05);
 }
 
-/* Loading State for Badge */
 .offers-badge.loading {
     position: relative;
     overflow: hidden;

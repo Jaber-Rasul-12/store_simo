@@ -5,7 +5,6 @@
     direction: rtl;
 }
 
-/* ========== Suggestions Section ========== */
 .suggestions-modern {
     padding: 16px;
     background: white;
@@ -126,12 +125,9 @@
     color: #718096;
 }
 
-/* ========== Main Product Section ========== */
 .product-main-modern {
     padding: 16px;
 }
-
-/* Gallery */
 .product-gallery-modern {
     margin-bottom: 20px;
 }
@@ -192,7 +188,6 @@
     object-fit: cover;
 }
 
-/* Product Info */
 .product-info-modern {
     background: white;
     border-radius: 28px;
@@ -244,7 +239,6 @@
     margin: 0;
 }
 
-/* Options Section */
 .option-section-modern {
     margin-bottom: 20px;
 }
@@ -339,7 +333,6 @@
     opacity: 1;
 }
 
-/* Add to Cart Button */
 .action-buttons-modern {
     margin: 24px 0 20px;
 }
@@ -367,7 +360,6 @@
     box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
-/* Share Section */
 .share-section-modern {
     display: flex;
     align-items: center;
@@ -412,7 +404,6 @@
 .share-icon.whatsapp { background: #25d366; }
 .share-icon.telegram { background: #0088cc; }
 
-/* Tabs Section */
 .product-tabs-modern {
     background: white;
     border-radius: 28px;
@@ -485,7 +476,6 @@
     color: #4a5568;
 }
 
-/* Reviews */
 .reviews-container {
     display: flex;
     flex-direction: column;
@@ -583,7 +573,6 @@
     margin: 0;
 }
 
-/* Add Review Form */
 .add-review-form {
     background: #f8f9fa;
     border-radius: 20px;
@@ -726,7 +715,6 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Loading State */
 .add-to-cart-modern.loading {
     opacity: 0.7;
     pointer-events: none;

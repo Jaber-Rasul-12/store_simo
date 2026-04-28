@@ -24,9 +24,7 @@
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Tajawal', sans-serif;
     }
     
-    /* ========================================
-    MAIN CONTAINER
-    ======================================== */
+
     .mshop-container {
         max-width: 85%;
         margin: 0 auto;
@@ -34,9 +32,7 @@
         min-height: 100vh;
     }
     
-    /* ========================================
-    FILTER BAR - BACKEND STYLE
-    ======================================== */
+
     .mshop-filter-bar {
         background: white;
         border-radius: var(--mshop-radius-md);
@@ -45,7 +41,6 @@
         overflow: hidden;
     }
     
-    /* Filter Header */
     .mshop-filter-header {
         padding: 16px 20px;
         background: linear-gradient(135deg, var(--mshop-primary-light) 0%, white 100%);
@@ -76,7 +71,6 @@
         gap: 12px;
     }
     
-    /* Filter Scopes Container - Like Backend */
     .mshop-filter-scopes {
         display: flex;
         flex-wrap: wrap;
@@ -87,7 +81,6 @@
         border-bottom: 1px solid var(--mshop-border);
     }
     
-    /* Individual Filter Scope - Backend Style */
     .mshop-filter-scope {
         display: inline-flex;
         align-items: center;
@@ -137,7 +130,6 @@
         color: white;
     }
     
-    /* Checkbox Scope - Backend Style */
     .mshop-filter-scope.checkbox {
         display: inline-flex;
         align-items: center;
@@ -169,7 +161,6 @@
         margin: 0;
     }
     
-    /* Filter Dropdown Panel - Like Backend */
     .mshop-filter-panel {
         display: none;
         background: white;
@@ -193,7 +184,6 @@
         }
     }
     
-    /* Panel Content */
     .mshop-panel-content {
         display: flex;
         flex-wrap: wrap;
@@ -214,7 +204,6 @@
         border-bottom: 2px solid var(--mshop-border);
     }
     
-    /* Options List */
     .mshop-options-list {
         display: flex;
         flex-direction: column;
@@ -263,7 +252,6 @@
         border-radius: 12px;
     }
     
-    /* Color Option */
     .mshop-color-dot {
         display: inline-block;
         width: 14px;
@@ -272,7 +260,6 @@
         border: 1px solid var(--mshop-border);
     }
     
-    /* Price Range in Panel */
     .mshop-price-range-panel {
         padding: 10px;
     }
@@ -352,7 +339,6 @@
         font-size: 13px;
     }
     
-    /* Panel Actions */
     .mshop-panel-actions {
         display: flex;
         gap: 12px;
@@ -393,8 +379,6 @@
     .mshop-btn-outline:hover {
         background: var(--mshop-light);
     }
-    
-    /* Search Bar */
     .mshop-search-wrapper {
         margin-bottom: 24px;
         position: relative;
@@ -424,7 +408,6 @@
         color: var(--mshop-gray);
     }
     
-    /* Products Grid */
     .mshop-products-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -432,7 +415,6 @@
         margin-bottom: 30px;
     }
     
-    /* Product Card */
     .mshop-product-card {
         background: white;
         border-radius: var(--mshop-radius-md);
@@ -563,7 +545,6 @@
         color: white;
     }
     
-    /* Pagination */
     .mshop-pagination {
         display: flex;
         justify-content: center;
@@ -594,7 +575,6 @@
         border: none;
     }
     
-    /* Responsive */
     @media (min-width: 640px) {
         .mshop-products-grid {
             grid-template-columns: repeat(3, 1fr);

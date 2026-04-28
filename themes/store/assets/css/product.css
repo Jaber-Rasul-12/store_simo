@@ -18,32 +18,7 @@
             --transition-fast: all 0.2s ease;
         }
         
-        /* body {
-            margin: 30px;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
-        }  */
-         
-        /* body {
-            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-        } 
-          */
-        /* .container-fluid {
-            width: 100%;
-            max-width: 1400px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-xl);
-            margin-bottom: 40px;
-            background: white;
-            animation: containerEntrance 1s ease-out;
-        }  */
+
         @keyframes containerEntrance {
             0% {
                 opacity: 0;
@@ -54,8 +29,7 @@
                 transform: translateY(0) scale(1);
             }
         }
-         */
-        /* العنوان الرئيسي */
+
         .text-center {
             padding: 60px 0 40px;
             position: relative;
@@ -88,7 +62,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            /* border: 3px solid transparent; */
             
             border-image: linear-gradient(135deg, var(--primary-color), var(--gold-color)) 1;
             border-radius: 15px;
@@ -125,7 +98,6 @@
             }
         }
         
-        /* شبكة المنتجات */
         .row {
             padding: 0 20px 0px;
             animation: gridEntrance 0.8s ease-out 0.5s both;
@@ -141,7 +113,6 @@
                 transform: translateY(0);
             }
         }
-        /* بطاقة المنتج */
         .product-item {
             border-radius: 16px !important;
             overflow: hidden;
@@ -168,7 +139,6 @@
             }
         }
         
-        /* تأخير ظهور البطاقات */
         .product-item:nth-child(1) { animation-delay: 0.1s; }
         .product-item:nth-child(2) { animation-delay: 0.2s; }
         .product-item:nth-child(3) { animation-delay: 0.3s; }
@@ -203,7 +173,6 @@
             opacity: 1;
         }
          
-        /* رأس البطاقة - صورة المنتج */
         .card-header {
             padding: 0 !important;
             border: none !important;
@@ -240,7 +209,6 @@
             filter: brightness(1);
         }
         
-        /* تأثير اللمعان على الصورة */
         .image-container::before {
             content: '';
             position: absolute;
@@ -258,7 +226,6 @@
             transform: translateX(100%);
         }
         
-        /* بطاقة البيع السريع */
         .badge-sale {
             position: absolute;
             top: 15px;
@@ -286,7 +253,6 @@
             }
         }
         
-        /* جسم البطاقة */
         .card-body {
             padding: 25px 20px 20px !important;
             border: none !important;
@@ -320,7 +286,6 @@
 
 
         
-        /* قسم الأسعار */
         .product-flex {
             margin: 15px 0;
             position: relative;
@@ -358,23 +323,11 @@
         .text-muted {
             font-size: 10px !important;
             color: var(--text-light) !important;
-            /* text-decoration: line-through;
-            position: relative; */
+
             padding: 5px 10px !important;
         } 
         
-        /* .text-muted::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--danger-color), transparent);
-            transform: translateY(-50%);
-        } 
-         */
-        /* ترويج السعر القديم */
+       
          .discount-badge {
             position: absolute;
             top: -12px;
@@ -402,7 +355,6 @@
             }
         } 
          
-        /* تذييل البطاقة */
        
         .card-footer {
             background: linear-gradient(to right, #fdf6f6, white) !important;
@@ -490,7 +442,6 @@
             transform: scale(1.2);
         }
         
-        /* تأثيرات إضافية */
         .star-rating {
             position: absolute;
             top: 15px;
@@ -543,7 +494,6 @@
             }
         }
         
-        /* تأثيرات التحميل */
         .skeleton-loading {
             animation: skeletonPulse 1.5s infinite;
         }
@@ -557,7 +507,6 @@
             }
         }
         
-        /* تأثيرات دخول عند التمرير */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(40px);
@@ -569,7 +518,6 @@
             transform: translateY(0);
         }
         
-        /* فلتر المنتجات */
         .product-filters {
             display: flex;
             justify-content: center;
@@ -598,7 +546,6 @@
             box-shadow: 0 6px 20px rgba(139, 94, 94, 0.2);
         }
         
-        /* Responsive */
         @media (max-width: 1200px) {
             .col-lg-3 {
                 flex: 0 0 33.333333%;
@@ -664,10 +611,7 @@
                 font-size: 10px;
             }
 
-            /* .container-fluid div{
-                margin: 0px!important;
-                padding: 1px!important;
-            } */
+
             .section-title {
                 padding: 0px!important;
             }
@@ -711,10 +655,7 @@
             .text-primary-product-custom {
                 font-size: 16px !important;
             }
-/* 
-            #row-product div{
-                
-            } */
+
 
             .featured-tag {
                 top: 10px;
@@ -737,12 +678,10 @@
             }
         }
         
-        /* تأثيرات خاصة للـ hover */
         .product-item:hover .card-body {
             transform: translateY(-5px);
         }
         
-        /* تأثيرات الضوء التفاعلية */
         .product-item {
             position: relative;
             overflow: hidden;
@@ -766,7 +705,6 @@
             opacity: 1;
         }
         
-        /* تأثيرات اللمس للموبايل */
         
         @media (hover: none) {
             .product-item:hover {

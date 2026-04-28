@@ -31,7 +31,6 @@
             padding: 15px;
         }
         
-        /* Category Card Styling */
         .cat-item {
             background: white;
             border-radius: 16px;
@@ -223,7 +222,6 @@
             gap: 12px;
         }
         
-        /* Responsive Design */
         @media (max-width: 992px) {
             .col-lg-4 {
                 width: 50%;
@@ -231,12 +229,7 @@
         }
         
         @media (max-width: 768px) {
-            /* body{
-                font-size: 10px!important;
-            } */
-            /* .container-fluid div {
-                padding-top: 0px!important;
-            } */
+
 
             .text-center p {
                 font-size: 9px!important;
@@ -280,7 +273,6 @@
             }
         }
         
-        /* Animation for the entire section */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -294,7 +286,6 @@
             animation: fadeIn 0.8s ease-out;
         }
         
-        /* Badge for new categories */
         .new-badge {
             position: absolute;
             top: 20px;

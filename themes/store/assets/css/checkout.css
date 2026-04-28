@@ -6,7 +6,6 @@
             min-height: 100vh;
         }
         
-        /* Section Headers */
         .xcheckout-section-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 16px;
@@ -33,7 +32,6 @@
             margin-right: auto;
         }
         
-        /* Cards */
         .xcheckout-card {
             background: white;
             border-radius: 20px;
@@ -73,7 +71,6 @@
             border-top: 1px solid #eef2f6;
         }
         
-        /* Cart Items */
         .xcheckout-cart-items {
             display: flex;
             flex-direction: column;
@@ -114,7 +111,6 @@
             color: #48bb78;
         }
         
-        /* Summary */
         .xcheckout-summary {
             margin-top: 16px;
         }
@@ -141,7 +137,6 @@
             font-size: 18px;
         }
         
-        /* Form Elements */
         .xcheckout-form-group {
             margin-bottom: 18px;
         }
@@ -189,7 +184,6 @@
             cursor: default;
         }
         
-        /* Radio Buttons */
         .xcheckout-radio-group {
             display: flex;
             flex-direction: column;
@@ -227,7 +221,6 @@
             margin: 0;
         }
         
-        /* Map Container */
         .xcheckout-map {
             height: 280px;
             border-radius: 16px;
@@ -245,7 +238,6 @@
             gap: 6px;
         }
         
-        /* Delivery Fee */
         .xcheckout-delivery-fee {
             background: linear-gradient(135deg, #fef5e7 0%, #fff9f0 100%);
             border-radius: 12px;
@@ -268,7 +260,6 @@
             color: #ed8936;
         }
         
-        /* Button */
         .xcheckout-btn {
             width: 100%;
             padding: 14px;
@@ -300,7 +291,6 @@
             background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
         }
         
-        /* Completed Orders Card */
         .xcheckout-card-completed {
             background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
             border: 2px solid #c6f6d5;
@@ -315,7 +305,6 @@
             font-weight: 600;
         }
         
-        /* Alerts */
         .xcheckout-alert {
             border-radius: 16px;
             padding: 16px;
@@ -343,7 +332,6 @@
             color: #22543d;
         }
         
-        /* Empty State */
         .xcheckout-empty-state {
             text-align: center;
             padding: 40px 20px;
@@ -356,14 +344,12 @@
             margin-bottom: 16px;
         }
         
-        /* Grid System */
         .xcheckout-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
         }
         
-        /* Loading State */
         .xcheckout-btn-loading {
             position: relative;
             pointer-events: none;
@@ -387,21 +373,18 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Coordinates Row */
         .xcheckout-coords-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
         
-        /* Separator */
         .xcheckout-separator {
             height: 1px;
             background: linear-gradient(to right, transparent, #e2e8f0, transparent);
             margin: 16px 0;
         }
         
-        /* Tablet & Desktop Responsive */
         @media (min-width: 768px) {
             .xcheckout-container {
                 padding: 20px !important;
@@ -422,7 +405,6 @@
             }
         }
         
-        /* Touch Optimizations */
         @media (hover: none) and (pointer: coarse) {
             .xcheckout-btn,
             .xcheckout-radio,
@@ -435,7 +417,6 @@
             }
         }
         
-        /* Animation */
         @keyframes xcheckout-fadeIn {
             from {
                 opacity: 0;
