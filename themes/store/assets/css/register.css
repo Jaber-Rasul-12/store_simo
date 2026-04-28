@@ -1,0 +1,254 @@
+    .authmaster-container {
+        --auth-primary: #4361ee;
+        --auth-primary-dark: #3a56d4;
+        --auth-secondary: #7209b7;
+        --auth-success: #06ffa5;
+        --auth-gray: #6c757d;
+        --auth-light: #f8f9fa;
+        --auth-white: #ffffff;
+        --auth-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
+        --auth-radius: 28px;
+        --auth-radius-sm: 20px;
+    }
+    
+    .authmaster-card {
+        background: var(--auth-white);
+        border-radius: var(--auth-radius);
+        box-shadow: var(--auth-shadow);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+    }
+    
+    .authmaster-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 30px 45px -12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .authmaster-header {
+        background-image: linear-gradient(135deg, #804747, #a39898);
+        padding: 1.8rem 1.5rem;
+        text-align: center;
+        border-bottom: none;
+    }
+    
+    .authmaster-header h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        margin: 0;
+        color: white;
+    }
+    
+    .authmaster-header i {
+        font-size: 1.8rem;
+        vertical-align: middle;
+    }
+    
+    .authmaster-body {
+        padding: 2rem 2rem 1.5rem;
+    }
+    
+    .authmaster-field {
+        margin-bottom: 1.5rem;
+        text-align: right;
+    }
+    
+    .authmaster-label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.6rem;
+        color: #1e293b;
+        font-size: 0.95rem;
+    }
+    
+    .authmaster-label i {
+        color: var(--auth-primary);
+        margin-left: 8px;
+        font-size: 1rem;
+    }
+    
+    .authmaster-input {
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        font-size: 1rem;
+        border: 2px solid #e2e8f0;
+        border-radius: 16px;
+        transition: all 0.25s ease;
+        background: var(--auth-white);
+        font-family: inherit;
+    }
+    
+    .authmaster-input:focus {
+        border-color: var(--auth-primary);
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+        transform: translateY(-2px);
+    }
+    
+    .authmaster-input-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    
+    .authmaster-input-group .authmaster-input {
+        flex: 1;
+        padding-left: 3rem;
+    }
+    
+    .authmaster-toggle-btn {
+        position: absolute;
+        left: 12px;
+        background: none;
+        border: none;
+        color: #94a3b8;
+        cursor: pointer;
+        font-size: 1.2rem;
+        padding: 0;
+        transition: color 0.2s;
+        z-index: 2;
+    }
+    
+    .authmaster-toggle-btn:hover {
+        color: var(--auth-primary);
+    }
+    
+    .authmaster-btn-primary {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 16px;
+        background-image: linear-gradient(135deg, #804747, #a39898);
+        color: white;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .authmaster-btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -5px rgba(67, 97, 238, 0.4);
+        filter: brightness(1.02);
+    }
+    
+    .authmaster-btn-outline {
+        width: 100%;
+        padding: 0.9rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border: 2px solid var(--auth-primary);
+        border-radius: 16px;
+        background: transparent;
+        color: var(--auth-primary);
+        transition: all 0.25s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .authmaster-btn-outline:hover {
+        background: linear-gradient(135deg, #804747, #a39898);
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .authmaster-info-text {
+        font-size: 0.8rem;
+        color: #64748b;
+        margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .authmaster-info-text i {
+        font-size: 0.75rem;
+        color: var(--auth-primary);
+    }
+    
+    .authmaster-footer {
+        background: #fafcff;
+        text-align: center;
+        padding: 1.2rem;
+        border-top: 1px solid #eef2ff;
+        font-size: 0.85rem;
+        color: #5b6e8c;
+    }
+    
+    .authmaster-footer i {
+        margin-left: 5px;
+    }
+    
+    .authmaster-alert {
+        background: linear-gradient(135deg, #fff3e0 0%, #ffe8cc 100%);
+        border: none;
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: var(--auth-shadow);
+    }
+    
+    .authmaster-alert i {
+        color: #f59e0b;
+        margin-bottom: 1rem;
+    }
+    
+    .authmaster-alert h4 {
+        color: #92400e;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* mobile fine-tuning */
+    @media (max-width: 768px) {
+        .authmaster-body {
+            padding: 1.5rem;
+        }
+        .authmaster-header h2 {
+            font-size: 1.5rem;
+        }
+        .authmaster-header i {
+            font-size: 1.4rem;
+        }
+        .authmaster-input {
+            padding: 0.8rem 1rem;
+            font-size: 0.95rem;
+        }
+        .authmaster-btn-primary,
+        .authmaster-btn-outline {
+            padding: 0.8rem;
+            font-size: 1rem;
+        }
+        .authmaster-label {
+            font-size: 0.9rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .authmaster-body {
+            padding: 1.2rem;
+        }
+        .authmaster-header h2 {
+            font-size: 1.35rem;
+        }
+        .authmaster-field {
+            margin-bottom: 1.2rem;
+        }
+    }
+    
+    /* RTL native adjustments */
+    .authmaster-field,
+    .authmaster-checkbox {
+        text-align: right;
+    }
+    .authmaster-toggle-btn {
+        left: 12px;
+        right: auto;
+    }
