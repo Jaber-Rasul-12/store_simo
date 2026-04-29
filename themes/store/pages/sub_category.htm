@@ -1,4 +1,4 @@
-title = "تصفح متجرنا"
+title = "التصنيفات الفرعية"
 url = "/sub_category/:slug"
 layout = "default"
 slug = "{{ :slug }}"
@@ -7,6 +7,45 @@ slug = "{{ :slug }}"
 [session]
 [Cart]
 == 
+<?php
+function onStart()
+{
+    // جلب معلومات التصنيف الفرعي الحالي
+    $slug = $this->param('slug');
+    $this['currentSubCategory'] = \Store\Store\Models\SubCategory::where('slug', $slug)->first();
+    $this['subCategoryName'] = $this['currentSubCategory'] ? $this['currentSubCategory']->name : 'التصنيفات الفرعية';
+    
+    // تعيين متغيرات الميتا مباشرة
+    $subCatName = $this['subCategoryName'];
+    
+    $this['meta_description'] = 'استعرضي أحدث منتجات ' . $subCatName . ' في متجر سيمو ✨ تشكيلة رائعة من المنتجات النسائية في هذا القسم. تسوقي الآن واستمتعي بتوصيل سريع في سوريا.';
+    $this['meta_keywords'] = $subCatName . ', ' . $subCatName . ' سيمو, منتجات ' . $subCatName . ', تصنيفات فرعية, متجر نسائي سوريا, تسوق أونلاين';
+    $this['og_title'] = 'سيمو | ' . $subCatName . ' - أحدث المنتجات النسائية';
+    $this['og_description'] = 'تصفحي أحدث منتجات ' . $subCatName . ' من سيمو. تشكيلة واسعة من الملابس، العطور، الإكسسوارات ومنتجات التجميل.';
+    $this['og_url'] = 'sub_category/' . $slug;
+    $this['twitter_title'] = 'سيمو - ' . $subCatName . ' | اكتشفي أحدث التشكيلات';
+    $this['twitter_description'] = 'تشكيلة واسعة ومتنوعة من منتجات ' . $subCatName . ' في متجر سيمو. تسوقي بكل سهولة مع توصيل سريع.';
+    $this['productImage'] = $this['currentSubCategory']->image->path ?: 'assets/img/file.svg';
+}
+?>
+==
+
+{% put head %}
+{% partial 'meta/meta'  
+    seodescription=meta_description
+    seokeywords=meta_keywords
+    seorobots='index, follow'
+    fslintitle=og_title
+    fslindescription=og_description
+    fslinimage=productImage
+    fslinurl=og_url
+    fslintype='website'
+    twicard='summary_large_image'
+    twititle=twitter_title
+    twidescription=twitter_description
+    twiimage=productImage
+%}
+{% endput %}
 
    {% partial 'home/topbar' %}
 

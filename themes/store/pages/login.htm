@@ -15,6 +15,27 @@ function onStart()
 }
 ?>
 ==
+
+{% put head %}
+{% partial 'meta/meta'  
+    seodescription='تسجيل الدخول إلى حسابك في سيمو للاستمتاع بتجربة تسوق فاخرة. يمكنك متابعة طلباتك، إدارة معلوماتك، والحصول على عروض حصرية للأعضاء فقط.'
+    seokeywords='تسجيل دخول, دخول حساب سيمو, تسجيل دخول متجر نسائي, حسابي, سيمو, login'
+    seorobots='noindex, follow'
+
+    fslintitle='سيمو | تسجيل الدخول إلى حسابك'
+    fslindescription='سجلي الدخول إلى حسابك في سيمو لمتابعة طلباتك، الاستفادة من العروض الحصرية، وتجربة تسوق مخصصة تناسب ذوقك.'
+    fslinimage='assets/img/file.svg'
+    fslinurl='/login'
+    fslintype='website'
+
+    twicard='summary_large_image'
+    twititle='سيمو - تسجيل الدخول | استمتعي بتجربة تسوق مخصصة'
+    twidescription='سجلي الدخول الآن إلى حسابك في سيمو وتابعي طلباتك، استفيدي من العروض الحصرية، وأديري مشترياتك بكل سهولة.'
+    twiimage='assets/img/file.svg'
+%}
+{% endput %}
+
+
 {% if user %}
     <script>
         window.location.href = "{{ 'home'|page }}";

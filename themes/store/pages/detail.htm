@@ -12,9 +12,60 @@ slug = "{{ :slug }}"
 function onStart()
 {
     $this->addCss('assets/css/detail.css');
+    
+    $slug = $this->param('slug');
+    $this['currentProduct'] = \Store\Store\Models\Product::with('prices')->where('slug', $slug)->first();
+    
+    if ($this['currentProduct']) {
+        $this['productName'] = $this['currentProduct']->name;
+        $this['productDescription'] = strip_tags(substr($this['currentProduct']->description, 0, 160));
+        $price = $this['currentProduct']->prices->where('status', true)->first();
+        $this['productPrice'] = $price ? $price->price : '0';
+        $this['productImage'] = $this['currentProduct']->image->path ?: 'assets/img/file.svg';
+        $this['productCategory'] = $this['currentProduct']->category ? $this['currentProduct']->category->name : '';
+        $this['productBrand'] = $this['currentProduct']->brand ? $this['currentProduct']->brand->name : '';
+    } else {
+        $this['productName'] = 'المنتج';
+        $this['productDescription'] = 'تفاصيل المنتج في متجر سيمو';
+        $this['productPrice'] = '0';
+        $this['productImage'] = 'assets/img/file.svg';
+        $this['productCategory'] = '';
+        $this['productBrand'] = '';
+    }
+    
+    $brandText = $this['productBrand'] ? 'ماركة ' . $this['productBrand'] . '، ' : '';
+    $categoryText = $this['productCategory'] ? 'قسم ' . $this['productCategory'] . '. ' : '';
+    
+    $this['meta_description'] = $this['productDescription'] . ' ✨ تسوقي منتج ' . $this['productName'] . ' من متجر سيمو. ' . $brandText . $categoryText . 'توصيل سريع لجميع أنحاء سوريا.';
+    $this['meta_keywords'] = $this['productName'] . ', سعر ' . $this['productName'] . ', شراء ' . $this['productName'] . ', ' . $this['productBrand'] . ', ' . $this['productCategory'] . ', منتجات نسائية, تسوق أونلاين سوريا';
+    $this['og_title'] = 'سيمو | ' . $this['productName'] . ' - تسوقي بأفضل سعر';
+    $this['og_description'] = $this['productDescription'] . ' ✨ توصيل سريع لجميع أنحاء سوريا. تسوقي ' . $this['productName'] . ' أونلاين من متجر سيمو.';
+    $this['og_url'] = 'detail/' . $slug;
+    $this['twitter_title'] = 'سيمو - ' . $this['productName'] . ' | تسوقي بأفضل سعر في سوريا';
+    $this['twitter_description'] = $this['productDescription'] . ' توصيل سريع لجميع أنحاء سوريا. اطلبي ' . $this['productName'] . ' الآن من متجر سيمو.';
 }
 ?>
 ==
+
+{% put head %}
+{% partial 'meta/meta'  
+    seodescription=meta_description
+    seokeywords=meta_keywords
+    seorobots='index, follow'
+    fslintitle=og_title
+    fslindescription=og_description
+    fslinimage=productImage
+    fslinurl=og_url
+    fslintype='product'
+    fslinavailability='instock'
+    fslinprice=productPrice
+    fslinpricecurrency='SYP'
+    twicard='summary_large_image'
+    twititle=twitter_title
+    twidescription=twitter_description
+    twiimage=productImage
+%}
+{% endput %}
 
     {% partial 'home/topbar' %}
 

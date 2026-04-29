@@ -1,4 +1,4 @@
-title = "تصفح متجرنا"
+title = "العلامات التجارية"
 url = "/brand/:slug"
 layout = "default"
 slug = "{{ :slug }}"
@@ -8,11 +8,48 @@ slug = "{{ :slug }}"
 [Cart]
 == 
 
+<?php
+function onStart()
+{
+    $slug = $this->param('slug');
+    $this['currentBrand'] = \Store\Store\Models\Brand::where('slug', $slug)->first();
+    $this['brandName'] = $this['currentBrand'] ? $this['currentBrand']->name : 'العلامات التجارية';
+    
+    $brandName = $this['brandName'];
+    
+    $this['meta_description'] = 'اكتشفي مجموعة منتجات ' . $brandName . ' في متجر سيمو ✨ تشكيلة حصرية من أجود الماركات العالمية والمحلية. تسوقي منتجات ' . $brandName . ' الأصلية بأفضل الأسعار في سوريا.';
+    $this['meta_keywords'] = $brandName . ', منتجات ' . $brandName . ', ' . $brandName . ' سيمو, ماركة ' . $brandName . ', تسوق ' . $brandName . ' أونلاين, ماركات أصلية';
+    $this['og_title'] = 'سيمو | ' . $brandName . ' - تشكيلة حصرية من الماركة';
+    $this['og_description'] = 'تسوقي أحدث منتجات ' . $brandName . ' من سيمو. منتجات أصلية 100% بأسعار مميزة مع توصيل سريع لجميع أنحاء سوريا. اكتشفي المجموعة الكاملة الآن.';
+    $this['og_url'] = 'brand/' . $slug;
+    $this['twitter_title'] = 'سيمو - ' . $brandName . ' | تسوقي منتجات أصلية';
+    $this['twitter_description'] = 'تشكيلة واسعة من منتجات ' . $brandName . ' الأصلية في متجر سيمو. جودة عالية وأسعار مميزة مع توصيل سريع لجميع أنحاء سوريا.';
+}
+?>
+
+==
+
+{% put head %}
+{% partial 'meta/meta'  
+    seodescription=meta_description
+    seokeywords=meta_keywords
+    seorobots='index, follow'
+    fslintitle=og_title
+    fslindescription=og_description
+    fslinimage='assets/img/file.svg'
+    fslinurl=og_url
+    fslintype='website'
+    twicard='summary_large_image'
+    twititle=twitter_title
+    twidescription=twitter_description
+    twiimage='assets/img/file.svg'
+%}
+{% endput %}
+
    {% partial 'home/topbar' %}
 
    {% partial 'navbar' home=false  shop=true contact=false %}
 
-   {# {% partial 'page_header' title='تصفح متجرنا' name_page='قسم التصنيفات'  %} #}
 
    {% if Store.onGetProductsWhereBrand is not empty %} {% partial 'brand/products' relateds=Store.onGetRelatedBrands title_product='قسم العلامات التجارية' name_component=Store.onGetProductsWhereBrand %} {% endif %}
 
