@@ -6,6 +6,14 @@ layout = "default"
 [account]
 redirect = "home"
 paramCode = "code"
+
+==
+<?php 
+function onStart()
+{
+    $this->addCss('assets/css/register.css');
+}
+?>
 ==
 {% if user %}
     <script>

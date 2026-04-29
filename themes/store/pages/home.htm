@@ -7,18 +7,33 @@ layout = "default"
 [Cart]
 ==
 
-   
-   {# {% component "notifications" %} #}
-   {% partial 'home/topbar' %}
-   {% partial 'home/navbar' show_clouser=true %}
-   
-   {% if Store.onGetProductsIsBest is not empty %} {% partial 'home/products' title_product='أفضل المنتجات' name_component=Store.onGetProductsIsBest %} {% endif %}
-   {% if Store.onGetProductsIsFeatured is not empty %} {% partial 'home/products' title_product='منتجات مميزة' name_component=Store.onGetProductsIsFeatured %} {% endif %}
-   {% if Store.onGetProductsNew is not empty %} {% partial 'home/products' title_product='منتجات جديدة' name_component=Store.onGetProductsNew %} {% endif %}
-   {% if Store.onGetProductsIsTop is not empty %} {% partial 'home/products' title_product='منتجات عالية الجودة' name_component=Store.onGetProductsIsTop %} {% endif %}
+{% put head %}
+{% partial 'meta/meta'  
+seodescription='سيمو ✨ متجرك الأول للمنتجات النسائية الفاخرة. اكتشفي أحدث صيحات الموضة، العطور، الإكسسوارات، ومنتجات العناية بالبشرة. تسوقي بأمان وتوصيل سريع لجميع أنحاء سوريا'
+seokeywords='سيمو, متجر نسائي, منتجات نسائية, موضة, أزياء, عطور, إكسسوارات, مكياج, عناية بالبشرة'
+seorobots='index, follow'
 
-   {% partial 'home/categories' %}
+fslintitle='سيمو | متجر المنتجات النسائية الفاخرة'
+fslindescription='تسوقي من سيمو أحدث التشكيلات من الملابس، العطور، الإكسسوارات ومنتجات التجميل'
+fslinimage='assets/img/file.svg'
+fslinurl='/'
+fslintype='website'
 
+
+twicard='summary_large_image'
+twititle='سيمو - متجر المنتجات النسائية | تسوقي بأسلوبك'
+twidescription='تشكيلة واسعة من الملابس، العطور، المكياج والإكسسوارات. توصيل مجاني للطلبات فوق'
+twiimage='assets/img/file.svg'
+%}
+{% endput %}
+   
+{% partial 'home/topbar' %}
+{% partial 'home/navbar' show_clouser=true %}
+{% if Store.onGetProductsIsBest is not empty %} {% partial 'home/products' title_product='أفضل المنتجات' name_component=Store.onGetProductsIsBest %} {% endif %}
+{% if Store.onGetProductsIsFeatured is not empty %} {% partial 'home/products' title_product='منتجات مميزة' name_component=Store.onGetProductsIsFeatured %} {% endif %}
+{% if Store.onGetProductsNew is not empty %} {% partial 'home/products' title_product='منتجات جديدة' name_component=Store.onGetProductsNew %} {% endif %}
+{% if Store.onGetProductsIsTop is not empty %} {% partial 'home/products' title_product='منتجات عالية الجودة' name_component=Store.onGetProductsIsTop %} {% endif %}
+{% partial 'home/categories' %}
 {% partial 'home/featured' %}
 
 

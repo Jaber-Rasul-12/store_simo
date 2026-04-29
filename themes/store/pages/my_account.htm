@@ -9,6 +9,13 @@ layout = "default"
 security = "user"
 redirect = "home"
 ==
+<?php 
+function onStart()
+{
+    $this->addCss('assets/css/my_account.css');
+}
+?>
+==
 {% partial 'home/topbar' %}
 {% partial 'navbar' home=false shop=false contact=false %}
 {% partial 'my_account/my_account' %}

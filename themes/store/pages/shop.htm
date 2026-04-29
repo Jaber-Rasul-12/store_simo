@@ -6,6 +6,13 @@ layout = "default"
 [session]
 [Cart]
 ==
+<?php 
+function onStart()
+{
+    $this->addCss('assets/css/shop.css');
+}
+?>
+==
    {% partial 'home/topbar' %}
    {% partial 'navbar' home=false  shop=true contact=false %}
    {# {% partial 'page_header' title='تصفح متجرنا' name_page='تصفح المتجر'  %} #}

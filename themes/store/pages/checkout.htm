@@ -8,6 +8,13 @@ layout = "default"
 security = "user"
 redirect = "home"
 ==
+<?php 
+function onStart()
+{
+    $this->addCss('assets/css/checkout.css');
+}
+?>
+==
 {% partial 'home/topbar' %}
    {% partial 'navbar' home=false  shop=false cart=false checkout=true contact=false %}
    {# {% partial 'page_header' title='الدفع' name_page='الدفع'  %}    #}

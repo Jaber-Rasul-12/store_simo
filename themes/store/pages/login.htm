@@ -6,6 +6,14 @@ layout = "default"
 [account]
 [sociallogin]
 redirect = "home"
+
+==
+<?php 
+function onStart()
+{
+    $this->addCss('assets/css/login.css');
+}
+?>
 ==
 {% if user %}
     <script>
