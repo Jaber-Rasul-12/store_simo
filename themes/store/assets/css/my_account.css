@@ -1,0 +1,66 @@
+    .avatar-wrapper {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+    
+    .avatar-wrapper img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #fff;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .avatar-upload-btn {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        background: #007bff;
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    .avatar-upload-btn:hover {
+        background: #0056b3;
+        transform: scale(1.05);
+    }
+    
+    .avatar-upload-btn i {
+        color: white;
+        font-size: 16px;
+    }
+    
+    .balance-card {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        border-radius: 15px;
+        padding: 20px;
+        color: white;
+    }
+    
+    @media (max-width: 768px) {
+        .avatar-wrapper img {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .avatar-upload-btn {
+            width: 28px;
+            height: 28px;
+            bottom: 0px;
+            right: 0px;
+        }
+        
+        .avatar-upload-btn i {
+            font-size: 14px;
+        }
+    }

@@ -196,22 +196,7 @@
     <div class="limited-offers">
         <div class="limited-header">
             <h3>⚡ عروض محدودة الوقت</h3>
-            <p style="color:rgba(255,255,255,0.8);">خصم يصل إلى 60%</p>
-            <div class="timer">
-                <div class="timer-item">
-                    <div class="timer-number" id="hours">24</div>
-                    <div class="timer-label">ساعة</div>
-                </div>
-                <div class="timer-item">
-                    <div class="timer-number" id="minutes">00</div>
-                    <div class="timer-label">دقيقة</div>
-                </div>
-                <div class="timer-item">
-                    <div class="timer-number" id="seconds">00</div>
-                    <div class="timer-label">ثانية</div>
-                </div>
-            </div>
-        </div>
+           
         <div class="limited-products">
             {% for product in Store.getProductsShowHomePage %}
             <a href="/detail/{{ product.slug }}" class="product-card">
@@ -266,33 +251,7 @@
     
 </div>
 
-<script>
-function startTimer(hours, minutes, seconds) {
-    let totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
-    
-    const timerInterval = setInterval(() => {
-        totalSeconds--;
-        
-        if (totalSeconds < 0) {
-            clearInterval(timerInterval);
-            document.getElementById('hours').innerText = '00';
-            document.getElementById('minutes').innerText = '00';
-            document.getElementById('seconds').innerText = '00';
-            return;
-        }
-        
-        const hrs = Math.floor(totalSeconds / 3600);
-        const mins = Math.floor((totalSeconds % 3600) / 60);
-        const secs = totalSeconds % 60;
-        
-        document.getElementById('hours').innerText = hrs.toString().padStart(2, '0');
-        document.getElementById('minutes').innerText = mins.toString().padStart(2, '0');
-        document.getElementById('seconds').innerText = secs.toString().padStart(2, '0');
-    }, 1000);
-}
 
-startTimer(24, 0, 0);
-</script>
 
 
 
