@@ -26,7 +26,7 @@ function onStart()
         $this['productBrand'] = $this['currentProduct']->brand ? $this['currentProduct']->brand->name : '';
     } else {
         $this['productName'] = 'المنتج';
-        $this['productDescription'] = 'تفاصيل المنتج في متجر سيمو';
+        $this['productDescription'] = 'تفاصيل المنتج في متجر فيكسو';
         $this['productPrice'] = '0';
         $this['productImage'] = 'assets/img/file.svg';
         $this['productCategory'] = '';
@@ -36,13 +36,13 @@ function onStart()
     $brandText = $this['productBrand'] ? 'ماركة ' . $this['productBrand'] . '، ' : '';
     $categoryText = $this['productCategory'] ? 'قسم ' . $this['productCategory'] . '. ' : '';
     
-    $this['meta_description'] = $this['productDescription'] . ' ✨ تسوقي منتج ' . $this['productName'] . ' من متجر سيمو. ' . $brandText . $categoryText . 'توصيل سريع لجميع أنحاء سوريا.';
+    $this['meta_description'] = $this['productDescription'] . ' ✨ تسوقي منتج ' . $this['productName'] . ' من متجر فيكسو. ' . $brandText . $categoryText . 'توصيل سريع لجميع أنحاء سوريا.';
     $this['meta_keywords'] = $this['productName'] . ', سعر ' . $this['productName'] . ', شراء ' . $this['productName'] . ', ' . $this['productBrand'] . ', ' . $this['productCategory'] . ', منتجات نسائية, تسوق أونلاين سوريا';
-    $this['og_title'] = 'سيمو | ' . $this['productName'] . ' - تسوقي بأفضل سعر';
-    $this['og_description'] = $this['productDescription'] . ' ✨ توصيل سريع لجميع أنحاء سوريا. تسوقي ' . $this['productName'] . ' أونلاين من متجر سيمو.';
+    $this['og_title'] = 'فيكسو | ' . $this['productName'] . ' - تسوقي بأفضل سعر';
+    $this['og_description'] = $this['productDescription'] . ' ✨ توصيل سريع لجميع أنحاء سوريا. تسوقي ' . $this['productName'] . ' أونلاين من متجر فيكسو.';
     $this['og_url'] = 'detail/' . $slug;
-    $this['twitter_title'] = 'سيمو - ' . $this['productName'] . ' | تسوقي بأفضل سعر في سوريا';
-    $this['twitter_description'] = $this['productDescription'] . ' توصيل سريع لجميع أنحاء سوريا. اطلبي ' . $this['productName'] . ' الآن من متجر سيمو.';
+    $this['twitter_title'] = 'فيكسو - ' . $this['productName'] . ' | تسوقي بأفضل سعر في سوريا';
+    $this['twitter_description'] = $this['productDescription'] . ' توصيل سريع لجميع أنحاء سوريا. اطلبي ' . $this['productName'] . ' الآن من متجر فيكسو.';
 }
 ?>
 ==
