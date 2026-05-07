@@ -1,0 +1,56 @@
+fields:
+    full_name:
+        label: 'store.store::lang.model.team.full_name'
+        span: auto
+        type: text
+    phone:
+        label: 'store.store::lang.model.team.phone'
+        span: auto
+        type: text
+    type:
+        label: 'store.store::lang.model.team.type'
+        span: auto
+        type: dropdown
+        options:
+            basics: 'store.store::lang.model.team.basics'
+            agent: 'store.store::lang.model.team.agent'
+    fs_link:
+        label: 'store.store::lang.model.team.fs_link'
+        span: auto
+        type: text
+    ins_link:
+        label: 'store.store::lang.model.team.ins_link'
+        span: auto
+        type: text
+    tw_link:
+        label: 'store.store::lang.model.team.tw_link'
+        span: auto
+        type: text
+    wh_number:
+        label: 'store.store::lang.model.team.wh_number'
+        span: auto
+        type: text
+    job:
+        label: 'store.store::lang.model.team.job'
+        span: auto
+        type: text
+    address:
+        label: 'store.store::lang.model.team.address'
+        span: auto
+        type: text
+    image:
+        label: store.store::lang.model.product.general_image
+        type: fileupload
+        mode: image
+        span: auto
+        imageHeight: 260
+        imageWidth: 260
+        thumbOptions:
+            mode: crop
+            offset:
+                - 0
+                - 0
+            quality: 90
+            sharpen: 0
+            interlace: false
+            extension: auto

@@ -47,12 +47,14 @@
             </div>
         <?php endif; ?>
 
+        <?php if (config('cms.restorePassword', false)): ?>
         <p class="wn-icon-lock pull-right forgot-password">
             <!-- Forgot your password? -->
             <a href="<?= Backend::url('backend/auth/restore') ?>" class="text-muted">
                 <?= e(trans('backend::lang.account.forgot_password')) ?>
             </a>
         </p>
+        <?php endif; ?>
 
     </div>
 <?= Form::close() ?>

@@ -1,0 +1,12 @@
+list: $/store/store/models/team/columns.yaml
+modelClass: Store\Store\Models\Team
+title: 'store.store::lang.controller.teams.teams'
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'store/store/teams/update/:id'

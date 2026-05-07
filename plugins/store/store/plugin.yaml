@@ -62,6 +62,9 @@ permissions:
     subcategories:
         tab: 'store.store::lang.plugin.setting_store'
         label: 'store.store::lang.plugin.subcategories'
+    teams:
+        tab: 'store.store::lang.plugin.setting_store'
+        label: 'store.store::lang.plugin.teams'
 navigation:
     setting_store:
         label: 'store.store::lang.plugin.setting store'
@@ -142,7 +145,12 @@ navigation:
                 icon: icon-comment
                 permissions:
                     - comments
-
+            teams:
+                label: 'store.store::lang.plugin.teams'
+                url: store/store/teams
+                icon: icon-users
+                permissions:
+                    - teams
     store:
         label: 'store.store::lang.plugin.store'
         url: store/store/products

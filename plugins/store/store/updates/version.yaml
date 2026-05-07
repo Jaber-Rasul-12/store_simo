@@ -84,3 +84,6 @@
 1.0.30:
     - 'Created table store_store_subcategory_related'
     - builder_table_create_store_store_subcategory_related_1_0_30.php
+1.0.31:
+    - 'Created table store_store_teams'
+    - builder_table_create_store_store_teams.php

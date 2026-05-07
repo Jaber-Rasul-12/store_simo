@@ -1,3 +1,4 @@
+ <?php if (config('cms.restorePassword', false)): ?>
 <h2><?= e(trans('backend::lang.account.enter_login')) ?></h2>
 
 <?= Form::open() ?>
@@ -29,3 +30,4 @@
 <?= Form::close() ?>
 
 <?= $this->fireViewEvent('backend.auth.extendRestoreView') ?>
+ <?php endif; ?>

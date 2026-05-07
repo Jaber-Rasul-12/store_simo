@@ -1,0 +1,21 @@
+title = "الفريق"
+url = "/teams"
+layout = "default"
+
+[localePicker]
+[Store]
+[session]
+[Cart]
+== 
+<?php 
+function onStart()
+{
+    $this->addCss('assets/css/teams.css');
+}
+?>
+==
+
+{% partial 'home/topbar' %}
+{% partial 'teams/teams' %}
+
+

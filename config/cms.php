@@ -69,6 +69,8 @@ return [
 
     'backendForceRemember' => true,
 
+    'restorePassword' => false,
+
     /*
     |--------------------------------------------------------------------------
     | Back-end timezone

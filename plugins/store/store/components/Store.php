@@ -13,6 +13,7 @@ use Store\Store\Models\Comment;
 use Store\Store\Models\ContactMessage;
 use Store\Store\Models\Size;
 use Store\Store\Models\SubCategory;
+use Store\Store\Models\Team;
 
 class Store extends ComponentBase
 {
@@ -103,6 +104,21 @@ class Store extends ComponentBase
         }
         
     }
+
+
+
+    public function onGetTeamsBasics()
+    {
+        return Team::where('type', '=', 'basics')->get();
+    }
+
+    public function onGetTeamsAgent()
+    {
+        return Team::where('type', '=', 'agent')->get();
+    }
+
+
+
 
 
 

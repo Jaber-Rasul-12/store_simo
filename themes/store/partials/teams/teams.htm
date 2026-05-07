@@ -1,0 +1,121 @@
+<!-- System Managers Section -->
+<div class="team-page">
+    <div class="team-container">
+        <div class="team-section">
+            <div class="custom-section-header">
+                <h1 class="section-title">الطاقم الإداري</h1>
+                <p class="section-subtitle">فريق الإدارة المتخصص لضمان سير العمل بكفاءة</p>
+            </div>
+
+            <div class="team-grid">
+                {% set managers = Store.onGetTeamsBasics %}
+                {% if managers is not empty %}
+                    {% for team in managers %}
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="{{ team.image.path ? team.image.path : ('assets/img/file.svg' | theme) }}" alt="{{ team.full_name }}">
+                            <div class="custom-teams-social-links">
+                                {% if team.fs_link %}
+                                <a href="{{ team.fs_link }}" class="custom-teams-social-link facebook" target="_blank">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                {% endif %}
+                                {% if team.tw_link %}
+                                <a href="{{ team.tw_link }}" class="custom-teams-social-link twitter" target="_blank">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                {% endif %}
+                                {% if team.ins_link %}
+                                <a href="{{ team.ins_link }}" class="custom-teams-social-link instagram" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                {% endif %}
+                                {% if team.wh_number %}
+                                <a href="https://wa.me/{{ team.wh_number|replace({' ': '', '+': '', '-': ''}) }}" class="custom-teams-social-link whatsapp" target="_blank">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">{{ team.full_name }}</h3>
+                            <div class="member-role">{{ team.job }}</div>
+                            {% if team.address %}
+                            <p class="member-bio">{{ team.address }}</p>
+                            {% endif %}
+                            <span class="member-badge">مدير نظام</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <i class="fas fa-users-slash"></i>
+                        <h3>لا يوجد أعضاء</h3>
+                        <p>لم يتم إضافة أي مدراء نظام حتى الآن</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- System Agents Section -->
+<div class="team-page">
+    <div class="team-container">
+        <div class="team-section">
+            <div class="custom-section-header">
+                <h1 class="section-title">وكلاء النظام</h1>
+                <p class="section-subtitle">فريق الدعم والتنفيذ لخدمتكم على مدار الساعة</p>
+            </div>
+
+            <div class="team-grid">
+                {% set agents = Store.onGetTeamsAgent %}
+                {% if agents is not empty %}
+                    {% for team in agents %}
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="{{ team.image.path ? team.image.path : ('assets/img/file.svg' | theme) }}" alt="{{ team.full_name }}">
+                            <div class="custom-teams-social-links">
+                                {% if team.fs_link %}
+                                <a href="{{ team.fs_link }}" class="custom-teams-social-link facebook" target="_blank">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                {% endif %}
+                                {% if team.tw_link %}
+                                <a href="{{ team.tw_link }}" class="custom-teams-social-link twitter" target="_blank">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                {% endif %}
+                                {% if team.ins_link %}
+                                <a href="{{ team.ins_link }}" class="custom-teams-social-link instagram" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                {% endif %}
+                                {% if team.wh_number %}
+                                <a href="https://wa.me/{{ team.wh_number|replace({' ': '', '+': '', '-': ''}) }}" class="custom-teams-social-link whatsapp" target="_blank">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="member-info">
+                            <h3 class="member-name">{{ team.full_name }}</h3>
+                            <div class="member-role">{{ team.job }}</div>
+                            {% if team.address %}
+                            <p class="member-bio">{{ team.address }}</p>
+                            {% endif %}
+                            <span class="member-badge">وكيل نظام</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <i class="fas fa-user-friends"></i>
+                        <h3>لا يوجد أعضاء</h3>
+                        <p>لم يتم إضافة أي وكلاء نظام حتى الآن</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

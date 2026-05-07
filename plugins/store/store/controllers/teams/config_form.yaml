@@ -1,0 +1,10 @@
+name: 'store.store::lang.controller.teams.teams'
+form: $/store/store/models/team/fields.yaml
+modelClass: Store\Store\Models\Team
+defaultRedirect: store/store/teams
+create:
+    redirect: 'store/store/teams/update/:id'
+    redirectClose: store/store/teams
+update:
+    redirect: store/store/teams
+    redirectClose: store/store/teams

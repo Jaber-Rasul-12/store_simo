@@ -1,0 +1,38 @@
+columns:
+    id:
+        label: 'store.store::lang.model.team.id'
+        type: number
+    full_name:
+        label: 'store.store::lang.model.team.full_name'
+        type: text
+        searchable: true
+    phone:
+        label: 'store.store::lang.model.team.phone'
+        type: text
+    address:
+        label: 'store.store::lang.model.team.address'
+        type: text
+    fs_link:
+        label: 'store.store::lang.model.team.fs_link'
+        type: text
+    ins_link:
+        label: 'store.store::lang.model.team.ins_link'
+        type: text
+    tw_link:
+        label: 'store.store::lang.model.team.tw_link'
+        type: text
+    wh_number:
+        label: 'store.store::lang.model.team.wh_number'
+        type: text
+    job:
+        label: 'store.store::lang.model.team.job'
+        type: text
+    type:
+        label: 'store.store::lang.model.team.type'
+        type: text
+    created_at:
+        label: 'store.store::lang.model.team.created_at'
+        type: datetime
+    updated_at:
+        label: 'store.store::lang.model.team.updated_at'
+        type: datetime

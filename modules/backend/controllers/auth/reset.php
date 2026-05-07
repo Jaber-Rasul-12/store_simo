@@ -1,3 +1,4 @@
+ <?php if (config('cms.restorePassword', false)): ?>
 <h2><?= e(trans('backend::lang.account.enter_new_password')) ?></h2>
 
 <?= Form::open() ?>
@@ -31,3 +32,4 @@
         </p>
     </div>
 <?= Form::close() ?>
+ <?php endif; ?>

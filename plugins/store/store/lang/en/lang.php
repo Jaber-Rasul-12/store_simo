@@ -45,6 +45,7 @@ return [
         'comments' => 'Comments',
         'related' => 'Related',
         'merchants' => 'Merchants',
+        'teams' => 'Teams',
         'subcategories' => 'Sub Categories',
     ],
     'model' => [
@@ -286,6 +287,22 @@ return [
             'created_at' => 'Created at',
             'updated_at' => 'Updated at',
         ],
+        'team' => [
+            'id' => 'Id',
+            'full_name' => 'Full name',
+            'phone' => 'Phone',
+            'fs_link' => 'Fs link',
+            'ins_link' => 'Ins link',
+            'tw_link' => 'Tw link',
+            'wh_number' => 'Wh number',
+            'job' => 'Job',
+            'type' => 'Type',
+            'basics'=>'Basics',
+            'agent'=>'Agent',
+            'address'=>'Address',
+            'created_at' => 'Created at',
+            'updated_at' => 'Updated at',
+        ],
     ],
     'controller' => [
         'categories' => [
@@ -341,6 +358,9 @@ return [
         ],
         'subcategories' => [
             'subcategories' => 'Subcategories',
+        ],
+        'teams' => [
+            'teams' => 'Teams',
         ],
     ],
 ];
