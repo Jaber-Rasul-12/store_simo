@@ -66,17 +66,18 @@
                         <span>{{ 'أو' |_ }}</span>
                     </div>
                     
-                    <div class="text-center mb-4">
-                        <p class="text-muted mb-3">{{ 'ليس لدي حساب؟' |_ }}</p>
-                        <a href="{{ '/register' }}" class="authmaster-btn-outline">
+                    <div class="mb-3">
+                        <a href="{{ '/register' }}" class="authmaster-btn-primary">
                             <i class="fas fa-user-plus me-2"></i>{{ 'تسجيل في الموقع' |_ }}
                         </a>
                     </div>
                    
-                    
+                     <div class="authmaster-divider">
+                        <span>{{ 'أو' |_ }}</span>
+                    </div>
                     {% if social_login_links is defined and social_login_links is not empty %}
-                    <div class="text-center mt-3">
-                        <p class="small text-secondary mb-2">{{ 'أو سجل دخول بواسطة' |_ }}</p>
+                    <div class="">
+                        
                         <div class="authmaster-social-icons">
                             {% for name, link in social_login_links %}
                                 <a href="{{ link }}" class="authmaster-social-link">
