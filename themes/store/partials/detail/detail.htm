@@ -1,7 +1,7 @@
 <div class="modern-product-detail">
     
-    <div class="suggestions-modern">
         {% if relateds is not empty %}
+    <div class="suggestions-modern">
         <div class="suggestions-header-modern">
             <div class="suggestions-title-modern">
                 <span class="suggestions-icon">✨</span>
@@ -37,8 +37,8 @@
                 {% endfor %}
             </div>
         </div>
-        {% endif %}
     </div>
+        {% endif %}
 
     <div class="product-main-modern">
         {% set product = Store.onGetProductWithSlug %}
