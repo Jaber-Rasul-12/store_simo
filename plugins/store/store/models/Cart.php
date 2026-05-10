@@ -26,7 +26,7 @@ class Cart extends Model
 
 
 
-    public $fillable = ['user_id', 'wallet_id', 'coupon_id', 'total_price', 'total_promotions', 'final_price' , 'type', 'notes', 'contacts', 'status' , 'location_lat', 'location_lng', 'address'];
+    public $fillable = ['user_id', 'wallet_id', 'coupon_id', 'total_price', 'total_promotions', 'final_price' , 'type', 'notes', 'contacts', 'status' , 'location_lat', 'location_lng', 'address' , 'delivered'];
 
     /**
      * @var array Validation rules
@@ -40,6 +40,7 @@ class Cart extends Model
         'location_lng' => 'nullable|string|max:1000',
         'address' => 'nullable|string|max:1000',
         'status' => 'required|boolean',
+        'delivered' => 'required|boolean',        
         'type' => 'required|in:cashe,wallet',
         'coupon_id'=>'nullable|exists:store_store_coupons,id',
         'total_price' => 'required|numeric|min:0',

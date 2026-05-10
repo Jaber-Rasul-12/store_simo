@@ -10,7 +10,9 @@
                 <div class="item-info">
                     <h4 class="item-name">{{ item.name }}</h4>
                     <div class="price-badge">
+                        {% if item.discount_price > 0 %}
                         <span class="original-price">$ {{ item.price_main }}</span>
+                        {% endif %}
                         <span class="taxed-price">$ {{ item.price_after_taxes }}</span>
                     </div>
                 </div>
@@ -69,45 +71,120 @@
         <h3>ملخص الطلب</h3>
         <i class="fa fa-receipt"></i>
     </div>
+ 
+    {% if Cart.getCoupon is empty %}
+    <form data-request="onApplyCoupon" data-request-flash class="coupon-form">
+        <div class="coupon-wrapper">
+            <div class="coupon-input-group">
+                <i class="fa fa-ticket-alt input-icon"></i>
+                <input type="text" 
+                       name="coupon_code" 
+                       class="coupon-input" 
+                       placeholder="أدخل كود الخصم" 
+                       autocomplete="off">
+                <button type="submit" class="coupon-btn">
+                    <i class="fa fa-check"></i>
+                    <span>تطبيق</span>
+                </button>
+            </div>
+        </div>
+    </form>
+    {% else %}
+        <div class="applied-coupon-card">
+            <div class="coupon-card-content">
+                <div class="coupon-icon">
+                    <i class="fa fa-ticket-alt"></i>
+                </div>
+                <div class="coupon-details">
+                    <div class="coupon-code-wrapper">
+                        <i class="fa fa-tag"></i>
+                        <span class="coupon-code">{{ Cart.getCoupon.code }}</span>
+                        <span class="coupon-badge">مطبق</span>
+                    </div>
+                    <div class="coupon-discount">
+                        <i class="fa fa-percent"></i>
+                        <span class="discount-value">{{ Cart.getCoupon.percentage }}</span>
+                        <span class="discount-label">خصم</span>
+                    </div>
+                </div>
+                <button class="remove-coupon-btn" data-request="onRemoveCoupon" data-request-flash>
+                    <i class="fa fa-trash-alt"></i>
+                    <span>إلغاء</span>
+                </button>
+            </div>
+        </div>
+    {% endif %}
+
+<div class="summary-details">
+    {% set totalprice = 0 %}
+    {% set totaltaxes = 0 %}
+    {% set totalfinal = 0 %}
     
-    <div class="summary-details">
-        {% set totalprice = 0 %}
-        {% set totaltaxes = 0 %}
-        {% set totalfinal = 0 %}
-        
-        {% for item in Cart.cartItems %}
-            {% if item.quantity is iterable %}
-                {% for variant in item.quantity %}
-                    {% set item_total = item.price_main * variant.quantity %}
-                    {% set totalprice = totalprice + item_total %}
-                    
-                    {% set tax_amount = (item.price_after_taxes - item.price_main) * variant.quantity %}
-                    {% set totaltaxes = totaltaxes + tax_amount %}
-                    
-                    {% set totalfinal = totalfinal + (item.price_after_taxes * variant.quantity) %}
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
-        
-        <div class="summary-row">
-            <span>المجموع الفرعي</span>
-            <span>$ {{ totalprice|number_format(2) }}</span>
-        </div>
-        <div class="summary-row">
-            <span>الضرائب</span>
-            <span>$ {{ totaltaxes|number_format(2) }}</span>
-        </div>
-        {% if discount_total > 0 %}
-        <div class="summary-row discount">
-            <span>الخصم</span>
-            <span>- $ {{ discount_total|number_format(2) }}</span>
-        </div>
+    {% for item in Cart.cartItems %}
+        {% if item.quantity is iterable %}
+            {% for variant in item.quantity %}
+                {% set item_total = item.price_main * variant.quantity %}
+                {% set totalprice = totalprice + item_total %}
+                
+                {% set tax_amount = (item.price_after_taxes - item.price_main) * variant.quantity %}
+                {% set totaltaxes = totaltaxes + tax_amount %}
+                
+                {% set totalfinal = totalfinal + (item.price_after_taxes * variant.quantity) %}
+            {% endfor %}
         {% endif %}
-        <div class="summary-row total">
-            <span>الإجمالي</span>
-            <span id="cart-total">$ {{ totalfinal|number_format(2) }}</span>
-        </div>
+    {% endfor %}
+    
+    {% set coupon_percentage = Cart.getCoupon.percentage ?? 0 %}
+    {% set coupon_discount_amount = (totalfinal * coupon_percentage) / 100 %}
+    {% set final_total_after_coupon = totalfinal - coupon_discount_amount %}
+    
+    <div class="summary-row">
+        <span>المجموع الفرعي</span>
+        <span>$ {{ totalprice|number_format(2) }}</span>
     </div>
+    
+    <div class="summary-row">
+        <span>الضرائب</span>
+        <span>$ {{ totaltaxes|number_format(2) }}</span>
+    </div>
+    
+    {% if discount_total > 0 %}
+    <div class="summary-row discount">
+        <span>الخصم</span>
+        <span>- $ {{ discount_total|number_format(2) }}</span>
+    </div>
+    {% endif %}
+    
+    {% if coupon_percentage > 0 %}
+    <div class="summary-row coupon-discount">
+        <div class="discount-info">
+            <i class="fa fa-ticket-alt"></i>
+            <span>خصم الكوبون ({{ coupon_percentage }}%)</span>
+            <span class="coupon-code">{{ Cart.getCoupon.code }}</span>
+        </div>
+        <span class="discount-amount">- $ {{ coupon_discount_amount|number_format(2) }}</span>
+    </div>
+    {% endif %}
+    
+    <div class="summary-divider"></div>
+    
+    <div class="summary-row total">
+        <div class="total-info">
+            <span>الإجمالي النهائي</span>
+            {% if coupon_percentage > 0 %}
+            <small>(بعد خصم {{ coupon_percentage }}%)</small>
+            {% endif %}
+        </div>
+        <span id="cart-total" class="total-amount">$ {{ final_total_after_coupon|number_format(2) }}</span>
+    </div>
+    
+    {% if coupon_percentage > 0 %}
+    <div class="savings-message">
+        <i class="fa fa-check-circle"></i>
+        <span>لقد وفرت $ {{ coupon_discount_amount|number_format(2) }} باستخدام الكوبون!</span>
+    </div>
+    {% endif %}
+</div>
     
     <form data-request="onSetCartTotal" data-request-flash>
         <input type="hidden" name="total_price" value="{{ totalprice }}">

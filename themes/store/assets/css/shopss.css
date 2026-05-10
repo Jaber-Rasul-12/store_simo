@@ -534,6 +534,12 @@
         justify-content: center;
         gap: 6px;
     }
+    .mshop-action-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--mshop-shadow-sm);
+        cursor: pointer;
+        color: black
+    }
     
     .mshop-action-view {
         background: #f1f5f9;

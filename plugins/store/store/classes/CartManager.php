@@ -31,15 +31,17 @@ class CartManager
 
         $price = $product->prices->first()->price ?? 0;
         $taxes_products = $product->taxes_products()->where('status', true)->get()->sum('price') ?? 0;
+        $discount_price = $product->promotions()->where('status', true)->get()->sum('discount_value') ?? 0;
 
         $cart[$productId] = [
             'id' => $productId, 
             'quantity' => 0, 
             'name' => $product->name, 
             'price_main' => $price,
-            'price_after_taxes' => $price + $taxes_products,
+            'price_after_taxes' => $price + $taxes_products - $discount_price,
             'taxes' => $taxes_products, 
-            'image_path' => $product->image ? $product->image->getPath() : null
+            'image_path' => $product->image ? $product->image->getPath() : null,
+            'discount_price' => $discount_price
         ];
      
         
@@ -148,6 +150,14 @@ public function removeQuantityFromProduct($productId, $sizeId = null, $colorId =
         return Session::get("cart-$userId", []);
     }
 
+    public  function getCoupon()
+    {
+        $userId = Auth::getUser()->id;
+        return Session::get("coupon-$userId", []);
+    }
+    
+    
+
     public  function getCartCount()
     {
         $userId = Auth::getUser()->id;
@@ -173,6 +183,12 @@ public function removeFromSessionCart($productId = null, $removeAll = false)
         // Default: clear entire cart
         Session::forget("cart-$userId");
     }
+}
+
+public function removeCouponFromSessionCart()
+{
+    $userId = Auth::getUser()->id;
+    Session::forget("coupon-$userId");
 }
 
 }

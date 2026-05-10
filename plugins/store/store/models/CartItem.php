@@ -33,8 +33,8 @@ class CartItem extends Model
         'qty' => 'required|integer|min:1|max:1000',
         'price' => 'required|numeric|min:0',
         'cart_id' => 'required|exists:store_store_carts,id',
-        'size_id' => 'required|exists:store_store_sizes,id',
-        'color_id' => 'required|exists:store_store_colors,id',
+        'size_id' => 'nullable|exists:store_store_sizes,id',
+        'color_id' => 'nullable|exists:store_store_colors,id',
 
     ];
 

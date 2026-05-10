@@ -123,62 +123,79 @@ function onLoadPageContent()
 
    
 
+// public function onApplyCoupon()
+// {
+//     $couponCode = post('coupon_code');
+    
+//     // التحقق من وجود كود الكوبون
+//     if (!$couponCode) {
+//         Flash::error('الرجاء إدخال كود الخصم');
+//         return;
+//     }
+    
+//     // البحث عن الكوبون في قاعدة البيانات
+//     $coupon = Coupon::where('code', $couponCode)->where('status', true)->first();
+    
+//     if (!$coupon) {
+//         Flash::error('كود الكوبون غير صالح!');
+//         return;
+//     }
+    
+//     // الحصول على عناصر السلة من الـ Session
+//     $userId = Auth::getUser()->id;
+//     $cart = Session::get("cart-$userId", []);
+    
+//     if (empty($cart)) {
+//         Flash::error('السلة فارغة!');
+//         return;
+//     }
+    
+//     // حساب الإجمالي الحالي من السلة
+//     $total = 0;
+//     foreach ($cart as $item) {
+//         $total += $item['price_after_taxes'] * $item['quantity'];
+//     }
+    
+//     // تطبيق الخصم
+//     $percentage = $coupon->percentage;
+//     $discountAmount = ($total * $percentage) / 100;
+//     $newTotal = $total - $discountAmount;
+    
+//     // تخزين الكوبون المطبق في السلة (اختياري)
+//     Session::put("cart-$userId-coupon", [
+//         'code' => $coupon->code,
+//         'percentage' => $percentage,
+//         'discount_amount' => $discountAmount
+//     ]);
+    
+//     Flash::success("تم تطبيق خصم {$percentage}% بنجاح! تم خصم $" . number_format($discountAmount, 2));
+    
+//     // إعادة الـ Partial المحدث
+//     return [
+//         '#cart-total' => $this->renderPartial('@update_coupon.htm', [
+//             'old_total' => $total, 
+//             'percentage' => $percentage, 
+//             'new_total' => $newTotal,
+//             'discount_amount' => $discountAmount
+//         ]),
+//     ];
+// }
 public function onApplyCoupon()
 {
-    $couponCode = post('coupon_code');
-    
-    // التحقق من وجود كود الكوبون
-    if (!$couponCode) {
-        Flash::error('الرجاء إدخال كود الخصم');
-        return;
-    }
-    
-    // البحث عن الكوبون في قاعدة البيانات
-    $coupon = Coupon::where('code', $couponCode)->where('status', true)->first();
-    
-    if (!$coupon) {
+
+    $coupon = Coupon::where('code' , post('coupon_code'))->where('status', true)->first();
+     if (!$coupon) {
         Flash::error('كود الكوبون غير صالح!');
         return;
     }
-    
-    // الحصول على عناصر السلة من الـ Session
     $userId = Auth::getUser()->id;
-    $cart = Session::get("cart-$userId", []);
-    
-    if (empty($cart)) {
-        Flash::error('السلة فارغة!');
-        return;
-    }
-    
-    // حساب الإجمالي الحالي من السلة
-    $total = 0;
-    foreach ($cart as $item) {
-        $total += $item['price_after_taxes'] * $item['quantity'];
-    }
-    
-    // تطبيق الخصم
-    $percentage = $coupon->percentage;
-    $discountAmount = ($total * $percentage) / 100;
-    $newTotal = $total - $discountAmount;
-    
-    // تخزين الكوبون المطبق في السلة (اختياري)
-    Session::put("cart-$userId-coupon", [
+    Session::put("coupon-$userId", [
         'code' => $coupon->code,
-        'percentage' => $percentage,
-        'discount_amount' => $discountAmount
+        'percentage' => $coupon->percentage,
+        'coupon_id' => $coupon->id,
     ]);
-    
-    Flash::success("تم تطبيق خصم {$percentage}% بنجاح! تم خصم $" . number_format($discountAmount, 2));
-    
-    // إعادة الـ Partial المحدث
-    return [
-        '#cart-total' => $this->renderPartial('@update_coupon.htm', [
-            'old_total' => $total, 
-            'percentage' => $percentage, 
-            'new_total' => $newTotal,
-            'discount_amount' => $discountAmount
-        ]),
-    ];
+    Flash::success("تم تطبيق خصم {$coupon->percentage}% بنجاح!");
+    return redirect('cart');
 }
     
     public function cartItems()
@@ -187,56 +204,131 @@ public function onApplyCoupon()
         return $cartManager->getCartItems();
     }
 
-
-       public function onSetCartTotal()
+    public function getCoupon()
     {
-        $total_price = post('total_price', 0);
-        $total_promotions = post('total_promotions', 0);
-        $final_price = post('final_price', 0);
-        $user_id = Auth::getUser()->id;
-        
-        $cart = CartModel::create([
-            'user_id' => $user_id,
-            'total_price' => $total_price,
-            'total_promotions' => $total_promotions,
-            'final_price' => $final_price,
-            'status' => false,
-            'type' => 'cashe',
-        ]);
-        
-$cartItems = (new CartManager())->getCartItems();
-$cartItemsToInsert = [];
+        $cartManager = new CartManager();
+        return $cartManager->getCoupon();
+    }
 
-foreach ($cartItems as $item) {
+    public function onRemoveCoupon()
+    {
+        $userId = Auth::getUser()->id;
+        Session::forget("coupon-$userId");
+        Flash::success('تم إزالة الكوبون بنجاح!');
+        return redirect('cart');
+    }
 
-        foreach ($item['quantity'] as $variant) {
-            $cartItemsToInsert[] = [
-                'product_id' => $item['id'],
-                'qty' => $variant['quantity'], 
-                'price' => $item['price_after_taxes'],
-                'user_id' => $user_id,
-                'color_id' => $variant['color_id'] ,
-                'size_id' => $variant['size_id'],
-                'promotion_id' => null,
-            ];
+
+
+
+public function onSetCartTotal()
+{
+    $user_id = Auth::getUser()->id;
+    
+    // جلب عناصر السلة من الجلسة
+    $cartItems = (new CartManager())->getCartItems();
+    
+    // التحقق من وجود عناصر في السلة
+    if (empty($cartItems)) {
+        Flash::error('سلة التسوق فارغة. يرجى إضافة منتجات قبل متابعة الدفع.');
+        return redirect()->back();
+    }
+    
+    // حساب القيم بنفس طريقة Twig
+    $totalprice = 0;      // المجموع الفرعي (السعر الأساسي)
+    $totaltaxes = 0;      // إجمالي الضرائب
+    $totalfinal = 0;      // الإجمالي قبل الخصم (بعد الضرائب)
+    
+    foreach ($cartItems as $item) {
+        // التحقق من وجود الكميات
+        if (!isset($item['quantity']) || empty($item['quantity'])) {
+            Flash::error('المنتج ' . ($item['name'] ?? 'غير معروف') . ' لا يحتوي على كميات محددة.');
+            return redirect()->back();
         }
         
-    
-}
-
-// إدراج جميع العناصر دفعة واحدة
-if (!empty($cartItemsToInsert)) {
-    $cart->items()->createMany($cartItemsToInsert);
-}
-
-        
-        (new CartManager())->removeFromSessionCart(); 
-        
-        
-        Flash::success('تم حفظ سلة التسوق الخاصة بك بنجاح وهي جاهزة للدفع!');
-        
-        return redirect('checkout');
+        foreach ($item['quantity'] as $variant) {
+            // التحقق من صحة الكمية
+            if (!isset($variant['quantity']) || $variant['quantity'] <= 0) {
+                Flash::error('المنتج ' . ($item['name'] ?? 'غير معروف') . ' يحتوي على كمية غير صالحة.');
+                return redirect()->back();
+            }
+            
+            // حساب المجموع الفرعي (السعر الأساسي × الكمية)
+            $item_total = ($item['price_main'] ?? 0) * $variant['quantity'];
+            $totalprice += $item_total;
+            
+            // حساب الضرائب (الفرق بين السعر بعد الضرائب والسعر الأساسي)
+            $price_after_taxes = $item['price_after_taxes'] ?? $item['price_main'] ?? 0;
+            $tax_amount = ($price_after_taxes - ($item['price_main'] ?? 0)) * $variant['quantity'];
+            $totaltaxes += $tax_amount;
+            
+            // حساب الإجمالي قبل الخصم (السعر بعد الضرائب × الكمية)
+            $totalfinal += $price_after_taxes * $variant['quantity'];
+        }
     }
+    
+    // جلب الكوبون المطبق
+    $coupon = (new CartManager())->getCoupon();
+    $coupon_percentage = $coupon['percentage'] ?? 0;
+    $coupon_discount_amount = ($totalfinal * $coupon_percentage) / 100;
+    $final_total_after_coupon = $totalfinal - $coupon_discount_amount;
+    
+    // التحقق من صحة القيم الرقمية
+    if ($totalprice <= 0 && $final_total_after_coupon <= 0) {
+        Flash::error('لا يمكن متابعة الدفع. قيمة الطلب غير صالحة.');
+        return redirect()->back();
+    }
+    
+    // إنشاء سلة التسوق في قاعدة البيانات
+    $cart = CartModel::create([
+        'user_id' => $user_id,
+        'total_price' => $totalprice,                       // المجموع الفرعي
+        'total_promotions' => $totaltaxes,                  // إجمالي الضرائب
+        'final_price' => $final_total_after_coupon,         // الإجمالي بعد خصم الكوبون
+        'status' => false,
+        'delivered' => false,
+        'coupon_id' => isset($coupon['coupon_id']) ? $coupon['coupon_id'] : null,
+        'type' => 'cashe',
+    ]);
+    
+    $cartItemsToInsert = [];
+    
+    foreach ($cartItems as $item) {
+        foreach ($item['quantity'] as $variant) {
+            // التحقق الإضافي قبل الإدراج
+            if (isset($variant['quantity']) && $variant['quantity'] > 0) {
+                $cartItemsToInsert[] = [
+                    'product_id' => $item['id'],
+                    'qty' => $variant['quantity'], 
+                    'price' => $item['price_after_taxes'] ?? $item['price_main'] ?? 0,
+                    'user_id' => $user_id,
+                    'color_id' => $variant['color_id'] ?? null,
+                    'size_id' => $variant['size_id'] ?? null,
+                    'promotion_id' => null,
+                ];
+            }
+        }
+    }
+    
+    // التحقق من وجود عناصر للإدراج
+    if (empty($cartItemsToInsert)) {
+        Flash::error('لا توجد منتجات صالحة للإدراج. يرجى التحقق من الكميات المحددة.');
+        return redirect()->back();
+    }
+    
+    // إدراج جميع العناصر دفعة واحدة
+    $cart->items()->createMany($cartItemsToInsert);
+    
+    // تنظيف سلة الجلسة
+    (new CartManager())->removeFromSessionCart();
+    (new CartManager())->removeCouponFromSessionCart();
+
+    
+    // رسالة نجاح
+    Flash::success('تم حفظ سلة التسوق الخاصة بك بنجاح وهي جاهزة للدفع!');
+    
+    return redirect('checkout');
+}
 
     public function GetAllCartItems()
     {

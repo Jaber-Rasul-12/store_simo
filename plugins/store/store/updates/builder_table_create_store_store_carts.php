@@ -25,6 +25,7 @@ class BuilderTableCreateStoreStoreCarts extends Migration
 
 
             $table->boolean('status');
+            $table->boolean('delivered')->default(false);
             $table->decimal('total_price', 15, 2)->default(0);
             $table->decimal('total_promotions', 15, 2)->default(0);
             $table->decimal('final_price', 15, 2)->default(0);

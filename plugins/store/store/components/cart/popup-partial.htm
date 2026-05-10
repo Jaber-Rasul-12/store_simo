@@ -30,6 +30,7 @@
     <!-- خيارات المنتج في صف واحد -->
     <div class="simple-options-row">
         <!-- اختيار اللون -->
+        {% if product.colors is not empty %}
         <div class="simple-option">
             <label>🎨 اللون:</label>
             <select id="productColor" name="color_id" class="simple-select">
@@ -38,7 +39,9 @@
                {% endfor %}
             </select>
         </div>
+        {% endif %}
 
+         {% if product.sizes is not empty %}
         <!-- اختيار القياس -->
         <div class="simple-option">
             <label>📏 القياس:</label>
@@ -48,6 +51,7 @@
                {% endfor %}
             </select>
         </div>
+        {% endif %}
 
         <!-- اختيار الكمية -->
         <div class="simple-option">

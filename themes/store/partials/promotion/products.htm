@@ -1,12 +1,23 @@
+
+
+    
+
+
+
+
+
+
 <div class="container-fluid ">
+  
 
 
 
-
-        <br>
+   
+                 
 <hr>
 <div class="d-flex justify-content-center align-items-center mb-4" style="width: 100%;">
-            
+   
+
      <div class="search-container">
                 <form class="search-form" method="post" role="form" data-request="onSearchProductsWithPromotions">
                   <div class="search-input-group">
@@ -26,9 +37,11 @@
 
                 </form>
             </div>
-</div>
+    
+    </div>
 <hr>
-      <div class="row px-xl-5 pb-3 row-product" style="justify-content: center;" id="products-list_container">
+
+      <div class="row px-xl-5 pb-3 row-product"  style="justify-content: center;" id="products-list_container">
 
         {% for product in name_component %}
 
@@ -39,7 +52,7 @@
                     {% if product.HasPromotions == true  %}
                     <div class="badge-sale">{{ product.promotionsActive.discount_value }} %</div>
                     {% endif %}
-                   
+                    
                     <div class="star-rating">
                         <i class="fas fa-star"></i> {{ product.averageRating | default(0) }}
                     </div>
@@ -92,4 +105,20 @@
     </div>
 
 
-    
+
+<div id="pagindation">
+{% if name_component.hasMorePages %}
+<div style="text-align: center; margin-top: 20px; margin-bottom: 20px;" id="loadMoreContainer">
+    <button 
+        class="btn btn-primary load-more-btn" 
+        id="loadMoreBtn"
+        data-request="onGetProductsWherePromotions"
+        data-request-data="page: {{ name_component.currentPage + 1 }}, slug: '{{ this.param.slug }}'"
+        data-stripe-load-indicator
+        >
+        <i class="fas fa-arrow-down me-2"></i>
+        {{ 'شاهد المزيد' |_ }}
+    </button>
+</div>
+{% endif %}
+</div>

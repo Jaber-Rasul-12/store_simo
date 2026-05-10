@@ -52,10 +52,12 @@
                         <a href="/detail/{{ product.slug }}" class="btn btn-custom btn-sm text-dark p-0">
                             <i class="fas fa-eye text-primary-product-custom mr-1"></i>{{ 'عرض التفاصيل' |_ }}
                         </a>
-                        <a {% if user %} data-request="onAddToCart" data-request-flash data-request-data="product_id: {{ product.id }}" {% else %} href="/login" {% endif %} class="btn btn-custom btn-sm text-dark p-0">
+                        <a {% if isAuth %} data-request="onAddToCart" data-request-flash data-request-data="product_id: {{ product.id }}" {% else %} href="/login" {% endif %} class="btn btn-custom btn-sm text-dark p-0">
                             <i class="fas fa-shopping-cart   mr-1"></i>{{ 'أضف إلى السلة' |_ }}
                         </a>
                     </div>
                 </div>
             </div>
         {% endfor %}
+
+

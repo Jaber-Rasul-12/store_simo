@@ -17,8 +17,8 @@ class BuilderTableCreateStoreStoreCartItems extends Migration
             $table->double('qty', 10, 0);
             $table->double('price', 10, 0);
             $table->unsignedInteger('cart_id');
-            $table->unsignedInteger('size_id');
-            $table->unsignedInteger('color_id');
+            $table->unsignedInteger('size_id')->nullable();
+            $table->unsignedInteger('color_id')->nullable();
 
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

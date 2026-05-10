@@ -46,8 +46,8 @@
                                 <div class="xcheckout-cart-item">
                                     <span class="xcheckout-item-name">{{ item.product.name }}</span>
                                     <span class="xcheckout-item-qty">× {{ item.qty }}</span>
-                                    <span class="xcheckout-item-qty">{{ item.color.name }}</span>
-                                    <span class="xcheckout-item-qty">{{ item.size.name }}</span>
+                                    {% if item.color %}<span class="xcheckout-item-qty">{{ item.color.name }}</span>{% endif %}
+                                    {% if item.size %}<span class="xcheckout-item-qty">{{ item.size.name }}</span>{% endif %}
                                     <span class="xcheckout-item-price">{{ item.price }} $</span>
                                 </div>
                             {% endfor %}
@@ -60,6 +60,12 @@
                                 <span>المجموع الفرعي</span>
                                 <span>{{ cart.total_price }} $</span>
                             </div>
+                            {% if cart.coupon %}
+                            <div class="xcheckout-summary-row">
+                                <span>خصم الكوبون : ( {{ cart.coupon.code }} )</span>
+                                <span>{{ cart.coupon.percentage }} %</span>
+                            </div>
+                            {% endif %}
                             <div class="xcheckout-summary-row">
                                 <span>الضرائب</span>
                                 <span>{{ cart.total_promotions }} $</span>
@@ -70,9 +76,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="xcheckout-card">
+                                    <div class="xcheckout-card">
                     <div class="xcheckout-card-header">
                         <h4>
                             <i class="fa fa-truck"></i>
@@ -122,22 +127,10 @@
                                     <input type="radio" name="xpayment_{{ cart.id }}" id="xcash_{{ cart.id }}" value="cash" checked>
                                     <label for="xcash_{{ cart.id }}">💰 الدفع النقدي عند الاستلام</label>
                                 </div>
-                                <div class="xcheckout-radio">
-                                    <input type="radio" name="xpayment_{{ cart.id }}" id="xcard_{{ cart.id }}" value="card">
-                                    <label for="xcard_{{ cart.id }}">💳 بطاقة ائتمان</label>
-                                </div>
                             </div>
                         </div>
 
-                        <div id="xdelivery_fee_{{ cart.id }}" style="display: none;">
-                            <div class="xcheckout-delivery-fee">
-                                <span class="xcheckout-delivery-fee-label">
-                                    <i class="fa fa-motorcycle"></i>
-                                    رسوم التوصيل
-                                </span>
-                                <span class="xcheckout-delivery-fee-amount" id="xfee_amount_{{ cart.id }}">0 $</span>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     <form data-request="onPlaceOrder" data-request-data="my_id: '{{ cart.id }}'" data-request-flash>
@@ -155,6 +148,9 @@
                         </div>
                     </form>
                 </div>
+                </div>
+
+
             {% endfor %}
         </div>
     {% else %}
@@ -183,7 +179,12 @@
                             <h4>
                                 <span>طلب #{{ cart.id }}</span>
                                 <span class="xcheckout-completed-badge">
-                                    <i class="fa fa-check"></i> مكتمل
+                                     {% if cart.delivered %}
+                                     <i class="fa fa-check-double"></i> مكتمل
+                                      {% else %}
+                                     <i class="fa fa-check"></i> جارٍ التسليم
+
+                                     {% endif %}
                                 </span>
                             </h4>
                         </div>
@@ -194,6 +195,8 @@
                                     <div class="xcheckout-cart-item">
                                         <span class="xcheckout-item-name">{{ item.product.name }}</span>
                                         <span class="xcheckout-item-qty">× {{ item.qty }}</span>
+                                        {% if item.color %}<span class="xcheckout-item-qty">{{ item.color.name }}</span>{% endif %}
+                                        {% if item.size %}<span class="xcheckout-item-qty">{{ item.size.name }}</span>{% endif %}
                                         <span class="xcheckout-item-price">{{ item.price }} $</span>
                                     </div>
                                 {% endfor %}
@@ -206,6 +209,12 @@
                                     <span>المجموع الفرعي</span>
                                     <span>{{ cart.total_price }} $</span>
                                 </div>
+                                {% if cart.coupon %}
+                                    <div class="xcheckout-summary-row">
+                                        <span>خصم الكوبون : ( {{ cart.coupon.code }} )</span>
+                                        <span>{{ cart.coupon.percentage }} %</span>
+                                    </div>
+                                {% endif %}
                                 <div class="xcheckout-summary-row">
                                     <span>الضرائب</span>
                                     <span>{{ cart.total_promotions }} $</span>
@@ -218,10 +227,20 @@
                         </div>
                         
                         <div class="xcheckout-card-footer">
-                            <button class="xcheckout-btn xcheckout-btn-success" disabled>
-                                <i class="fa fa-check-double"></i>
-                                تم التسليم بنجاح
-                            </button>
+                                {% if cart.delivered %}
+                            
+                                        <button class="xcheckout-btn xcheckout-btn-info" disabled>
+                                            <i class="fa fa-check-double"></i>
+                                                تم التسليم بنجاح
+                                        </button>
+                                {% else %}
+                                        <button class="xcheckout-btn xcheckout-btn-success" disabled>
+                                            <i class="fa fa-check"></i>
+                                                جارٍ التسليم
+                                        </button>
+                                                
+                            
+                                {% endif %}
                         </div>
                     </div>
                 {% endfor %}
@@ -319,11 +338,7 @@
                     document.getElementById(`xlng_${cartId}`).value = lng.toFixed(6);
                     
                     const fee = calculateDeliveryFee(lat, lng);
-                    const feeDiv = document.getElementById(`xdelivery_fee_${cartId}`);
-                    if (feeDiv) {
-                        document.getElementById(`xfee_amount_${cartId}`).textContent = fee + ' $';
-                        feeDiv.style.display = 'block';
-                    }
+                   
                     
                     reverseGeocode(lat, lng, cartId);
                     

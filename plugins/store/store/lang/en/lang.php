@@ -134,6 +134,7 @@ return [
             'id' => 'Id',
             'user' => 'User',
             'notes' => 'Notes',
+            'delivered' => 'Delivered',
             'contacts' => 'Contacts',
             'coupon' => 'Coupon',
             'total_price' => 'Total Price',

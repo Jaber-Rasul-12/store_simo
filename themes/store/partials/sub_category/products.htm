@@ -137,3 +137,21 @@
         {% endfor %}
         </div>
     </div>
+
+
+<div id="pagindation">
+{% if name_component.hasMorePages %}
+<div class="text-center mt-4 mb-5" id="loadMoreContainer">
+    <button 
+        class="btn btn-primary load-more-btn" 
+        id="loadMoreBtn"
+        data-request="onGetProductsWhereSubCategory"
+        data-request-data="page: {{ name_component.currentPage + 1 }}, slug: '{{ this.param.slug }}'"
+        data-stripe-load-indicator
+        style=";">
+        <i class="fas fa-arrow-down me-2"></i>
+        {{ 'شاهد المزيد' |_ }}
+    </button>
+</div>
+{% endif %}
+</div>

@@ -66,7 +66,7 @@ class Store extends ComponentBase
             $products = Product::with('prices')->whereHas('categories', function($query) use ($slug) {
                 $query->where('slug', $slug);
             })->where('status', '=', true)->where('name', 'like', '%' . $queryString . '%')->orderBy('id' , 'desc')->get();
-            return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products])];
+            return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products , 'isAuth' => Auth::check() ? true : false])];
         } else {
             return null;
         }
@@ -83,7 +83,7 @@ class Store extends ComponentBase
                     $query->where('slug', $slug);
                 });
             })->where('status', '=', true)->where('name', 'like', '%' . $queryString . '%')->orderBy('id' , 'desc')->get();
-            return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products])];
+            return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products , 'isAuth' => Auth::check() ? true : false])];
         } else {
             return null;
         }
@@ -98,7 +98,7 @@ class Store extends ComponentBase
             $products = Product::with('prices')->whereHas('brand', function($query) use ($slug) {
                 $query->where('slug', $slug);
             })->where('status', '=', true)->where('name', 'like', '%' . $queryString . '%')->orderBy('id' , 'desc')->get();
-            return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products])];
+            return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products , 'isAuth' => Auth::check() ? true : false])];
         } else {
             return null;
         }
@@ -128,31 +128,61 @@ class Store extends ComponentBase
 
 
     
-    public function onGetProductsWhereCategory()
-    {
-        $slug =  $this->param('slug');
-        $category_id = Category::where('slug', $slug)->first()->id;
-        if (isset($slug) && !empty($slug)) {
-            return Product::with('prices')->whereHas('subcategory_products', function($query) use ($category_id) {
-                $query->where('category_id', $category_id);
-            })->where('status', '=', true)->orderBy('id' , 'desc')->get();
-        } else {
-            return null;
-        }
-    }
 
-        public function onGetProductsWhereSubCategory()
-    {
-        $slug =  $this->param('slug');
-        $subcategory_id = SubCategory::where('slug', $slug)->first()->id;
-        if (isset($slug) && !empty($slug)) {
-            return Product::with('prices')->whereHas('subcategory_products', function($query) use ($subcategory_id) {
-                $query->where('subcategory_id', $subcategory_id);
-            })->orderBy('id' , 'desc')->get();
-        } else {
+
+
+        public function onGetProductsWhereCategory()
+        {
+            $slug = $this->param('slug');
+            $page = post('page', 1);
+            $perPage = 12; 
+            
+            if (isset($slug) && !empty($slug)) {
+                $category_id = Category::where('slug', $slug)->first()->id;
+                
+                $products = Product::with('prices')->whereHas('subcategory_products', function($query) use ($category_id) {
+                        $query->where('category_id', $category_id);
+                    })->where('status', '=', true)->orderBy('id' , 'desc')
+                    ->paginate($perPage, $page);
+                if($page == 1 ){
+                    return $products;
+                }else{
+                    return [
+                        '#pagindation' => $this->renderPartial('@pagindation.htm', ['GetAllProducts' => $products , 'pageNumber' => $page + 1 , 'nameAlgorithm' => __FUNCTION__]),
+                        '@#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products , 'isAuth' => Auth::check() ? true : false])];
+                }        
+            }
+            
             return null;
         }
+
+
+    public function onGetProductsWhereSubCategory()
+{
+    $slug = $this->param('slug');
+    $page = post('page', 1);
+    $perPage = 12; 
+    
+    if (isset($slug) && !empty($slug)) {
+        $subcategory_id = SubCategory::where('slug', $slug)->first()->id;
+        
+        $products = Product::with('prices')
+            ->whereHas('subcategory_products', function($query) use ($subcategory_id) {
+                $query->where('subcategory_id', $subcategory_id);
+            })
+            ->orderBy('id', 'desc')
+            ->paginate($perPage, $page);
+        if($page == 1 ){
+            return $products;
+        }else{
+            return [
+                '#pagindation' => $this->renderPartial('@pagindation.htm', ['GetAllProducts' => $products , 'pageNumber' => $page + 1 , 'nameAlgorithm' => __FUNCTION__]),
+                '@#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products , 'isAuth' => Auth::check() ? true : false])];
+        }        
     }
+    
+    return null;
+}
 
     public function onGetRelatedCategories()
     {
@@ -232,27 +262,49 @@ class Store extends ComponentBase
 
     
 
-    public function onGetProductsWhereBrand()
-    {
-        $slug =  $this->param('slug');
-        if (isset($slug) && !empty($slug)) {
-            return Product::with('prices')->whereHas('brand', function($query) use ($slug) {
+       public function onGetProductsWhereBrand()
+{
+    $slug = $this->param('slug');
+    $page = post('page', 1);
+    $perPage = 12; 
+    
+    if (isset($slug) && !empty($slug)) {    
+        $products = Product::with('prices')->whereHas('brand', function($query) use ($slug) {
                 $query->where('slug', $slug);
-            })->where('status', '=', true)->orderBy('id' , 'desc')->get();
-        } else {
-            return null;
-        }
+            })->where('status', '=', true)->orderBy('id' , 'desc')->paginate($perPage, $page);
+        if($page == 1 ){
+            return $products;
+        }else{
+            return [
+                '#pagindation' => $this->renderPartial('@pagindation.htm', ['GetAllProducts' => $products , 'pageNumber' => $page + 1 , 'nameAlgorithm' => __FUNCTION__]),
+                '@#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products , 'isAuth' => Auth::check() ? true : false])];
+        }        
     }
+    
+    return null;
+}
 
-    public function onGetProductsWherePromotions()
-    {
-       
-       
-        return Product::whereHas('promotions', function ($query) {
+
+       public function onGetProductsWherePromotions()
+{
+   
+    $page = post('page', 1);
+    $perPage = 12; 
+    
+    
+        $products = Product::whereHas('promotions', function ($query) {
             $query->where('status', '=', true);
-        })->where('status', '=', true)->get();
-        
-    }
+        })->where('status', '=', true)->orderBy('id' , 'desc')->paginate($perPage, $page);
+        if($page == 1 ){
+            return $products;
+        }else{
+            return [
+                '#pagindation' => $this->renderPartial('@pagindation.htm', ['GetAllProducts' => $products , 'pageNumber' => $page + 1 , 'nameAlgorithm' => __FUNCTION__]),
+                '@#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products , 'isAuth' => Auth::check() ? true : false])];
+        }            
+}
+
+ 
 
          public function onSearchProductsWithPromotions()
     {
@@ -261,7 +313,7 @@ class Store extends ComponentBase
             $products = Product::whereHas('promotions', function ($query) {
             $query->where('status', '=', true);
         })->where('status', '=', true)->where('name', 'like', '%' . $queryString . '%')->orderBy('id' , 'desc')->get();
-            return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products])];
+            return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products , 'isAuth' => Auth::check() ? true : false])];
         } else {
             return null;
         }
@@ -319,9 +371,23 @@ class Store extends ComponentBase
     }
 
 
+
+
     public function onGetAllProducts()
     {
-        return Product::with('prices')->where('status', '=', true)->orderBy('id' , 'desc')->paginate(18);
+       
+        $page = post('page', 1);
+        $perPage = 10; 
+        
+        
+            $products = Product::with('prices')->where('status', '=', true)->orderBy('id' , 'desc')->paginate($perPage, $page);
+            if($page == 1 ){
+                return $products;
+            }else{
+                return [
+                    '#pagindation' => $this->renderPartial('@pagindation.htm', ['GetAllProducts' => $products , 'pageNumber' => $page + 1 , 'nameAlgorithm' => __FUNCTION__]),
+                    '@#mshop-products-list' => $this->renderPartial('@shop_list_products.htm', ['GetAllProducts' => $products , 'isAuth' => Auth::check() ? true : false]),];
+            }            
     }
 
     public function onGetAllColors()

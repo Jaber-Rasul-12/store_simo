@@ -30,10 +30,6 @@
                 <span class="filter-label">الأحجام:</span>
                 <span class="filter-setting" id="sizeSetting">الكل</span>
             </a>
-            <a href="javascript:;" class="mshop-filter-scope" data-scope="categories">
-                <span class="filter-label">التصنيفات:</span>
-                <span class="filter-setting" id="categorySetting">الكل</span>
-            </a>
         </div>
         
         <div class="mshop-filter-panel" data-panel="price">
@@ -201,27 +197,22 @@
         {% endfor %}
     </div>
     
-    {% if Store.onGetAllProducts.lastPage() > 1 %}
-        <div class="mshop-pagination">
-            {% if Store.onGetAllProducts.currentPage() > 1 %}
-                <a href="{{ Store.onGetAllProducts.previousPageUrl() }}" class="mshop-page-link">
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-            {% endif %}
-            
-            {% for page in 1..Store.onGetAllProducts.lastPage() %}
-                <a href="{{ Store.onGetAllProducts.url(page) }}" class="mshop-page-link {% if Store.onGetAllProducts.currentPage() == page %}mshop-page-active{% endif %}">
-                    {{ page }}
-                </a>
-            {% endfor %}
-            
-            {% if Store.onGetAllProducts.currentPage() < Store.onGetAllProducts.lastPage() %}
-                <a href="{{ Store.onGetAllProducts.nextPageUrl() }}" class="mshop-page-link">
-                    <i class="fas fa-chevron-left"></i>
-                </a>
-            {% endif %}
-        </div>
-    {% endif %}
+<div id="pagindation">
+{% if Store.onGetAllProducts.hasMorePages %}
+<div class="text-center mt-4 mb-5" id="loadMoreContainer">
+    <button 
+        class="btn btn-primary load-more-btn" 
+        id="loadMoreBtn"
+        data-request="onGetAllProducts"
+        data-request-data="page: {{ Store.onGetAllProducts.currentPage + 1 }}, slug: '{{ this.param.slug }}'"
+        data-stripe-load-indicator
+        style=";">
+        <i class="fas fa-arrow-down me-2"></i>
+        {{ 'شاهد المزيد' |_ }}
+    </button>
+</div>
+{% endif %}
+</div>
 </div>
 
 <script>

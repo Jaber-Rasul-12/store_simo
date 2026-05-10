@@ -43,6 +43,11 @@ columns:
         type: store-list-switch  
         icon: true
         font-size: 20
+    delivered:
+        label: 'store.store::lang.model.cart.delivered'
+        type: store-list-switch  
+        icon: true
+        font-size: 20        
     created_at:
         label: 'store.store::lang.model.cart.created_at'
         type: datetime
