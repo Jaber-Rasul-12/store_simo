@@ -41,6 +41,8 @@ function onStart()
         window.location.href = "{{ 'home'|page }}";
     </script>
 {% endif %}
+
+{% partial 'site/bottom_nav' login=true %}
 {% partial 'home/topbar' %}
 {% partial 'navbar' home=false shop=false contact=false %}
 {% partial 'auth/login'  %}

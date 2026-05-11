@@ -1,0 +1,44 @@
+      <nav class="mobile-bottom-nav">
+    <a href='/' class="bottom-nav-item {% if home is not empty  %} active {% endif %}">
+        <i class="fas fa-home"></i>
+        <span>الرئيسية</span>
+    </a>
+    <a class="bottom-nav-item {% if shop is not empty  %} active {% endif %}" href='/shop'>
+        <i class="fas fa-search"></i>
+        <span>بحث</span>
+    </a>
+
+    <a class="bottom-nav-item {% if promotions is not empty  %} active {% endif %}" href='/promotions'>
+        <i class="fas fa-gift offers-icon"></i>
+        <span>العروض</span>
+         <span class="cart-badge">{{ Store.getProductsShowHomePage|length }}</span>
+    </a>
+
+
+
+      {% if user %}
+
+          <a class="bottom-nav-item {% if cart is not empty  %} active {% endif %}" href='/cart'>
+          <i class="fas fa-shopping-cart"></i>
+          <span>السلة</span>
+          <span class="cart-badge" id="cart-count">{{ Cart.getCountCarts }}</span>
+          </a>
+          <a class="bottom-nav-item {% if checkout is not empty  %} active {% endif %}" href='/checkout'>
+              <i class="fas fa-receipt"></i>
+              <span>الدفع</span>
+               <span class="cart-badge">{{ Cart.getCountCartsCheckout }}</span>
+          </a>
+     {% else %}
+        <a class="bottom-nav-item {% if login is not empty  %} active {% endif %}" href='/login'>
+          <i class="fas fa-sign-in-alt"></i>
+          <span>{{ 'تسجيل دخول' }}</span>
+          
+          </a>
+          <a class="bottom-nav-item {% if register is not empty  %} active {% endif %}" href='/register'>
+              <i class="fas fa-user-plus"></i>
+              <span>{{ 'التسجيل في الموقع' }}</span>
+          </a>
+                
+     {% endif %}
+</nav>
+
