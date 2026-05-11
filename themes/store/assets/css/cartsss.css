@@ -641,12 +641,16 @@
 
 @media (max-width: 768px) {
     .coupon-card-content {
-        flex-direction: column;
+        flex-direction: row;
         text-align: center;
     }
     
     .coupon-details {
         justify-content: center;
+    }
+    .coupon-card-content{
+        gap: 2px;
+        padding: 2px;
     }
 }
 
@@ -793,6 +797,89 @@
     }
     
     .coupon-code {
+        font-size: 11px;
+    }
+
+    .item-name {
+        font-size: 12px;
+    }
+    .taxed-price{
+        font-size: 12px;
+    }
+    .remove-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+    .add-more-btn {
+        font-size: 12px;
+        padding: 5px;
+    }
+    .summary-header h3{
+        font-size: 15px;
+    }
+
+    .summary-header i {
+        font-size: 20px;
+    }
+    .coupon-wrapper {
+        padding: 0px;
+    }
+    .coupon-input{
+        font-size: 10px;
+        padding: 9px 40px 12px 12px;
+    }
+    .coupon-btn {
+        padding: 10px;
+        font-size: 10px;
+    }
+    .coupon-btn i {
+    font-size: 10px;
+    }
+
+    .summary-row.total span:last-child {
+        font-size: 14px;
+    }
+
+    .checkout-btn {
+        width: 50%;
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .coupon-icon {
+        width: 20px;
+        height: 20px;
+    }
+    .coupon-icon i {
+     font-size: 10px;
+    }
+    .coupon-details {
+        gap: 1px;
+    }
+
+    .coupon-discount {
+        margin: none;
+        padding: 2px;
+    }
+
+    .discount-value {
+        font-size: 11px;
+    }
+    .discount-label {
+     font-size: 11px;
+    }
+    .coupon-discount i {
+        font-size: 11px;
+    }
+    .coupon-code-wrapper i {
+        font-size: 11px;
+    }
+
+    .remove-coupon-btn {
+        font-size: 11px;
+    }
+    .remove-coupon-btn i {
         font-size: 11px;
     }
 }
