@@ -1,3 +1,29 @@
+document.addEventListener('DOMContentLoaded', function() {
+    var element = document.querySelector('.shein-categories-wrapper');
+  
+    
+  
+    element.style.position = 'sticky';
+    element.style.top = '60px';
+    element.style.zIndex = '1000';
+    element.style.display = 'block';
+  
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 0) {
+          
+            element.style.position = 'fixed';
+            element.style.top = '0px';
+            element.style.display = 'block';
+            element.style.width = '100%';
+        } else {
+          
+            element.style.position = 'sticky';
+            element.style.top = '60px';
+            element.style.display = 'block';
+        }
+    });
+});
+
 (function ($) {
     "use strict";
     
