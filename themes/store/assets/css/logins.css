@@ -1,15 +1,17 @@
     .authmaster-container {
-        --auth-primary: #4361ee;
-        --auth-primary-dark: #3a56d4;
-        --auth-secondary: #7209b7;
+        --auth-primary: #4a1726;
+        --auth-primary-dark: #290813;
+        --auth-secondary: #d39e7f;
         --auth-success: #06ffa5;
         --auth-gray: #6c757d;
-        --auth-light: #f8f9fa;
-        --auth-white: #ffffff;
+        --auth-light: #efefef;
+        --auth-white: #efefef;
         --auth-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.1);
         --auth-radius: 28px;
         --auth-radius-sm: 20px;
     }
+
+
     
     .authmaster-card {
         background: var(--auth-white);

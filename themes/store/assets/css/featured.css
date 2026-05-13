@@ -1,8 +1,8 @@
         :root {
-            --primary: #8b5e5ec9;
-            --primary-dark: #804747;
-            --secondary: #EDF1FF;
-            --accent: #f9dfdf;
+            --primary: #4a1726;
+            --primary-dark: #290813;
+            --secondary: #d39e7f;
+            --accent: #efefef;
             --light: #718096;
             --gray: #64748b;
             --dark: #2d3748;
@@ -10,7 +10,7 @@
         
        
  
-        
+
 
         
         .row {

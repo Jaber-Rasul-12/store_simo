@@ -203,6 +203,7 @@
     <button 
         class="btn btn-primary load-more-btn" 
         id="loadMoreBtn"
+        style="color: #efefef;"
         data-request="onGetAllProducts"
         data-request-data="page: {{ Store.onGetAllProducts.currentPage + 1 }}, slug: '{{ this.param.slug }}'"
         data-stripe-load-indicator

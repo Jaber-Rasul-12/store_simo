@@ -1,8 +1,8 @@
                 :root {
-            --primary-color: #8b5e5ec9;
-            --primary-dark: #804747;
-            --primary-light: #d19c97;
-            --accent-color: #f9dfdf;
+            --primary-color: #4a1726;
+            --primary-dark: #290813;
+            --primary-light: #d39e7f;
+            --accent-color: #efefef;
             --secondary-color: #5e646b;
             --text-dark: #2d3748;
             --text-light: #718096;
@@ -16,7 +16,6 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-fast: all 0.2s ease;
         }
-        
         
 
         

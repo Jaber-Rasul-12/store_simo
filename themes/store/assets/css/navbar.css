@@ -1,12 +1,12 @@
         :root {
-            --primary-color: #8b5e5ec9;
-            --primary-dark: #804747;
-            --primary-light: #d19c97;
-            --accent-color: #f9dfdf;
+            --primary-color: #4a1726;
+            --primary-dark: #290813;
+            --primary-light: #d39e7f;
+            --accent-color: #efefef;
             --secondary-color: #5e646b;
             --text-dark: #2d3748;
             --text-light: #718096;
-            --border-color: #e2e8f0;
+            --border-color: #efefef;
             --success-color: #38a169;
             --gold-color: #d4af37;
             --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
@@ -18,7 +18,12 @@
         }
         
        
+
+
         
+       
+
+       
         .container-fluid {
             border-radius: 20px;
             overflow: hidden;

@@ -1,8 +1,8 @@
     :root {
-        --mshop-primary: #D19C97;
-        --mshop-primary-dark: #b87a74;
-        --mshop-primary-light: #fdf2f1;
-        --mshop-secondary: #EDF1FF;
+        --mshop-primary: #4a1726;
+        --mshop-primary-dark: #290813;
+        --mshop-primary-light: #d39e7f;
+        --mshop-secondary: #efefef;
         --mshop-success: #10b981;
         --mshop-danger: #ef4444;
         --mshop-warning: #f59e0b;
@@ -18,6 +18,8 @@
         --mshop-radius-md: 12px;
         --mshop-radius-lg: 16px;
     }
+
+
 
     body {
         background: #f5f7fb;
