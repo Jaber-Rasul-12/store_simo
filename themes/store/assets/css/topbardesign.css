@@ -850,8 +850,11 @@
                 top: 0px;
             }
             .user-avatar {
-                width: 25px;
-                height: 25px;
+                width: 20px;
+                height: 20px;
+            }
+            #user_avatar_top{
+                padding: 1px!important;
             }
 
             .action-text {

@@ -72,7 +72,8 @@
                 font-size: 8px!important;  
             }
             .stats-section {
-                padding: 10px;
+                padding: 0px!important;
+                margin-top: none!important;
             }
             .stat-item{
                 font-size: 10px!important;
