@@ -5,10 +5,10 @@
 <div class="shein-categories-wrapper" id="categoriesWrapper">
     <div class="shein-categories-container">
         <div class="shein-categories-scroll" id="categoriesScroll">
-            <button class="shein-cat-item active has-children" 
+            <a href="/" class="shein-cat-item active has-children" 
                        >
                     جميع التصنيفات
-            </button>
+            </a>
             {% for category in Store.getCateogries %}
                 <button class="shein-cat-item {% if category.subcategories is not empty %}has-children{% endif %}" 
                         data-category-id="{{ category.id }}"
