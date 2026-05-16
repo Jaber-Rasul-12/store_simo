@@ -97,10 +97,28 @@
                     
                     <div class="card-header bg-transparent border p-0">
                         <div class="image-container">
-                            <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}"       width="300"
-         height="300"
-         loading="lazy"
-                                 class="product-image">
+                            {% if product.image %}
+                                <img
+                                    src="{{ product.image.thumb(400, 400, {'mode': 'crop'}) }}"
+                                    srcset="
+                                        {{ product.image.thumb(400, 400, {'mode': 'crop'}) }} 400w,
+                                        {{ product.image.thumb(768, 768, {'mode': 'crop'}) }} 768w,
+                                        {{ product.image.thumb(1024, 1024, {'mode': 'crop'}) }} 1024w
+                                    "
+                                    sizes="(max-width: 576px) 400px,
+                                           (max-width: 992px) 768px,
+                                           1024px"
+                                    class="product-image"
+                                    loading="lazy"
+                                    alt="{{ product.name }}"
+                                >
+                            {% else %}
+                                <img
+                                    src="{{ 'assets/img/file.svg' | theme }}"
+                                    class="product-image"
+                                    alt="No Image"
+                                >
+                            {% endif %}
                         </div>
                     </div>
                     
