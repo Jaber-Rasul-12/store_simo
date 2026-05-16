@@ -1040,8 +1040,8 @@ pre code {
 .col-xl-auto {
   position: relative;
   width: 100%;
-  padding-right: 3px;
-  padding-left: 3px;
+  padding-right: 1.5px;
+  padding-left: 1.5px;
 }
 
 .col {
