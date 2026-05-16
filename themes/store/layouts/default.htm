@@ -11,67 +11,46 @@ default = true
 
 
 <script>
+// تحسين lazy loading مع مؤشر تحميل
 document.addEventListener('DOMContentLoaded', function() {
-    // تطبيق lazy loading على جميع الصور التي لها width و height
-    const images = document.querySelectorAll('img:not([loading])');
+    // استهداف جميع الصور
+    const productImages = document.querySelectorAll('.product-image');
     
-    images.forEach(img => {
-        // التحقق من وجود width و height
-        if (img.hasAttribute('width') && img.hasAttribute('height')) {
+    productImages.forEach(img => {
+        // إضافة مؤشر تحميل
+        const container = img.closest('.image-container');
+        if (container && !container.querySelector('.image-loader')) {
+            const loader = document.createElement('div');
+            loader.className = 'image-loader';
+            loader.innerHTML = '<div class="spinner-border text-primary spinner-border-sm" role="status"><span class="visually-hidden">Loading...</span></div>';
+            loader.style.cssText = 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;';
+            container.style.position = 'relative';
+            container.insertBefore(loader, img);
+        }
+        
+        // إخفاء loader عند تحميل الصورة
+        if (img.complete) {
+            img.classList.add('loaded');
+            const loader = img.parentElement.querySelector('.image-loader');
+            if (loader) loader.style.display = 'none';
+        } else {
+            img.addEventListener('load', function() {
+                this.classList.add('loaded');
+                const loader = this.parentElement.querySelector('.image-loader');
+                if (loader) loader.style.display = 'none';
+            });
+            
+            img.addEventListener('error', function() {
+                const loader = this.parentElement.querySelector('.image-loader');
+                if (loader) loader.style.display = 'none';
+                this.src = "{{ 'assets/img/placeholder.jpg' | theme }}";
+            });
+        }
+        
+        // إضافة lazy loading
+        if (!img.hasAttribute('loading') && img.hasAttribute('width') && img.hasAttribute('height')) {
             img.setAttribute('loading', 'lazy');
         }
-        
-        // للصور التي ليس لها width/height، أضف كلاس خاص
-        if (!img.hasAttribute('width') || !img.hasAttribute('height')) {
-            img.classList.add('image-no-dimensions');
-        }
     });
-    
-    // استخدام Intersection Observer لتحميل الصور عند الظهور (اختياري)
-    if ('IntersectionObserver' in window) {
-        const lazyImages = document.querySelectorAll('img[data-src]');
-        
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.add('loaded');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-        
-        lazyImages.forEach(img => imageObserver.observe(img));
-    }
 });
 </script>
-
-<style>
-
-
-/* منع layout shift */
-img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
-
-/* للصور التي ليس لها أبعاد محددة */
-img.image-no-dimensions {
-    min-height: 200px;
-    background: #f0f0f0;
-}
-
-/* مؤشر تحميل للصور */
-img[loading="lazy"] {
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-img[loading="lazy"].loaded,
-img:not([loading="lazy"]) {
-    opacity: 1;
-}
-
-</style>
