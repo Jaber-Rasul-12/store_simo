@@ -610,7 +610,7 @@
     text-align: center;
     text-decoration: none;
     transition: all 0.3s ease;
-    display: block;
+    display: grid;
 }
 
 .category-icon-card:hover {
