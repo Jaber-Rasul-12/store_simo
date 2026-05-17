@@ -945,7 +945,7 @@
     width: 55px;
     height: 55px;
     border-radius: 50%;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
 }
 
 .brand-card h4 {
@@ -1107,7 +1107,7 @@
     }
     
     .brand-card {
-        padding: 8px;
+        padding: 4px;
     }
     
     .brand-card img {
@@ -1171,7 +1171,7 @@
     }
     
     .brands-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
     
     .new-grid {
