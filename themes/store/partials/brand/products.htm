@@ -22,7 +22,7 @@
     <div class="suggestions-scroll-container">
         <div class="suggestions-suggestions">
             {% for related in relateds %}
-                <div class="suggestions-card" onclick="location.href='/category/{{ related.slug }}'">
+                <div class="suggestions-card" onclick="location.href='/brand/{{ related.slug }}'">
                     <div class="suggestions-image-wrapper">
                         <div class="suggestions-image">
                             <img src="{% if related.image.path %}{{ related.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" 
