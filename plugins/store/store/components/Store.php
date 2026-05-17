@@ -63,8 +63,10 @@ class Store extends ComponentBase
         $queryString = post('text');
         $slug =  $this->param('slug');
         if (isset($slug) && !empty($slug)) {
-            $products = Product::with('prices')->whereHas('categories', function($query) use ($slug) {
-                $query->where('slug', $slug);
+            $products = Product::with('prices')->whereHas('subcategory_products', function($query) use ($slug) {
+                $query->whereHas('category', function($query) use ($slug) {
+                    $query->where('slug', $slug);
+                });
             })->where('status', '=', true)->where('name', 'like', '%' . $queryString . '%')->orderBy('id' , 'desc')->get();
             return ['#products-list_container' => $this->renderPartial('@products_lists_container.htm', ['GetAllProducts' => $products , 'isAuth' => Auth::check() ? true : false])];
         } else {
