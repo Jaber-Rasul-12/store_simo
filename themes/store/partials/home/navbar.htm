@@ -113,59 +113,7 @@
     
 
     
-    <div class="section-header">
-        <h3 id='headershownew'>🔥 منتجات ساخنة</h3>
-        <a href="/shop" id='headershownew' style="color:#ff4757;">شاهد الكل ›</a>
-    </div>
-    <div class="hot-products-grid">
-        {% for product in Store.onGetProductsIsFeatured %}
-        <a href="/detail/{{ product.slug }}" class="product-card">
-            <div class="product-img-wrapper">
-                <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="منتج">
-                <span class="product-badge">الأكثر مبيعاً</span>
-            </div>
-            <div class="product-info-card">
-                <h4 class="product-title-card">{{ product.name }}</h4>
-                <div class="product-price-card">
-                   {% set activePrice = null %}
-                            {% set previousPrice = null %}
-                            
-                            {% for price in product.prices %}
-                                {% if price.status == true %}
-                                    {% set activePrice = price %}
-                                    {% if loop.index0 > 0 %}
-                                        {% set previousPrice = product.prices[loop.index0 - 1] %}
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
-                            {% if activePrice %}
-                            <span class="current-price-card">{{ activePrice.price }}$</span>
-                            {% if previousPrice %}
-                            <span class="old-price-card">{{ previousPrice.price }}$</span>
-                            {% endif %}
-
-                            {% endif %}
-                </div>
-                <div class="rating-card">
-                    <span class="stars-card"><div class="review-rating">
-                                            {% for i in 1..5 %}
-                                                {% if comment.rating >= i %}
-                                                    <i class="fas fa-star"></i>
-                                                {% elseif comment.rating >= (i - 0.5) %}
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                {% else %}
-                                                    <i class="far fa-star"></i>
-                                                {% endif %}
-                                            {% endfor %}
-                                            </div>
-                                            <span>{{ comment.rating|number_format(1) }}</span> 
-                                            </span>
-                  
-                </div>
-            </div>
-        </a>
-        {% endfor %}
-    </div>
+    
     
 
 
