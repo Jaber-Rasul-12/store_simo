@@ -10294,6 +10294,10 @@ a.text-dark:hover, a.text-dark:focus {
         margin-top: 2rem !important;
         padding-top: 1.5rem !important;
     }
+
+    #headershownew{
+      font-size: 11px;
+    }
     
     .px-xl-6 {
         padding-left: 1rem !important;

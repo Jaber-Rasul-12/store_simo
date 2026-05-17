@@ -87,26 +87,7 @@
 
 <div class="shein-full-section">
     
-    <div class="quick-offers">
-        <div class="offers-grid">
-            <a href="/promotions" class="offer-mini-card">
-                <h4>تخفيضات الصيف</h4>
-                <div class="percentage">-70%</div>
-            </a>
-            <a href="/promotions" class="offer-mini-card">
-                <h4>عرض سريع</h4>
-                <div class="percentage">-30%</div>
-            </a>
-            <a href="/promotions" class="offer-mini-card">
-                <h4>تشكيلة جديدة</h4>
-                <div class="percentage">-50%</div>
-            </a>
-            <a href="/promotions" class="offer-mini-card">
-                <h4>هدايا مجانية</h4>
-                <div class="percentage">Buy 1+1</div>
-            </a>
-        </div>
-    </div>
+
     
 <div class="main-categories">
     <div class="categories-grid">
@@ -133,8 +114,8 @@
 
     
     <div class="section-header">
-        <h3>🔥 منتجات ساخنة</h3>
-        <a href="/shop" style="color:#ff4757;">شاهد الكل ›</a>
+        <h3 id='headershownew'>🔥 منتجات ساخنة</h3>
+        <a href="/shop" id='headershownew' style="color:#ff4757;">شاهد الكل ›</a>
     </div>
     <div class="hot-products-grid">
         {% for product in Store.onGetProductsIsFeatured %}
@@ -192,50 +173,11 @@
 
 
 
-    
-    <div class="limited-offers">
-        <div class="limited-header">
-            <h3>⚡ عروض محدودة الوقت</h3>
-           
-        <div class="limited-products">
-            {% for product in Store.getProductsShowHomePage %}
-            <a href="/detail/{{ product.slug }}" class="product-card">
-                <div class="product-img-wrapper">
-                    <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="منتج">
-                    <span class="product-badge">-60%</span>
-                </div>
-                <div class="product-info-card">
-                    <h4 class="product-title-card">{{ product.name }}</h4>
-                    <div class="product-price-card">
-                    {% set activePrice = null %}
-                            {% set previousPrice = null %}
-                            
-                            {% for price in product.prices %}
-                                {% if price.status == true %}
-                                    {% set activePrice = price %}
-                                    {% if loop.index0 > 0 %}
-                                        {% set previousPrice = product.prices[loop.index0 - 1] %}
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
-                            {% if activePrice %}
-                            <span class="current-price-card">{{ activePrice.price }}$</span>
-                            {% if previousPrice %}
-                            <span class="old-price-card">{{ previousPrice.price }}$</span>
-                            {% endif %}
 
-                            {% endif %}
-                    </div>
-                </div>
-            </a>
-            {% endfor %}
-          
-        </div>
-    </div>
     
     <div class="section-header">
-        <h3>🏷️ ماركات شهيرة</h3>
-        <a href="/shop" style="color:#ff4757;">جميع الماركات ›</a>
+        <h3 id='headershownew'>🏷️ ماركات شهيرة</h3>
+        <a href="/shop" id='headershownew' style="color:#ff4757;">جميع الماركات ›</a>
     </div>
     <div class="brands-showcase">
         <div class="brands-grid">
