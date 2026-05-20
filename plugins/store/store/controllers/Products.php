@@ -20,4 +20,21 @@ class Products extends Controller
     {
         parent::__construct();
     }
+
+
+            public function formGetRedirectUrl($context = null, $model = null)
+    {
+        $url = post('url');
+
+
+        if (($url == 'create') && !empty($url)) {
+            return "store/store/products/create";
+        } else {
+            if ((post("close") == 1) && !empty(post("close"))) {
+                return "store/store/invoices";
+            } else {
+                return "store/store/invoices/update/$model->id";
+            }
+        }
+    }
 }

@@ -46,6 +46,7 @@ return [
         'related' => 'Related',
         'merchants' => 'Merchants',
         'teams' => 'Teams',
+        'create_and_new' => 'Create and New',
         'subcategories' => 'Sub Categories',
     ],
     'model' => [
