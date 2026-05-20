@@ -3,13 +3,6 @@ fields:
         label: 'store.store::lang.model.category.name'
         span: auto
         type: text
-    slug:
-        label: 'store.store::lang.model.category.slug'
-        span: auto
-        readOnly: true
-        preset:
-            field: name
-            type: slug
 
     status:
         label: 'store.store::lang.model.category.status'

@@ -14,6 +14,11 @@ class Product extends Model
     use \Winter\Storm\Database\Traits\Validation;
     use \Winter\Storm\Database\Traits\Purgeable; 
  
+    use \Winter\Storm\Database\Traits\Sluggable;
+
+
+
+    protected $slugs = ['slug' => ['name', 'short_name']];
 
 
     protected $purgeable = ['price'];

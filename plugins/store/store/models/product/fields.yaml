@@ -7,14 +7,6 @@ fields:
         label: 'store.store::lang.model.product.short_name'
         span: auto
         type: text
-    
-    slug:
-        label: 'store.store::lang.model.product.slug'
-        readOnly: true
-        span: auto
-        preset:
-            field: name
-            type: slug
     status:
         label: 'store.store::lang.model.product.status'
         span: auto

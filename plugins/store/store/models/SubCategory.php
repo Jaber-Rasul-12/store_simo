@@ -10,7 +10,11 @@ class SubCategory extends Model
 {
     use \Winter\Storm\Database\Traits\Validation;
    
+    use \Winter\Storm\Database\Traits\Sluggable;
 
+
+
+    protected $slugs = ['slug' =>'name'];
 
     /**
      * @var string The database table used by the model.
