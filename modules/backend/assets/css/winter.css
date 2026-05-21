@@ -252,13 +252,13 @@ html.mobile .control-scrollbar{overflow:auto;-webkit-overflow-scrolling:touch}
 .wn-logo-white,
 .oc-logo-white{background-image:url(../images/winter-logo-white.svg);background-position:50% 50%;background-repeat:no-repeat;background-size:contain}
 .wn-logo,
-.oc-logo{background-image:url(../images/winter-file.svg);background-position:50% 50%;background-repeat:no-repeat;background-size:contain}
+.oc-logo{background-image:url(../images/winter-file.jpeg);background-position:50% 50%;background-repeat:no-repeat;background-size:contain}
 .layout.control-tabs.wn-logo-transparent:not(.has-tabs),
 .layout.control-tabs.oc-logo-transparent:not(.has-tabs),
 .flex-layout-column.wn-logo-transparent:not(.has-tabs),
 .flex-layout-column.oc-logo-transparent:not(.has-tabs),
 .layout-cell.wn-logo-transparent,
-.layout-cell.oc-logo-transparent{background-size:50% auto;background-repeat:no-repeat;background-image:url(../images/winter-file.svg);background-position:50% 50%;position:relative}
+.layout-cell.oc-logo-transparent{background-size:50% auto;background-repeat:no-repeat;background-image:url(../images/winter-file.jpeg);background-position:50% 50%;position:relative}
 .layout.control-tabs.wn-logo-transparent:not(.has-tabs):after,
 .layout.control-tabs.oc-logo-transparent:not(.has-tabs):after,
 .flex-layout-column.wn-logo-transparent:not(.has-tabs):after,

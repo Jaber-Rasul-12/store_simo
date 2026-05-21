@@ -6,7 +6,7 @@
         {% for item in Cart.cartItems %}
         <div class="cart-item-card" data-product-id="{{ item.id }}">
             <div class="item-header">
-                <img src="{% if item.image.path %}{{ item.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="{{ item.name }}" class="item-image">
+                <img src="{% if item.image.path %}{{ item.image.path }}{% else %}{{ 'assets/img/file.jpeg' | theme }}{% endif %}" alt="{{ item.name }}" class="item-image">
                 <div class="item-info">
                     <h4 class="item-name">{{ item.name }}</h4>
                     <div class="price-badge">

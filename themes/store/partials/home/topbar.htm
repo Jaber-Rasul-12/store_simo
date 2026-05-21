@@ -79,7 +79,7 @@
 
                 
                 <a href="/my-account" class="action-btn" id='user_avatar_top'>
-                    <img src="{% if user.avatar.path %}{{ user.avatar.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}"  alt="الصورة غير متوفرة" class="user-avatar">
+                    <img src="{% if user.avatar.path %}{{ user.avatar.path }}{% else %}{{ 'assets/img/file.jpeg' | theme }}{% endif %}"  alt="الصورة غير متوفرة" class="user-avatar">
                 </a>
                 
                 <a href="javascript:;" data-request="onLogout" data-request-data="redirect: '/login'" class="action-btn logout-btn">
