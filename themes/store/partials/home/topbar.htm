@@ -93,10 +93,17 @@
                     <i class="fas fa-sign-in-alt" style="color: var(--primary-color); padding: 2px;"></i>
                     <span class="action-text">{{ 'تسجيل دخول' }}</span>
                 </a>
-                <a href="/register" class="action-btn register-btn">
-                    <i class="fas fa-user-plus" style=" padding: 2px;"></i>
-                    <span class="action-text">{{ 'التسجيل في الموقع' }}</span>
-                </a>
+
+                   {% if social_login_links is defined and social_login_links is not empty %}
+                    
+                        {% for name, link in social_login_links %}
+                            <a href="{{ link }}" class="action-btn register-btn">
+                                <i class="fab fa-{{ name|lower }}" style=" padding: 2px;"></i>
+                                <span class="action-text">{{ 'تسجيل سريع من خلال ' }} {{ name }}</span>
+                            </a>
+                        {% endfor %}
+                    {% endif %}
+
                 {% endif %}
 
                 
