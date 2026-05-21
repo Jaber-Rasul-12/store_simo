@@ -20,7 +20,7 @@
         <?php if (class_exists(\Symfony\Component\HttpKernel\Kernel::class)) { ?>
             <header>
                 <div class="container">
-                    <h1 class="logo"><?= $this->include('assets/images/symfony-logo.svg'); ?> Symfony Exception</h1>
+                    <h1 class="logo"><?= $this->include('assets/images/symfony-file.svg'); ?> Symfony Exception</h1>
 
                     <div class="help-link">
                         <a href="https://symfony.com/doc/<?= Symfony\Component\HttpKernel\Kernel::VERSION; ?>/index.html">
