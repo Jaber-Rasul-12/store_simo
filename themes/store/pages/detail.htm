@@ -21,14 +21,14 @@ function onStart()
         $this['productDescription'] = strip_tags(substr($this['currentProduct']->description, 0, 160));
         $price = $this['currentProduct']->prices->where('status', true)->first();
         $this['productPrice'] = $price ? $price->price : '0';
-        $this['productImage'] = $this['currentProduct']->image->path ?: 'assets/img/file.jpeg';
+        $this['productImage'] = $this['currentProduct']->image->path ?: 'assets/img/file.svg';
         $this['productCategory'] = $this['currentProduct']->category ? $this['currentProduct']->category->name : '';
         $this['productBrand'] = $this['currentProduct']->brand ? $this['currentProduct']->brand->name : '';
     } else {
         $this['productName'] = 'المنتج';
         $this['productDescription'] = 'تفاصيل المنتج في متجر فيكسو';
         $this['productPrice'] = '0';
-        $this['productImage'] = 'assets/img/file.jpeg';
+        $this['productImage'] = 'assets/img/file.svg';
         $this['productCategory'] = '';
         $this['productBrand'] = '';
     }
