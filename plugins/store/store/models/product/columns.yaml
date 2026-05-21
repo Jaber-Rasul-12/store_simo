@@ -11,6 +11,7 @@ columns:
     name:
         label: 'store.store::lang.model.product.name'
         type: text
+        searchble: true
     short_name:
         label: 'store.store::lang.model.product.short_name'
         type: text
