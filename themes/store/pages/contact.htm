@@ -6,6 +6,14 @@ layout = "default"
 [session]
 [Cart]
 ==
+
+<?php 
+function onStart()
+{
+    $this->addCss('assets/css/contact.css');
+}
+?>
+==
  
 {% put head %}
 {% partial 'meta/meta'  
