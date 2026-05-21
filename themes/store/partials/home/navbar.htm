@@ -131,7 +131,7 @@
         <div class="brands-grid">
            {% for brand in Store.getTopBrands %}
             <a href="/brand/{{ brand.slug }}" class="brand-card">
-                <img src="{% if brand.image.path %}{{ brand.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="{{ brand.name }}">
+                <img src="{% if brand.image.path %}{{ brand.image.path }}{% else %}{{ 'assets/img/file.webp' | theme }}{% endif %}" alt="{{ brand.name }}">
                 <h4>{{ brand.name }}</h4>
             </a>
             {% endfor %}

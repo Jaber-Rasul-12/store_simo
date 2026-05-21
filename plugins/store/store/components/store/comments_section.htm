@@ -2,7 +2,7 @@
 {% if product_comments %}
         {% for comment in product_comments %}
                 <div class="media mb-4">
-                    <img src="{% if comment.user.avatar %}{{ comment.user.avatar.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="لا يوجد صورة" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                    <img src="{% if comment.user.avatar %}{{ comment.user.avatar.path }}{% else %}{{ 'assets/img/file.webp' | theme }}{% endif %}" alt="لا يوجد صورة" class="img-fluid mr-3 mt-1" style="width: 45px;">
                     <div class="media-body">
                         <h6 class="mr-3">{{ comment.user.name }}<small> - <i>{{ comment.created_at|date('Y-m-d') }}</i></small></h6>
                         <div class="text-primary mb-2 mr-3">
