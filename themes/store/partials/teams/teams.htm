@@ -13,7 +13,7 @@
                     {% for team in managers %}
                     <div class="team-member">
                         <div class="member-image">
-                            <img src="{{ team.image.path ? team.image.path : ('assets/img/file.webp' | theme) }}" alt="{{ team.full_name }}">
+                            <img src="{{ team.image.path ? team.image.path : ('assets/img/file.svg' | theme) }}" alt="{{ team.full_name }}">
                             <div class="custom-teams-social-links">
                                 {% if team.fs_link %}
                                 <a href="{{ team.fs_link }}" class="custom-teams-social-link facebook" target="_blank">
@@ -74,7 +74,7 @@
                     {% for team in agents %}
                     <div class="team-member">
                         <div class="member-image">
-                            <img src="{{ team.image.path ? team.image.path : ('assets/img/file.webp' | theme) }}" alt="{{ team.full_name }}">
+                            <img src="{{ team.image.path ? team.image.path : ('assets/img/file.svg' | theme) }}" alt="{{ team.full_name }}">
                             <div class="custom-teams-social-links">
                                 {% if team.fs_link %}
                                 <a href="{{ team.fs_link }}" class="custom-teams-social-link facebook" target="_blank">

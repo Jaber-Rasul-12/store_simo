@@ -2,7 +2,7 @@
 <div class="simple-product-options">
     <!-- معلومات المنتج -->
     <div class="simple-product-info">
-        <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.webp' | theme }}{% endif %}" alt="منتج" class="simple-product-img">
+        <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" alt="منتج" class="simple-product-img">
         <div class="simple-product-details">
             <h3>{{ product.name }}</h3>
              {% set activePrice = null %}

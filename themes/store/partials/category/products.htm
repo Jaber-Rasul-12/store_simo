@@ -23,7 +23,7 @@
                 <div class="suggestions-card" onclick="location.href='/category/{{ related.slug }}'">
                     <div class="suggestions-image-wrapper">
                         <div class="suggestions-image">
-                            <img src="{% if related.image.path %}{{ related.image.path }}{% else %}{{ 'assets/img/file.webp' | theme }}{% endif %}" 
+                            <img src="{% if related.image.path %}{{ related.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}" 
                                  alt="{{ related.name }}"
                                  loading="lazy">
                             <div class="image-overlay">
@@ -95,7 +95,7 @@
                     
                     <div class="card-header bg-transparent border p-0">
                         <div class="image-container">
-                            <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.webp' | theme }}{% endif %}"
+                            <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.svg' | theme }}{% endif %}"
                                  class="product-image">
                         </div>
                     </div>

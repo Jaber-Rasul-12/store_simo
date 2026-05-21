@@ -86,7 +86,7 @@ Thanks to the work by [gudmdharalds](https://github.com/gudmdharalds) there's no
 
 Any errors will be output in JSON format. See [the PR](https://github.com/darylldoyle/svg-sanitizer/pull/25) for an example.
 
-Use it as follows: `php svg-scanner.php ~/svgs/myfile.webp`
+Use it as follows: `php svg-scanner.php ~/svgs/myfile.svg`
 
 ## To-Do
 
