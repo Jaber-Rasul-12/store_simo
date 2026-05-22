@@ -1,68 +1,70 @@
- <!-- Footer Start -->
-    <div class="container-fluid bg-footer-custom  text-dark " id="footer">
-        <div class="row px-xl-6">
-            <div class="col-lg-4 col-md-12 pr-3 pr-xl-5">
-                <a href="" class="text-decoration-none">
-                    <h1 class="mb-4 display-5 font-weight-semi-bold" id="footer-title"><span class="text-primary font-weight-bold border border-white px-3 mr-1">V</span>Ecso</h1>
+<div class="ftr" id="footer">
+    <div class="ftr-container">
+        <!-- القسم العلوي -->
+        <div class="ftr-grid">
+            <!-- معلومات الموقع -->
+            <div class="ftr-col">
+                <a href="" class="ftr-brand">
+                    <h2 class="ftr-logo">
+                        Ecso <span class="ftr-logo-mark">V</span>
+                    </h2>
                 </a>
-                <p>{{ 'نظام توصيل سريع للمنتجات النسائية' |_ }}</p>
-<p class="mb-2" id="footer-address">
-    <a href="https://maps.google.com/?q=دمشق، سوريا" target="_blank" style="text-decoration: none; color: inherit;">
-        {{ 'سوريا , دمشق' |_ }} <i class="fa fa-map-marker-alt text-primary mr-3"></i>
-    </a>
-</p>
-    <a href="mailto:info@vecso.shop" style="text-decoration: none; color: inherit;">
-        info@vecso.shop <i class="fa fa-envelope text-primary mr-3"></i>
-    </a>
-</p>
-               <p class="mb-0" id="footer-address">
-    <a href="https://wa.me/963934240928" target="_blank" style="text-decoration: none; color: inherit;">
-        00963934240928 <i class="fa fa-phone-alt text-primary mr-3"></i>
-    </a>
-</p>
-            </div>
-            <div class="col-lg-8 col-md-12">
-                <div class="row">
-                    <div class="col-md-6 mb-2">
-                        <h5 class="font-weight-bold text-dark mt-2" id="footer-links">{{ 'روابط سريعة' |_ }}</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" id="footer-link" href="/">{{ 'الصفحة الرئيسية' |_ }} <i class="fa fa-angle-left mr-2"></i></a>
-                            <a class="text-dark mb-2" id="footer-link" href="/shop">{{ 'تصفح' |_ }} <i class="fa fa-angle-left mr-2"></i></a>
-                            <a class="text-dark mb-2" id="footer-link" href="/cart">{{ 'تصفح السلة' |_ }} <i class="fa fa-angle-left mr-2"></i></a>
-                            <a class="text-dark mb-2" id="footer-link" href="/checkout">{{ 'التاكد من السالة' |_ }} <i class="fa fa-angle-left mr-2"></i></a>
-                            <a class="text-dark" id="footer-link" href="/contact">{{ 'تواصل' |_ }} <i class="fa fa-angle-left mr-2"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5">
-                        <h5 class="font-weight-bold text-dark mt-2  text-right">{{ 'النشرة الإخبارية' }}</h5>
-                        <form class="subscription-form" role="form" data-request="onSaveEmail" data-request-success="$('#email').val('');" data-request-flash>
-                            <div class="form-group">
-                                <input type="email" name="email" id="email" placeholder="{{ 'قم بالاشتراك ليصلك كل جديد' |_ }}" required class="form-control border-0 py-4"
-                                    required="required" />
-                            </div>
-                            <div>
-                                <button class="btn btn-primary btn-block border-0 py-3" style="color: #efefef;" type="submit" data-stripe-load-indicator>{{ 'اشترك الآن' |_ }}</button>
-                            </div>
-                        </form>
-                    </div>
+                <p class="ftr-text">{{ 'نظام توصيل سريع للمنتجات النسائية' |_ }}</p>
+                <div class="ftr-contacts">
+                    <a href="https://maps.google.com/?q=دمشق، سوريا" target="_blank" class="ftr-contact">
+                        <i class="fa fa-map-marker-alt"></i>
+                        <span>{{ 'سوريا , دمشق' |_ }}</span>
+                    </a>
+                    <a href="mailto:info@vecso.shop" class="ftr-contact">
+                        <i class="fa fa-envelope"></i>
+                        <span>info@vecso.shop</span>
+                    </a>
+                    <a href="https://wa.me/963934240928" target="_blank" class="ftr-contact">
+                        <i class="fa fa-phone-alt"></i>
+                        <span>00963934240928</span>
+                    </a>
                 </div>
             </div>
+
+            <!-- الروابط -->
+            <div class="ftr-col">
+                <h6 class="ftr-title">{{ 'روابط سريعة' |_ }}</h6>
+                <div class="ftr-links">
+                    <a href="/" class="ftr-link">{{ 'الصفحة الرئيسية' |_ }} <i class="fa fa-angle-left"></i></a>
+                    <a href="/shop" class="ftr-link">{{ 'تصفح' |_ }} <i class="fa fa-angle-left"></i></a>
+                    <a href="/cart" class="ftr-link">{{ 'السلة' |_ }} <i class="fa fa-angle-left"></i></a>
+                    <a href="/checkout" class="ftr-link">{{ 'الدفع' |_ }} <i class="fa fa-angle-left"></i></a>
+                    <a href="/contact" class="ftr-link">{{ 'تواصل' |_ }} <i class="fa fa-angle-left"></i></a>
+                </div>
+            </div>
+
+            <!-- النشرة -->
+            <div class="ftr-col">
+                <h6 class="ftr-title">{{ 'النشرة الإخبارية' |_ }}</h6>
+                <form class="ftr-form" role="form" data-request="onSaveEmail" data-request-success="$('#ftrEmail').val('');" data-request-flash>
+                    <div class="ftr-input-group">
+                        <input type="email" name="email" id="ftrEmail" placeholder="{{ 'بريدك الإلكتروني' |_ }}" required class="ftr-input" />
+                        <button class="ftr-btn" type="submit" data-stripe-load-indicator>
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
 
-
-        <div class="row border-top border-light mx-xl-6 py-4">
-            <div class="col-md-6 px-xl-0">
-                <p class="mb-md-0 text-md-left text-dark">
-                    &copy; <a class="text-dark font-weight-semi-bold" href="#">Vecso</a>. {{ 'جميع الحقوق محفوظة' |_ }}.
-                     {{ 'بواسطة' |_ }}
-                    <a class="text-dark font-weight-semi-bold" href="">{{ 'جابر رسول' |_ }}</a><br>
-                    {{ 'تم التوزيع بواسطة' |_ }} <a href="https://www.facebook.com/share/1LAQCdgD3B/" target="_blank">{{ 'جابر رسول' |_ }}</a>
-                </p>
+        <!-- القسم السفلي -->
+        <div class="ftr-bottom">
+            <div class="ftr-copyright">
+                <p>© <a href="#">Vecso</a> {{ 'جميع الحقوق محفوظة' |_ }} {{ 'بواسطة' |_ }} <a href="https://www.facebook.com/share/1LAQCdgD3B/" target="_blank">{{ 'جابر رسول' |_ }}</a></p>
             </div>
-           
+            <div class="ftr-social">
+                <a href="https://www.facebook.com/share/18FmuUzTYk/" class="ftr-social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/vecso_shop?igsh=MWozcGk3N3NzODB1bg==" class="ftr-social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/+963983138125" class="ftr-social-link"><i class="fab fa-whatsapp"></i></a>
+            </div>
         </div>
     </div>
+</div>
 
 
 
