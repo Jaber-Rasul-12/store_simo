@@ -216,7 +216,7 @@ class Store extends ComponentBase
             return null;
         }
     
-        $subcategory = SubCategory::where('slug', $slug)
+        $subcategory = SubCategory::withCount('products')->where('slug', $slug)
             ->first();
     
         if (!$subcategory) {
