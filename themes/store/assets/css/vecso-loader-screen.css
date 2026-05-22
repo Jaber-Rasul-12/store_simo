@@ -1,0 +1,355 @@
+ /* ========== VECSO LOADER PRO ULTRA ========== */
+    
+    /* شاشة التحميل الرئيسية */
+    .vecso-loader-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(145deg, #d39e7f 0%, #4a1726 50%, #2d0e18 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 99999;
+        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .vecso-loader-screen.fade-out {
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(1.1);
+    }
+
+    /* الحاوية الرئيسية للود */
+    .vecso-loader-container {
+        text-align: center;
+        position: relative;
+    }
+
+    /* تأثير الدوائر الخلفية */
+    .vecso-bg-circles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+
+    .vecso-bg-circle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.03);
+        animation: floatCircle 8s ease-in-out infinite;
+    }
+
+    .vecso-bg-circle:nth-child(1) {
+        width: 300px;
+        height: 300px;
+        top: -150px;
+        left: -150px;
+        animation-delay: 0s;
+    }
+
+    .vecso-bg-circle:nth-child(2) {
+        width: 200px;
+        height: 200px;
+        bottom: -100px;
+        right: -100px;
+        animation-delay: 2s;
+    }
+
+    .vecso-bg-circle:nth-child(3) {
+        width: 150px;
+        height: 150px;
+        top: 50%;
+        right: 10%;
+        animation-delay: 4s;
+    }
+
+    /* اللوجو المتقدم */
+    .vecso-logo-wrapper {
+        margin-bottom: 40px;
+        position: relative;
+    }
+
+    .vecso-logo-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 140px;
+        height: 140px;
+    }
+
+    .vecso-logo-ring svg {
+        width: 100%;
+        height: 100%;
+        animation: rotateRing 3s linear infinite;
+    }
+
+    .vecso-logo-ring circle {
+        fill: none;
+        stroke: rgba(255,255,255,0.3);
+        stroke-width: 2;
+        stroke-dasharray: 200;
+        stroke-dashoffset: 0;
+    }
+
+    .vecso-logo-ring circle:first-child {
+        stroke: url(#gradientRing);
+        stroke-width: 3;
+        stroke-dasharray: 300;
+        stroke-dashoffset: 300;
+        animation: drawRing 1.5s ease-in-out infinite alternate;
+    }
+
+    .vecso-logo-box {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+        background: linear-gradient(135deg, #ffffff 0%, #f5e6d8 100%);
+        border-radius: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 4px rgba(255,255,255,0.1);
+        animation: floatLogo 3s ease-in-out infinite, pulseBox 2s ease-in-out infinite;
+        overflow: hidden;
+    }
+
+    .vecso-logo-box::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(211,158,127,0.3), transparent);
+        transform: rotate(45deg);
+        animation: shine 3s ease-in-out infinite;
+    }
+
+    .vecso-logo-box img {
+        width: 70%;
+        height: auto;
+        object-fit: contain;
+        border-radius: 35px;
+        animation: pulseLogo 2s ease-in-out infinite;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+    }
+
+    /* النص المتحرك */
+    .vecso-title {
+        margin-top: 30px;
+        position: relative;
+    }
+
+    .vecso-title-text {
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #ffffff 0%, #f5e6d8 50%, #d39e7f 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        letter-spacing: 8px;
+        animation: gradientShift 3s ease infinite;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        position: relative;
+    }
+
+    .vecso-title-text::after {
+        content: 'VECSO';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, transparent 0%, rgba(211,158,127,0.5) 50%, transparent 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: textShine 2s ease-in-out infinite;
+    }
+
+    /* بار التحميل المتقدم */
+    .vecso-progress-section {
+        width: 300px;
+        margin: 40px auto 25px;
+    }
+
+    .vecso-progress-bar-container {
+        width: 100%;
+        height: 4px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .vecso-progress-fill {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #d39e7f, #ffffff, #d39e7f);
+        border-radius: 10px;
+        animation: loadingProgress 2.5s ease-out forwards;
+        position: relative;
+        box-shadow: 0 0 10px rgba(211,158,127,0.8);
+    }
+
+    .vecso-progress-fill::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20px;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+        animation: progressShine 1s ease-in-out infinite;
+    }
+
+    /* نص التحميل */
+    .vecso-loading-status {
+        color: rgba(255,255,255,0.8);
+        font-size: 0.85rem;
+        margin-top: 15px;
+        letter-spacing: 2px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .vecso-loading-dots {
+        display: inline-flex;
+        gap: 4px;
+    }
+
+    .vecso-loading-dots span {
+        width: 5px;
+        height: 5px;
+        background: white;
+        border-radius: 50%;
+        animation: dotBlink 1.4s ease-in-out infinite;
+    }
+
+    .vecso-loading-dots span:nth-child(1) { animation-delay: 0s; }
+    .vecso-loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .vecso-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    /* النقاط المتحركة أسفل */
+    .vecso-dots-group {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .vecso-dot {
+        width: 8px;
+        height: 8px;
+        background: rgba(255,255,255,0.5);
+        border-radius: 50%;
+        animation: bounceDot 1.4s ease-in-out infinite;
+    }
+
+    .vecso-dot:nth-child(1) { animation-delay: -0.32s; }
+    .vecso-dot:nth-child(2) { animation-delay: -0.16s; }
+    .vecso-dot:nth-child(3) { animation-delay: 0s; }
+
+    /* أنيميشنات متقدمة */
+    @keyframes floatLogo {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); }
+    }
+
+    @keyframes pulseBox {
+        0%, 100% { box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 4px rgba(255,255,255,0.1); }
+        50% { box-shadow: 0 25px 50px rgba(0,0,0,0.4), 0 0 0 8px rgba(255,255,255,0.2); }
+    }
+
+    @keyframes pulseLogo {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    @keyframes shine {
+        0% { transform: rotate(45deg) translate(-100%, -100%); }
+        100% { transform: rotate(45deg) translate(100%, 100%); }
+    }
+
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    @keyframes textShine {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    @keyframes loadingProgress {
+        0% { width: 0%; }
+        20% { width: 15%; }
+        40% { width: 35%; }
+        60% { width: 60%; }
+        80% { width: 85%; }
+        100% { width: 100%; }
+    }
+
+    @keyframes progressShine {
+        0% { transform: translateX(-100%); opacity: 0; }
+        50% { opacity: 1; }
+        100% { transform: translateX(100%); opacity: 0; }
+    }
+
+    @keyframes rotateRing {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @keyframes drawRing {
+        0% { stroke-dashoffset: 300; }
+        100% { stroke-dashoffset: 0; }
+    }
+
+    @keyframes floatCircle {
+        0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+        50% { transform: translateY(-30px) scale(1.1); opacity: 0.6; }
+    }
+
+    @keyframes bounceDot {
+        0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+        40% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes dotBlink {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+    }
+
+    /* التوافق مع الموبايل */
+    @media (max-width: 768px) {
+        .vecso-logo-box {
+            width: 90px;
+            height: 90px;
+            border-radius: 25px;
+        }
+
+        .vecso-title-text {
+            font-size: 2rem;
+            letter-spacing: 4px;
+        }
+
+        .vecso-progress-section {
+            width: 250px;
+        }
+
+        .vecso-logo-ring {
+            width: 110px;
+            height: 110px;
+        }
+    }

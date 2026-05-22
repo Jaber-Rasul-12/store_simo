@@ -1,0 +1,61 @@
+
+<!-- شاشة التحميل VECSO PRO -->
+<div class="vecso-loader-screen" id="vecsoLoaderScreen">
+    <!-- دوائر خلفية متحركة -->
+    <div class="vecso-bg-circles">
+        <div class="vecso-bg-circle"></div>
+        <div class="vecso-bg-circle"></div>
+        <div class="vecso-bg-circle"></div>
+    </div>
+
+    <div class="vecso-loader-container">
+        <!-- SVG للحلقة -->
+        <svg style="display: none;">
+            <defs>
+                <linearGradient id="gradientRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#d39e7f" />
+                    <stop offset="50%" stop-color="#ffffff" />
+                    <stop offset="100%" stop-color="#d39e7f" />
+                </linearGradient>
+            </defs>
+        </svg>
+
+        <!-- اللوجو مع الحلقة -->
+        <div class="vecso-logo-wrapper">
+            <div class="vecso-logo-ring">
+                <svg viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="55" />
+                    <circle cx="60" cy="60" r="55" stroke="url(#gradientRing)" />
+                </svg>
+            </div>
+            <div class="vecso-logo-box">
+                <img src="{{ 'assets/img/logo.webp' | theme }}" alt="Vecso">
+            </div>
+        </div>
+
+        <!-- النص الرئيسي -->
+        <div class="vecso-title">
+            <div class="vecso-title-text">VECSO</div>
+        </div>
+
+        <!-- بار التحميل المتقدم -->
+        <div class="vecso-progress-section">
+            <div class="vecso-progress-bar-container">
+                <div class="vecso-progress-fill"></div>
+            </div>
+            <div class="vecso-loading-status">
+                <span>جاري التحميل</span>
+                <div class="vecso-loading-dots">
+                    <span>.</span><span>.</span><span>.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- نقاط متحركة -->
+        <div class="vecso-dots-group">
+            <div class="vecso-dot"></div>
+            <div class="vecso-dot"></div>
+            <div class="vecso-dot"></div>
+        </div>
+    </div>
+</div>
