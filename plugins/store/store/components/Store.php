@@ -216,14 +216,14 @@ class Store extends ComponentBase
             return null;
         }
     
-        $subcategory = SubCategory::withCount('products')->where('slug', $slug)
+        $subcategory = SubCategory::where('slug', $slug)
             ->first();
     
         if (!$subcategory) {
             return null;
         }
     
-        return $subcategory->related_subcategories()->get();
+        return $subcategory->related_subcategories()->withCount('products')->get();
     }
     public function onGetRelatedProducts()
     {
