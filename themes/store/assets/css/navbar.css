@@ -743,7 +743,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding: 20px 15px 15px;
+    padding: 10px;
     background: #f5f7fa;
 }
 
@@ -922,7 +922,7 @@
 
 
 .brands-showcase {
-    padding: 20px 15px;
+    padding: 5px;
     background: white;
 }
 
