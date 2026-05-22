@@ -39,12 +39,11 @@
         background: white;
         border-radius: var(--mshop-radius-md);
         box-shadow: var(--mshop-shadow-sm);
-        margin-bottom: 24px;
         overflow: hidden;
     }
     
     .mshop-filter-header {
-        padding: 16px 20px;
+        padding: 5px;
         background: linear-gradient(135deg, var(--mshop-primary-light) 0%, white 100%);
         border-bottom: 1px solid var(--mshop-border);
         display: flex;
@@ -382,7 +381,7 @@
         background: var(--mshop-light);
     }
     .mshop-search-wrapper {
-        margin-bottom: 24px;
+        margin-bottom: 5px;
         position: relative;
     }
     
@@ -605,6 +604,23 @@
         .mshop-container {
             max-width: 100%;
             padding: 12px;
+        }
+
+        .mshop-search-input {
+            font-size: 12px;
+            padding: 7px;
+        }
+
+        .mshop-filter-title i 
+        ,.mshop-filter-title  , .mshop-filter-scope .filter-label  .mshop-filter-scope .filter-setting {
+        font-size: 12px;
+        }
+        .mshop-btn {
+            font-size: 12px;
+            padding: 5px;
+        }
+        .mshop-filter-scopes , {
+            padding: 5px;
         }
         
         .mshop-filter-scopes {
