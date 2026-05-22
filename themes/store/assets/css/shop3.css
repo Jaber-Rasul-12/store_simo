@@ -640,6 +640,7 @@
         
         .mshop-filter-scope {
             white-space: nowrap;
+            padding: 5px;
         }
         
         .mshop-panel-content {
