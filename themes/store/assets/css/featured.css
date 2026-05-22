@@ -73,7 +73,7 @@
             }
             .stats-section {
                 padding: 0px!important;
-                margin-top: none!important;
+                margin-top: 2px!important;
             }
             .stat-item{
                 font-size: 10px!important;
@@ -225,7 +225,7 @@
         }
         
         .stat-item {
-            padding: 15px;
+            padding: 5px;
         }
         
         .stat-number {
