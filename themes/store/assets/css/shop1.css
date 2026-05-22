@@ -612,20 +612,18 @@
         }
 
         .mshop-filter-title i 
-        ,.mshop-filter-title  , .mshop-filter-scope .filter-label  .mshop-filter-scope .filter-setting {
+        ,.mshop-filter-title  , .mshop-filter-scope .filter-label , .mshop-filter-scope .filter-setting {
         font-size: 12px!important;
         }
         .mshop-btn {
             font-size: 12px!important;
             padding: 5px!important;
         }
-        .mshop-filter-scopes  {
-            padding: 5px!important;
-        }
-        
+
         .mshop-filter-scopes {
             overflow-x: auto;
             flex-wrap: nowrap;
+            padding: 5px!important;
             -webkit-overflow-scrolling: touch;
         }
         
