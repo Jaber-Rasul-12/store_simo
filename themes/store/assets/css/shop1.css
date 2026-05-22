@@ -611,9 +611,20 @@
             padding: 7px!important;
         }
 
-        .mshop-filter-title i 
-        ,.mshop-filter-title  , .mshop-filter-scope .filter-label , .mshop-filter-scope .filter-setting {
-        font-size: 12px!important;
+        .mshop-filter-title i {
+        font-size: 10px!important;
+
+        }
+        .mshop-filter-title  {
+        font-size: 10px!important;
+
+        } 
+        .mshop-filter-scope .filter-label {
+        font-size: 10px!important;
+
+        } 
+        .mshop-filter-scope .filter-setting {
+        font-size: 10px!important;
         }
         .mshop-btn {
             font-size: 12px!important;
