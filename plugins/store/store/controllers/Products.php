@@ -31,9 +31,9 @@ class Products extends Controller
             return "store/store/products/create";
         } else {
             if ((post("close") == 1) && !empty(post("close"))) {
-                return "store/store/invoices";
+                return "store/store/products";
             } else {
-                return "store/store/invoices/update/$model->id";
+                return "store/store/products/update/$model->id";
             }
         }
     }
