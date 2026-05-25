@@ -11,7 +11,7 @@
         let textIndex = 0;
         let textInterval;
         
-        // وظيفة إخفاء شاشة التحميل
+     
         function hideLoader() {
             const loadingScreen = document.getElementById('vecsoLoaderScreen');
             if (loadingScreen) {
@@ -24,7 +24,7 @@
             }
         }
         
-        // بدء النصوص المتغيرة
+       
         function startTextAnimation() {
             const statusSpan = document.querySelector('.vecso-loading-status span:first-child');
             if (!statusSpan) return;
