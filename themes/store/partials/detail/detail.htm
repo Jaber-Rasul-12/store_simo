@@ -274,39 +274,66 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. نختار الصورة الرئيسية (الكبيرة)
-    const mainImage = document.getElementById('mainProductImage');
-    
-    // 2. نختار كل الصور المصغرة
-    const thumbnails = document.querySelectorAll('.thumb-item');
-    
-    // 3. نتأكد من وجود الصور
-    if (mainImage && thumbnails.length > 0) {
-        // 4. نضيف حدث النقر لكل صورة مصغرة
-        thumbnails.forEach(function(thumbnail) {
-            thumbnail.addEventListener('click', function() {
-                // نحصل على رابط الصورة من الخاصية data-image
-                const newImageUrl = this.getAttribute('data-image');
-                
-                // نغير الصورة الرئيسية إلى الصورة التي تم الضغط عليها
-                if (newImageUrl) {
-                    mainImage.src = newImageUrl;
-                }
-                
-                // نزيل الكلاس 'active' من كل الصور
-                thumbnails.forEach(function(thumb) {
-                    thumb.classList.remove('active');
-                });
-                
-                // نضيف الكلاس 'active' للصورة التي تم الضغط عليها
-                this.classList.add('active');
-            });
-        });
-        
-        console.log('تم تفعيل معرض الصور - عدد الصور: ' + thumbnails.length);
-    } else {
-        console.log('لم يتم العثور على الصورة الرئيسية أو الصور المصغرة');
+// حل مستقل لا يحتاج jQuery
+(function() {
+    // وظيفة تغيير الصورة
+    function changeMainImage(imageUrl, element) {
+        var mainImage = document.getElementById('mainProductImage');
+        if (mainImage && imageUrl) {
+            mainImage.src = imageUrl;
+            
+            // إزالة الكلاس النشط من كل الصور
+            var allThumbs = document.querySelectorAll('.thumb-item');
+            for (var i = 0; i < allThumbs.length; i++) {
+                allThumbs[i].classList.remove('active');
+            }
+            
+            // إضافة الكلاس النشط للصورة المحددة
+            if (element) {
+                element.classList.add('active');
+            }
+        }
     }
-});
+    
+    // انتظر حتى يتم تحميل الصفحة
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            initGallery();
+        });
+    } else {
+        initGallery();
+    }
+    
+    function initGallery() {
+        var thumbs = document.querySelectorAll('.thumb-item');
+        var mainImg = document.getElementById('mainProductImage');
+        
+        if (thumbs.length > 0 && mainImg) {
+            // إضافة حدث النقر لكل صورة
+            for (var i = 0; i < thumbs.length; i++) {
+                // إزالة أي أحداث قديمة
+                thumbs[i].removeAttribute('onclick');
+                
+                // إضافة حدث جديد
+                (function(index) {
+                    var thumb = thumbs[index];
+                    thumb.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        var newSrc = this.getAttribute('data-image');
+                        if (newSrc) {
+                            mainImg.src = newSrc;
+                            // تحديث الكلاس النشط
+                            for (var j = 0; j < thumbs.length; j++) {
+                                thumbs[j].classList.remove('active');
+                            }
+                            this.classList.add('active');
+                        }
+                    });
+                })(i);
+            }
+            console.log('معرض الصور يعمل - ' + thumbs.length + ' صورة');
+        }
+    }
+})();
 </script>
