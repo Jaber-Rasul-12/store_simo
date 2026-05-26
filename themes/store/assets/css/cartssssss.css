@@ -301,7 +301,7 @@
     background: white;
     border-radius: 28px;
     width: 85%;
-    height: 75vh;
+    height: 80vh;
     /* max-width: 400px; */
     /* max-height: 80vh; */
     overflow: hidden;
@@ -354,8 +354,8 @@
 }
 
 .popup-content {
-    padding: 20px;
-    max-height: 60vh;
+    /* padding: 20px; */
+    height: 75vh;
     overflow-y: auto;
 }
 
