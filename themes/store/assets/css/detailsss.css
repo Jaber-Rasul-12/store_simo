@@ -971,7 +971,7 @@
 
 .swiper-button-next:after,
 .swiper-button-prev:after {
-    font-size: 18px;
+    font-size: 18px!important;
     font-weight: bold;
 }
 
@@ -1013,6 +1013,6 @@
     
     .swiper-button-next:after,
     .swiper-button-prev:after {
-        font-size: 14px;
+        font-size: 14px!important;
     }
 }
