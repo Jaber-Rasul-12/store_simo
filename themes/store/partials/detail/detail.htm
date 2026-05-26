@@ -49,63 +49,26 @@
     <div class="product-main-modern">
         {% set product = Store.onGetProductWithSlug %}
         
-       <!-- معرض الصور المحسن -->
-<div class="product-gallery-modern">
-    <div class="gallery-main-modern">
-        <div class="main-image-container">
-            <img id="mainProductImage" 
-                 src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.jpeg' | theme }}{% endif %}" 
-                 alt="{{ product.name }}" 
-                 class="main-product-image">
-            
-            <!-- أزرار التصفح -->
-            <button class="gallery-nav prev-btn" id="prevImageBtn" style="display: none;">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            <button class="gallery-nav next-btn" id="nextImageBtn" style="display: none;">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-        </div>
-    </div>
-    
-    {% if product.images is not empty %}
-    <div class="gallery-thumbs-modern">
-        <div class="thumbs-scroll-container">
-            <button class="scroll-btn left-scroll" id="scrollLeftBtn" style="display: none;">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            
-            <div class="thumbs-wrapper" id="thumbsWrapper">
-                <div class="thumbs-track" id="thumbsTrack">
-                    <!-- الصورة الرئيسية دائماً أول عنصر -->
-                    <div class="thumb-item-modern active" 
-                         data-image="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.jpeg' | theme }}{% endif %}">
-                        <img src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.jpeg' | theme }}{% endif %}" 
-                             alt="{{ product.name }}">
-                        <div class="thumb-overlay">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                    
-                    {% for image in product.images %}
-                    <div class="thumb-item-modern" 
-                         data-image="{{ image.path }}">
-                        <img src="{{ image.path }}" alt="{{ product.name }}">
-                        <div class="thumb-overlay">
-                            <i class="fas fa-search-plus"></i>
-                        </div>
-                    </div>
-                    {% endfor %}
+        <div class="product-gallery-modern">
+            <div class="gallery-container">
+                <div class="gallery-main" id="mainGallery">
+                    <img id="mainProductImage" 
+                         src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.jpeg' | theme }}{% endif %}" 
+                         alt="{{ product.name }}">
                 </div>
+                {% if product.images is not empty %}
+                <div class="gallery-thumbs">
+                    <div class="thumb-track">
+                        {% for image in product.images %}
+                        <div class="thumb-item {% if loop.first %}active{% endif %}" data-image="{{ image.path }}">
+                            <img src="{{ image.path }}" alt="{{ product.name }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
             </div>
-            
-            <button class="scroll-btn right-scroll" id="scrollRightBtn" style="display: none;">
-                <i class="fas fa-chevron-left"></i>
-            </button>
         </div>
-    </div>
-    {% endif %}
-</div>
         
         <div class="product-info-modern">
             <h1 class="product-title-modern">{{ product.name }}</h1>
@@ -310,339 +273,66 @@
     </div>
 </div>
 
-<style>
-
-/* معرض الصور المحسن */
-.product-gallery-modern {
-    margin-bottom: 20px;
-    background: white;
-    border-radius: 20px;
-    padding: 15px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-
-.gallery-main-modern {
-    position: relative;
-    margin-bottom: 20px;
-    border-radius: 16px;
-    overflow: hidden;
-    background: #f8f9fa;
-}
-
-.main-image-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 350px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #fff 100%);
-}
-
-.main-product-image {
-    max-width: 100%;
-    max-height: 350px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-}
-
-.main-product-image:hover {
-    transform: scale(1.05);
-}
-
-.gallery-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.9);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: all 0.3s;
-    z-index: 10;
-}
-
-.gallery-nav:hover {
-    background: white;
-    transform: translateY(-50%) scale(1.1);
-}
-
-.prev-btn {
-    right: 10px;
-}
-
-.next-btn {
-    left: 10px;
-}
-
-.gallery-thumbs-modern {
-    position: relative;
-}
-
-.thumbs-scroll-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.thumbs-wrapper {
-    flex: 1;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-.thumbs-wrapper::-webkit-scrollbar {
-    height: 4px;
-}
-
-.thumbs-wrapper::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-.thumbs-wrapper::-webkit-scrollbar-thumb {
-    background: #667eea;
-    border-radius: 10px;
-}
-
-.thumbs-track {
-    display: flex;
-    gap: 12px;
-    padding: 5px 0;
-}
-
-.thumb-item-modern {
-    flex: 0 0 80px;
-    height: 80px;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    border: 3px solid transparent;
-    transition: all 0.2s;
-    position: relative;
-}
-
-.thumb-item-modern.active {
-    border-color: #667eea;
-    box-shadow: 0 4px 12px rgba(102,126,234,0.3);
-}
-
-.thumb-item-modern:hover .thumb-overlay {
-    opacity: 1;
-}
-
-.thumb-item-modern img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.thumb-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-    color: white;
-}
-
-.scroll-btn {
-    background: white;
-    border: 1px solid #e2e8f0;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.scroll-btn:hover {
-    background: #667eea;
-    color: white;
-    border-color: #667eea;
-}
-
-/* للشاشات الصغيرة */
-@media (max-width: 768px) {
-    .product-gallery-modern {
-        padding: 10px;
-    }
-    
-    .main-image-container {
-        min-height: 250px;
-    }
-    
-    .main-product-image {
-        max-height: 250px;
-    }
-    
-    .thumb-item-modern {
-        flex: 0 0 60px;
-        height: 60px;
-    }
-    
-    .gallery-nav {
-        width: 32px;
-        height: 32px;
-    }
-}
-</style>
 <script>
-// معرض الصور المتقدم - يعمل بدون أي مشاكل
-(function() {
-    // جلب العناصر
-    const mainImage = document.getElementById('mainProductImage');
-    const thumbs = document.querySelectorAll('.thumb-item-modern');
-    const prevBtn = document.getElementById('prevImageBtn');
-    const nextBtn = document.getElementById('nextImageBtn');
-    const scrollLeftBtn = document.getElementById('scrollLeftBtn');
-    const scrollRightBtn = document.getElementById('scrollRightBtn');
-    const thumbsWrapper = document.getElementById('thumbsWrapper');
-    
-    let currentIndex = 0;
-    let allImages = [];
-    
-    // جمع كل الصور
-    thumbs.forEach((thumb, index) => {
-        const imgSrc = thumb.getAttribute('data-image');
-        allImages.push(imgSrc);
-        
-        // إضافة حدث النقر
-        thumb.addEventListener('click', function() {
-            changeImage(imgSrc, index);
-        });
+document.querySelectorAll('.thumb-item').forEach(thumb => {
+    thumb.addEventListener('click', function() {
+        const imageUrl = this.dataset.image;
+        document.getElementById('mainProductImage').src = imageUrl;
+        document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
     });
-    
-    // وظيفة تغيير الصورة
-    function changeImage(imageSrc, index) {
-        if (mainImage && imageSrc) {
-            // تأثير التلاشي
-            mainImage.style.opacity = '0.5';
-            
-            setTimeout(() => {
-                mainImage.src = imageSrc;
-                mainImage.onload = function() {
-                    mainImage.style.opacity = '1';
-                };
-            }, 150);
-            
-            // تحديث الكلاس النشط
-            thumbs.forEach(thumb => {
-                thumb.classList.remove('active');
-            });
-            
-            if (thumbs[index]) {
-                thumbs[index].classList.add('active');
-                // جعل الصورة المختارة مرئية في السلايدر
-                if (thumbsWrapper) {
-                    const thumbElement = thumbs[index];
-                    const scrollPosition = thumbElement.offsetLeft - thumbsWrapper.offsetWidth / 2 + thumbElement.offsetWidth / 2;
-                    thumbsWrapper.scrollTo({
-                        left: scrollPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-            
-            currentIndex = index;
-            
-            // إظهار/إخفاء أزرار التصفح
-            if (prevBtn && nextBtn) {
-                prevBtn.style.display = allImages.length > 1 ? 'flex' : 'none';
-                nextBtn.style.display = allImages.length > 1 ? 'flex' : 'none';
-            }
-        }
-    }
-    
-    // الصورة التالية
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function() {
-            if (currentIndex < allImages.length - 1) {
-                changeImage(allImages[currentIndex + 1], currentIndex + 1);
-            } else if (allImages.length > 0) {
-                changeImage(allImages[0], 0);
+});
+
+document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+    });
+});
+
+document.querySelectorAll('.color-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+    });
+});
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const tabId = this.dataset.tab;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById(`tab-${tabId}`).classList.add('active');
+    });
+});
+
+let currentRating = 0;
+document.querySelectorAll('.stars-rating i').forEach(star => {
+    star.addEventListener('click', function() {
+        currentRating = parseInt(this.dataset.rate);
+        document.querySelectorAll('.stars-rating i').forEach((s, index) => {
+            if (index < currentRating) {
+                s.classList.add('active');
+                s.classList.remove('far');
+                s.classList.add('fas');
+            } else {
+                s.classList.remove('active');
+                s.classList.remove('fas');
+                s.classList.add('far');
             }
         });
-    }
-    
-    // الصورة السابقة
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function() {
-            if (currentIndex > 0) {
-                changeImage(allImages[currentIndex - 1], currentIndex - 1);
-            } else if (allImages.length > 0) {
-                changeImage(allImages[allImages.length - 1], allImages.length - 1);
-            }
-        });
-    }
-    
-    // التمرير لليمين في الثامب
-    if (scrollRightBtn && thumbsWrapper) {
-        scrollRightBtn.addEventListener('click', function() {
-            thumbsWrapper.scrollBy({
-                left: 200,
-                behavior: 'smooth'
-            });
-        });
-    }
-    
-    // التمرير لليسار في الثامب
-    if (scrollLeftBtn && thumbsWrapper) {
-        scrollLeftBtn.addEventListener('click', function() {
-            thumbsWrapper.scrollBy({
-                left: -200,
-                behavior: 'smooth'
-            });
-        });
-    }
-    
-    // إظهار أزرار التمرير إذا كان هناك الكثير من الصور
-    if (thumbsWrapper && scrollLeftBtn && scrollRightBtn) {
-        function checkScrollButtons() {
-            const hasScroll = thumbsWrapper.scrollWidth > thumbsWrapper.clientWidth;
-            scrollLeftBtn.style.display = hasScroll ? 'flex' : 'none';
-            scrollRightBtn.style.display = hasScroll ? 'flex' : 'none';
-        }
-        
-        checkScrollButtons();
-        window.addEventListener('resize', checkScrollButtons);
-        
-        // إخفاء أزرار التصفح إذا كانت صورة واحدة فقط
-        if (allImages.length <= 1) {
-            if (prevBtn) prevBtn.style.display = 'none';
-            if (nextBtn) nextBtn.style.display = 'none';
-        }
-    }
-    
-    // إضافة تأثير تكبير عند النقر على الصورة الرئيسية
-    if (mainImage) {
-        mainImage.addEventListener('click', function() {
-            this.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                this.style.transform = 'scale(1)';
-            }, 300);
-        });
-    }
-    
-    console.log('✅ معرض الصور يعمل بنجاح - عدد الصور: ' + allImages.length);
-})();
+        document.getElementById('ratingValue').value = currentRating;
+    });
+});
+
+function resetRating() {
+    currentRating = 0;
+    document.querySelectorAll('.stars-rating i').forEach(star => {
+        star.classList.remove('active', 'fas');
+        star.classList.add('far');
+    });
+    document.getElementById('ratingValue').value = 0;
+    document.getElementById('commentText').value = '';
+}
 </script>
