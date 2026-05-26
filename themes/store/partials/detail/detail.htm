@@ -54,31 +54,36 @@
     <div class="product-main-modern">
         {% set product = Store.onGetProductWithSlug %}
         
-       <div class="swiper-container gallery-top">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide">
-            <img src="{{ product.image.path }}" alt="{{ product.name }}">
+<!-- استبدل معرض الصور بهذا -->
+<div class="product-gallery-section" style="margin-bottom: 20px;">
+    <!-- السلايدر الرئيسي -->
+    <div class="swiper-container gallery-top">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="{{ product.image.path }}" alt="{{ product.name }}">
+            </div>
+            {% for image in product.images %}
+            <div class="swiper-slide">
+                <img src="{{ image.path }}" alt="{{ product.name }}">
+            </div>
+            {% endfor %}
         </div>
-        {% for image in product.images %}
-        <div class="swiper-slide">
-            <img src="{{ image.path }}" alt="{{ product.name }}">
-        </div>
-        {% endfor %}
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-</div>
 
-<div class="swiper-container gallery-thumbs">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide">
-            <img src="{{ product.image.path }}" alt="{{ product.name }}">
+    <!-- السلايدر المصغر -->
+    <div class="swiper-container gallery-thumbs">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="{{ product.image.path }}" alt="{{ product.name }}">
+            </div>
+            {% for image in product.images %}
+            <div class="swiper-slide">
+                <img src="{{ image.path }}" alt="{{ product.name }}">
+            </div>
+            {% endfor %}
         </div>
-        {% for image in product.images %}
-        <div class="swiper-slide">
-            <img src="{{ image.path }}" alt="{{ product.name }}">
-        </div>
-        {% endfor %}
     </div>
 </div>
 
