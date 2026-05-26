@@ -180,7 +180,7 @@
 }
 
 .thumb-item.active {
-    border-color: #667eea;
+    border-color: #4a1726;
 }
 
 .thumb-item img {
@@ -255,7 +255,7 @@
 }
 
 .option-label-modern i {
-    color: #667eea;
+    color: #4a1726;
 }
 
 .size-options-modern {
@@ -282,8 +282,8 @@
 }
 
 .size-btn.selected {
-    background: #667eea;
-    border-color: #667eea;
+    background: #4a1726;
+    border-color: #4a1726;
     color: white;
 }
 
@@ -309,8 +309,8 @@
 }
 
 .color-btn.selected {
-    border-color: #667eea;
-    box-shadow: 0 0 0 2px #667eea;
+    border-color: #4a1726;
+    box-shadow: 0 0 0 2px #4a1726;
 }
 
 .color-tooltip {
@@ -340,7 +340,7 @@
 
 .add-to-cart-modern {
     width: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #4a1726 0%, #d39e7f 100%);
     border: none;
     padding: 16px 24px;
     border-radius: 60px;
@@ -436,7 +436,7 @@
 }
 
 .tab-btn.active {
-    color: #667eea;
+    color: #4a1726;
     background: white;
 }
 
@@ -447,7 +447,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    background: linear-gradient(90deg, #4a1726, #d39e7f);
 }
 
 .tab-badge {
@@ -589,7 +589,7 @@
 
 .form-header i {
     font-size: 24px;
-    color: #667eea;
+    color: #4a1726;
 }
 
 .form-header h4 {
@@ -655,12 +655,12 @@
 
 .comment-input textarea:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: #4a1726;
 }
 
 .submit-review-btn {
     width: 100%;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #4a1726, #d39e7f);
     border: none;
     padding: 12px;
     border-radius: 60px;
@@ -703,7 +703,7 @@
     align-items: center;
     gap: 8px;
     padding: 10px 24px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #4a1726, #d39e7f);
     color: white;
     text-decoration: none;
     border-radius: 60px;
@@ -833,7 +833,7 @@
 }
 
 .gallery-thumbs .swiper-slide-thumb-active {
-    border-color: #667eea !important;
+    border-color: #4a1726 !important;
     box-shadow: 0 0 0 2px rgba(102,126,234,0.3);
 }
 
@@ -873,7 +873,7 @@
 .swiper-button-prev:after {
     font-size: 18px;
     font-weight: bold;
-    color: #667eea;
+    color: #4a1726;
 }
 
 /* للشاشات الصغيرة جداً */
@@ -949,7 +949,7 @@
 
 .gallery-thumbs .swiper-slide-active {
     opacity: 1;
-    border-color: #667eea;
+    border-color: #4a1726;
 }
 
 .gallery-thumbs .swiper-slide img {
@@ -966,7 +966,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    color: #667eea;
+    color: #4a1726;
 }
 
 .swiper-button-next:after,
@@ -977,13 +977,13 @@
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-    background: #667eea;
-    color: white;
+    background: #4a1726;
+    color: white!important;
 }
 
 /* نقاط التنقل */
 .swiper-pagination-bullet {
-    background: #667eea;
+    background: #4a1726;
 }
 
 /* للشاشات الصغيرة */
