@@ -274,32 +274,37 @@
 </div>
 
 <script>
-// الحل الأبسط
-(function() {
-    // انتظر حتى يتم تحميل الصفحة
-    window.addEventListener('load', function() {
-        const thumbs = document.querySelectorAll('.gallery-thumbs .thumb-item');
-        const mainImg = document.getElementById('mainProductImage');
-        
-        if (thumbs.length > 0 && mainImg) {
-            for (let i = 0; i < thumbs.length; i++) {
-                thumbs[i].onclick = function() {
-                    let newSrc = this.getAttribute('data-image');
-                    if (newSrc) {
-                        mainImg.src = newSrc;
-                        
-                        // إزالة الكلاس النشط من كل الصور
-                        for (let j = 0; j < thumbs.length; j++) {
-                            thumbs[j].classList.remove('active');
-                        }
-                        
-                        // إضافة الكلاس النشط للصورة المحددة
-                        this.classList.add('active');
-                    }
-                    return false;
-                };
-            }
-        }
-    });
-})();
+// حل بسيط ومباشر لمعرض الصور
+document.addEventListener('DOMContentLoaded', function() {
+    // جلب العناصر
+    const mainImage = document.getElementById('mainProductImage');
+    const thumbImages = document.querySelectorAll('.thumb-item');
+    
+    // التأكد من وجود الصور
+    if(thumbImages.length > 0 && mainImage) {
+        // إضافة حدث النقر لكل صورة مصغرة
+        thumbImages.forEach(function(thumb) {
+            thumb.onclick = function() {
+                // جلب رابط الصورة
+                var newImageSrc = this.getAttribute('data-image');
+                
+                // تغيير الصورة الرئيسية
+                if(newImageSrc) {
+                    mainImage.src = newImageSrc;
+                }
+                
+                // إزالة الكلاس النشط من جميع الصور
+                thumbImages.forEach(function(item) {
+                    item.classList.remove('active');
+                });
+                
+                // إضافة الكلاس النشط للصورة المحددة
+                this.classList.add('active');
+            };
+        });
+    }
+    
+    // اختبار: اطبع في الكونسول للتأكد من أن الكود يعمل
+    console.log('معرض الصور يعمل - عدد الصور: ' + thumbImages.length);
+});
 </script>
