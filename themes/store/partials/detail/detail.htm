@@ -274,37 +274,39 @@
 </div>
 
 <script>
-// حل بسيط ومباشر لمعرض الصور
 document.addEventListener('DOMContentLoaded', function() {
-    // جلب العناصر
+    // 1. نختار الصورة الرئيسية (الكبيرة)
     const mainImage = document.getElementById('mainProductImage');
-    const thumbImages = document.querySelectorAll('.thumb-item');
     
-    // التأكد من وجود الصور
-    if(thumbImages.length > 0 && mainImage) {
-        // إضافة حدث النقر لكل صورة مصغرة
-        thumbImages.forEach(function(thumb) {
-            thumb.onclick = function() {
-                // جلب رابط الصورة
-                var newImageSrc = this.getAttribute('data-image');
+    // 2. نختار كل الصور المصغرة
+    const thumbnails = document.querySelectorAll('.thumb-item');
+    
+    // 3. نتأكد من وجود الصور
+    if (mainImage && thumbnails.length > 0) {
+        // 4. نضيف حدث النقر لكل صورة مصغرة
+        thumbnails.forEach(function(thumbnail) {
+            thumbnail.addEventListener('click', function() {
+                // نحصل على رابط الصورة من الخاصية data-image
+                const newImageUrl = this.getAttribute('data-image');
                 
-                // تغيير الصورة الرئيسية
-                if(newImageSrc) {
-                    mainImage.src = newImageSrc;
+                // نغير الصورة الرئيسية إلى الصورة التي تم الضغط عليها
+                if (newImageUrl) {
+                    mainImage.src = newImageUrl;
                 }
                 
-                // إزالة الكلاس النشط من جميع الصور
-                thumbImages.forEach(function(item) {
-                    item.classList.remove('active');
+                // نزيل الكلاس 'active' من كل الصور
+                thumbnails.forEach(function(thumb) {
+                    thumb.classList.remove('active');
                 });
                 
-                // إضافة الكلاس النشط للصورة المحددة
+                // نضيف الكلاس 'active' للصورة التي تم الضغط عليها
                 this.classList.add('active');
-            };
+            });
         });
+        
+        console.log('تم تفعيل معرض الصور - عدد الصور: ' + thumbnails.length);
+    } else {
+        console.log('لم يتم العثور على الصورة الرئيسية أو الصور المصغرة');
     }
-    
-    // اختبار: اطبع في الكونسول للتأكد من أن الكود يعمل
-    console.log('معرض الصور يعمل - عدد الصور: ' + thumbImages.length);
 });
 </script>
