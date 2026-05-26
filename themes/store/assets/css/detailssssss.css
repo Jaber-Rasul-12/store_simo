@@ -945,6 +945,7 @@
     overflow: hidden;
     border: 2px solid transparent;
     transition: all 0.3s;
+    margin-left: 0px!important;
 }
 
 .gallery-thumbs .swiper-slide-active {
