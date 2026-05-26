@@ -274,42 +274,32 @@
 </div>
 
 <script>
-// دالة عامة لتغيير الصورة الرئيسية
-function changeMainImage(imageUrl, element) {
-    const mainImage = document.getElementById('mainProductImage');
-    if (mainImage && imageUrl) {
-        // تأثير تحميل
-        mainImage.style.opacity = '0.3';
+// الحل الأبسط
+(function() {
+    // انتظر حتى يتم تحميل الصفحة
+    window.addEventListener('load', function() {
+        const thumbs = document.querySelectorAll('.gallery-thumbs .thumb-item');
+        const mainImg = document.getElementById('mainProductImage');
         
-        // تغيير الصورة
-        mainImage.src = imageUrl;
-        
-        // بعد تحميل الصورة
-        mainImage.onload = function() {
-            mainImage.style.opacity = '1';
-        };
-        
-        // تحديث حالة النشاط
-        const allThumbs = document.querySelectorAll('.thumb-item');
-        allThumbs.forEach(thumb => {
-            thumb.classList.remove('active');
-        });
-        
-        if (element) {
-            element.classList.add('active');
+        if (thumbs.length > 0 && mainImg) {
+            for (let i = 0; i < thumbs.length; i++) {
+                thumbs[i].onclick = function() {
+                    let newSrc = this.getAttribute('data-image');
+                    if (newSrc) {
+                        mainImg.src = newSrc;
+                        
+                        // إزالة الكلاس النشط من كل الصور
+                        for (let j = 0; j < thumbs.length; j++) {
+                            thumbs[j].classList.remove('active');
+                        }
+                        
+                        // إضافة الكلاس النشط للصورة المحددة
+                        this.classList.add('active');
+                    }
+                    return false;
+                };
+            }
         }
-    }
-}
-
-// تهيئة السلايدر عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    // إضافة مستمعات للأصابع (لللمس)
-    const thumbItems = document.querySelectorAll('.thumb-item');
-    thumbItems.forEach(thumb => {
-        thumb.addEventListener('click', function(e) {
-            const imageUrl = this.getAttribute('data-image');
-            changeMainImage(imageUrl, this);
-        });
     });
-});
+})();
 </script>
