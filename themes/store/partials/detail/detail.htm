@@ -1,3 +1,8 @@
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <div class="modern-product-detail">
     
 {% if relateds is not empty %}
@@ -49,26 +54,34 @@
     <div class="product-main-modern">
         {% set product = Store.onGetProductWithSlug %}
         
-        <div class="product-gallery-modern">
-            <div class="gallery-container">
-                <div class="gallery-main" id="mainGallery">
-                    <img id="mainProductImage" 
-                         src="{% if product.image.path %}{{ product.image.path }}{% else %}{{ 'assets/img/file.jpeg' | theme }}{% endif %}" 
-                         alt="{{ product.name }}">
-                </div>
-                {% if product.images is not empty %}
-                <div class="gallery-thumbs">
-                    <div class="thumb-track">
-                        {% for image in product.images %}
-                        <div class="thumb-item {% if loop.first %}active{% endif %}" data-image="{{ image.path }}">
-                            <img src="{{ image.path }}" alt="{{ product.name }}">
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endif %}
-            </div>
+       <div class="swiper-container gallery-top">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="{{ product.image.path }}" alt="{{ product.name }}">
         </div>
+        {% for image in product.images %}
+        <div class="swiper-slide">
+            <img src="{{ image.path }}" alt="{{ product.name }}">
+        </div>
+        {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+</div>
+
+<div class="swiper-container gallery-thumbs">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <img src="{{ product.image.path }}" alt="{{ product.name }}">
+        </div>
+        {% for image in product.images %}
+        <div class="swiper-slide">
+            <img src="{{ image.path }}" alt="{{ product.name }}">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
         
         <div class="product-info-modern">
             <h1 class="product-title-modern">{{ product.name }}</h1>
@@ -272,67 +285,21 @@
         </div>
     </div>
 </div>
-
 <script>
-document.querySelectorAll('.thumb-item').forEach(thumb => {
-    thumb.addEventListener('click', function() {
-        const imageUrl = this.dataset.image;
-        document.getElementById('mainProductImage').src = imageUrl;
-        document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-    });
+var galleryThumbs = new Swiper('.gallery-thumbs', {
+    spaceBetween: 10,
+    slidesPerView: 4,
+    freeMode: true,
+    watchSlidesProgress: true,
 });
-
-document.querySelectorAll('.size-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
-        this.classList.add('selected');
-    });
+var galleryTop = new Swiper('.gallery-top', {
+    spaceBetween: 10,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    thumbs: {
+        swiper: galleryThumbs,
+    },
 });
-
-document.querySelectorAll('.color-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
-        this.classList.add('selected');
-    });
-});
-
-document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const tabId = this.dataset.tab;
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-        this.classList.add('active');
-        document.getElementById(`tab-${tabId}`).classList.add('active');
-    });
-});
-
-let currentRating = 0;
-document.querySelectorAll('.stars-rating i').forEach(star => {
-    star.addEventListener('click', function() {
-        currentRating = parseInt(this.dataset.rate);
-        document.querySelectorAll('.stars-rating i').forEach((s, index) => {
-            if (index < currentRating) {
-                s.classList.add('active');
-                s.classList.remove('far');
-                s.classList.add('fas');
-            } else {
-                s.classList.remove('active');
-                s.classList.remove('fas');
-                s.classList.add('far');
-            }
-        });
-        document.getElementById('ratingValue').value = currentRating;
-    });
-});
-
-function resetRating() {
-    currentRating = 0;
-    document.querySelectorAll('.stars-rating i').forEach(star => {
-        star.classList.remove('active', 'fas');
-        star.classList.add('far');
-    });
-    document.getElementById('ratingValue').value = 0;
-    document.getElementById('commentText').value = '';
-}
 </script>
