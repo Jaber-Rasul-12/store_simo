@@ -94,12 +94,27 @@ tabs:
             tab: 'store.store::lang.plugin.features'
 
         # prices Tab
+        price_merchant:
+            label: 'store.store::lang.model.product.price_merchant'
+            context: 'create'
+            span: auto
+            tab: 'store.store::lang.plugin.prices'
+            type: number
+        profit_percentage:
+            label: 'store.store::lang.model.product.profit_percentage'
+            context: 'create'
+            span: auto
+            tab: 'store.store::lang.plugin.prices'
+            type: number
         price:
             label: 'store.store::lang.model.product.prices'
             context: 'create'
             span: auto
             tab: 'store.store::lang.plugin.prices'
             type: number
+            dependsOn: 
+                    - price_merchant
+                    - profit_percentage
         prices:
             label: 'store.store::lang.model.product.prices'
             context: ['update', 'preview']

@@ -1,8 +1,20 @@
 fields:
+    price_merchant:
+        label: 'store.store::lang.model.price.price_merchant'
+        span: auto
+        type: number
+
+    profit_percentage:
+        label: 'store.store::lang.model.price.profit_percentage'
+        span: auto
+        type: number
     price:
         label: 'store.store::lang.model.price.price'
         span: auto
         type: number
+        dependsOn: 
+                    - price_merchant
+                    - profit_percentage
     status:
         label: 'store.store::lang.model.price.status'
         span: auto

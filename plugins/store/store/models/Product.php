@@ -21,7 +21,7 @@ class Product extends Model
     protected $slugs = ['slug' => ['name', 'short_name']];
 
 
-    protected $purgeable = ['price'];
+    protected $purgeable = ['price' , 'price_merchant' , 'profit_percentage'];
 
     /**
      * @var string The database table used by the model.
@@ -130,6 +130,34 @@ class Product extends Model
         ];
     }
 
+/**
+   * Filter and set options for form fields based on certain conditions.
+   *
+   * @param object $fields   The form fields.
+   * @param mixed  $context  Additional context information if needed.
+   *
+   */
+public function filterFields($fields, $context = null)
+{
+    if($context === 'create') {
+        // التحقق من وجود القيم وعدم كونها فارغة
+        if (isset($fields->price_merchant->value, $fields->profit_percentage->value) 
+            && !empty($fields->price_merchant->value) 
+            && !empty($fields->profit_percentage->value)) {
+            
+            // جلب القيم وتحويلها إلى أرقام عشرية (float)
+            $priceMerchant = (float) $fields->price_merchant->value;
+            $profitPercentage = (float) $fields->profit_percentage->value;
+            
+            // حساب سعر البيع: السعر الأصلي + (السعر الأصلي * نسبة الربح المئوية / 100)
+            $calculatedPrice = $priceMerchant * (1 + ($profitPercentage / 100));
+            
+            // تعيين القيمة المحسوبة لحقل price
+            $fields->price->value = $calculatedPrice;
+        }
+    }
+}
+
 
   public function beforeValidate()
     {
@@ -155,6 +183,8 @@ class Product extends Model
     {
         $this->prices()->create([
             'price' => $this->getOriginalPurgeValue('price'),
+            'price_merchant' => $this->getOriginalPurgeValue('price_merchant'),
+            'profit_percentage' => $this->getOriginalPurgeValue('profit_percentage'),
             'status' => 1
         ]);
     }

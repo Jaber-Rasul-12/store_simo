@@ -5,6 +5,12 @@ columns:
     price:
         label: 'store.store::lang.model.price.price'
         type: text
+    price_merchant:
+        label: 'store.store::lang.model.price.price_merchant'
+        type: text
+    profit_percentage:
+        label: 'store.store::lang.model.price.profit_percentage'
+        type: text
     status:
         label: 'store.store::lang.model.price.status'
         type: store-list-switch  
