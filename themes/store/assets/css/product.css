@@ -385,17 +385,19 @@
         .btn-custom:hover {
             transform: translateY(-3px) !important;
             box-shadow: 0 6px 20px rgba(139, 94, 94, 0.2) !important;
+            color: white !important;
         }
         
         .btn-custom:first-child {
             background: linear-gradient(135deg, rgba(139, 94, 94, 0.1), rgba(209, 156, 151, 0.05)) !important;
-            color: var(--primary-dark) !important;
+            color: white !important;
             border-color: rgba(139, 94, 94, 0.2) !important;
         }
         
         .btn-custom:first-child:hover {
             background: linear-gradient(135deg, rgba(139, 94, 94, 0.2), rgba(209, 156, 151, 0.1)) !important;
             border-color: var(--primary-color) !important;
+            color: white !important;
         }
         
         .btn-custom:last-child {
@@ -407,6 +409,7 @@
         .btn-custom:last-child:hover {
             background: linear-gradient(135deg, var(--primary-dark), #6b4747) !important;
             box-shadow: 0 8px 25px rgba(139, 94, 94, 0.4) !important;
+                color: white !important;
         }
         
         .btn-custom::before {

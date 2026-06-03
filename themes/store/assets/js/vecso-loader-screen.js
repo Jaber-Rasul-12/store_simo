@@ -64,23 +64,23 @@
         setTimeout(hideLoader, 3500);
         
         // إعادة الظهور عند النقر على الروابط (اختياري)
-        document.addEventListener('click', function(e) {
-            const link = e.target.closest('a');
-            if (link && link.href && !link.target && !link.href.startsWith('javascript:')) {
-                const currentDomain = window.location.origin;
-                if (link.href.startsWith(currentDomain) || link.href.startsWith('/')) {
-                    const loaderScreen = document.getElementById('vecsoLoaderScreen');
-                    if (loaderScreen && loaderScreen.style.display === 'none') {
-                        loaderScreen.style.display = 'flex';
-                        loaderScreen.classList.remove('fade-out');
-                        // إخفاء مرة أخرى بعد التحميل
-                        setTimeout(function() {
-                            window.addEventListener('load', function() {
-                                setTimeout(hideLoader, 1500);
-                            });
-                        }, 100);
-                    }
-                }
-            }
-        });
+        // document.addEventListener('click', function(e) {
+        //     const link = e.target.closest('a');
+        //     if (link && link.href && !link.target && !link.href.startsWith('javascript:')) {
+        //         const currentDomain = window.location.origin;
+        //         if (link.href.startsWith(currentDomain) || link.href.startsWith('/')) {
+        //             const loaderScreen = document.getElementById('vecsoLoaderScreen');
+        //             if (loaderScreen && loaderScreen.style.display === 'none') {
+        //                 loaderScreen.style.display = 'flex';
+        //                 loaderScreen.classList.remove('fade-out');
+        //                 // إخفاء مرة أخرى بعد التحميل
+        //                 setTimeout(function() {
+        //                     window.addEventListener('load', function() {
+        //                         setTimeout(hideLoader, 1500);
+        //                     });
+        //                 }, 100);
+        //             }
+        //         }
+        //     }
+        // });
     })();
