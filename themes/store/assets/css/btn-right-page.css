@@ -1,0 +1,216 @@
+        .jaber-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 3rem 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            scroll-margin-top: 30px;
+        }
+
+        
+        .jaber-section:nth-child(1) { background: linear-gradient(135deg, #d39e7f 0%, #4a1726 100%); }
+        .jaber-section:nth-child(2) { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .jaber-section:nth-child(3) { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .jaber-section:nth-child(4) { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+
+      
+        .jaber-content {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem 4rem;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(10px);
+            max-width: 700px;
+            width: 90%;
+            transition: transform 0.3s ease;
+        }
+
+        .jaber-content:hover {
+            transform: translateY(-10px);
+        }
+
+        .jaber-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #d39e7f, #4a1726);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .jaber-description {
+            font-size: 1.1rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .jaber-number {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #d39e7f, #4a1726);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+       
+        .jaber-nav-container {
+            position: fixed;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 9999;
+        }
+
+        .jaber-nav-btn {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .jaber-nav-btn:hover {
+            width: 130px;
+            background: linear-gradient(135deg, #d39e7f, #4a1726);
+            border-color: transparent;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+
+     
+        .jaber-nav-text {
+            display: none;
+            margin-left: 8px;
+            padding: 5px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .jaber-nav-btn:hover .jaber-nav-text {
+            display: inline;
+        }
+
+    
+        .jaber-nav-icon {
+            font-size: 1.3rem;
+            transition: transform 0.3s;
+            display: flex;
+            color: black;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .jaber-nav-btn:hover .jaber-nav-icon {
+            transform: scale(1.1);
+        }
+
+     
+        .jaber-nav-btn.active {
+            background: white;
+            width: 130px;
+            border-color: white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .jaber-nav-btn.active .jaber-nav-text {
+            display: inline;
+        }
+
+        .jaber-nav-btn.active .jaber-nav-icon {
+            color: #d39e7f;
+        }
+
+        .jaber-nav-btn.active[data-section="1"] .jaber-nav-icon { color: #d39e7f; }
+        .jaber-nav-btn.active[data-section="2"] .jaber-nav-icon { color: #f5576c; }
+        .jaber-nav-btn.active[data-section="3"] .jaber-nav-icon { color: #4facfe; }
+        .jaber-nav-btn.active[data-section="4"] .jaber-nav-icon { color: #43e97b; }
+
+
+
+        /* تنسيق متجاوب للأجهزة الصغيرة */
+        @media (max-width: 768px) {
+            .jaber-nav-container {
+                right: 3px;
+                gap: 10px;
+                top: 75%;
+            }
+            .jaber-nav-icon {
+                font-size: 15px;
+            }
+            .jaber-nav-text {
+                font-size: 12px;
+            }
+            
+            .jaber-nav-btn {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .jaber-nav-btn:hover {
+                width: 110px;
+            }
+            
+            .jaber-nav-btn.active {
+                width: 110px;
+            }
+            
+            .jaber-title {
+                font-size: 2rem;
+            }
+            
+            .jaber-content {
+                padding: 2rem;
+            }
+            
+            .jaber-nav-btn::before {
+                display: none;
+            }
+        }
+
+        /* تأثير ظهور للأزرار */
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .jaber-nav-btn {
+            animation: fadeInRight 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .jaber-nav-btn:nth-child(1) { animation-delay: 0.1s; }
+        .jaber-nav-btn:nth-child(2) { animation-delay: 0.2s; }
+        .jaber-nav-btn:nth-child(3) { animation-delay: 0.3s; }
+        .jaber-nav-btn:nth-child(4) { animation-delay: 0.4s; }

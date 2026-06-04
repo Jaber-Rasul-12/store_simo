@@ -7,7 +7,13 @@ layout = "default"
 [Cart]
 [sociallogin]
 ==
-
+<?php 
+function onStart()
+{
+    $this->addCss('assets/css/btn-right-page.css');
+}
+?>
+==
 
 {% put head %}
 {% partial 'meta/meta'  
@@ -29,12 +35,14 @@ twiimage='assets/img/file.jpeg'
 %}
 {% endput %}
 {% partial 'site/bottom_nav' home=true %}
+{% partial 'home/btn-right-page' home=true %}
+
 {% partial 'home/topbar' %}
 {% partial 'home/navbar' show_clouser=true %}
-{% if Store.onGetProductsIsBest is not empty %} {% partial 'home/products' title_product='أفضل المنتجات' name_component=Store.onGetProductsIsBest %} {% endif %}
-{% if Store.onGetProductsIsFeatured is not empty %} {% partial 'home/products' title_product='منتجات مميزة' name_component=Store.onGetProductsIsFeatured %} {% endif %}
-{% if Store.onGetProductsNew is not empty %} {% partial 'home/products' title_product='منتجات جديدة' name_component=Store.onGetProductsNew %} {% endif %}
-{% if Store.onGetProductsIsTop is not empty %} {% partial 'home/products' title_product='منتجات عالية الجودة' name_component=Store.onGetProductsIsTop %} {% endif %}
+{% if Store.onGetProductsIsBest is not empty %} {% partial 'home/products' idsection="section1" title_product='أفضل المنتجات' name_component=Store.onGetProductsIsBest %} {% endif %}
+{% if Store.onGetProductsIsFeatured is not empty %} {% partial 'home/products' idsection="section2" title_product='منتجات مميزة' name_component=Store.onGetProductsIsFeatured %} {% endif %}
+{% if Store.onGetProductsNew is not empty %} {% partial 'home/products' idsection="section3" title_product='منتجات جديدة' name_component=Store.onGetProductsNew %} {% endif %}
+{% if Store.onGetProductsIsTop is not empty %} {% partial 'home/products' idsection="section4" title_product='منتجات عالية الجودة' name_component=Store.onGetProductsIsTop %} {% endif %}
 {% partial 'home/categories' %}
 {% partial 'home/featured' %}
 
@@ -43,17 +51,5 @@ twiimage='assets/img/file.jpeg'
 
 
 
-   
 
-
-
-
-
-    
-
-
-   
-
-
-   
 
