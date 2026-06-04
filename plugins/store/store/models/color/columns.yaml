@@ -5,6 +5,7 @@ columns:
     name:
         label: 'store.store::lang.model.color.name'
         type: text
+        searchable: true
     code:
         label: 'store.store::lang.model.color.code'
         type: colorpicker

@@ -33,6 +33,16 @@ class Size extends Model
     ];
 
 
+     public function scopeSearch($query, $term)
+    {
+        $term = '%' . $term . '%';
+        
+        return $query->where(function($q) use ($term) {
+            $q->where('name', 'like', $term);
+        });
+    }
+
+
         // ⭐ فقط أضف هذه العلاقة
     public $morphMany = [
         'notifications' => [

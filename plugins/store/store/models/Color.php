@@ -31,6 +31,16 @@ class Color extends Model
         'products' => ['Store\Store\Models\Product', 'table' => 'store_store_products_colors'],
     ];
 
+
+     public function scopeSearch($query, $term)
+    {
+        $term = '%' . $term . '%';
+        
+        return $query->where(function($q) use ($term) {
+            $q->where('name', 'like', $term);
+        });
+    }
+
     
 
 }

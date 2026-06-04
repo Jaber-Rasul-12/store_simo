@@ -129,14 +129,14 @@ tabs:
         # taxes_products Tab    
         taxes_products:
             label: store.store::lang.model.product.taxes_products
-            type: relation
-            nameFrom: title
+            type: relationmanager
+            context: ['update', 'preview']
             tab: 'store.store::lang.plugin.taxes_products'
         # return_policies Tab    
         return_policies:
             label: store.store::lang.model.product.return_policies
-            type: relation
-            nameFrom: title
+            type: relationmanager
+            context: ['update', 'preview']
             tab: 'store.store::lang.plugin.return_policies'
         # promotions Tab    
         promotions:
@@ -148,15 +148,16 @@ tabs:
 
         # colors Tab    
         colors:
-            label: store.store::lang.model.product.colors
-            type: relation
-            nameFrom: name
+            label: Records
+            type: relationmanager
+            context: ['update', 'preview']
             tab: 'store.store::lang.plugin.colors'
+
         # sizes Tab    
         sizes:
             label: store.store::lang.model.product.sizes
-            type: relation
-            nameFrom: name
+            type: relationmanager
+            context: ['update', 'preview']
             tab: 'store.store::lang.plugin.sizes'
         # Files Tab
         image:

@@ -31,3 +31,91 @@ subcategory_products:
     manage:
         form: $/store/store/models/categoriesproducts/fields.yaml
         recordsPerPage: 10
+
+colors:
+    label: 'الألوان'
+    view:
+        list: $/store/store/models/color/columns.yaml
+        toolbarButtons: add|remove|create|delete
+    manage:
+        form: $/store/store/models/color/fields.yaml
+        list: $/store/store/models/color/columns.yaml
+        recordsPerPage: 10
+        showSearch: true
+        search:
+            prompt: 'بحث في الألوان'
+            mode: contains
+            scope: search  
+        showSorting: true
+        defaultSort:
+            column: fullname
+            direction: asc
+        showSetup: true
+
+sizes:
+    label: 'الأحجام'
+    view:
+        list: $/store/store/models/size/columns.yaml
+        toolbarButtons: add|remove|create|delete
+    manage:
+        form: $/store/store/models/size/fields.yaml
+        recordsPerPage: 10
+        showSearch: true
+        search:
+            prompt: 'بحث في الأحجام'
+            mode: contains
+            scope: search 
+        showSorting: true
+        defaultSort:
+            column: name
+            direction: asc
+        showSetup: true
+
+taxes_products:
+    label: 'ضرائب المنتجات'
+    view:
+        list: $/store/store/models/producttaxe/columns.yaml
+        toolbarButtons: add|remove|create|delete
+    manage:
+        form: $/store/store/models/producttaxe/fields.yaml
+        list: $/store/store/models/producttaxe/columns.yaml
+        recordsPerPage: 10
+        showSearch: true
+        search:
+            prompt: 'بحث في ضرائب المنتجات'
+            mode: contains
+            onEnter: false
+        showSorting: true
+        defaultSort:
+            column: created_at
+            direction: desc
+        showSetup: true
+    recordsPerPage: 15
+    showSearch: true
+    noRecordsMessage: 'لا توجد ضرائب مطابقة لمعايير البحث'
+return_policies:
+    label: 'سياسات الاسترجاع'
+    view:
+        list: $/store/store/models/returnpolicy/columns.yaml
+        toolbarButtons: add|remove|create|delete
+    manage:
+        form: $/store/store/models/returnpolicy/fields.yaml
+        recordsPerPage: 10
+        showSearch: true
+        search:
+            prompt: 'بحث في سياسات الاسترجاع'
+            mode: contains
+            onEnter: false
+        showSorting: true
+        defaultSort:
+            column: created_at
+            direction: desc
+        showSetup: true
+    recordsPerPage: 15
+    showSearch: true
+    noRecordsMessage: 'لا توجد سياسات استرجاع مطابقة لمعايير البحث'
+
+
+
+
+
