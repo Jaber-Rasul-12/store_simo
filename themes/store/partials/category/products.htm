@@ -116,9 +116,9 @@
                                 {% endif %}
                             {% endfor %}
                             {% if activePrice %}
-                            <h6 class=""  style="padding: 10px; color: green;">{{ activePrice.price }}$</h6>
+                            <h6 class="price_number"  style="padding: 10px; color: green;">{{ activePrice.price }} $</h6>
                             {% if previousPrice %}
-                            <h6 class="text-muted ml-2" style="padding: 10px"><del>{{ previousPrice.price }}$</del></h6>
+                            <h6 class="text-muted ml-2" style="padding: 10px"><del>{{ previousPrice.price }} $</del></h6>
                             {% endif %}
 
                             {% endif %}

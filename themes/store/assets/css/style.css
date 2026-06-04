@@ -10816,6 +10816,9 @@ a.text-dark:hover, a.text-dark:focus {
         height: 26px;
         font-size: 0.65rem;
     }
+    .price_number{
+      font-size: 14px!important;
+    }
 }
 
 /* للشاشات الصغيرة جداً */

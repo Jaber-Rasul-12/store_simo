@@ -290,7 +290,6 @@
             margin: 15px 0;
             position: relative;
             padding: 10px;
-            background: linear-gradient(135deg, rgba(248, 245, 240, 0.5), rgba(240, 235, 224, 0.3));
             border-radius: 10px;
             border: 1px solid rgba(139, 94, 94, 0.1);
         }
