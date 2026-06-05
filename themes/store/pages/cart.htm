@@ -18,6 +18,12 @@ function onStart()
 }
 ?>
 ==
+
+{% if not user %}
+    <script>
+        window.location.href = "{{ 'login'|page }}";
+    </script>
+{% else %}
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 {% put head %}
@@ -41,6 +47,7 @@ function onStart()
 
 
 
+
 {% partial 'site/bottom_nav' cart=true %}
 
 <!-- باقي محتوى صفحة سلة التسوق -->
@@ -49,3 +56,6 @@ function onStart()
 {% partial 'cart/cart' %}
 
 {% partial 'check_phone_number' %}
+
+
+{% endif %}

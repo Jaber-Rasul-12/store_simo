@@ -18,6 +18,13 @@ function onStart()
 ?>
 ==
 
+
+{% if not user %}
+    <script>
+        window.location.href = "{{ 'login'|page }}";
+    </script>
+{% else %}
+
 {% put head %}
 {% partial 'meta/meta'  
     seodescription='أكملي عملية الدفع بأمان في متجر فيكسو. طلبك آمن ومحمي، نوفر خيارات دفع متعددة وتوصيل سريع لجميع أنحاء سوريا. إتمام الشراء بكل ثقة.'
@@ -36,6 +43,9 @@ function onStart()
     twiimage='assets/img/file.jpeg'
 %}
 {% endput %}
+
+
+
 {% partial 'site/bottom_nav' checkout=true %}
 {% partial 'home/topbar' %}
    {% partial 'navbar' home=false  shop=false cart=false checkout=true contact=false %}
@@ -44,3 +54,5 @@ function onStart()
 {% partial 'check_phone_number' %}
 
 
+
+{% endif %}

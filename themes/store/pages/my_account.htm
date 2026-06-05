@@ -19,6 +19,12 @@ function onStart()
 ?>
 ==
 
+{% if not user %}
+    <script>
+        window.location.href = "{{ 'login'|page }}";
+    </script>
+{% else %}
+
 {% put head %}
 {% partial 'meta/meta'  
     seodescription='إدارة حسابك الشخصي في فيكسو. تابعي طلباتك، عدلي معلوماتك، استعرضي مشترياتك السابقة واستمتعي بتجربة تسوق مخصصة تناسب ذوقك.'
@@ -39,6 +45,8 @@ function onStart()
 {% endput %}
 
 
+
+
 {% partial 'site/bottom_nav' %}
 
 {% partial 'home/topbar' %}
@@ -47,3 +55,5 @@ function onStart()
 
 
 {% partial 'check_phone_number' %}
+
+{% endif %}
