@@ -1,0 +1,594 @@
+.profile-page {
+    min-height: 100vh;
+    background: #f8f9fa;
+    padding-bottom: 80px;
+}
+
+/* Header Section */
+.profile-header {
+    position: relative;
+    background: linear-gradient(135deg, #4a1726 0%, #d39e7f 100%);
+    border-radius: 0 0 30px 30px;
+}
+
+.profile-cover {
+    height: 120px;
+}
+
+.profile-avatar-wrapper {
+    position: relative;
+    text-align: center;
+    margin-top: -60px;
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-avatar-img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 4px solid white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    object-fit: cover;
+    background: white;
+}
+
+.avatar-edit-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: #4a1726;
+    border: 2px solid white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.avatar-edit-btn i {
+    color: white;
+    font-size: 14px;
+}
+
+.avatar-edit-btn:active {
+    transform: scale(0.95);
+}
+
+.profile-info {
+    padding: 8px 16px 20px;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 5px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.profile-email {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.9);
+    margin: 0 0 8px;
+}
+
+.member-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.2);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: white;
+}
+
+.member-badge i {
+    font-size: 0.7rem;
+}
+
+/* Wallet Card */
+.wallet-card {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.wallet-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.wallet-icon {
+    width: 55px;
+    height: 55px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wallet-icon i {
+    font-size: 28px;
+    color: white;
+}
+
+.wallet-info {
+    flex: 1;
+}
+
+.wallet-label {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.9);
+    margin: 0 0 5px;
+}
+
+.wallet-balance {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.currency {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.wallet-status {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.8);
+}
+
+/* Info Cards */
+.info-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.card-header-custom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 18px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #f8f9fa 100%);
+    border-bottom: 1px solid #e9ecef;
+}
+
+.header-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #4a1726 0%, #d39e7f 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-icon i {
+    color: white;
+    font-size: 14px;
+}
+
+.header-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+/* Info List */
+.info-list {
+    padding: 0;
+}
+
+.info-item {
+    padding: 14px 18px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-bottom: 6px;
+}
+
+.info-label i {
+    font-size: 0.7rem;
+    color: #4a1726;
+}
+
+.info-value {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #2c3e50;
+    word-break: break-all;
+}
+
+.add-phone-btn {
+    background: none;
+    border: none;
+    color: #28a745;
+    font-size: 0.75rem;
+    padding: 0;
+    margin-top: 5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.add-phone-btn:active {
+    opacity: 0.7;
+}
+
+/* Form Styles */
+.card-body-custom {
+    padding: 18px;
+}
+
+.form-group-custom {
+    margin-bottom: 18px;
+}
+
+.form-label-custom {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 8px;
+}
+
+.form-label-custom i {
+    color: #4a1726;
+    font-size: 0.75rem;
+}
+
+.form-input-custom {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.form-input-custom:focus {
+    outline: none;
+    border-color: #4a1726;
+    background: white;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #4a1726 0%, #d39e7f 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:active {
+    transform: scale(0.98);
+}
+
+/* Activity List */
+.activity-list {
+    padding: 0;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.activity-icon.success {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.activity-icon.pending {
+    background: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.activity-icon i {
+    font-size: 16px;
+}
+
+.activity-details {
+    flex: 1;
+}
+
+.activity-desc {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #2c3e50;
+    margin: 0 0 4px;
+}
+
+.activity-date {
+    font-size: 0.7rem;
+    color: #6c757d;
+}
+
+.activity-amount {
+    font-size: 0.9rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.text-success {
+    color: #28a745;
+}
+
+.text-warning {
+    color: #ffc107;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #dee2e6;
+    margin-bottom: 12px;
+}
+
+.empty-state p {
+    color: #6c757d;
+    margin: 0;
+}
+
+/* Modal Styles */
+.custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+}
+
+.modal-container {
+    position: relative;
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 24px;
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+    margin: 20px;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #f8f9fa 100%);
+    border-bottom: 1px solid #e9ecef;
+}
+
+.modal-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #6c757d;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.avatar-preview-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.avatar-preview-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #4a1726;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.file-upload-wrapper {
+    text-align: center;
+}
+
+.file-upload-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #4a1726;
+    transition: all 0.3s ease;
+}
+
+.file-upload-label:active {
+    background: #e9ecef;
+}
+
+.upload-hint {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.7rem;
+    color: #6c757d;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-cancel, .btn-submit-modal {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel {
+    background: #f8f9fa;
+    color: #6c757d;
+}
+
+.btn-submit-modal {
+    background: linear-gradient(135deg, #4a1726 0%, #d39e7f 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-cancel:active, .btn-submit-modal:active {
+    transform: scale(0.98);
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .profile-name {
+        font-size: 1.3rem;
+    }
+    
+    .profile-email {
+        font-size: 0.8rem;
+    }
+    
+    .wallet-balance {
+        font-size: 1.5rem;
+    }
+    
+    .wallet-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .wallet-icon i {
+        font-size: 24px;
+    }
+    
+    .info-value {
+        font-size: 0.85rem;
+    }
+    
+    .activity-desc {
+        font-size: 0.8rem;
+    }
+    
+    .activity-amount {
+        font-size: 0.85rem;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) {
+    .btn-submit:active,
+    .avatar-edit-btn:active,
+    .file-upload-label:active,
+    .btn-cancel:active,
+    .btn-submit-modal:active {
+        transform: scale(0.97);
+    }
+}
