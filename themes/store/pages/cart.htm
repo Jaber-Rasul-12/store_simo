@@ -6,6 +6,7 @@ layout = "default"
 [Cart]
 [session]
 [sociallogin]
+[PhoneNumberPopup]
 security = "user"
 redirect = "home"
 
@@ -46,3 +47,5 @@ function onStart()
 {% partial 'home/topbar' %}
 {% partial 'navbar' home=false shop=false cart=true checkout=false contact=false %}
 {% partial 'cart/cart' %}
+
+{% partial 'check_phone_number' %}

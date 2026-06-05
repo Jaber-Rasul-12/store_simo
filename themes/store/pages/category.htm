@@ -7,6 +7,7 @@ slug = "{{ :slug }}"
 [session]
 [Cart]
 [sociallogin]
+[PhoneNumberPopup]
 == 
 
 <?php
@@ -54,3 +55,4 @@ function onStart()
 
    {% if Store.onGetProductsWhereCategory is not empty %} {% partial 'category/products' relateds=Store.onGetRelatedCategories title_product='منتجات مميزة' name_component=Store.onGetProductsWhereCategory %} {% endif %}
 
+{% partial 'check_phone_number' %}

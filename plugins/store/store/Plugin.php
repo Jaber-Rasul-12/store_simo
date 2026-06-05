@@ -11,7 +11,9 @@ class Plugin extends PluginBase
         return [
             'Store\Store\Components\Store' => 'Store',
             'Store\Store\Components\Cart' => 'Cart',
-            'Store\Store\Components\AccountUserFrontEnd' => 'AccountUserFrontEnd'
+            'Store\Store\Components\AccountUserFrontEnd' => 'AccountUserFrontEnd',
+            'Store\Store\Components\PhoneNumberPopup' => 'PhoneNumberPopup'
+
 
             
 

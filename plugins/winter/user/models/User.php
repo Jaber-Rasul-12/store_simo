@@ -30,7 +30,7 @@ class User extends UserBase
         'password' => 'required:create|between:8,255|confirmed',
         'password_confirmation' => 'required_with:password|between:8,255',
         'role_frontend' => 'nullable|in:user,agent',
-        'phone' => 'nullable|string|max:100',
+        'phone' => 'nullable|string|max:100|unique:users',
     ];
 
     /**

@@ -6,6 +6,7 @@ layout = "default"
 [session]
 [Cart]
 [sociallogin]
+[PhoneNumberPopup]
 ==
 <?php 
 function onStart()
@@ -44,7 +45,7 @@ function onStart()
    {% partial 'shop/shop'  %}
 
 
-
+{% partial 'check_phone_number' %}
 
 
 

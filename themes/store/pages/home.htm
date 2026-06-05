@@ -6,12 +6,19 @@ layout = "default"
 [session]
 [Cart]
 [sociallogin]
+[PhoneNumberPopup]
+
 ==
 <?php 
+
+
 function onStart()
 {
     $this->addCss('assets/css/btn-right-page.css');
+   
 }
+
+
 ?>
 ==
 
@@ -48,8 +55,7 @@ twiimage='assets/img/file.jpeg'
 
 
 
-
-
+{% partial 'check_phone_number' %}
 
 
 

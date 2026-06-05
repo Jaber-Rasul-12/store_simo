@@ -6,6 +6,7 @@ layout = "default"
 [session]
 [Cart]
 [sociallogin]
+[PhoneNumberPopup]
 == 
 
 {% put head %}
@@ -37,3 +38,4 @@ layout = "default"
 
    {% if Store.onGetProductsWherePromotions is not empty %} {% partial 'promotion/products' title_product='قسم العروض' name_component=Store.onGetProductsWherePromotions %} {% endif %}
 
+{% partial 'check_phone_number' %}

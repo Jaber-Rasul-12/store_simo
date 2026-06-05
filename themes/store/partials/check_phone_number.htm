@@ -1,0 +1,356 @@
+{% if showPopup %}
+    <div id="phoneNumberPopup" class="popup-overlay" style="display: none;">
+        <div class="popup-container">
+            <div class="popup-header">
+                <h3>📱 إضافة رقم الموبايل</h3>
+                <button class="popup-close" onclick="closePopup()">&times;</button>
+            </div>
+            <div class="popup-body">
+                <p>مرحباً {{ user.name }}! يرجى إضافة رقم الموبايل لإكمال ملفك الشخصي</p>
+                <form id="phoneNumberForm" data-request="onUpdatePhoneNumber" data-request-success="closePopup()" data-request-flash>
+                    <div class="form-group">
+                        <label for="phone_number">رقم الموبايل</label>
+                        <input type="tel" 
+                               id="phone_number" 
+                               name="phone_number" 
+                               class="form-control" 
+                               required 
+                               pattern="[0-9]{10,15}"
+                               placeholder="أدخل رقم الموبايل">
+                        <small class="form-text text-muted">مثال: 09xxxxxxxx</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">حفظ</button>
+                    <button type="button" class="btn btn-secondary" onclick="closePopup()">تذكر لاحقاً</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .popup-container {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .popup-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .popup-header h3 {
+            margin: 0;
+            color: #333;
+        }
+        
+        .popup-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .popup-close:hover {
+            color: #333;
+        }
+        
+        .popup-body {
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #ff6b6b;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 10px;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-primary {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .form-text {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+            display: block;
+        }
+        
+        @media (max-width: 480px) {
+            .popup-container {
+                width: 95%;
+                margin: 10px;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                margin-right: 5px;
+            }
+        }
+    </style>
+
+<script>
+    // متغير للتحكم في مؤقت عرض الـ popup
+    var popupInterval = null;
+    var isPopupVisible = false;
+    
+    // عرض الـ popup تلقائياً بعد التأخير المحدد
+    document.addEventListener('DOMContentLoaded', function() {
+        startPopupInterval();
+    });
+    
+    function startPopupInterval() {
+        // تنظيف أي مؤقت سابق
+        if (popupInterval) {
+            clearInterval(popupInterval);
+        }
+        
+        // عرض الـ popup أول مرة بعد التأخير المحدد
+        setTimeout(function() {
+            if (shouldShowPopup()) {
+                showPopup();
+            }
+        }, {{ popupDelay }});
+        
+        // تعيين مؤقت متكرر كل دقيقتين (120000 ميلي ثانية)
+        popupInterval = setInterval(function() {
+            if (shouldShowPopup()) {
+                showPopup();
+            }
+        }, 120000); // 2 minutes = 120000 milliseconds
+    }
+    
+    function shouldShowPopup() {
+        // التحقق من وجود المستخدم وعدم وجود رقم هاتف
+        var userHasPhone = {{ user and user.phone ? 'true' : 'false' }};
+        var popupElement = document.getElementById('phoneNumberPopup');
+        
+        // لا تظهر الـ popup إذا:
+        // 1. المستخدم ليس لديه حساب أو لديه رقم هاتف بالفعل
+        // 2. الـ popup ظاهر بالفعل
+        // 3. المستخدم قام بإدخال رقم الهاتف في هذه الجلسة
+        
+        if (userHasPhone) {
+            return false;
+        }
+        
+        if (popupElement && popupElement.style.display === 'flex') {
+            return false;
+        }
+        
+        // يمكنك إضافة شرط إضافي إذا أردت منع ظهوره بعد إغلاقه يدوياً
+        // if (sessionStorage.getItem('popupClosed_manually_{{ user.id }}') === 'true') {
+        //     return false;
+        // }
+        
+        return true;
+    }
+    
+    function showPopup() {
+        var popup = document.getElementById('phoneNumberPopup');
+        if (popup && popup.style.display !== 'flex') {
+            popup.style.display = 'flex';
+            isPopupVisible = true;
+        }
+    }
+    
+    function closePopup() {
+        var popup = document.getElementById('phoneNumberPopup');
+        if (popup) {
+            popup.style.display = 'none';
+            isPopupVisible = false;
+            // إذا أردت منع ظهوره لمدة 2 دقيقة بعد الإغلاق اليدوي
+            // sessionStorage.setItem('popupClosed_manually_{{ user.id }}', 'true');
+            // setTimeout(function() {
+            //     sessionStorage.removeItem('popupClosed_manually_{{ user.id }}');
+            // }, 120000);
+        }
+    }
+    
+    function handleSuccess(data) {
+        if (data.success) {
+            // إذا نجح المستخدم في إدخال الرقم، قم بإيقاف المؤقت
+            if (popupInterval) {
+                clearInterval(popupInterval);
+                popupInterval = null;
+            }
+            closePopup();
+            showNotification('تم إضافة رقم الموبايل بنجاح!', 'success');
+            // إعادة تحميل الصفحة بعد 1.5 ثانية
+            setTimeout(function() {
+                location.reload();
+            }, 1500);
+        } else {
+            showNotification(data.error || 'حدث خطأ، يرجى المحاولة مرة أخرى', 'error');
+            closePopup();
+        }
+    }
+    
+    function showNotification(message, type) {
+        // إزالة أي إشعارات قديمة
+        var oldNotifications = document.querySelectorAll('.custom-notification');
+        oldNotifications.forEach(function(notification) {
+            notification.remove();
+        });
+        
+        // إنشاء عنصر إشعار جديد
+        var notification = document.createElement('div');
+        notification.className = 'custom-notification';
+        notification.textContent = message;
+        
+        var bgColor = type === 'success' ? '#4CAF50' : '#f44336';
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: ${bgColor};
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 10000;
+            font-size: 14px;
+            animation: slideInRight 0.3s ease-out;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            direction: rtl;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(function() {
+            notification.style.animation = 'slideOutRight 0.3s ease-out';
+            setTimeout(function() {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }, 3000);
+    }
+    
+    // إضافة CSS للـ animations
+    if (!document.getElementById('popup-animations')) {
+        var style = document.createElement('style');
+        style.id = 'popup-animations';
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    
+    // مراقبة إغلاق الـ popup من زر الإغلاق
+    document.addEventListener('click', function(event) {
+        var popup = document.getElementById('phoneNumberPopup');
+        var closeBtn = document.querySelector('.popup-close');
+        var cancelBtn = document.querySelector('.btn-secondary');
+        
+        // إذا تم النقر على زر الإغلاق أو زر الإلغاء
+        if (event.target === closeBtn || (cancelBtn && event.target === cancelBtn)) {
+            // لا شيء، closePopup سيتم استدعاؤها من onclick
+            return;
+        }
+        
+        // منع إغلاق الـ popup عند النقر خارج المحتوى
+        var container = document.querySelector('.popup-container');
+        if (popup && popup.style.display === 'flex' && container && !container.contains(event.target) && !event.target.closest('.popup-container')) {
+            // لا تفعل شيئاً - منع الإغلاق عند النقر خارج الـ popup
+            // يمكنك إلغاء التعليق على السطر التالي إذا أردت السماح بالإغلاق بالنقر خارج الـ popup
+            // closePopup();
+        }
+    });
+    
+    // إيقاف المؤقت عند مغادرة الصفحة (اختياري)
+    window.addEventListener('beforeunload', function() {
+        if (popupInterval) {
+            clearInterval(popupInterval);
+        }
+    });
+</script>
+{% endif %}
