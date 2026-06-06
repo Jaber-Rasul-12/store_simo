@@ -173,6 +173,14 @@
                     {% set shareUrl = url('/detail/' ~ product.slug) %}
                     {% set shareText = product.name %}
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ shareUrl|url_encode }}" class="share-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/"
+                               target="_blank"
+                               class="share-icon instagram"
+                               style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;"
+                               title="مشاركة على انستغرام"
+                               onclick="shareToInstagram('{{ shareUrl|escape('js') }}', '{{ shareText|escape('js') }}')">
+                                <i class="fab fa-instagram"></i>
+                            </a>
                     <a href="https://twitter.com/intent/tweet?text={{ shareText|url_encode }}&url={{ shareUrl|url_encode }}" target="_blank" class="share-icon twitter"><i class="fab fa-twitter"></i></a>
                     <a href="https://wa.me/?text={{ (shareText ~ ' ' ~ shareUrl)|url_encode }}" target="_blank" class="share-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
                     <a href="https://t.me/share/url?url={{ shareUrl|url_encode }}&text={{ shareText|url_encode }}" target="_blank" class="share-icon telegram"><i class="fab fa-telegram"></i></a>
