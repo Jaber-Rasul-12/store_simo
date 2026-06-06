@@ -5,6 +5,7 @@ use BackendMenu;
 use Store\Store\Models\Product;
 use Redirect;
 use Backend;
+use Flash;
 
 class Products extends Controller
 {
