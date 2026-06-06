@@ -12,7 +12,7 @@ slug = "{{ :slug }}"
 <?php 
 function onStart()
 {
-    $this->addCss('assets/css/detaild.css');
+    $this->addCss('assets/css/detailds.css');
     
     $slug = $this->param('slug');
     $this['currentProduct'] = \Store\Store\Models\Product::with('prices')->where('slug', $slug)->get()->first();
