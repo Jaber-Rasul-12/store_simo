@@ -170,11 +170,14 @@
                     {{ 'شارك المنتج' }}
                 </span>
                 <div class="share-icons">
-                    <a href="#" class="share-icon facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="share-icon twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="share-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" class="share-icon telegram"><i class="fab fa-telegram"></i></a>
+                    {% set shareUrl = url('/detail/' ~ product.slug) %}
+                    {% set shareText = product.name %}
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ shareUrl|url_encode }}" class="share-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/intent/tweet?text={{ shareText|url_encode }}&url={{ shareUrl|url_encode }}" target="_blank" class="share-icon twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/?text={{ (shareText ~ ' ' ~ shareUrl)|url_encode }}" target="_blank" class="share-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://t.me/share/url?url={{ shareUrl|url_encode }}&text={{ shareText|url_encode }}" target="_blank" class="share-icon telegram"><i class="fab fa-telegram"></i></a>
                 </div>
+                 
             </div>
         </div>
         
