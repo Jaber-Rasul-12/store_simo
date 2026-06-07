@@ -16,11 +16,11 @@ function onStart()
     
     $slug = $this->param('slug');
     $this['currentProduct'] = \Store\Store\Models\Product::with('prices')->where('slug', $slug)->get()->first();
+    $price = $this['currentProduct']->prices->where('status', true)->first();
     
     if ($this['currentProduct']) {
-        $this['productName'] = $this['currentProduct']->name;
+        $this['productName'] = $this['currentProduct']->name  . 'بسعر ' . ($price ? $price->price : '0') . '$';
         $this['productDescription'] = strip_tags(substr($this['currentProduct']->description, 0, 160));
-        $price = $this['currentProduct']->prices->where('status', true)->first();
         $this['productPrice'] = $price ? $price->price : '0';
         $this['productImage'] = ($this['currentProduct']->image && $this['currentProduct']->image->path) ? $this['currentProduct']->image->path : 'assets/img/file.jpeg';
         $this['productCategory'] = $this['currentProduct']->category ? $this['currentProduct']->category->name : '';
@@ -60,7 +60,7 @@ function onStart()
     fslintype='product'
     fslinavailability='instock'
     fslinprice=productPrice
-    fslinpricecurrency='SYP'
+    fslinpricecurrency='USD'
     twicard='summary_large_image'
     twititle=twitter_title
     twidescription=twitter_description
