@@ -19,7 +19,7 @@ function onStart()
     $price = $this['currentProduct']->prices->where('status', true)->first();
     
     if ($this['currentProduct']) {
-        $this['productName'] = $this['currentProduct']->name  . 'بسعر ' . ($price ? $price->price : '0') . '$';
+        $this['productName'] = $this['currentProduct']->name  . ' بسعر ' . ($price ? $price->price : '0') . '$';
         $this['productDescription'] = strip_tags(substr($this['currentProduct']->description, 0, 160));
         $this['productPrice'] = $price ? $price->price : '0';
         $this['productImage'] = ($this['currentProduct']->image && $this['currentProduct']->image->path) ? $this['currentProduct']->image->path : 'assets/img/file.jpeg';
