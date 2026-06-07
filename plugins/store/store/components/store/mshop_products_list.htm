@@ -53,6 +53,49 @@
                                 <i class="fas fa-shopping-cart"></i> إضافة
                             </a>
                         </div>
+                                             <div class="card-footer bg-light border-top-0">
+                        <div class="d-flex justify-content-around align-items-center">
+                            <!-- ربط المنتج للمشاركة -->
+                            {% set shareUrl = url('/detail/' ~ product.slug) %}
+                            {% set shareText = product.name %}
+                            
+                            <!-- مشاركة على Facebook -->
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ shareUrl|url_encode }}"
+                               target="_blank"
+                               class="btn btn-sm btn-outline-primary rounded-circle"
+                               style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;"
+                               title="مشاركة على فيسبوك">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            
+                            <!-- مشاركة على WhatsApp -->
+                            <a href="https://wa.me/?text={{ (shareText ~ ' ' ~ shareUrl)|url_encode }}"
+                               target="_blank"
+                               class="btn btn-sm btn-outline-success rounded-circle"
+                               style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;"
+                               title="مشاركة على واتساب">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            
+                            <!-- مشاركة على Instagram (توجيه إلى المنشور أو فتح التطبيق) -->
+                            <a href="https://www.instagram.com/"
+                               target="_blank"
+                               class="btn btn-sm btn-outline-danger rounded-circle"
+                               style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;"
+                               title="مشاركة على انستغرام"
+                               onclick="shareToInstagram('{{ shareUrl|escape('js') }}', '{{ shareText|escape('js') }}')">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            
+                            <!-- نسخ الرابط (إضافة مفيدة) -->
+                            <button onclick="copyToClipboard('{{ shareUrl|escape('js') }}')"
+                                    class="btn btn-sm btn-outline-secondary rounded-circle"
+                                    style="width: 35px; height: 35px; display: inline-flex; align-items: center; justify-content: center;"
+                                    title="نسخ الرابط">
+                                <i class="fas fa-link"></i>
+                            </button>
+                        </div>
+                    </div>
                     </div>
                 {% else %}
                     <div class="mshop-empty-state">
